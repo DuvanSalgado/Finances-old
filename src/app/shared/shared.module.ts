@@ -2,17 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { IonicModule } from '@ionic/angular';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    ToolbarComponent
+    ToolbarComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    RouterModule
   ],
   exports: [
-    ToolbarComponent
+    ToolbarComponent,
+    SidebarComponent
   ]
 })
 export class SharedModule { }
