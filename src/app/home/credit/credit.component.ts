@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreditComponent implements OnInit {
 
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
 
 }

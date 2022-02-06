@@ -4,11 +4,15 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { IonicModule } from '@ionic/angular';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
     ToolbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    SearchbarComponent,
+    CalendarComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +21,9 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     ToolbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    SearchbarComponent,
+    CalendarComponent
   ]
 })
 export class SharedModule { }
