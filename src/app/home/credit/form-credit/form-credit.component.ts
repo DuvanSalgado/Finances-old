@@ -9,6 +9,10 @@ export class FormCreditComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  options(event: boolean): void {
+    console.log(event);
+  }
 
 }
