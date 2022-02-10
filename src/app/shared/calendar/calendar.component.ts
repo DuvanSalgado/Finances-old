@@ -53,6 +53,8 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
 
   setChange(value: string): void {
     this.formGroup.controls[this.formCtrl.value].setValue(this.formatDate(value));
+    this.onTouched();
+    this.onChange(this.formatDate(value));
   }
 
   private formatDate(value: string) {
