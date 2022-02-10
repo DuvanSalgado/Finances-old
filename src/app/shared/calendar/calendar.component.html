@@ -1,12 +1,18 @@
-<ion-item button="true" id="open-date-input">
-  <ion-input [value]="dateValue"></ion-input>
-  <ion-button fill="clear" id="open-date-input-2">
-    <ion-icon icon="calendar"></ion-icon>
-  </ion-button>
-  <ion-popover trigger="open-date-input" show-backdrop="false">
-    <ng-template>
-      <ion-datetime #popoverDatetime presentation="date" (ionChange)="dateValue = formatDate(popoverDatetime.value)">
-      </ion-datetime>
-    </ng-template>
-  </ion-popover>
-</ion-item>
+<form [formGroup]="formGroup">
+  <ion-item button="true" id="open-date-input">
+
+    <ion-input [formControlName]="formCtrl.value"></ion-input>
+
+    <ion-button fill="clear" id="open-date-input-2">
+      <ion-icon icon="calendar"></ion-icon>
+    </ion-button>
+
+    <ion-popover trigger="open-date-input" show-backdrop="false">
+      <ng-template>
+        <ion-datetime #popoverDatetime presentation="date"
+        (ionChange)="setChange(popoverDatetime.value)">
+        </ion-datetime>
+      </ng-template>
+    </ion-popover>
+  </ion-item>
+</form>

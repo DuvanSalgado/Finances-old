@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ButtonsActionsComponent } from './buttons-actions/buttons-actions.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ToolbarComponent,
@@ -19,7 +19,8 @@ import { ButtonsActionsComponent } from './buttons-actions/buttons-actions.compo
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
     ToolbarComponent,
