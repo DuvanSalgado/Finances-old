@@ -1,7 +1,10 @@
 <app-searchbar></app-searchbar>
 <ion-list-header> Listado de gastos </ion-list-header>
+<ion-button (click)="create()">
+  <ion-icon name="add-circle-outline"></ion-icon>
+</ion-button>
 <ion-list *ngFor="let item of items">
-  <ion-item (click)="updateStatus(item)">
+  <ion-item (click)="update(item)">
     <ion-label>
       <h2>Nombre: {{item.name}}</h2>
       <h2> valor: {{item.value}}</h2>

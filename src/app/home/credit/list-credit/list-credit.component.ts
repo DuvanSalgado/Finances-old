@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormCreditComponent } from '../form-credit/form-credit.component';
+import { IcreditModel } from '../model/credit.interface';
 
 @Component({
   selector: 'app-list-credit',
@@ -31,7 +32,15 @@ export class ListCreditComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  async updateStatus(item: any): Promise<void> {
+  update(item: any): void {
+    this.openModal(item);
+  }
+
+  create(): void {
+    this.openModal(null);
+  }
+
+  private async openModal(item: IcreditModel): Promise<void> {
     const modal = await this.modalController.create({
       component: FormCreditComponent,
       componentProps: { data: item }

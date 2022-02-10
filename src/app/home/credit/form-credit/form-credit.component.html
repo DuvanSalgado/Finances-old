@@ -1,46 +1,59 @@
-<form>
-  <ion-list>
-    <ion-grid>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-buttons (click)="cancel()" slot="start">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </ion-buttons>
+          <ion-title>Modal</ion-title>
+        </ion-toolbar>
+      </ion-header>
+    </ion-col>
+  </ion-row>
+  <form [formGroup]="formGroup">
+    <ion-list>
       <ion-row>
         <ion-col>
           <ion-item>
             <ion-label position="floating">Nombre</ion-label>
-            <ion-input></ion-input>
+            <ion-input [formControlName]="formCtrl.name"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
             <ion-label position="floating">Valor</ion-label>
-            <ion-input type="number"></ion-input>
+            <ion-input [formControlName]="formCtrl.value" type="number"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <app-calendar></app-calendar>
+       <!--    <app-calendar [formControlName]="formCtrl.date"></app-calendar> -->
+          <ion-input [formControlName]="formCtrl.date" type="number"></ion-input>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <ion-item>
             <ion-label>Efectivo</ion-label>
-            <ion-toggle></ion-toggle>
+            <ion-toggle [formControlName]="formCtrl.cash"></ion-toggle>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
             <ion-label>Gasto</ion-label>
-            <ion-toggle></ion-toggle>
+            <ion-toggle [formControlName]="formCtrl.spending"></ion-toggle>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
             <ion-label>Pendiente</ion-label>
-            <ion-toggle></ion-toggle>
+            <ion-toggle [formControlName]="formCtrl.outstanding"></ion-toggle>
           </ion-item>
         </ion-col>
       </ion-row>
       <app-buttons-actions (cancelEventEmit)="cancel()" [isCreate]="true"></app-buttons-actions>
-    </ion-grid>
-  </ion-list>
-</form>
+    </ion-list>
+  </form>
+</ion-grid>
