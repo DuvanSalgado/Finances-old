@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { FormCreditComponent } from '../form-credit/form-credit.component';
 
 @Component({
   selector: 'app-list-credit',
@@ -7,8 +9,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListCreditComponent implements OnInit {
 
-  constructor() { }
+  items: any[] = [{
+    name: 'duvan',
+    value: '50.000',
+    date: '10/10/2022'
+  }, {
+    name: 'duvan',
+    value: '50.000',
+    date: '10/10/2022'
+  }, {
+    name: 'duvan',
+    value: '50.000',
+    date: '10/10/2022'
+  }, {
+    name: 'duvan',
+    value: '50.000',
+    date: '10/10/2022'
+  }];
 
-  ngOnInit() {}
+  constructor(private modalController: ModalController) { }
+
+  ngOnInit(): void { }
+
+  async updateStatus(item: any): Promise<void> {
+    const modal = await this.modalController.create({
+      component: FormCreditComponent,
+      componentProps: { data: item }
+    });
+    return await modal.present();
+  }
 
 }

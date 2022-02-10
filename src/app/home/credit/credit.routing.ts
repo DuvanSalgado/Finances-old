@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreditComponent } from './credit.component';
-import { FormCreditComponent } from './form-credit/form-credit.component';
 import { ListCreditComponent } from './list-credit/list-credit.component';
 
 const routes: Routes = [
@@ -10,7 +9,6 @@ const routes: Routes = [
     component: CreditComponent,
     children: [
       { path: '', component: ListCreditComponent },
-      { path: 'form', component: FormCreditComponent }
     ]
   }
 ];

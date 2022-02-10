@@ -40,7 +40,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <app-buttons-actions (createEventEmit)="options($event)" [isCreate]="true"></app-buttons-actions>
+      <app-buttons-actions (cancelEventEmit)="cancel()" [isCreate]="true"></app-buttons-actions>
     </ion-grid>
   </ion-list>
 </form>

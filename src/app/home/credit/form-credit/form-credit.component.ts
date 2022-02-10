@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-form-credit',
   templateUrl: './form-credit.component.html',
@@ -7,12 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormCreditComponent implements OnInit {
 
-  constructor() { }
+  @Input() data: any;
 
-  ngOnInit() { }
+  constructor(private modalController: ModalController) { }
 
-  options(event: boolean): void {
-    console.log(event);
+  ngOnInit(): void {
+    console.log(this.data);
+  }
+
+  cancel(): void {
+    this.modalController.dismiss();
   }
 
 }
