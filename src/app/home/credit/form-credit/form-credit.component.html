@@ -30,7 +30,6 @@
       <ion-row>
         <ion-col>
           <app-calendar [formControlName]="formCtrl.date"></app-calendar>
-       <!--    <ion-input [formControlName]="formCtrl.date" type="number"></ion-input> -->
         </ion-col>
       </ion-row>
       <ion-row>
@@ -53,7 +52,8 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <app-buttons-actions (cancelEventEmit)="cancel()" [isCreate]="true"></app-buttons-actions>
+      <app-buttons-actions (createEventEmit)="saveChange()" (cancelEventEmit)="cancel()" [isCreate]="true">
+      </app-buttons-actions>
     </ion-list>
   </form>
 </ion-grid>

@@ -37,4 +37,9 @@ export class FormCreditComponent implements OnInit {
     this.modalController.dismiss();
   }
 
+  saveChange(): void {
+    console.log(this.formGroup.value);
+
+  }
+
 }
