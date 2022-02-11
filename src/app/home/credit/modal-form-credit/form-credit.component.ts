@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { IcreditModel } from '../model/credit.interface';
 import { FormCreditCtrl } from '../model/formCredit.enum';
+import { CreditService } from '../service/credit.service';
 @Component({
   selector: 'app-form-credit',
   templateUrl: './form-credit.component.html',
@@ -14,9 +15,13 @@ export class ModalFormCreditComponent implements OnInit {
   @Input() isCreate = true;
   formGroup: FormGroup;
   formCtrl = FormCreditCtrl;
+  loading = false;;
+
   constructor(
     private modalController: ModalController,
-    private formBuild: FormBuilder
+    private formBuild: FormBuilder,
+    private creditService: CreditService,
+    public toastController: ToastController
   ) { }
 
   ngOnInit(): void {
@@ -28,9 +33,9 @@ export class ModalFormCreditComponent implements OnInit {
       [this.formCtrl.name]: [data ? data.name : null, Validators.required],
       [this.formCtrl.value]: [data ? data.value : null, Validators.required],
       [this.formCtrl.date]: [data ? data.date : null, Validators.required],
-      [this.formCtrl.spending]: [data ? data.spending : false],
-      [this.formCtrl.cash]: [data ? data.cash : false],
-      [this.formCtrl.outstanding]: [data ? data.outstanding : false]
+      [this.formCtrl.spending]: [data ? data.spending : false, Validators.required],
+      [this.formCtrl.cash]: [data ? data.cash : false, Validators.required],
+      [this.formCtrl.outstanding]: [data ? data.outstanding : false, Validators.required]
     });
   }
 
@@ -38,9 +43,19 @@ export class ModalFormCreditComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  saveChange(): void {
-    console.log(this.formGroup.value);
-
+  async saveChange(): Promise<void> {
+    this.loading = true;
+    await this.creditService.createCredit(this.formGroup.value);
+    await this.presentToast('Registro creado correctamente');
+    this.loading = false;
+    await this.modalController.dismiss();
   }
 
+  private async presentToast(mensaje: string): Promise<void> {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
+  }
 }

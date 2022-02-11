@@ -52,8 +52,8 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <app-buttons-actions [disabled]="formGroup.invalid" (createEventEmit)="saveChange()" (cancelEventEmit)="cancel()"
-        [isCreate]="isCreate">
+      <app-buttons-actions [loading]="loading" [disabled]="formGroup.invalid" (createEventEmit)="saveChange()"
+        (cancelEventEmit)="cancel()" [isCreate]="isCreate">
       </app-buttons-actions>
     </ion-list>
   </form>
