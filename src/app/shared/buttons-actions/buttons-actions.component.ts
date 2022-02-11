@@ -9,6 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ButtonsActionsComponent {
 
   @Input() isCreate = true;
+  @Input() disabled = false;
   @Output() createEventEmit = new EventEmitter<boolean>();
   @Output() cancelEventEmit = new EventEmitter<boolean>();
 

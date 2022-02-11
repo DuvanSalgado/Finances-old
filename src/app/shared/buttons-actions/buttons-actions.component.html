@@ -1,10 +1,10 @@
 <ion-row class="ion-text-center">
   <ion-col>
     <ng-container *ngIf="isCreate; else elseTemplate">
-      <ion-button (click)="create()">Guardar</ion-button>
+      <ion-button [disabled]="disabled" (click)="create()">Guardar</ion-button>
     </ng-container>
     <ng-template #elseTemplate>
-      <ion-button (click)="update()">Actualizar</ion-button>
+      <ion-button [disabled]="disabled" (click)="update()">Actualizar</ion-button>
     </ng-template>
   </ion-col>
   <ion-col>
