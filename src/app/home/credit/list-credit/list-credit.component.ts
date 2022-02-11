@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { FormCreditComponent } from '../form-credit/form-credit.component';
+import { ModalFormCreditComponent } from '../modal-form-credit/form-credit.component';
 import { IcreditModel } from '../model/credit.interface';
 
 @Component({
@@ -40,7 +40,7 @@ export class ListCreditComponent {
 
   private async openModal(data: IcreditModel, isCreate: boolean): Promise<void> {
     const modal = await this.modalController.create({
-      component: FormCreditComponent,
+      component: ModalFormCreditComponent,
       componentProps: { data, isCreate }
     });
     return await modal.present();

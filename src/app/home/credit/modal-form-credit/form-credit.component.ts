@@ -8,7 +8,7 @@ import { FormCreditCtrl } from '../model/formCredit.enum';
   templateUrl: './form-credit.component.html',
   styleUrls: ['./form-credit.component.scss'],
 })
-export class FormCreditComponent implements OnInit {
+export class ModalFormCreditComponent implements OnInit {
 
   @Input() data: IcreditModel = null;
   @Input() isCreate = true;
