@@ -1,34 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalFormCreditComponent } from '../modal-form-credit/form-credit.component';
 import { IcreditModel } from '../model/credit.interface';
+import { CreditService } from '../service/credit.service';
 
 @Component({
   selector: 'app-list-credit',
   templateUrl: './list-credit.component.html',
   styleUrls: ['./list-credit.component.scss'],
 })
-export class ListCreditComponent {
+export class ListCreditComponent implements OnInit {
 
-  items: any[] = [{
-    name: 'duvan',
-    value: '50.000',
-    date: '10/10/2022'
-  }, {
-    name: 'duvan',
-    value: '50.000',
-    date: '10/10/2022'
-  }, {
-    name: 'duvan',
-    value: '50.000',
-    date: '10/10/2022'
-  }, {
-    name: 'duvan',
-    value: '50.000',
-    date: '10/10/2022'
-  }];
+  data: Array<IcreditModel> = [];
 
-  constructor(private modalController: ModalController) { }
+  constructor(
+    private modalController: ModalController,
+    private creditService: CreditService
+  ) { }
+
+
+  ngOnInit(): void {
+    this.creditService.getAllCredit().subscribe((data) => this.data = data);
+  }
 
   update(data: IcreditModel): void {
     this.openModal(data, false);

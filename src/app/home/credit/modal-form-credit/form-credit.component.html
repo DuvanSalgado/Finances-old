@@ -28,8 +28,8 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
-          <app-calendar [formControlName]="formCtrl.date"></app-calendar>
+        <ion-col *ngIf="isCreate">
+          <app-calendar [formControlName]="formCtrl.month"></app-calendar>
         </ion-col>
       </ion-row>
       <ion-row>

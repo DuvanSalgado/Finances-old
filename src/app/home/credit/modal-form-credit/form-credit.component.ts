@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { IcreditModel } from '../model/credit.interface';
 import { FormCreditCtrl } from '../model/formCredit.enum';
 import { CreditService } from '../service/credit.service';
@@ -32,7 +32,7 @@ export class ModalFormCreditComponent implements OnInit {
     this.formGroup = this.formBuild.group({
       [this.formCtrl.name]: [data ? data.name : null, Validators.required],
       [this.formCtrl.value]: [data ? data.value : null, Validators.required],
-      [this.formCtrl.date]: [data ? data.date : null, Validators.required],
+      [this.formCtrl.month]: [data ? data.month : null, Validators.required],
       [this.formCtrl.spending]: [data ? data.spending : false, Validators.required],
       [this.formCtrl.cash]: [data ? data.cash : false, Validators.required],
       [this.formCtrl.outstanding]: [data ? data.outstanding : false, Validators.required]

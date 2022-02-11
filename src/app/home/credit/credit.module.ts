@@ -8,12 +8,14 @@ import { CreditRoutingModule } from './credit.routing';
 import { ModalFormCreditComponent } from './modal-form-credit/form-credit.component';
 import { ListCreditComponent } from './list-credit/list-credit.component';
 import { CreditService } from './service/credit.service';
+import { StatusPipe } from './pipes/status.pipe';
 
 @NgModule({
   declarations: [
     CreditComponent,
     ModalFormCreditComponent,
-    ListCreditComponent
+    ListCreditComponent,
+    StatusPipe
   ],
   imports: [
     CommonModule,
