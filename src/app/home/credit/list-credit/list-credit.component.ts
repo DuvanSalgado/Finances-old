@@ -18,7 +18,6 @@ export class ListCreditComponent implements OnInit {
     private creditService: CreditService
   ) { }
 
-
   ngOnInit(): void {
     this.creditService.getAllCredit().subscribe((data) => this.data = data);
   }
@@ -38,5 +37,4 @@ export class ListCreditComponent implements OnInit {
     });
     return await modal.present();
   }
-
 }
