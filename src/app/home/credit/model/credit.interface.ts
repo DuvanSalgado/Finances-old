@@ -1,7 +1,8 @@
 export interface IcreditModel {
+  id?: string;
   name: string;
   value: number;
-  date: Date;
+  month: number;
   spending: boolean;
   cash: boolean;
   outstanding: boolean;

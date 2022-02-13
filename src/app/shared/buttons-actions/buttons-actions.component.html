@@ -1,13 +1,17 @@
 <ion-row class="ion-text-center">
   <ion-col>
     <ng-container *ngIf="isCreate; else elseTemplate">
-      <ion-button (click)="create()">Guardar</ion-button>
+      <ion-button [disabled]="disabled || loading" (click)="create()">
+        {{nameButton}}
+        <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+      </ion-button>
+
     </ng-container>
     <ng-template #elseTemplate>
-      <ion-button (click)="update()">Actualizar</ion-button>
+      <ion-button [disabled]="disabled" (click)="update()">Actualizar</ion-button>
     </ng-template>
   </ion-col>
   <ion-col>
-    <ion-button (click)="cancel()">Cancelar</ion-button>
+    <ion-button [disabled]="loading" (click)="cancel()">Cancelar</ion-button>
   </ion-col>
 </ion-row>

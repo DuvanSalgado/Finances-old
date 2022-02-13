@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { FormCreditComponent } from '../form-credit/form-credit.component';
+import { ModalFormCreditComponent } from '../modal-form-credit/form-credit.component';
 import { IcreditModel } from '../model/credit.interface';
+import { CreditService } from '../service/credit.service';
 
 @Component({
   selector: 'app-list-credit',
@@ -10,40 +11,30 @@ import { IcreditModel } from '../model/credit.interface';
 })
 export class ListCreditComponent implements OnInit {
 
-  items: any[] = [{
-    name: 'duvan',
-    value: '50.000',
-    date: '10/10/2022'
-  }, {
-    name: 'duvan',
-    value: '50.000',
-    date: '10/10/2022'
-  }, {
-    name: 'duvan',
-    value: '50.000',
-    date: '10/10/2022'
-  }, {
-    name: 'duvan',
-    value: '50.000',
-    date: '10/10/2022'
-  }];
+  data: Array<IcreditModel> = [];
 
-  constructor(private modalController: ModalController) { }
+  constructor(
+    private modalController: ModalController,
+    private creditService: CreditService
+  ) { }
 
-  ngOnInit(): void { }
 
-  update(item: any): void {
-    this.openModal(item);
+  ngOnInit(): void {
+    this.creditService.getAllCredit().subscribe((data) => this.data = data);
+  }
+
+  update(data: IcreditModel): void {
+    this.openModal(data, false);
   }
 
   create(): void {
-    this.openModal(null);
+    this.openModal(null, true);
   }
 
-  private async openModal(item: IcreditModel): Promise<void> {
+  private async openModal(data: IcreditModel, isCreate: boolean): Promise<void> {
     const modal = await this.modalController.create({
-      component: FormCreditComponent,
-      componentProps: { data: item }
+      component: ModalFormCreditComponent,
+      componentProps: { data, isCreate }
     });
     return await modal.present();
   }

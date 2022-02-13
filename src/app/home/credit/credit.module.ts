@@ -5,14 +5,17 @@ import { SharedModule } from '@shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { CreditComponent } from '@home/credit/credit.component';
 import { CreditRoutingModule } from './credit.routing';
-import { FormCreditComponent } from './form-credit/form-credit.component';
+import { ModalFormCreditComponent } from './modal-form-credit/form-credit.component';
 import { ListCreditComponent } from './list-credit/list-credit.component';
+import { CreditService } from './service/credit.service';
+import { StatusPipe } from './pipes/status.pipe';
 
 @NgModule({
   declarations: [
     CreditComponent,
-    FormCreditComponent,
-    ListCreditComponent
+    ModalFormCreditComponent,
+    ListCreditComponent,
+    StatusPipe
   ],
   imports: [
     CommonModule,
@@ -20,6 +23,9 @@ import { ListCreditComponent } from './list-credit/list-credit.component';
     IonicModule,
     ReactiveFormsModule,
     SharedModule
+  ],
+  providers: [
+    CreditService
   ]
 })
 export class CreditModule { }
