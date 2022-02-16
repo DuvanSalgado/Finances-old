@@ -30,11 +30,15 @@ export class ListCreditComponent implements OnInit, OnDestroy {
   }
 
   update(data: IcreditModel): void {
-    this.openModal(data, false);
+    this.openModal(data, false, false);
   }
 
   create(): void {
-    this.openModal(null, true);
+    this.openModal(null, true, false);
+  }
+
+  view(data: IcreditModel): void {
+    this.openModal(data, false, true);
   }
 
   private getData(): void {
@@ -42,10 +46,10 @@ export class ListCreditComponent implements OnInit, OnDestroy {
       .subscribe((data) => this.data = data);
   }
 
-  private async openModal(data: IcreditModel, isCreate: boolean): Promise<void> {
+  private async openModal(data: IcreditModel, isCreate: boolean, isView: boolean): Promise<void> {
     const modal = await this.modalController.create({
       component: ModalFormCreditComponent,
-      componentProps: { data, isCreate }
+      componentProps: { data, isCreate, isView }
     });
     return await modal.present();
   }
