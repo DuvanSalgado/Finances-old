@@ -1,9 +1,9 @@
+import { ICombobox } from '@app/shared/combobox/model/combobox.interface';
 export interface IcreditModel {
   id?: string;
   name: string;
   value: number;
   month: number;
-  spending: boolean;
-  cash: boolean;
-  outstanding: boolean;
+  status: ICombobox;
+  date: Date;
 }

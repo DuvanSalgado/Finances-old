@@ -29,30 +29,15 @@
       </ion-row>
       <ion-row>
         <ion-col *ngIf="isCreate">
-          <app-calendar [formControlName]="formCtrl.month"></app-calendar>
+          <app-calendar [formControlName]="formCtrl.date"></app-calendar>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-label>Efectivo</ion-label>
-            <ion-toggle [formControlName]="formCtrl.cash"></ion-toggle>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-label>Gasto</ion-label>
-            <ion-toggle [formControlName]="formCtrl.spending"></ion-toggle>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-label>Pendiente</ion-label>
-            <ion-toggle [formControlName]="formCtrl.outstanding"></ion-toggle>
-          </ion-item>
+          <app-combobox [formControlName]="formCtrl.status"></app-combobox>
         </ion-col>
       </ion-row>
-      <app-buttons-actions [loading]="loading" [disabled]="formGroup.invalid" (createEventEmit)="saveChange()"
+      <app-buttons-actions [loading]="loading" [disabled]="formGroup.invalid" (createEventEmit)="saveChange($event)"
         (cancelEventEmit)="cancel()" [isCreate]="isCreate">
       </app-buttons-actions>
     </ion-list>
