@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { ModalFormCreditComponent } from '../modal-form-credit/form-credit.component';
 import { IcreditModel } from '../model/credit.interface';
 import { CreditService } from '../service/credit.service';
@@ -9,17 +10,23 @@ import { CreditService } from '../service/credit.service';
   templateUrl: './list-credit.component.html',
   styleUrls: ['./list-credit.component.scss'],
 })
-export class ListCreditComponent implements OnInit {
+export class ListCreditComponent implements OnInit, OnDestroy {
 
-  data: Array<IcreditModel> = [];
+  public data: Array<IcreditModel> = [];
+
+  private subscription: Subscription;
 
   constructor(
     private modalController: ModalController,
     private creditService: CreditService
   ) { }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   ngOnInit(): void {
-    this.creditService.getAllCredit().subscribe((data) => this.data = data);
+    this.getData();
   }
 
   update(data: IcreditModel): void {
@@ -28,6 +35,11 @@ export class ListCreditComponent implements OnInit {
 
   create(): void {
     this.openModal(null, true);
+  }
+
+  private getData(): void {
+    this.subscription = this.creditService.getAllCredit()
+      .subscribe((data) => this.data = data);
   }
 
   private async openModal(data: IcreditModel, isCreate: boolean): Promise<void> {

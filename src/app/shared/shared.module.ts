@@ -1,33 +1,36 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { IonicModule } from '@ionic/angular';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SearchbarComponent } from './searchbar/searchbar.component';
-import { CalendarComponent } from './calendar/calendar.component';
+import { IonicModule } from '@ionic/angular';
 import { ButtonsActionsComponent } from './buttons-actions/buttons-actions.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { CalendarComponent } from './calendar/calendar.component';
+import { ComboboxComponent } from './combobox/combobox.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 @NgModule({
   declarations: [
     ToolbarComponent,
     SidebarComponent,
     SearchbarComponent,
     CalendarComponent,
-    ButtonsActionsComponent
+    ButtonsActionsComponent,
+    ComboboxComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     RouterModule,
-    ReactiveFormsModule
+    FormsModule
   ],
   exports: [
     ToolbarComponent,
     SidebarComponent,
     SearchbarComponent,
     CalendarComponent,
-    ButtonsActionsComponent
+    ButtonsActionsComponent,
+    ComboboxComponent
   ]
 })
 export class SharedModule { }

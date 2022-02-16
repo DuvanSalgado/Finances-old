@@ -1,0 +1,10 @@
+<ion-list>
+  <ion-item>
+    <ion-label>Estado</ion-label>
+    <ion-select [compareWith]="compareWith" (ionChange)="setChange($event)" [(ngModel)]="value">
+      <ion-select-option *ngFor="let item of items" [value]="item">
+        {{ item.name}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>

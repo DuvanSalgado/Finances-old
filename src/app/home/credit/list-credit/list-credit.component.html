@@ -8,7 +8,7 @@
     <ion-label>
       <h2>Nombre: {{item.name}}</h2>
       <h2>Valor: {{item.value}}</h2>
-      <h2>Estado: {{item | status}} </h2>
+      <h2>Estado: {{item.status?.name}} </h2>
     </ion-label>
     <ion-label *ngIf="!data">
 

@@ -1,6 +1,5 @@
-import { Component, forwardRef, OnInit, Output } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FormCalendarCtrl } from '@app/home/core/model/calendar.enum';
+import { Component, forwardRef, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { format, parseISO } from 'date-fns';
 @Component({
   selector: 'app-calendar',
@@ -14,29 +13,16 @@ import { format, parseISO } from 'date-fns';
     }
   ]
 })
-export class CalendarComponent implements OnInit, ControlValueAccessor {
+export class CalendarComponent implements ControlValueAccessor {
 
   @Output() isDisabled = false;
-  formGroup: FormGroup;
-  formCtrl = FormCalendarCtrl;
+  value: string;
+
   onChange: (event) => void;
   onTouched: () => void;
 
-  constructor(private formbuilder: FormBuilder) { }
-
-
-  ngOnInit(): void {
-    this.initializateForm();
-  }
-
-  initializateForm(): void {
-    this.formGroup = this.formbuilder.group({
-      [this.formCtrl.value]: [null]
-    });
-  }
-
-  writeValue(obj: any): void {
-    this.formGroup.controls[this.formCtrl.value].setValue(obj);
+  writeValue(obj: string): void {
+    this.value = obj;
   }
 
   registerOnChange(fn: any): void {
@@ -52,7 +38,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
   }
 
   setChange(value: string): void {
-    this.formGroup.controls[this.formCtrl.value].setValue(this.formatDate(value));
+    this.value = this.formatDate(value);
     this.onTouched();
     this.onChange(parseISO(value).getMonth());
   }
