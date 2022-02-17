@@ -17,6 +17,8 @@ export class CalendarComponent implements ControlValueAccessor {
 
   @Output() isDisabled = false;
   value: string;
+  maxDate = format(new Date(), 'yyyy-MM-dd');
+  minDate = format(new Date(), 'yyyy-MM');
 
   onChange: (event) => void;
   onTouched: () => void;

@@ -20,7 +20,8 @@ export class ModalFormCreditComponent implements OnInit {
   public formCtrl = FormCreditCtrl;
   public loading = false;
   public loadingModal: any;
-  public toast: any;
+
+  private todayDate = new Date();
 
   constructor(
     private modalController: ModalController,
@@ -40,15 +41,11 @@ export class ModalFormCreditComponent implements OnInit {
       [this.formCtrl.name]: [data ? data.name : null, Validators.required],
       [this.formCtrl.value]: [data ? data.value : null, Validators.required],
       [this.formCtrl.valueInitial]: [data ? data.valueInitial : null],
-      [this.formCtrl.month]: [data ? data.month : new Date().getMonth()],
-      [this.formCtrl.date]: [data ? data.date : format(new Date(), 'MMM dd yyyy')],
-      [this.formCtrl.status]: [data ? data.status : { name: 'Selecione', id: 0 }],
+      [this.formCtrl.month]: [data ? data.month : this.todayDate.getMonth()],
+      [this.formCtrl.date]: [data ? data.date : format(this.todayDate, 'MMM dd yyyy'), Validators.required],
+      [this.formCtrl.status]: [data ? data.status : null, Validators.required],
       [this.formCtrl.history]: [data ? data.history : []]
     });
-  }
-
-  public cancel(): void {
-    this.modalController.dismiss();
   }
 
   public async saveChange(event: boolean): Promise<void> {
@@ -65,17 +62,19 @@ export class ModalFormCreditComponent implements OnInit {
     }
 
     this.loading = false;
-
-    await this.toast.dismiss();
     await this.loadingModal.dismiss();
     await this.modalController.dismiss();
 
   }
 
+  public cancel(): void {
+    this.modalController.dismiss();
+  }
+
   private async presentToast(mensaje: string): Promise<void> {
-    this.toast = await this.toastController
-      .create({ message: mensaje });
-    this.toast.present();
+    const toast = await this.toastController
+      .create({ message: mensaje, duration: 900 });
+    toast.present();
   }
 
   private setValueInitial(): void {
