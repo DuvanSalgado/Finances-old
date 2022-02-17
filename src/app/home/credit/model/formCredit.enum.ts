@@ -5,5 +5,6 @@ export enum FormCreditCtrl {
   month = 'month',
   status = 'status',
   date = 'date',
-  history = 'history'
+  history = 'history',
+  id = 'id'
 }

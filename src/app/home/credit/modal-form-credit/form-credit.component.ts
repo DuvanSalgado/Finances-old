@@ -36,6 +36,7 @@ export class ModalFormCreditComponent implements OnInit {
 
   public initializeForm(data: IcreditModel): void {
     this.formGroup = this.formBuild.group({
+      [this.formCtrl.id]: [data ? data.id : null],
       [this.formCtrl.name]: [data ? data.name : null, Validators.required],
       [this.formCtrl.value]: [data ? data.value : null, Validators.required],
       [this.formCtrl.valueInitial]: [data ? data.valueInitial : null],
@@ -59,9 +60,10 @@ export class ModalFormCreditComponent implements OnInit {
       await this.creditService.createCredit(this.formGroup.value);
       await this.presentToast('Registro creado correctamente');
     } else {
-      console.log(99);
-
+      await this.creditService.updateCredit(this.formGroup.value);
+      await this.presentToast('Registro actualizado correctamente');
     }
+
     this.loading = false;
 
     await this.toast.dismiss();

@@ -1,4 +1,4 @@
-import { Component, forwardRef, Output } from '@angular/core';
+import { Component, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ICombobox } from './model/combobox.interface';
 
@@ -16,7 +16,7 @@ import { ICombobox } from './model/combobox.interface';
 
 export class ComboboxComponent implements ControlValueAccessor {
 
-  @Output() isDisabled = false;
+  @Input() isDisabled = false;
   value: ICombobox;
 
   items = [{
@@ -53,6 +53,8 @@ export class ComboboxComponent implements ControlValueAccessor {
   }
 
   setDisabledState?(isDisabled: boolean): void {
+    console.log(isDisabled);
+
     this.isDisabled = isDisabled;;
   }
 
