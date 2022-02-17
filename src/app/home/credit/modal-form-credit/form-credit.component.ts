@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { format } from 'date-fns';
-import { IcreditModel } from '../model/credit.interface';
-import { FormCreditCtrl } from '../model/formCredit.enum';
-import { CreditService } from '../service/credit.service';
+import { IcreditModel } from '../shared/model/credit.interface';
+import { FormCreditCtrl } from '../shared/model/formCredit.enum';
+import { CreditService } from '../shared/service/credit.service';
 @Component({
   selector: 'app-form-credit',
   templateUrl: './form-credit.component.html',

@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ModalFormCreditComponent } from '../modal-form-credit/form-credit.component';
-import { IcreditModel } from '../model/credit.interface';
-import { CreditService } from '../service/credit.service';
+import { IcreditModel } from '../shared/model/credit.interface';
+import { CreditService } from '../shared/service/credit.service';
 
 @Component({
   selector: 'app-list-credit',
