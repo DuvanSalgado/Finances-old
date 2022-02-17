@@ -4,15 +4,15 @@
   <ion-icon name="add-circle-outline"></ion-icon>
 </ion-button>
 <ion-list *ngIf="this.data.length > 0">
-  <ion-item *ngFor="let item of data" (click)="update(item)">
+  <ion-item *ngFor="let item of data">
     <ion-label>
       <h2>Nombre: {{item.name}}</h2>
-      <h2>Valor: {{item.value}}</h2>
+      <h2>Valor: {{item.value | currency:'COP':'symbol-narrow':'1.0-0'}}</h2>
       <h2>Estado: {{item.status?.name}} </h2>
     </ion-label>
-    <ion-label *ngIf="!data">
 
-    </ion-label>
+    <ion-icon (click)="view(item)" name="eye-outline"></ion-icon>
+    <ion-icon (click)="update(item)" name="create"></ion-icon>
   </ion-item>
 </ion-list>
 

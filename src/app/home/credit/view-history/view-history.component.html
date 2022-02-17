@@ -1,0 +1,9 @@
+<ion-list *ngFor="let item of listHistory">
+  <ion-item>
+    <ion-label>
+      <h2>Valor: {{item?.value | currency:'COP':'symbol-narrow':'1.0-0'}} </h2>
+      <h2>Fecha: {{item?.date}}</h2>
+      <h2>Estado: {{item?.status.name}}</h2>
+    </ion-label>
+  </ion-item>
+</ion-list>

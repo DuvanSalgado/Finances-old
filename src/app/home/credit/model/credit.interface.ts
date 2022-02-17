@@ -5,5 +5,7 @@ export interface IcreditModel {
   value: number;
   month: number;
   status: ICombobox;
+  valueInitial: number;
   date: Date;
+  history: any[];
 }

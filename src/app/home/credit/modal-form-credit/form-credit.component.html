@@ -15,15 +15,21 @@
     <ion-list>
       <ion-row>
         <ion-col>
+          <ion-label>Valor: {{formGroup.get(formCtrl.valueInitial).value | currency:'COP':'symbol-narrow':'1.0-0'}}
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
           <ion-item>
             <ion-label position="floating">Nombre</ion-label>
-            <ion-input [formControlName]="formCtrl.name"></ion-input>
+            <ion-input [readonly]="isView" [formControlName]="formCtrl.name"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
             <ion-label position="floating">Valor</ion-label>
-            <ion-input [formControlName]="formCtrl.value" type="number"></ion-input>
+            <ion-input [readonly]="isView" [formControlName]="formCtrl.value" type="number"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -34,12 +40,28 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <app-combobox [formControlName]="formCtrl.status"></app-combobox>
+          <app-combobox [isDisabled]="isView" [formControlName]="formCtrl.status"></app-combobox>
         </ion-col>
       </ion-row>
+    </ion-list>
+    <ion-row *ngIf="isView">
+      <ion-col>
+        <ion-label>Historial</ion-label>
+        <app-view-history [listHistory]="formGroup.get(formCtrl.history).value"></app-view-history>
+      </ion-col>
+    </ion-row>
+
+    <ng-container *ngIf="!isView; else elseTemplate">
       <app-buttons-actions [loading]="loading" [disabled]="formGroup.invalid" (createEventEmit)="saveChange($event)"
         (cancelEventEmit)="cancel()" [isCreate]="isCreate">
       </app-buttons-actions>
-    </ion-list>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <ion-row class="ion-text-center">
+        <ion-col>
+          <ion-button (click)="cancel()">Cerrar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ng-template>
   </form>
 </ion-grid>
