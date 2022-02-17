@@ -21,7 +21,7 @@
   </ion-item>
 </ion-list>
 
-<app-skeleton ></app-skeleton>
+<app-skeleton *ngIf="loading"></app-skeleton>
 <ion-label *ngIf="!(data.length > 0) && !loading ">
   No hay registros
 </ion-label>
