@@ -1,12 +1,12 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons (click)="cancel()" slot="start">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>Modal</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content fullscreen>
-  <ion-header translucent>
-    <ion-toolbar>
-      <ion-buttons (click)="cancel()" slot="start">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-buttons>
-      <ion-title>Modal</ion-title>
-    </ion-toolbar>
-  </ion-header>
   <form [formGroup]="formGroup">
     <ion-list>
       <ion-row>

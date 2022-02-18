@@ -1,9 +1,7 @@
-<ion-content>
-  <ion-row>
-    <app-sidebar></app-sidebar>
-    <ion-col>
-      <app-toolbar></app-toolbar>
-      <router-outlet id="main-content"></router-outlet>
-    </ion-col>
-  </ion-row>
-</ion-content>
+<ion-app>
+  <app-toolbar></app-toolbar>
+  <app-sidebar></app-sidebar>
+  <ion-content fullscreen>
+    <router-outlet id="main-content"></router-outlet>
+  </ion-content>
+</ion-app>
