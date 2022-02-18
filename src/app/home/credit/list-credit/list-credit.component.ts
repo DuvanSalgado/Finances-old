@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ModalFormCreditComponent } from '../modal-form-credit/form-credit.component';
-import { IcreditModel } from '../model/credit.interface';
-import { CreditService } from '../service/credit.service';
+import { IcreditModel } from '../shared/model/credit.interface';
+import { CreditService } from '../shared/service/credit.service';
 
 @Component({
   selector: 'app-list-credit',
@@ -13,6 +13,7 @@ import { CreditService } from '../service/credit.service';
 export class ListCreditComponent implements OnInit, OnDestroy {
 
   public data: Array<IcreditModel> = [];
+  public loading = true;
 
   private subscription: Subscription;
 
@@ -43,7 +44,7 @@ export class ListCreditComponent implements OnInit, OnDestroy {
 
   private getData(): void {
     this.subscription = this.creditService.getAllCredit()
-      .subscribe((data) => this.data = data);
+      .subscribe((data) => { this.loading = false; this.data = data; });
   }
 
   private async openModal(data: IcreditModel, isCreate: boolean, isView: boolean): Promise<void> {

@@ -1,6 +1,7 @@
 import { Component, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ICombobox } from './model/combobox.interface';
+import { ITEMS } from './model/data.combobox';
 
 @Component({
   selector: 'app-combobox',
@@ -17,28 +18,12 @@ import { ICombobox } from './model/combobox.interface';
 export class ComboboxComponent implements ControlValueAccessor {
 
   @Input() isDisabled = false;
-  value: ICombobox;
 
-  items = [{
-    name: 'Selecione',
-    id: 0,
-  }, {
-    name: 'Gasto',
-    id: 1,
-  },
-  {
-    name: 'Prestamo',
-    id: 2,
-  },
-  {
-    name: 'Efectivo',
-    id: 3
-  }];
-
+  public value: ICombobox;
+  public items = ITEMS;
 
   onChange: (event) => void;
   onTouched: () => void;
-
 
   writeValue(item: any): void {
     this.value = item;
@@ -53,8 +38,6 @@ export class ComboboxComponent implements ControlValueAccessor {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    console.log(isDisabled);
-
     this.isDisabled = isDisabled;;
   }
 
@@ -63,8 +46,8 @@ export class ComboboxComponent implements ControlValueAccessor {
     this.onChange(event.detail.value);
   }
 
-  compareWith(o1: ICombobox, o2: ICombobox): boolean {
-    return o1 && o2 ? o1.id === o2.id : o1 === o2;
+  compareWith(list: ICombobox, value: ICombobox): boolean {
+    return list && value ? list.id === value.id : list === value;
   }
 
 }
