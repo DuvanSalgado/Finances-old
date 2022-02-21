@@ -3,18 +3,17 @@
     <ion-buttons (click)="cancel()" slot="start">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-buttons>
-    <ion-title>Modal</ion-title>
+    <ion-title> {{title}} </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
+  <ion-item class="value">
+    <ion-label>
+      Valor Total: {{formGroup.get(formCtrl.fullValue).value | currency:'COP':'symbol-narrow':'1.0-0'}}
+    </ion-label>
+  </ion-item>
   <form [formGroup]="formGroup">
     <ion-list>
-      <ion-row>
-        <ion-col>
-          <ion-label>Valor: {{formGroup.get(formCtrl.fullValue).value | currency:'COP':'symbol-narrow':'1.0-0'}}
-          </ion-label>
-        </ion-col>
-      </ion-row>
       <ion-row>
         <ion-col>
           <ion-item>

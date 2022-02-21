@@ -16,6 +16,7 @@ export class ModalFormCreditComponent implements OnInit {
   @Input() data: IcreditModel = null;
   @Input() isCreate = true;
   @Input() isView = false;
+  @Input() title: string;
 
   public formGroup: FormGroup;
   public formCtrl = FormCreditCtrl;
@@ -40,7 +41,7 @@ export class ModalFormCreditComponent implements OnInit {
     this.formGroup = this.formBuild.group({
       [this.formCtrl.id]: [data ? data.id : null],
       [this.formCtrl.name]: [data ? data.name : null, Validators.required],
-      [this.formCtrl.value]: [data ? data.value : null, Validators.required],
+      [this.formCtrl.value]: [null, Validators.required],
       [this.formCtrl.fullValue]: [data ? data.fullValue : null],
       [this.formCtrl.month]: [data ? data.month : this.todayDate.getMonth()],
       [this.formCtrl.date]: [data ? data.date : format(this.todayDate, 'MMM dd yyyy'), Validators.required],
