@@ -1,7 +1,7 @@
 export enum FormCreditCtrl {
   name = 'name',
   value = 'value',
-  valueInitial = 'valueInitial',
+  fullValue = 'fullValue',
   month = 'month',
   status = 'status',
   date = 'date',

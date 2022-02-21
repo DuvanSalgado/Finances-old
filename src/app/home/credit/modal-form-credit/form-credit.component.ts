@@ -4,6 +4,7 @@ import { LoadingController, ModalController, ToastController } from '@ionic/angu
 import { format } from 'date-fns';
 import { IcreditModel } from '../shared/model/credit.interface';
 import { FormCreditCtrl } from '../shared/model/formCredit.enum';
+import { Status } from '../shared/model/status.enum';
 import { CreditService } from '../shared/service/credit.service';
 @Component({
   selector: 'app-form-credit',
@@ -40,7 +41,7 @@ export class ModalFormCreditComponent implements OnInit {
       [this.formCtrl.id]: [data ? data.id : null],
       [this.formCtrl.name]: [data ? data.name : null, Validators.required],
       [this.formCtrl.value]: [data ? data.value : null, Validators.required],
-      [this.formCtrl.valueInitial]: [data ? data.valueInitial : null],
+      [this.formCtrl.fullValue]: [data ? data.fullValue : null],
       [this.formCtrl.month]: [data ? data.month : this.todayDate.getMonth()],
       [this.formCtrl.date]: [data ? data.date : format(this.todayDate, 'MMM dd yyyy'), Validators.required],
       [this.formCtrl.status]: [data ? data.status : null, Validators.required],
@@ -51,6 +52,7 @@ export class ModalFormCreditComponent implements OnInit {
   public async saveChange(event: boolean): Promise<void> {
     this.setValueInitial();
     this.setHistory();
+
     this.loading = true;
     await this.presentLoading();
     if (event) {
@@ -78,10 +80,24 @@ export class ModalFormCreditComponent implements OnInit {
   }
 
   private setValueInitial(): void {
-    if (!this.formGroup.get(this.formCtrl.valueInitial).value) {
-      this.formGroup.controls[this.formCtrl.valueInitial]
+    if (!this.formGroup.get(this.formCtrl.fullValue).value) {
+      this.formGroup.controls[this.formCtrl.fullValue]
         .setValue(this.formGroup.get(this.formCtrl.value).value);
+    } else {
+      this.proceso();
     }
+  }
+
+  private proceso(): void {
+    const fullvalue = this.formGroup.controls[this.formCtrl.fullValue].value;
+    const value = this.formGroup.controls[this.formCtrl.value].value;
+
+    if (this.formGroup.get(this.formCtrl.status).value.id === Status.prestamo) {
+      this.formGroup.controls[this.formCtrl.fullValue].setValue(fullvalue + value);
+    } else {
+      this.formGroup.controls[this.formCtrl.fullValue].setValue(fullvalue - value);
+    }
+
   }
 
   private setHistory(): void {
