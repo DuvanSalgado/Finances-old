@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -31,15 +32,15 @@ export class ListCreditComponent implements OnInit, OnDestroy {
   }
 
   update(data: IcreditModel): void {
-    this.openModal(data, false, false);
+    this.openModal(data, 'Actulización de datos', false, false);
   }
 
   create(): void {
-    this.openModal(null, true, false);
+    this.openModal(null, 'Crear un nuevo registro', true, false);
   }
 
   view(data: IcreditModel): void {
-    this.openModal(data, false, true);
+    this.openModal(data, 'Vista de detalles', false, true);
   }
 
   private getData(): void {
@@ -47,10 +48,10 @@ export class ListCreditComponent implements OnInit, OnDestroy {
       .subscribe((data) => { this.loading = false; this.data = data; });
   }
 
-  private async openModal(data: IcreditModel, isCreate: boolean, isView: boolean): Promise<void> {
+  private async openModal(data: IcreditModel, title: string, isCreate: boolean, isView: boolean): Promise<void> {
     const modal = await this.modalController.create({
       component: ModalFormCreditComponent,
-      componentProps: { data, isCreate, isView }
+      componentProps: { data, isCreate, isView, title }
     });
     return await modal.present();
   }
