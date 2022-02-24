@@ -6,9 +6,10 @@
   <ion-item *ngFor="let item of data">
     <ion-label>
       <h2>Nombre: {{item.name}}</h2>
-      <h2>Valor: {{item.value | currency:'COP':'symbol-narrow':'1.0-0'}}</h2>
-      <h2 [ngClass]="{'prestamo': !(item?.status.id === 2), 'efectivo': item?.status.id === 2}">Estado:
-        {{item.status?.name}} </h2>
+      <h2>Valor: {{item.pendingValue | currency:'COP':'symbol-narrow':'1.0-0'}}</h2>
+      <h2 [ngClass]="{'prestamo': !(item?.history[0].status.id === 2), 'efectivo': item?.history[0].status.id === 2}">
+        Estado:
+        {{item?.history[0].status.name}} </h2>
     </ion-label>
     <ion-item-group>
       <ion-button (click)="view(item)">

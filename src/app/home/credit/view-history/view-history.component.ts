@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IHistory } from '../shared/model/credit.interface';
 
 @Component({
   selector: 'app-view-history',
@@ -7,5 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ViewHistoryComponent {
 
-  @Input() listHistory = null;
+  @Input() listHistory: IHistory[] = [];
 }
