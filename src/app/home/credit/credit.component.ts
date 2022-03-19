@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ModalFormCreditComponent } from './modal-form-credit/form-credit.component';
 import { IcreditModel } from './shared/model/credit.interface';
+import { Section } from './shared/model/section.enum';
 import { CreditService } from './shared/service/credit.service';
 
 @Component({
@@ -11,9 +12,10 @@ import { CreditService } from './shared/service/credit.service';
   styleUrls: ['./credit.component.scss'],
 })
 export class CreditComponent implements OnInit, OnDestroy {
+
   public data: Array<IcreditModel> = [];
   public loading = true;
-
+  public selectedSection = Section.expenses;
   private subscription: Subscription;
 
   constructor(
@@ -31,6 +33,10 @@ export class CreditComponent implements OnInit, OnDestroy {
 
   update(data: IcreditModel): void {
     this.openModal(data, 'Actulización de datos', false, false);
+  }
+
+  segmentChanged(event: any): void {
+    this.selectedSection = event.detail.value;
   }
 
   create(): void {

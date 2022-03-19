@@ -1,15 +1,37 @@
-<ion-list-header> Listado de gastos </ion-list-header>
-<ion-button (click)="create()">
-  <ion-icon name="add-circle-outline"></ion-icon>
-</ion-button>
-<ion-list *ngIf="!loading">
+<ion-segment
+  (ionChange)="segmentChanged($event)"
+  [value]="selectedSection"
+  color="secondary"
+>
+  <ion-segment-button value="expenses">
+    <ion-label>Gastos</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="moneyLoans">
+    <ion-label>Prestamos</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<ng-container *ngIf="selectedSection === 'expenses'; else moneyLoans">
+  <app-list-expenses></app-list-expenses>
+</ng-container>
+<ng-template #moneyLoans> prestamos </ng-template>
+
+<!-- <ion-list *ngIf="!loading">
   <ion-item *ngFor="let item of data">
     <ion-label>
-      <h2>Nombre: {{item.name}}</h2>
-      <h2>Valor: {{item.pendingValue | currency:'COP':'symbol-narrow':'1.0-0'}}</h2>
-      <h2 [ngClass]="{'prestamo': !(item?.history[0].status.id === 2), 'efectivo': item?.history[0].status.id === 2}">
+      <h2>Nombre: {{ item.name }}</h2>
+      <h2>
+        Valor: {{ item.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
+      </h2>
+      <h2
+        [ngClass]="{
+          prestamo: !(item?.history[0].status.id === 2),
+          efectivo: item?.history[0].status.id === 2
+        }"
+      >
         Estado:
-        {{item?.history[0].status.name}} </h2>
+        {{ item?.history[0].status.name }}
+      </h2>
     </ion-label>
     <ion-item-group>
       <ion-button (click)="view(item)">
@@ -20,8 +42,6 @@
       </ion-button>
     </ion-item-group>
   </ion-item>
-</ion-list>
+</ion-list> -->
 <app-skeleton *ngIf="loading"></app-skeleton>
-<ion-label *ngIf="!(data.length > 0) && !loading ">
-  No hay registros
-</ion-label>
+<ion-label *ngIf="!(data.length > 0) && !loading"> No hay registros </ion-label>
