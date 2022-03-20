@@ -13,3 +13,17 @@ export interface IcreditModel {
 }
 
 export type IHistory = Pick<IcreditModel, 'date' | 'value' | 'status'>;
+
+export interface IExpensesModel {
+  value: number;
+  description: string;
+  date: Date;
+  month: number;
+}
+
+export interface ITotal {
+  month: number;
+  expense?: number;
+  loan?: number;
+  id?: string;
+}

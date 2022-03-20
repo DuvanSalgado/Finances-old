@@ -10,3 +10,11 @@ export enum FormCreditCtrl {
   history = 'history',
   id = 'id'
 }
+
+export enum FormExpensesCtrl {
+  id = 'id',
+  value = 'value',
+  month = 'month',
+  date = 'date',
+  description = 'description'
+}
