@@ -28,10 +28,8 @@ export class CreditService {
       })));
   }
 
-  updateCredit(data: any): Promise<boolean> {
+  async updateCredit(data: any): Promise<void> {
     this.itemsCollection = this.fireBase.collection<any>('credit');
-    return this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)))
-      .then(() => true)
-      .catch(() => false);
+    return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));
   }
 }

@@ -9,6 +9,7 @@ import { ListExpensesComponent } from './expenses/list-expenses/list-expenses.co
 import { ModalAddExpensesComponent } from './expenses/modal-add-expenses/modal-add-expenses.component';
 import { ModalFormCreditComponent } from './modal-form-credit/form-credit.component';
 import { CreditService } from './shared/service/credit.service';
+import { CalculateService } from './shared/service/calculate.service';
 import { SkeletonComponent } from './shared/skeleton/skeleton.component';
 import { ViewHistoryComponent } from './view-history/view-history.component';
 
@@ -29,7 +30,8 @@ import { ViewHistoryComponent } from './view-history/view-history.component';
     SharedModule
   ],
   providers: [
-    CreditService
+    CreditService,
+    CalculateService
   ]
 })
 export class CreditModule { }

@@ -1,7 +1,6 @@
-<ion-button (click)="openModalCreate()" color="secondary">
+<ion-button [disabled]="loading" (click)="openModalCreate()" color="secondary">
   <ion-icon name="add-circle-outline"></ion-icon>
 </ion-button>
-
 <ion-list>
   <ion-item>
     <ion-label>

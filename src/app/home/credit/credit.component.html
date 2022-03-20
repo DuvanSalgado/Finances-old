@@ -12,7 +12,7 @@
 </ion-segment>
 
 <ng-container *ngIf="selectedSection === 'expenses'; else moneyLoans">
-  <app-list-expenses></app-list-expenses>
+  <app-list-expenses [loading]="loading" [total]="total"></app-list-expenses>
 </ng-container>
 <ng-template #moneyLoans> prestamos </ng-template>
 
