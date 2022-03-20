@@ -52,10 +52,14 @@ export class ModalAddExpensesComponent implements OnInit {
   }
 
   private async calculate(): Promise<void> {
+    const valueTotal = (this.total.length > 0) ? this.total[0].expense : 0;
+    const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10) + valueTotal;
+
     const reques = {
       ...this.total[0],
-      expense: parseInt(this.formGroup.get(this.formCtrl.value).value, 10),
+      expense: value,
     };
+
     await this.calculateService.calculate(reques);
   }
 }
