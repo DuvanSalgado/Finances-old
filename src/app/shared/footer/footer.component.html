@@ -1,5 +1,21 @@
 <ion-footer>
   <ion-toolbar>
-    <ion-title>Footer</ion-title>
+    <ion-title>Calculos</ion-title>
+    <ion-item>
+      <ion-label>
+        <p>
+          Gastos:
+          {{ total[0]?.expense | currency: "COP":"symbol-narrow":"1.0-0" }}
+        </p>
+        <p>
+          Efectivo:
+          {{ total[0]?.expense | currency: "COP":"symbol-narrow":"1.0-0" }}
+        </p>
+        <p>
+          Prestamos:
+          {{ total[0]?.expense | currency: "COP":"symbol-narrow":"1.0-0" }}
+        </p>
+      </ion-label>
+    </ion-item>
   </ion-toolbar>
 </ion-footer>

@@ -1,9 +1,10 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { ITotal } from '../../shared/model/credit.interface';
 import { FormExpensesCtrl } from '../../shared/model/formCredit.enum';
+import { mensages } from '../../shared/model/menssage';
 import { CalculateService } from '../../shared/service/calculate.service';
 import { ExpensesService } from '../../shared/service/expenses.service';
 @Component({
@@ -19,13 +20,16 @@ export class ModalAddExpensesComponent implements OnInit {
   public formGroup: FormGroup;
   public formCtrl = FormExpensesCtrl;
 
+  private loadingModal: any;
   private todayDate = new Date();
 
   constructor(
     private modalController: ModalController,
     private formbuilder: FormBuilder,
     private calculateService: CalculateService,
-    private expensesService: ExpensesService
+    private expensesService: ExpensesService,
+    private toastController: ToastController,
+    private loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -37,8 +41,13 @@ export class ModalAddExpensesComponent implements OnInit {
   }
 
   public async onSaveChange(evet: boolean): Promise<void> {
+    this.loading = true;
+    await this.presentLoading();
     await this.calculate();
     await this.expensesService.create(this.formGroup.value);
+    await this.presentToast(mensages.successful);
+    this.loading = false;
+    await this.loadingModal.dismiss();
     await this.modalController.dismiss();
   }
 
@@ -61,5 +70,18 @@ export class ModalAddExpensesComponent implements OnInit {
     };
 
     await this.calculateService.calculate(reques);
+  }
+
+  private async presentToast(mensaje: string): Promise<void> {
+    const toast = await this.toastController
+      .create({ message: mensaje, duration: 900 });
+    toast.present();
+  }
+
+  private async presentLoading(): Promise<void> {
+    this.loadingModal = await this.loadingController.create({
+      message: 'Cargando...',
+    });
+    await this.loadingModal.present();
   }
 }
