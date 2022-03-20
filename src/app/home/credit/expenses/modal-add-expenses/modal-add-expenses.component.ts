@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { ITotal } from '../../shared/model/credit.interface';
 import { FormExpensesCtrl } from '../../shared/model/formCredit.enum';
 import { CalculateService } from '../../shared/service/calculate.service';
+import { ExpensesService } from '../../shared/service/expenses.service';
 @Component({
   selector: 'app-modal-add-expenses',
   templateUrl: './modal-add-expenses.component.html',
@@ -23,7 +24,8 @@ export class ModalAddExpensesComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private formbuilder: FormBuilder,
-    private expensesService: CalculateService
+    private calculateService: CalculateService,
+    private expensesService: ExpensesService
   ) { }
 
 
@@ -35,9 +37,10 @@ export class ModalAddExpensesComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  public onSaveChange(evet: boolean): void {
-    this.calculate();
-    console.log(this.formGroup.value);
+  public async onSaveChange(evet: boolean): Promise<void> {
+    await this.calculate();
+    await this.expensesService.create(this.formGroup.value);
+    await this.modalController.dismiss();
   }
 
   private initializeForm(): void {
@@ -52,14 +55,13 @@ export class ModalAddExpensesComponent implements OnInit {
 
   private async calculate(): Promise<void> {
     const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
-    console.log(this.total);
 
     const reques = {
       ...this.total[0],
-      gastos: value,
+      expense: value,
     };
 
-    await this.expensesService.calculate(reques);
+    await this.calculateService.calculate(reques);
   }
 
 }
