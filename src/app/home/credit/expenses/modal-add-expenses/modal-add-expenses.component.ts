@@ -28,7 +28,6 @@ export class ModalAddExpensesComponent implements OnInit {
     private expensesService: ExpensesService
   ) { }
 
-
   ngOnInit() {
     this.initializeForm();
   }
@@ -52,16 +51,11 @@ export class ModalAddExpensesComponent implements OnInit {
     });
   }
 
-
   private async calculate(): Promise<void> {
-    const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
-
     const reques = {
       ...this.total[0],
-      expense: value,
+      expense: parseInt(this.formGroup.get(this.formCtrl.value).value, 10),
     };
-
     await this.calculateService.calculate(reques);
   }
-
 }

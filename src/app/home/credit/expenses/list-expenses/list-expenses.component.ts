@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ITotal } from '../../shared/model/credit.interface';
+import { IExpensesModel, ITotal } from '../../shared/model/credit.interface';
 import { ModalAddExpensesComponent } from '../modal-add-expenses/modal-add-expenses.component';
 
 @Component({
@@ -12,6 +12,7 @@ export class ListExpensesComponent {
 
   @Input() total: Array<ITotal>;
   @Input() loading: boolean;
+  @Input() expenses: Array<IExpensesModel>;
 
   constructor(private modalController: ModalController) { }
 
