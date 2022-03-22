@@ -1,19 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { IcreditModel } from '../../shared/model/credit.interface';
+import { FormCreditCtrl } from '../../shared/model/formCredit.enum';
+import { mensages } from '../../shared/model/menssage';
+import { CreditService } from '../../shared/service/credit.service';
 import { format } from 'date-fns';
-import { IcreditModel } from '../shared/model/credit.interface';
-import { FormCreditCtrl } from '../shared/model/formCredit.enum';
-import { mensages } from '../shared/model/menssage';
-import { Status } from '../shared/model/status.enum';
-import { CreditService } from '../shared/service/credit.service';
+import { Status } from '../../shared/model/status.enum';
 @Component({
-  selector: 'app-form-credit',
-  templateUrl: './form-credit.component.html',
-  styleUrls: ['./form-credit.component.scss'],
+  selector: 'app-modal-loans',
+  templateUrl: './modal-loans.component.html',
+  styleUrls: ['./modal-loans.component.scss'],
 })
-export class ModalFormCreditComponent implements OnInit {
-
+export class ModalLoansComponent implements OnInit {
   @Input() data: IcreditModel = null;
   @Input() title: string;
   @Input() isCreate = true;

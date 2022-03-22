@@ -1,0 +1,28 @@
+<ion-button [disabled]="loading" (click)="openModalCreate()" color="secondary">
+  <ion-icon name="add-circle-outline"></ion-icon>
+</ion-button>
+<ion-item *ngFor="let item of loans">
+  <ion-label>
+    <h2>Nombre: {{ item.name }}</h2>
+    <h2>
+      Valor: {{ item.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
+    </h2>
+    <h2
+      [ngClass]="{
+        prestamo: !(item?.history[0].status.id === 2),
+        efectivo: item?.history[0].status.id === 2
+      }"
+    >
+      Estado:
+      {{ item?.history[0].status.name }}
+    </h2>
+  </ion-label>
+  <ion-item-group>
+    <ion-button (click)="view(item)">
+      <ion-icon name="eye-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="update(item)">
+      <ion-icon name="create"></ion-icon>
+    </ion-button>
+  </ion-item-group>
+</ion-item>
