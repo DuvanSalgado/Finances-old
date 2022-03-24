@@ -11,24 +11,26 @@
   </ion-segment-button>
 </ion-segment>
 
-<ng-container *ngIf="selectedSection === 'expenses'; else moneyLoans">
-  <app-list-expenses
-    [expenses]="expenses"
-    [loading]="loadingExpense"
-    [total]="total"
-  ></app-list-expenses>
-</ng-container>
-<ng-template #moneyLoans>
-  <app-list-loans
-    [total]="total"
-    [loading]="loadingLoans"
-    [loans]="loans"
-  ></app-list-loans>
-</ng-template>
+<ion-content>
+  <ng-container *ngIf="selectedSection === 'expenses'; else moneyLoans">
+    <app-list-expenses
+      [expenses]="expenses"
+      [loading]="loadingExpense"
+      [total]="total"
+    ></app-list-expenses>
+  </ng-container>
+  <ng-template #moneyLoans>
+    <app-list-loans
+      [total]="total"
+      [loading]="loadingLoans"
+      [loans]="loans"
+    ></app-list-loans>
+  </ng-template>
 
-<app-skeleton *ngIf="loadingLoans"></app-skeleton>
-<ion-label *ngIf="!(loans.length > 0) && !loadingLoans">
-  No hay registros
-</ion-label>
+  <app-skeleton *ngIf="loadingLoans"></app-skeleton>
+  <ion-label *ngIf="!(loans.length > 0) && !loadingLoans">
+    No hay registros
+  </ion-label>
+</ion-content>
 
-<app-footer></app-footer>
+<app-footer [total]="total"></app-footer>

@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { IcreditModel, ITotal } from '../../shared/model/credit.interface';
+import { ModalDetailsLoansComponent } from '../modal-details-loans/modal-details-loans.component';
 import { ModalLoansComponent } from '../modal-loans/modal-loans.component';
 
 @Component({
@@ -8,7 +9,7 @@ import { ModalLoansComponent } from '../modal-loans/modal-loans.component';
   templateUrl: './list-loans.component.html',
   styleUrls: ['./list-loans.component.scss'],
 })
-export class ListLoansComponent implements OnInit {
+export class ListLoansComponent {
 
   @Input() loans: Array<IcreditModel> = [];
   @Input() total: Array<ITotal>;
@@ -16,24 +17,26 @@ export class ListLoansComponent implements OnInit {
 
   constructor(private modalController: ModalController) { }
 
-  ngOnInit() { }
-
-  view(data: IcreditModel): void {
-    this.openModal(data, 'Vista de detalles', false, true);
+  async view(data: IcreditModel): Promise<void> {
+    const modal = await this.modalController.create({
+      component: ModalDetailsLoansComponent,
+      componentProps: { data }
+    });
+    return await modal.present();
   }
 
   openModalCreate(): void {
-    this.openModal(null, 'Crear un nuevo registro', true, false);
+    this.openModal(null, 'Crear un nuevo registro', true);
   }
 
   update(data: IcreditModel): void {
-    this.openModal(data, 'Actulización de datos', false, false);
+    this.openModal(data, 'Actulización de datos', false);
   }
 
-  private async openModal(data: IcreditModel, title: string, isCreate: boolean, isView: boolean): Promise<void> {
+  private async openModal(data: IcreditModel, title: string, isCreate: boolean): Promise<void> {
     const modal = await this.modalController.create({
       component: ModalLoansComponent,
-      componentProps: { data, isCreate, isView, title }
+      componentProps: { data, isCreate, title, total: this.total }
     });
     return await modal.present();
   }

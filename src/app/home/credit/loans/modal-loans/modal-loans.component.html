@@ -3,32 +3,31 @@
     <ion-buttons (click)="cancel()" slot="start">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-buttons>
-    <ion-title> {{title}} </ion-title>
+    <ion-title> {{ title }} </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-
-  <ion-row>
-    <ion-col>
-      <ion-label>
-        Valor Pendiente: {{formGroup.get(formCtrl.pendingValue).value | currency:'COP':'symbol-narrow':'1.0-0'}}
-      </ion-label>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-label>
-        Valor Pagado: {{formGroup.get(formCtrl.paidValue).value | currency:'COP':'symbol-narrow':'1.0-0'}}
-      </ion-label>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-label>
-        Valor Total: {{formGroup.get(formCtrl.fullValue).value | currency:'COP':'symbol-narrow':'1.0-0'}}
-      </ion-label>
-    </ion-col>
-  </ion-row>
+  <ion-card *ngIf="!isCreate">
+    <ion-card-content>
+      <ion-item lines="none">
+        <label>
+          <h3>Nombre: {{ data.name }}</h3>
+          <p>
+            Pendiente:
+            {{ data.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </p>
+          <p>
+            Pagado:
+            {{ data.paidValue | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </p>
+          <p>
+            Total:
+            {{ data.fullValue | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </p>
+        </label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 
   <form [formGroup]="formGroup">
     <ion-list>
@@ -36,13 +35,13 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Nombre</ion-label>
-            <ion-input [readonly]="isView" [formControlName]="formCtrl.name"></ion-input>
+            <ion-input [formControlName]="formCtrl.name"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
             <ion-label position="floating">Valor</ion-label>
-            <ion-input type="number" [readonly]="isView" [formControlName]="formCtrl.value">
+            <ion-input type="number" [formControlName]="formCtrl.value">
             </ion-input>
           </ion-item>
         </ion-col>
@@ -54,27 +53,18 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <app-combobox [isDisabled]="isView" [formControlName]="formCtrl.status"></app-combobox>
+          <app-combobox [formControlName]="formCtrl.status"></app-combobox>
         </ion-col>
       </ion-row>
     </ion-list>
-    <ion-row *ngIf="isView">
-      <ion-col>
-        <ion-label>Historial</ion-label>
-        <app-view-history [listHistory]="formGroup.get(formCtrl.history).value"></app-view-history>
-      </ion-col>
-    </ion-row>
-    <ng-container *ngIf="!isView; else elseTemplate">
-      <app-buttons-actions [loading]="loading" [disabled]="formGroup.invalid" (createEventEmit)="saveChange($event)"
-        (cancelEventEmit)="cancel()" [isCreate]="isCreate">
-      </app-buttons-actions>
-    </ng-container>
-    <ng-template #elseTemplate>
-      <ion-row class="ion-text-center">
-        <ion-col>
-          <ion-button (click)="cancel()">Cerrar</ion-button>
-        </ion-col>
-      </ion-row>
-    </ng-template>
+
+    <app-buttons-actions
+      [loading]="loading"
+      [disabled]="formGroup.invalid"
+      (createEventEmit)="saveChange($event)"
+      (cancelEventEmit)="cancel()"
+      [isCreate]="isCreate"
+    >
+    </app-buttons-actions>
   </form>
 </ion-content>

@@ -1,32 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ITotal } from '@app/home/credit/shared/model/credit.interface';
-import { CalculateService } from '@app/home/credit/shared/service/calculate.service';
-import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
-  providers: [CalculateService]
+  styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit, OnDestroy {
+export class FooterComponent implements OnChanges {
 
-  public total: Array<ITotal> = [];
+  @Input() total: Array<ITotal> = [];
 
-  private subscription: Subscription;
-
-  constructor(private calculateService: CalculateService) { }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  ngOnChanges({ total }: SimpleChanges): void {
+    this.total = total.currentValue;
   }
-
-  ngOnInit(): void {
-    this.getData();
-  }
-
-  getData(): void {
-    this.subscription = this.calculateService.getAll()
-      .subscribe((data) => this.total = data);
-  }
-
 }
