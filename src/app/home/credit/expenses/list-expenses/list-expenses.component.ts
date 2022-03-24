@@ -10,14 +10,13 @@ import { ModalAddExpensesComponent } from '../modal-add-expenses/modal-add-expen
 })
 export class ListExpensesComponent {
 
-  @Input() total: Array<ITotal>;
+  @Input() total: Array<ITotal> = [{ expense: 0 }];
   @Input() loading: boolean;
   @Input() expenses: Array<IExpensesModel>;
 
   constructor(private modalController: ModalController) { }
 
   async openModalCreate(): Promise<void> {
-
     const modal = await this.modalController.create({
       component: ModalAddExpensesComponent,
       componentProps: { total: this.total }

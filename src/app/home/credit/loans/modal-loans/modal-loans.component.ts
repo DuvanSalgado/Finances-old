@@ -1,19 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
-import { IcreditModel } from '../../shared/model/credit.interface';
+import { IcreditModel, ITotal } from '../../shared/model/credit.interface';
 import { FormCreditCtrl } from '../../shared/model/formCredit.enum';
 import { mensages } from '../../shared/model/menssage';
 import { CreditService } from '../../shared/service/credit.service';
 import { format } from 'date-fns';
 import { Status } from '../../shared/model/status.enum';
+import { CalculateService } from '../../shared/service/calculate.service';
 @Component({
   selector: 'app-modal-loans',
   templateUrl: './modal-loans.component.html',
   styleUrls: ['./modal-loans.component.scss'],
 })
 export class ModalLoansComponent implements OnInit {
+
   @Input() data: IcreditModel = null;
+  @Input() total: Array<ITotal>;
   @Input() title: string;
   @Input() isCreate = true;
   @Input() isView = false;
@@ -28,6 +31,7 @@ export class ModalLoansComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private formBuild: FormBuilder,
+    private calculateService: CalculateService,
     private creditService: CreditService,
     private toastController: ToastController,
     private loadingController: LoadingController
@@ -53,12 +57,11 @@ export class ModalLoansComponent implements OnInit {
   }
 
   public async saveChange(event: boolean): Promise<void> {
-
-    this.calculate();
-    this.setHistory();
-
     this.loading = true;
     await this.presentLoading();
+    await this.calculate();
+    this.setHistory();
+
     if (event) {
       await this.creditService.createCredit(this.formGroup.value);
       await this.presentToast(mensages.successful);
@@ -83,13 +86,17 @@ export class ModalLoansComponent implements OnInit {
     toast.present();
   }
 
-  private calculate(): void {
+  private async calculate(): Promise<void> {
 
     const pendingValue = parseInt(this.formGroup.get(this.formCtrl.pendingValue).value, 10);
     const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
     const paid = parseInt(this.formGroup.get(this.formCtrl.paidValue).value, 10);
 
+    let cash = (this.total[0].cash === 0) ? 0 : this.total[0].cash;
+    let loan = (this.total[0].loan === 0) ? 0 : this.total[0].loan;
+
     if (this.formGroup.get(this.formCtrl.status).value.id === Status.prestamo) {
+      loan = loan + value;
       this.formGroup.patchValue({
         [this.formCtrl.pendingValue]: pendingValue + value,
         [this.formCtrl.fullValue]: pendingValue + paid + value
@@ -97,11 +104,20 @@ export class ModalLoansComponent implements OnInit {
     }
 
     if (this.formGroup.get(this.formCtrl.status).value.id === Status.efectivo) {
+      cash = cash + value;
       this.formGroup.patchValue({
         [this.formCtrl.paidValue]: value + paid,
         [this.formCtrl.pendingValue]: pendingValue - value
       });
     }
+
+    const total: ITotal = {
+      ...this.total[0],
+      cash,
+      loan
+    };
+
+    await this.calculateService.calculate(total);
   }
 
   private setHistory(): void {

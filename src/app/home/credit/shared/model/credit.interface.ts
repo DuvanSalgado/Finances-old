@@ -22,8 +22,9 @@ export interface IExpensesModel {
 }
 
 export interface ITotal {
-  month: number;
+  month?: number;
   expense?: number;
   loan?: number;
+  cash?: number;
   id?: string;
 }
