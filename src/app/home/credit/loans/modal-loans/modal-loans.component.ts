@@ -19,7 +19,6 @@ export class ModalLoansComponent implements OnInit {
   @Input() total: Array<ITotal>;
   @Input() title: string;
   @Input() isCreate = true;
-  @Input() isView = false;
 
   public formGroup: FormGroup;
   public formCtrl = FormCreditCtrl;
@@ -51,7 +50,7 @@ export class ModalLoansComponent implements OnInit {
       [this.formCtrl.fullValue]: [data ? data.fullValue : 0],
       [this.formCtrl.month]: [data ? data.month : this.todayDate.getMonth()],
       [this.formCtrl.date]: [data ? data.date : format(this.todayDate, 'MMM dd yyyy'), Validators.required],
-      [this.formCtrl.status]: [data?.status, Validators.required],
+      [this.formCtrl.status]: [null, Validators.required],
       [this.formCtrl.history]: [data ? data.history : []]
     });
   }
