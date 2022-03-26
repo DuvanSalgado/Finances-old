@@ -19,6 +19,7 @@ export interface IExpensesModel {
   description: string;
   date: Date;
   month: number;
+  cash: boolean;
 }
 
 export interface ITotal {
