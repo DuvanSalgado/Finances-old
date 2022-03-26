@@ -18,7 +18,7 @@ export class CreditComponent implements OnInit, OnDestroy {
   public loadingLoans = true;
   public loadingExpense = true;
   public selectedSection = Section.expenses;
-  public total: Array<ITotal> = [{ expense: 0, loan: 0, cash: 0 }];
+  public total: Array<ITotal> = [{ expense: 0, loan: 0, cash: 0, cashReference: 0 }];
 
   private subscription: Array<Subscription> = [];
 

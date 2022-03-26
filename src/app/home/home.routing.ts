@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { MotoComponent } from './moto/moto.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'credit', pathMatch: 'full' },
   {
     path: '',
     component: HomeComponent,

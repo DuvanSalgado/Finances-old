@@ -1,22 +1,24 @@
 <ion-footer>
   <ion-toolbar>
-    <ion-title>Calculos</ion-title>
     <ion-item>
       <ion-label>
         <p>
           Gastos:
           {{ total[0]?.expense | currency: "COP":"symbol-narrow":"1.0-0" }}
+        </p>
+        <p>
           Efectivo:
           {{ total[0]?.cash | currency: "COP":"symbol-narrow":"1.0-0" }}
         </p>
+      </ion-label>
+      <ion-label>
         <p>
           Prestamos:
           {{ total[0]?.loan | currency: "COP":"symbol-narrow":"1.0-0" }}
+        </p>
+        <p>
           Faltantes:
-          {{
-            total[0]?.loan - total[0]?.cash
-              | currency: "COP":"symbol-narrow":"1.0-0"
-          }}
+          {{ total[0]?.missing | currency: "COP":"symbol-narrow":"1.0-0" }}
         </p>
       </ion-label>
     </ion-item>

@@ -23,7 +23,9 @@ export interface IExpensesModel {
 
 export interface ITotal {
   month?: number;
+  cashReference?: number;
   expense?: number;
+  missing?: number;
   loan?: number;
   cash?: number;
   id?: string;
