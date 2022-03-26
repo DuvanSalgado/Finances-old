@@ -14,7 +14,7 @@ import { ExpensesService } from '../../shared/service/expenses.service';
 })
 export class ModalAddExpensesComponent implements OnInit {
 
-  @Input() total: Array<ITotal> = [{ expense: 0 }];
+  @Input() total: Array<ITotal>;
 
   public loading = false;
   public formGroup: FormGroup;
@@ -55,19 +55,23 @@ export class ModalAddExpensesComponent implements OnInit {
     this.formGroup = this.formbuilder.group({
       [this.formCtrl.value]: [null, [Validators.required]],
       [this.formCtrl.description]: [null, [Validators.required]],
+      [this.formCtrl.cash]: [false],
       [this.formCtrl.date]: [format(this.todayDate, 'MMM dd yyyy')],
       [this.formCtrl.month]: [this.todayDate.getMonth()]
     });
   }
 
   private async calculate(): Promise<void> {
+    const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
+
+    if (this.formGroup.get(this.formCtrl.cash).value) {
+      this.total[0].cash = this.total[0].cash - value;
+    }
 
     const valueTotal = (this.total[0].expense === 0) ? 0 : this.total[0].expense;
-    const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10) + valueTotal;
-
     const reques = {
       ...this.total[0],
-      expense: value,
+      expense: value + valueTotal,
     };
     await this.calculateService.calculate(reques);
   }

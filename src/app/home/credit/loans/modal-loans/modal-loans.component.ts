@@ -93,6 +93,7 @@ export class ModalLoansComponent implements OnInit {
 
     let cash = (this.total[0].cash === 0) ? 0 : this.total[0].cash;
     let loan = (this.total[0].loan === 0) ? 0 : this.total[0].loan;
+    let cashReference = (this.total[0].cashReference === 0) ? 0 : this.total[0].cashReference;
 
     if (this.formGroup.get(this.formCtrl.status).value.id === Status.prestamo) {
       loan = loan + value;
@@ -104,6 +105,8 @@ export class ModalLoansComponent implements OnInit {
 
     if (this.formGroup.get(this.formCtrl.status).value.id === Status.efectivo) {
       cash = cash + value;
+      cashReference = cashReference + value;
+
       this.formGroup.patchValue({
         [this.formCtrl.paidValue]: value + paid,
         [this.formCtrl.pendingValue]: pendingValue - value
@@ -113,7 +116,9 @@ export class ModalLoansComponent implements OnInit {
     const total: ITotal = {
       ...this.total[0],
       cash,
-      loan
+      loan,
+      cashReference,
+      missing: loan - cashReference
     };
 
     await this.calculateService.calculate(total);

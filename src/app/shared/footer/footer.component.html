@@ -18,10 +18,7 @@
         </p>
         <p>
           Faltantes:
-          {{
-            total[0]?.loan - total[0]?.cash
-              | currency: "COP":"symbol-narrow":"1.0-0"
-          }}
+          {{ total[0]?.missing | currency: "COP":"symbol-narrow":"1.0-0" }}
         </p>
       </ion-label>
     </ion-item>

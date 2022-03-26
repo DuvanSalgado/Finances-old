@@ -25,12 +25,11 @@
       [loading]="loadingLoans"
       [loans]="loans"
     ></app-list-loans>
+    <app-skeleton *ngIf="loadingLoans"></app-skeleton>
+    <ion-label *ngIf="!(loans.length > 0) && !loadingLoans">
+      No hay registros
+    </ion-label>
   </ng-template>
-
-  <app-skeleton *ngIf="loadingLoans"></app-skeleton>
-  <ion-label *ngIf="!(loans.length > 0) && !loadingLoans">
-    No hay registros
-  </ion-label>
 </ion-content>
 
 <app-footer [total]="total"></app-footer>

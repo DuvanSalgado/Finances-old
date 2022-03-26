@@ -1,13 +1,9 @@
 export const ITEMS = [
   {
-    name: 'Gasto',
+    name: 'Prestamo',
     id: 0,
   },
   {
-    name: 'Prestamo',
-    id: 1,
-  },
-  {
     name: 'Efectivo',
-    id: 2
+    id: 1
   }];

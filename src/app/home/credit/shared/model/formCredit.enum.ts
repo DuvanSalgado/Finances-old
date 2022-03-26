@@ -15,6 +15,7 @@ export enum FormExpensesCtrl {
   id = 'id',
   value = 'value',
   month = 'month',
+  cash = 'cash',
   date = 'date',
   description = 'description'
 }
