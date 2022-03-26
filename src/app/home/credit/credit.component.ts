@@ -43,11 +43,7 @@ export class CreditComponent implements OnInit, OnDestroy {
 
   private getData(): void {
     this.subscription.push(this.calculateService.getAll()
-      .subscribe((data) => {
-        if (data.length > 0) {
-          this.total = data;
-        }
-      }
+      .subscribe((data) => { if (data.length > 0) { this.total = data; } }
       ));
 
     this.subscription.push(this.creditService.getAllCredit()

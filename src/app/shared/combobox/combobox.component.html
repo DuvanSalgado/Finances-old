@@ -1,10 +1,17 @@
 <ion-list>
   <ion-item>
     <ion-label>Estado</ion-label>
-    <ion-select cancelText="Cancelar" okText="Aceptar" placeholder="Seleccione" [attr.disabled]="isDisabled"
-      [compareWith]="compareWith" (ionChange)="setChange($event)" [(ngModel)]="value">
+    <ion-select
+      cancelText="Cancelar"
+      okText="Aceptar"
+      placeholder="Seleccione"
+      [attr.disabled]="isDisabled"
+      [compareWith]="compareWith"
+      (ionChange)="setChange($event)"
+      [(ngModel)]="value"
+    >
       <ion-select-option *ngFor="let item of items" [value]="item">
-        {{ item.name}}
+        {{ item.name }}
       </ion-select-option>
     </ion-select>
   </ion-item>

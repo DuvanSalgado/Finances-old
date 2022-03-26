@@ -2,13 +2,14 @@
   <ion-col>
     <ng-container *ngIf="isCreate; else elseTemplate">
       <ion-button [disabled]="disabled" (click)="create()">
-        {{nameButton}}
+        {{ nameButton }}
         <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
       </ion-button>
-
     </ng-container>
     <ng-template #elseTemplate>
-      <ion-button [disabled]="disabled" (click)="update()">Actualizar</ion-button>
+      <ion-button [disabled]="disabled" (click)="update()"
+        >Actualizar</ion-button
+      >
     </ng-template>
   </ion-col>
   <ion-col>
