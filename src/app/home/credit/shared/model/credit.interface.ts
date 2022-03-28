@@ -24,10 +24,14 @@ export interface IExpensesModel {
 
 export interface ITotal {
   month?: number;
-  cashReference?: number;
-  expense?: number;
-  missing?: number;
-  loan?: number;
+  expenseCredit?: number;
+  paidCredit?: number;
+  pendingCredit?: number;
+  loanCredit?: number;
+  expenseDebit?: number;
+  paidDebit?: number;
+  pendingDebit?: number;
+  loanDebit?: number;
   cash?: number;
   id?: string;
 }

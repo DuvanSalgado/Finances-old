@@ -18,7 +18,17 @@ export class CreditComponent implements OnInit, OnDestroy {
   public loadingLoans = true;
   public loadingExpense = true;
   public selectedSection = Section.expenses;
-  public total: Array<ITotal> = [{ expense: 0, loan: 0, cash: 0, cashReference: 0 }];
+  public total: ITotal = {
+    expenseCredit: 0,
+    loanCredit: 0,
+    cash: 0,
+    paidCredit: 0,
+    pendingCredit: 0,
+    expenseDebit: 0,
+    paidDebit: 0,
+    pendingDebit: 0,
+    loanDebit: 0,
+  };
 
   private subscription: Array<Subscription> = [];
 
@@ -43,7 +53,7 @@ export class CreditComponent implements OnInit, OnDestroy {
 
   private getData(): void {
     this.subscription.push(this.calculateService.getAll()
-      .subscribe((data) => { if (data.length > 0) { this.total = data; } }
+      .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
       ));
 
     this.subscription.push(this.creditService.getAllCredit()

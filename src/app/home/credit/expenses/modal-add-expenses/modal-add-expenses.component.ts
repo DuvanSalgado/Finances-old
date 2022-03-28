@@ -14,7 +14,7 @@ import { ExpensesService } from '../../shared/service/expenses.service';
 })
 export class ModalAddExpensesComponent implements OnInit {
 
-  @Input() total: Array<ITotal>;
+  @Input() total: ITotal;
 
   public loading = false;
   public formGroup: FormGroup;
@@ -65,13 +65,13 @@ export class ModalAddExpensesComponent implements OnInit {
     const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
 
     if (this.formGroup.get(this.formCtrl.cash).value) {
-      this.total[0].cash = this.total[0].cash - value;
+      this.total[0].cash = this.total.cash - value;
     }
 
-    const valueTotal = (this.total[0].expense === 0) ? 0 : this.total[0].expense;
-    const reques = {
-      ...this.total[0],
-      expense: value + valueTotal,
+    const valueTotal = (this.total.expenseCredit === 0) ? 0 : this.total.expenseCredit;
+    const reques: ITotal = {
+      ...this.total,
+      expenseCredit: value + valueTotal,
     };
     await this.calculateService.calculate(reques);
   }

@@ -16,7 +16,7 @@ import { CalculateService } from '../../shared/service/calculate.service';
 export class ModalLoansComponent implements OnInit {
 
   @Input() data: IcreditModel = null;
-  @Input() total: Array<ITotal>;
+  @Input() total: ITotal;
   @Input() title: string;
   @Input() isCreate = true;
 
@@ -91,12 +91,25 @@ export class ModalLoansComponent implements OnInit {
     const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
     const paid = parseInt(this.formGroup.get(this.formCtrl.paidValue).value, 10);
 
-    let cash = (this.total[0].cash === 0) ? 0 : this.total[0].cash;
-    let loan = (this.total[0].loan === 0) ? 0 : this.total[0].loan;
-    let cashReference = (this.total[0].cashReference === 0) ? 0 : this.total[0].cashReference;
+    let cash = (this.total.cash === 0) ? 0 : this.total.cash;
+    let loanCredit = (this.total.loanCredit === 0) ? 0 : this.total.loanCredit;
+    let loanDebit = (this.total.loanDebit === 0) ? 0 : this.total.loanDebit;
+
+    let paidCredit = (this.total.paidCredit === 0) ? 0 : this.total.paidCredit;
+    let paidDebit = (this.total.paidDebit === 0) ? 0 : this.total.paidDebit;
+
+    let pendingCredit = (this.total.pendingCredit === 0) ? 0 : this.total.pendingCredit;
+    let pendingDebit = (this.total.pendingDebit === 0) ? 0 : this.total.pendingDebit;
 
     if (this.formGroup.get(this.formCtrl.status).value.id === Status.prestamo) {
-      loan = loan + value;
+
+      if (true) {
+        loanCredit = loanCredit + value;
+        pendingCredit = pendingCredit + value;
+      } else {
+        loanDebit = loanDebit + value;
+        pendingDebit = pendingDebit + value;
+      }
       this.formGroup.patchValue({
         [this.formCtrl.pendingValue]: pendingValue + value,
         [this.formCtrl.fullValue]: pendingValue + paid + value
@@ -105,8 +118,13 @@ export class ModalLoansComponent implements OnInit {
 
     if (this.formGroup.get(this.formCtrl.status).value.id === Status.efectivo) {
       cash = cash + value;
-      cashReference = cashReference + value;
-
+      if (true) {
+        paidCredit = paidCredit + value;
+        pendingCredit = pendingCredit - value;
+      } else {
+        paidDebit = paidDebit + value;
+        pendingDebit = pendingDebit - value;
+      }
       this.formGroup.patchValue({
         [this.formCtrl.paidValue]: value + paid,
         [this.formCtrl.pendingValue]: pendingValue - value
@@ -114,11 +132,14 @@ export class ModalLoansComponent implements OnInit {
     }
 
     const total: ITotal = {
-      ...this.total[0],
+      ...this.total,
       cash,
-      loan,
-      cashReference,
-      missing: loan - cashReference
+      loanCredit,
+      loanDebit,
+      paidCredit,
+      paidDebit,
+      pendingCredit,
+      pendingDebit
     };
 
     await this.calculateService.calculate(total);
