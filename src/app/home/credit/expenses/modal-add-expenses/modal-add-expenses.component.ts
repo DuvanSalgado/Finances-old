@@ -1,10 +1,12 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ITEMSEXPENSE } from '@app/shared/combobox/model/data.combobox';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { ITotal } from '../../shared/model/credit.interface';
 import { FormExpensesCtrl } from '../../shared/model/formCredit.enum';
 import { mensages } from '../../shared/model/menssage';
+import { Status } from '../../shared/model/status.enum';
 import { CalculateService } from '../../shared/service/calculate.service';
 import { ExpensesService } from '../../shared/service/expenses.service';
 @Component({
@@ -19,6 +21,7 @@ export class ModalAddExpensesComponent implements OnInit {
   public loading = false;
   public formGroup: FormGroup;
   public formCtrl = FormExpensesCtrl;
+  public itemsType = ITEMSEXPENSE;
 
   private loadingModal: any;
   private todayDate = new Date();
@@ -53,9 +56,9 @@ export class ModalAddExpensesComponent implements OnInit {
 
   private initializeForm(): void {
     this.formGroup = this.formbuilder.group({
-      [this.formCtrl.value]: [null, [Validators.required]],
-      [this.formCtrl.description]: [null, [Validators.required]],
-      [this.formCtrl.cash]: [false],
+      [this.formCtrl.value]: [null, Validators.required],
+      [this.formCtrl.description]: [null, Validators.required],
+      [this.formCtrl.status]: [null, Validators.required],
       [this.formCtrl.date]: [format(this.todayDate, 'MMM dd yyyy')],
       [this.formCtrl.month]: [this.todayDate.getMonth()]
     });
@@ -64,15 +67,33 @@ export class ModalAddExpensesComponent implements OnInit {
   private async calculate(): Promise<void> {
     const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
 
-    if (this.formGroup.get(this.formCtrl.cash).value) {
-      this.total[0].cash = this.total.cash - value;
+    let reques: ITotal;
+
+    if (this.formGroup.get(this.formCtrl.status).value.id === Status.efectivo) {
+
+      const valueTotalCash = (this.total.expenseCash === 0) ? 0 : this.total.expenseCash;
+      this.total.cash = this.total.cash - value;
+      reques = {
+        ...this.total,
+        expenseCash: valueTotalCash + value
+      };
+
+    } else if (this.formGroup.get(this.formCtrl.status).value.id === Status.credito) {
+
+      const valueTotalCredit = (this.total.expenseCredit === 0) ? 0 : this.total.expenseCredit;
+      reques = {
+        ...this.total,
+        expenseCredit: value + valueTotalCredit,
+      };
+
+    } else {
+      const valueTotalDebit = (this.total.expenseDebit === 0) ? 0 : this.total.expenseDebit;
+      reques = {
+        ...this.total,
+        expenseDebit: value + valueTotalDebit,
+      };
     }
 
-    const valueTotal = (this.total.expenseCredit === 0) ? 0 : this.total.expenseCredit;
-    const reques: ITotal = {
-      ...this.total,
-      expenseCredit: value + valueTotal,
-    };
     await this.calculateService.calculate(reques);
   }
 

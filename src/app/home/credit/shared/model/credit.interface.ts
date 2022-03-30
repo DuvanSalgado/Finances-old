@@ -5,6 +5,7 @@ export interface IcreditModel {
   pendingValue: number;
   value: number;
   month: number;
+  type: ICombobox;
   status: ICombobox;
   fullValue: number;
   date: Date;
@@ -12,19 +13,20 @@ export interface IcreditModel {
   history: IHistory[];
 }
 
-export type IHistory = Pick<IcreditModel, 'date' | 'value' | 'status'>;
+export type IHistory = Pick<IcreditModel, 'date' | 'value' | 'status' | 'type'>;
 
 export interface IExpensesModel {
   value: number;
   description: string;
   date: Date;
   month: number;
-  cash: boolean;
+  status: ICombobox;
 }
 
 export interface ITotal {
   month?: number;
   expenseCredit?: number;
+  expenseCash?: number;
   paidCredit?: number;
   pendingCredit?: number;
   loanCredit?: number;

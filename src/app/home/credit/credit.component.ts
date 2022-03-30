@@ -28,6 +28,7 @@ export class CreditComponent implements OnInit, OnDestroy {
     paidDebit: 0,
     pendingDebit: 0,
     loanDebit: 0,
+    expenseCash: 0,
   };
 
   private subscription: Array<Subscription> = [];

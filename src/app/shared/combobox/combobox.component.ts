@@ -1,7 +1,6 @@
-import { Component, forwardRef, Input, Output } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ICombobox } from './model/combobox.interface';
-import { ITEMS } from './model/data.combobox';
 
 @Component({
   selector: 'app-combobox',
@@ -18,9 +17,10 @@ import { ITEMS } from './model/data.combobox';
 export class ComboboxComponent implements ControlValueAccessor {
 
   @Input() isDisabled = false;
+  @Input() items: Array<ICombobox>;
+  @Input() label: string;
 
   public value: ICombobox;
-  public items = ITEMS;
 
   onChange: (event) => void;
   onTouched: () => void;

@@ -10,6 +10,7 @@ import { ModalAddExpensesComponent } from './expenses/modal-add-expenses/modal-a
 import { ListLoansComponent } from './loans/list-loans/list-loans.component';
 import { ModalDetailsLoansComponent } from './loans/modal-details-loans/modal-details-loans.component';
 import { ModalLoansComponent } from './loans/modal-loans/modal-loans.component';
+import { ModaltotalComponent } from './modaltotal/modaltotal.component';
 import { CalculateService } from './shared/service/calculate.service';
 import { CreditService } from './shared/service/credit.service';
 import { ExpensesService } from './shared/service/expenses.service';
@@ -20,10 +21,11 @@ import { SkeletonComponent } from './shared/skeleton/skeleton.component';
     CreditComponent,
     SkeletonComponent,
     ListExpensesComponent,
-    ModalAddExpensesComponent,
-    ModalDetailsLoansComponent,
     ListLoansComponent,
-    ModalLoansComponent
+    ModalLoansComponent,
+    ModalAddExpensesComponent,
+    ModaltotalComponent,
+    ModalDetailsLoansComponent
   ],
   imports: [
     CommonModule,

@@ -8,6 +8,7 @@ export enum FormCreditCtrl {
   status = 'status',
   date = 'date',
   history = 'history',
+  type = 'type',
   id = 'id'
 }
 
@@ -15,7 +16,7 @@ export enum FormExpensesCtrl {
   id = 'id',
   value = 'value',
   month = 'month',
-  cash = 'cash',
   date = 'date',
+  status = 'status',
   description = 'description'
 }

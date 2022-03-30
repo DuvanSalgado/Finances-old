@@ -1,7 +1,11 @@
 <ion-menu contentId="main-content" type="overlay">
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
   <ion-content>
-    <ion-list id="inbox-list">
-      <ion-list-header>Menu</ion-list-header>
+    <ion-list>
       <ion-menu-toggle
         auto-hide="false"
         *ngFor="let p of appPages; let i = index"
