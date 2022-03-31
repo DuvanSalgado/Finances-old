@@ -10,7 +10,7 @@ import { ModalAddExpensesComponent } from '../modal-add-expenses/modal-add-expen
 })
 export class ListExpensesComponent {
 
-  @Input() total: Array<ITotal> = [{ expense: 0 }];
+  @Input() total: ITotal;
   @Input() loading: boolean;
   @Input() expenses: Array<IExpensesModel>;
 

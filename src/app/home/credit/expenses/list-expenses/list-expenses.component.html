@@ -7,6 +7,7 @@
       <h3>Valor: {{ item.value | currency: "COP":"symbol-narrow":"1.0-0" }}</h3>
       <h3>Descripcion: {{ item.description }}</h3>
       <p>Fecha: {{ item.date }}</p>
+      <p>{{ item.status.name }}</p>
     </ion-label>
   </ion-item>
 </ion-list>

@@ -5,8 +5,13 @@
   </ion-button>
   <ion-popover trigger="open-date-input" show-backdrop="false">
     <ng-template>
-      <ion-datetime [min]="minDate" [max]="maxDate" #popoverDatetime presentation="date"
-        (ionChange)="setChange(popoverDatetime.value)">
+      <ion-datetime
+        [min]="minDate"
+        [max]="maxDate"
+        #popoverDatetime
+        presentation="date"
+        (ionChange)="setChange(popoverDatetime.value)"
+      >
       </ion-datetime>
     </ng-template>
   </ion-popover>

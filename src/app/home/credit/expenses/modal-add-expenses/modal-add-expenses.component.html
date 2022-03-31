@@ -34,13 +34,11 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-label>Efectivo</ion-label>
-            <ion-toggle
-              [formControlName]="formCtrl.cash"
-              color="secondary"
-            ></ion-toggle>
-          </ion-item>
+          <app-combobox
+            label="Fuente"
+            [items]="itemsType"
+            [formControlName]="formCtrl.status"
+          ></app-combobox>
         </ion-col>
       </ion-row>
     </ion-list>

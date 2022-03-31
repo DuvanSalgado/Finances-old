@@ -53,7 +53,20 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <app-combobox [formControlName]="formCtrl.status"></app-combobox>
+          <app-combobox
+            label="Tipo"
+            [items]="itemsType"
+            [formControlName]="formCtrl.type"
+          ></app-combobox>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <app-combobox
+            label="Fuente"
+            [items]="itemsLoans"
+            [formControlName]="formCtrl.status"
+          ></app-combobox>
         </ion-col>
       </ion-row>
     </ion-list>

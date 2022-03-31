@@ -12,7 +12,7 @@ import { ModalLoansComponent } from '../modal-loans/modal-loans.component';
 export class ListLoansComponent {
 
   @Input() loans: Array<IcreditModel> = [];
-  @Input() total: Array<ITotal>;
+  @Input() total: ITotal;
   @Input() loading = false;
 
   constructor(private modalController: ModalController) { }

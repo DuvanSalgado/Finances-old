@@ -1,13 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
-
 @Component({
   selector: 'app-buttons-actions',
   templateUrl: './buttons-actions.component.html',
   styleUrls: ['./buttons-actions.component.scss'],
 })
 export class ButtonsActionsComponent implements OnChanges {
-
 
   @Input() isCreate = true;
   @Input() disabled = false;
