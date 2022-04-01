@@ -1,13 +1,24 @@
-<ion-button [disabled]="loading" (click)="openModalCreate()" color="secondary">
-  <ion-icon name="add-circle-outline"></ion-icon>
-</ion-button>
-<ion-list>
-  <ion-item *ngFor="let item of expenses">
-    <ion-label>
-      <h3>Valor: {{ item.value | currency: "COP":"symbol-narrow":"1.0-0" }}</h3>
-      <h3>Descripcion: {{ item.description }}</h3>
-      <p>Fecha: {{ item.date }}</p>
-      <p>{{ item.status.name }}</p>
-    </ion-label>
-  </ion-item>
-</ion-list>
+<div class="container">
+  <ion-button
+    [disabled]="loading"
+    (click)="openModalCreate()"
+    color="secondary"
+    class="container_button"
+  >
+    <ion-icon name="add-circle-outline"></ion-icon>
+  </ion-button>
+  <div class="container_list">
+    <ion-list>
+      <ion-item *ngFor="let item of expenses">
+        <ion-label>
+          <h3>
+            Valor: {{ item.value | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h3>
+          <h3>Descripcion: {{ item.description }}</h3>
+          <p>Fecha: {{ item.date }}</p>
+          <p>{{ item.status.name }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>

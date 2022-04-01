@@ -1,35 +1,39 @@
-<ion-segment
-  (ionChange)="segmentChanged($event)"
-  [value]="selectedSection"
-  color="secondary"
->
-  <ion-segment-button value="expenses">
-    <ion-label>Gastos</ion-label>
-  </ion-segment-button>
-  <ion-segment-button value="moneyLoans">
-    <ion-label>Prestamos</ion-label>
-  </ion-segment-button>
-</ion-segment>
-
-<ion-content>
-  <ng-container *ngIf="selectedSection === 'expenses'; else moneyLoans">
-    <app-list-expenses
-      [expenses]="expenses"
-      [loading]="loadingExpense"
-      [total]="total"
-    ></app-list-expenses>
-  </ng-container>
-  <ng-template #moneyLoans>
-    <app-list-loans
-      [total]="total"
-      [loading]="loadingLoans"
-      [loans]="loans"
-    ></app-list-loans>
-    <app-skeleton *ngIf="loadingLoans"></app-skeleton>
-    <ion-label *ngIf="!(loans.length > 0) && !loadingLoans">
-      No hay registros
-    </ion-label>
-  </ng-template>
-</ion-content>
-
-<app-footer [total]="total"></app-footer>
+<div class="container">
+  <ion-segment
+    (ionChange)="segmentChanged($event)"
+    [value]="selectedSection"
+    color="secondary"
+  >
+    <ion-segment-button value="expenses">
+      <ion-label>Gastos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="moneyLoans">
+      <ion-label>Prestamos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div class="container_items">
+    <div class="container_items_group">
+      <ng-container *ngIf="selectedSection === 'expenses'; else moneyLoans">
+        <app-list-expenses
+          class="container_items_group_element"
+          [expenses]="expenses"
+          [loading]="loadingExpense"
+          [total]="total"
+        ></app-list-expenses>
+      </ng-container>
+      <ng-template #moneyLoans>
+        <app-list-loans
+        class="container_items_group_element"
+          [total]="total"
+          [loading]="loadingLoans"
+          [loans]="loans"
+        ></app-list-loans>
+        <app-skeleton *ngIf="loadingLoans"></app-skeleton>
+        <ion-label *ngIf="!(loans.length > 0) && !loadingLoans">
+          No hay registros
+        </ion-label>
+      </ng-template>
+    </div>
+    <app-footer class="container_items_footer" [total]="total"></app-footer>
+  </div>
+</div>

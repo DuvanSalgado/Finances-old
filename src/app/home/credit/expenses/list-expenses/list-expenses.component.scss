@@ -1,0 +1,17 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &_button {
+    height: 36px;
+    width: 50px;
+  }
+
+  &_list {
+    height: 86%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+}
