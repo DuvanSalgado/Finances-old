@@ -1,12 +1,23 @@
-<ion-footer>
-  <ion-toolbar>
-    <ion-item lines="none" (click)="openModal()">
-      <ion-label>
-        <p>
-          Efectivo:
-          {{ total?.cash | currency: "COP":"symbol-narrow":"1.0-0" }}
-        </p>
-      </ion-label>
-    </ion-item>
-  </ion-toolbar>
-</ion-footer>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="expenses">
+      <ion-icon name="cart-outline"></ion-icon>
+      <ion-label>Gastos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="loans">
+      <ion-icon name="card-outline"></ion-icon>
+      <ion-label>Prestamos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="general">
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>General</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="history">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <ion-label>Historial</ion-label>
+      <ion-badge>6</ion-badge>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

@@ -9,10 +9,9 @@ import { ComboboxComponent } from './combobox/combobox.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 @NgModule({
   declarations: [
-    ToolbarComponent,
+
     SidebarComponent,
     SearchbarComponent,
     CalendarComponent,
@@ -27,7 +26,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     FormsModule
   ],
   exports: [
-    ToolbarComponent,
+
     SidebarComponent,
     SearchbarComponent,
     CalendarComponent,
