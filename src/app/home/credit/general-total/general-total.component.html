@@ -10,6 +10,20 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
+      <ion-card-title>Efectivo</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none">
+        <label>
+          <h2>
+            {{ total?.cash | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h2>
+        </label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
       <ion-card-title>Credito</ion-card-title>
     </ion-card-header>
     <ion-card-content>

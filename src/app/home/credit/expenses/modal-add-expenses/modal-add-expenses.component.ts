@@ -35,7 +35,7 @@ export class ModalAddExpensesComponent implements OnInit {
     private loadingController: LoadingController
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initializeForm();
   }
 

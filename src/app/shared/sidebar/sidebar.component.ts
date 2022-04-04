@@ -8,9 +8,7 @@ import { Component } from '@angular/core';
 export class SidebarComponent {
 
   public appPages = [
-    { title: 'Credito', url: 'credit', icon: 'mail' },
+    { title: 'Credito', url: 'credit/expenses', icon: 'mail' },
     { title: 'Km/moto', url: 'moto', icon: 'paper-plane' }
   ];
-
-
 }

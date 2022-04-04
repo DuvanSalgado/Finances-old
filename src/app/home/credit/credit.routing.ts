@@ -7,6 +7,7 @@ import { HistoryComponent } from './history/history.component';
 import { ListLoansComponent } from './loans/list-loans/list-loans.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'expenses', pathMatch: 'full' },
   {
     path: '', component: CreditComponent,
 
