@@ -1,0 +1,27 @@
+.expenses-modal {
+  &::part(content) {
+    height: 370px;
+    border-radius: 10px;
+  }
+}
+
+.loans-modal-create {
+  &::part(content) {
+    height: 410px;
+    border-radius: 10px;
+  }
+}
+
+.loans-modal-edit {
+  &::part(content) {
+    height: 485px;
+    border-radius: 10px;
+  }
+}
+
+.view-modal {
+  &::part(content) {
+    height: 380px;
+    border-radius: 10px;
+  }
+}

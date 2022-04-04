@@ -1,12 +1,14 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-buttons (click)="cancel()" slot="start">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-buttons>
     <ion-title> Detalles </ion-title>
+    <ion-buttons (click)="cancel()" slot="end">
+      <ion-button>
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content fullscreen>
+<ion-content>
   <ion-card>
     <ion-card-content>
       <ion-item lines="none">
@@ -48,9 +50,14 @@
       </ion-label>
     </ion-item>
   </ion-list>
-  <ion-row class="ion-text-center">
-    <ion-col>
-      <ion-button (click)="cancel()">Cerrar</ion-button>
-    </ion-col>
-  </ion-row>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <ion-button (click)="cancel()">Cerrar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

@@ -50,6 +50,7 @@ export class ListLoansComponent implements OnInit, OnDestroy {
   public async view(data: IcreditModel): Promise<void> {
     const modal = await this.modalController.create({
       component: ModalDetailsLoansComponent,
+      cssClass: 'view-modal',
       componentProps: { data }
     });
     return await modal.present();
@@ -76,6 +77,7 @@ export class ListLoansComponent implements OnInit, OnDestroy {
   private async openModal(data: IcreditModel, title: string, isCreate: boolean): Promise<void> {
     const modal = await this.modalController.create({
       component: ModalLoansComponent,
+      cssClass: (isCreate) ? 'loans-modal-create' : 'loans-modal-edit',
       componentProps: { data, isCreate, title, total: this.total }
     });
     return await modal.present();

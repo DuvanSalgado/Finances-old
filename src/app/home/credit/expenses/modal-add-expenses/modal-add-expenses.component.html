@@ -1,13 +1,15 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-buttons (click)="cancel()" slot="start">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-buttons>
     <ion-title> Registrar un gasto </ion-title>
+    <ion-buttons (click)="cancel()" slot="end">
+      <ion-button>
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content>
   <form [formGroup]="formGroup">
     <ion-list>
       <ion-row>
@@ -42,7 +44,11 @@
         </ion-col>
       </ion-row>
     </ion-list>
+  </form>
+</ion-content>
 
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
     <app-buttons-actions
       [loading]="loading"
       [disabled]="formGroup.invalid"
@@ -50,5 +56,5 @@
       (cancelEventEmit)="cancel()"
     >
     </app-buttons-actions>
-  </form>
-</ion-content>
+  </ion-toolbar>
+</ion-footer>

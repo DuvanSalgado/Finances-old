@@ -58,6 +58,7 @@ export class ListExpensesComponent implements OnInit, OnDestroy {
   public async openModalCreate(): Promise<void> {
     const modal = await this.modalController.create({
       component: ModalAddExpensesComponent,
+      cssClass: 'expenses-modal',
       componentProps: { total: this.total }
     });
     return await modal.present();

@@ -20,20 +20,12 @@
   <ion-list>
     <ion-item *ngFor="let item of loans">
       <ion-label>
-        <h2>Nombre: {{ item.name }}</h2>
-        <h2>
+        <h3>Nombre: {{ item.name }}</h3>
+        <h3>
           Valor:
           {{ item.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
-        </h2>
-        <h2
-          [ngClass]="{
-            prestamo: !(item?.history[0].status.id === 2),
-            efectivo: item?.history[0].status.id === 2
-          }"
-        >
-          Fuente:
-          {{ item?.history[0].status.name }}
-        </h2>
+        </h3>
+        <p>{{ item?.history[0].status.name }}</p>
       </ion-label>
       <ion-item-group>
         <ion-button (click)="view(item)">
