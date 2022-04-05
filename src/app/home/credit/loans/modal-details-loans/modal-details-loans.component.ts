@@ -14,7 +14,7 @@ export class ModalDetailsLoansComponent {
   constructor(private modalController: ModalController) { }
 
   public cancel(): void {
-    this.modalController.dismiss();
+    this.modalController.dismiss(false);
   }
 
 }

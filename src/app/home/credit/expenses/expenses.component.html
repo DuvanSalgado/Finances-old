@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-button
-  [disabled]="loading"
+  [disabled]="disableButton"
   (click)="openModalCreate()"
   color="primary"
   class="button-add"
@@ -29,4 +29,10 @@
       </ion-label>
     </ion-item>
   </ion-list>
+  <app-sk-expenses [loading]="loading"></app-sk-expenses>
+  <ng-container *ngIf="!(expenses.length > 0) && !loading">
+    <ion-item lines="none">
+      <ion-label>No hay datos</ion-label>
+    </ion-item>
+  </ng-container>
 </ion-content>

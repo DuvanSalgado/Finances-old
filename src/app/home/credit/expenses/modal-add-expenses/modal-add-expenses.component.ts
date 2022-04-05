@@ -40,7 +40,7 @@ export class ModalAddExpensesComponent implements OnInit {
   }
 
   cancel(): void {
-    this.modalController.dismiss();
+    this.modalController.dismiss(false);
   }
 
   public async onSaveChange(evet: boolean): Promise<void> {

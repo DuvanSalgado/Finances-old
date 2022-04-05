@@ -14,6 +14,7 @@ import { ModalAddExpensesComponent } from './modal-add-expenses/modal-add-expens
 export class ExpensesComponent implements OnInit, OnDestroy {
 
   public loading = true;
+  public disableButton = false;
   public expenses: Array<IExpensesModel> = [];
   private total: ITotal = {
     expenseCredit: 0,
@@ -54,13 +55,15 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   }
 
   public async openModalCreate(): Promise<void> {
+    this.disableButton = true;
     const modal = await this.modalController.create({
       component: ModalAddExpensesComponent,
       cssClass: 'expenses-modal',
       backdropDismiss: false,
       componentProps: { total: this.total }
     });
-    return await modal.present();
+    await modal.present();
+    this.disableButton = await (await modal.onWillDismiss()).data;
   }
 }
 

@@ -1,13 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { HistoryRoutingModule } from './history.routing';
-import { HistoryComponent } from './history.component';
-import { SearchService } from '../shared/service/search.service';
-import { IonicModule } from '@ionic/angular';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared/shared.module';
-
+import { IonicModule } from '@ionic/angular';
+import { SearchService } from '../shared/service/search.service';
+import { HistoryComponent } from './history.component';
+import { HistoryRoutingModule } from './history.routing';
 
 @NgModule({
   declarations: [

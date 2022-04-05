@@ -162,6 +162,6 @@ export class ModalLoansComponent implements OnInit {
     this.loadingModal = await this.loadingController.create({
       message: 'Cargando...',
     });
-    await this.loadingModal.present();
+    await this.loadingModal.present(false);
   }
 }

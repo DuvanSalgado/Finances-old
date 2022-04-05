@@ -16,6 +16,7 @@ export class LoansComponent implements OnInit, OnDestroy {
 
   public loans: Array<IcreditModel> = [];
   public loading = true;
+  public disableButton = false;
 
   private total: ITotal = {
     expenseCredit: 0,
@@ -46,13 +47,15 @@ export class LoansComponent implements OnInit, OnDestroy {
   }
 
   public async view(data: IcreditModel): Promise<void> {
+    this.disableButton = true;
     const modal = await this.modalController.create({
       component: ModalDetailsLoansComponent,
       cssClass: 'view-modal',
       backdropDismiss: false,
       componentProps: { data }
     });
-    return await modal.present();
+    await modal.present();
+    this.disableButton = await (await modal.onWillDismiss()).data;
   }
 
   public openModalCreate(): void {
@@ -74,13 +77,15 @@ export class LoansComponent implements OnInit, OnDestroy {
   }
 
   private async openModal(data: IcreditModel, title: string, isCreate: boolean): Promise<void> {
+    this.disableButton = true;
     const modal = await this.modalController.create({
       component: ModalLoansComponent,
       cssClass: (isCreate) ? 'loans-modal-create' : 'loans-modal-edit',
       backdropDismiss: false,
       componentProps: { data, isCreate, title, total: this.total }
     });
-    return await modal.present();
+    await modal.present();
+    this.disableButton = await (await modal.onWillDismiss()).data;
   }
 
 }

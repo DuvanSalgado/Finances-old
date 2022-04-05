@@ -9,7 +9,7 @@
 
 <ion-button
   class="button-add"
-  [disabled]="loading"
+  [disabled]="disableButton"
   (click)="openModalCreate()"
   color="primary"
 >
@@ -28,13 +28,19 @@
         <p>{{ item?.history[0].status.name }}</p>
       </ion-label>
       <ion-item-group>
-        <ion-button (click)="view(item)">
+        <ion-button [disabled]="disableButton" (click)="view(item)">
           <ion-icon name="eye-outline"></ion-icon>
         </ion-button>
-        <ion-button (click)="update(item)">
+        <ion-button [disabled]="disableButton" (click)="update(item)">
           <ion-icon name="create"></ion-icon>
         </ion-button>
       </ion-item-group>
     </ion-item>
   </ion-list>
+  <app-sk-loans [loading]="loading"></app-sk-loans>
+  <ng-container *ngIf="!(loans.length > 0) && !loading">
+    <ion-item lines="none">
+      <ion-label>No hay datos</ion-label>
+    </ion-item>
+  </ng-container>
 </ion-content>

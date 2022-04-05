@@ -10,7 +10,19 @@ import { CalculateService } from '../shared/service/calculate.service';
 })
 export class GeneralTotalComponent implements OnInit, OnDestroy {
 
-  public total: ITotal;
+  public total: ITotal = {
+    expenseCredit: 0,
+    loanCredit: 0,
+    cash: 0,
+    paidCredit: 0,
+    pendingCredit: 0,
+    expenseDebit: 0,
+    paidDebit: 0,
+    pendingDebit: 0,
+    loanDebit: 0,
+    expenseCash: 0,
+  };
+
   private subscription: Subscription;
 
   constructor(private calculateService: CalculateService) { }
