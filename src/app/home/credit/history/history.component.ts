@@ -8,8 +8,7 @@ import { SearchService } from '../shared/service/search.service';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss'],
-  providers: [SearchService]
+  styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit, OnDestroy {
 
@@ -27,7 +26,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription) { this.subscription.unsubscribe(); }
   }
 
   ngOnInit(): void {

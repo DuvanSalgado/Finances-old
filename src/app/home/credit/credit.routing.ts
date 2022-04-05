@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreditComponent } from './credit.component';
-import { ListExpensesComponent } from './expenses/list-expenses/list-expenses.component';
 import { GeneralTotalComponent } from './general-total/general-total.component';
-import { HistoryComponent } from './history/history.component';
-import { ListLoansComponent } from './loans/list-loans/list-loans.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'expenses', pathMatch: 'full' },
@@ -12,10 +9,22 @@ const routes: Routes = [
     path: '', component: CreditComponent,
 
     children: [
-      { path: 'expenses', component: ListExpensesComponent },
-      { path: 'loans', component: ListLoansComponent },
-      { path: 'general', component: GeneralTotalComponent },
-      { path: 'history', component: HistoryComponent }
+      {
+        path: 'expenses',
+        loadChildren: () => import('./expenses/expenses.module').then(m => m.ExpensesModule)
+      },
+      {
+        path: 'loans',
+        loadChildren: () => import('./loans/loans.module').then(m => m.LoansModule)
+      },
+      {
+        path: 'general',
+        loadChildren: () => import('./general-total/general-total.module').then(m => m.GeneralTotalModule)
+      },
+      {
+        path: 'history',
+        loadChildren: () => import('./history/history.module').then(m => m.HistoryModule)
+      }
     ]
   }
 ];

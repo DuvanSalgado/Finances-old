@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { IExpensesModel, ITotal } from '../../shared/model/credit.interface';
-import { CalculateService } from '../../shared/service/calculate.service';
-import { ExpensesService } from '../../shared/service/expenses.service';
-import { ModalAddExpensesComponent } from '../modal-add-expenses/modal-add-expenses.component';
+import { IExpensesModel, ITotal } from '../shared/model/credit.interface';
+import { CalculateService } from '../shared/service/calculate.service';
+import { ExpensesService } from '../shared/service/expenses.service';
+import { ModalAddExpensesComponent } from './modal-add-expenses/modal-add-expenses.component';
 
 @Component({
-  selector: 'app-list-expenses',
-  templateUrl: './list-expenses.component.html',
-  styleUrls: ['./list-expenses.component.scss'],
+  selector: 'app-expenses',
+  templateUrl: './expenses.component.html',
+  styleUrls: ['./expenses.component.scss'],
 })
-export class ListExpensesComponent implements OnInit, OnDestroy {
+export class ExpensesComponent implements OnInit, OnDestroy {
 
   public loading = true;
   public expenses: Array<IExpensesModel> = [];
@@ -28,7 +28,7 @@ export class ListExpensesComponent implements OnInit, OnDestroy {
     expenseCash: 0,
   };
 
-  private subscription: Array<Subscription> = [];
+  private subscription: Subscription;
 
   constructor(
     private modalController: ModalController,
@@ -37,9 +37,7 @@ export class ListExpensesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnDestroy(): void {
-    this.subscription.forEach(element => {
-      element.unsubscribe();
-    });
+    if (this.subscription) { this.subscription.unsubscribe(); }
   }
 
   ngOnInit(): void {
@@ -47,10 +45,10 @@ export class ListExpensesComponent implements OnInit, OnDestroy {
   }
 
   getData(): void {
-    this.subscription.push(this.expensesService.getAll()
-      .subscribe((data) => { this.loading = false; this.expenses = data; }));
+    this.subscription = this.expensesService.getAll()
+      .subscribe((data) => { this.loading = false; this.expenses = data; });
 
-    this.subscription.push(this.calculateService.getAll()
+    this.subscription.add(this.calculateService.getAll()
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
       ));
   }

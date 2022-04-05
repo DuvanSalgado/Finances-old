@@ -1,18 +1,18 @@
 import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { IcreditModel, ITotal } from '../../shared/model/credit.interface';
-import { CalculateService } from '../../shared/service/calculate.service';
-import { CreditService } from '../../shared/service/credit.service';
-import { ModalDetailsLoansComponent } from '../modal-details-loans/modal-details-loans.component';
-import { ModalLoansComponent } from '../modal-loans/modal-loans.component';
+import { IcreditModel, ITotal } from '../shared/model/credit.interface';
+import { CalculateService } from '../shared/service/calculate.service';
+import { CreditService } from '../shared/service/credit.service';
+import { ModalDetailsLoansComponent } from './modal-details-loans/modal-details-loans.component';
+import { ModalLoansComponent } from './modal-loans/modal-loans.component';
 
 @Component({
-  selector: 'app-list-loans',
-  templateUrl: './list-loans.component.html',
-  styleUrls: ['./list-loans.component.scss'],
+  selector: 'app-loans',
+  templateUrl: 'loans.component.html',
+  styleUrls: ['loans.component.scss'],
 })
-export class ListLoansComponent implements OnInit, OnDestroy {
+export class LoansComponent implements OnInit, OnDestroy {
 
   public loans: Array<IcreditModel> = [];
   public loading = true;
@@ -29,7 +29,7 @@ export class ListLoansComponent implements OnInit, OnDestroy {
     loanDebit: 0,
     expenseCash: 0,
   };
-  private subscription: Array<Subscription> = [];
+  private subscription: Subscription;
 
   constructor(
     private modalController: ModalController,
@@ -42,9 +42,7 @@ export class ListLoansComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.subscription.forEach(element => {
-      element.unsubscribe();
-    });
+    if (this.subscription) { this.subscription.unsubscribe(); }
   }
 
   public async view(data: IcreditModel): Promise<void> {
@@ -66,10 +64,10 @@ export class ListLoansComponent implements OnInit, OnDestroy {
   }
 
   private getdata(): void {
-    this.subscription.push(this.creditService.getAllCredit()
-      .subscribe((data) => { this.loading = false; this.loans = data; }));
+    this.subscription = this.creditService.getAllCredit()
+      .subscribe((data) => { this.loading = false; this.loans = data; });
 
-    this.subscription.push(this.calculateService.getAll()
+    this.subscription.add(this.calculateService.getAll()
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
       ));
 
