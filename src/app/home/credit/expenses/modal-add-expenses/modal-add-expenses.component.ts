@@ -67,34 +67,19 @@ export class ModalAddExpensesComponent implements OnInit {
   private async calculate(): Promise<void> {
     const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
 
-    let reques: ITotal;
-
     if (this.formGroup.get(this.formCtrl.status).value.id === Status.efectivo) {
 
-      const valueTotalCash = (this.total.expenseCash === 0) ? 0 : this.total.expenseCash;
       this.total.cash = this.total.cash - value;
-      reques = {
-        ...this.total,
-        expenseCash: valueTotalCash + value
-      };
+      this.total.expenseCash = this.total.expenseCash + value;
 
     } else if (this.formGroup.get(this.formCtrl.status).value.id === Status.credito) {
-
-      const valueTotalCredit = (this.total.expenseCredit === 0) ? 0 : this.total.expenseCredit;
-      reques = {
-        ...this.total,
-        expenseCredit: value + valueTotalCredit,
-      };
+      this.total.expenseCredit = this.total.expenseCredit + value;
 
     } else {
-      const valueTotalDebit = (this.total.expenseDebit === 0) ? 0 : this.total.expenseDebit;
-      reques = {
-        ...this.total,
-        expenseDebit: value + valueTotalDebit,
-      };
+      this.total.expenseDebit = this.total.expenseDebit + value;
     }
 
-    await this.calculateService.calculate(reques);
+    await this.calculateService.calculate(this.total);
   }
 
   private async presentToast(mensaje: string): Promise<void> {

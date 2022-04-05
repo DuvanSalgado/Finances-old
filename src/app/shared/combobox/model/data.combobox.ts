@@ -2,7 +2,7 @@ import { ICombobox } from './combobox.interface';
 
 export const ITEMSTYPE: Array<ICombobox> = [
   { name: 'Prestamo', id: 0 },
-  { name: 'Efectivo', id: 1 }
+  { name: 'Abono', id: 1 }
 ];
 
 export const ITEMSLOANS: Array<ICombobox> = [

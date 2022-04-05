@@ -63,7 +63,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   }
 
   public update(data: IcreditModel): void {
-    this.openModal(data, 'Actulización de datos', false);
+    this.openModal(data, 'Actualización de datos', false);
   }
 
   private getdata(): void {
@@ -73,7 +73,6 @@ export class LoansComponent implements OnInit, OnDestroy {
     this.subscription.add(this.calculateService.getAll()
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
       ));
-
   }
 
   private async openModal(data: IcreditModel, title: string, isCreate: boolean): Promise<void> {
