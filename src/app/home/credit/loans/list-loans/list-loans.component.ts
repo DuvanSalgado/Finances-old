@@ -51,6 +51,7 @@ export class ListLoansComponent implements OnInit, OnDestroy {
     const modal = await this.modalController.create({
       component: ModalDetailsLoansComponent,
       cssClass: 'view-modal',
+      backdropDismiss: false,
       componentProps: { data }
     });
     return await modal.present();
@@ -78,6 +79,7 @@ export class ListLoansComponent implements OnInit, OnDestroy {
     const modal = await this.modalController.create({
       component: ModalLoansComponent,
       cssClass: (isCreate) ? 'loans-modal-create' : 'loans-modal-edit',
+      backdropDismiss: false,
       componentProps: { data, isCreate, title, total: this.total }
     });
     return await modal.present();

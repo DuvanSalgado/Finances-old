@@ -34,19 +34,11 @@
   <ion-list *ngFor="let item of data.history">
     <ion-item>
       <ion-label>
-        <h2>
+        <h3>
           Valor: {{ item?.value | currency: "COP":"symbol-narrow":"1.0-0" }}
-        </h2>
-        <h2>Fecha: {{ item?.date }}</h2>
-        <h2
-          [ngClass]="{
-            prestamo: !(item?.status.id === 2),
-            efectivo: item?.status.id === 2
-          }"
-        >
-          Fuente: {{ item?.status.name }}
-        </h2>
-        <p>Estado: {{ item?.type.name }}</p>
+        </h3>
+        <h3>Fecha: {{ item?.date }}</h3>
+        <p>{{ item?.status.name }} - {{ item?.type.name }}</p>
       </ion-label>
     </ion-item>
   </ion-list>

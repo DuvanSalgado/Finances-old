@@ -46,6 +46,6 @@ export class CalendarComponent implements ControlValueAccessor {
   }
 
   private formatDate(value: string): string {
-    return format(parseISO(value), 'MMM dd yyyy');
+    return format(new Date(value), 'MMMM dd yyyy');
   }
 }

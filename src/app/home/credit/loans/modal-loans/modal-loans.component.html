@@ -78,7 +78,6 @@
 <ion-footer class="ion-no-border">
   <ion-toolbar>
     <app-buttons-actions
-      [loading]="loading"
       [disabled]="formGroup.invalid"
       (createEventEmit)="saveChange($event)"
       (cancelEventEmit)="cancel()"
