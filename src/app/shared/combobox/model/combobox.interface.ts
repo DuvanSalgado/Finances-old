@@ -1,4 +1,4 @@
 export interface ICombobox {
   name: string;
-  id: number;
+  id: number | string;
 }

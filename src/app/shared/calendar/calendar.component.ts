@@ -45,7 +45,7 @@ export class CalendarComponent implements ControlValueAccessor {
     this.onChange(parseISO(value).getMonth());
   }
 
-  private formatDate(value: string) {
-    return format(parseISO(value), 'MMM dd yyyy');
+  private formatDate(value: string): string {
+    return format(new Date(value), 'MMMM dd yyyy');
   }
 }

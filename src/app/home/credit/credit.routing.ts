@@ -3,7 +3,29 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreditComponent } from './credit.component';
 
 const routes: Routes = [
-  { path: '', component: CreditComponent }
+  { path: '', redirectTo: 'expenses', pathMatch: 'full' },
+  {
+    path: '', component: CreditComponent,
+
+    children: [
+      {
+        path: 'expenses',
+        loadChildren: () => import('./expenses/expenses.module').then(m => m.ExpensesModule)
+      },
+      {
+        path: 'loans',
+        loadChildren: () => import('./loans/loans.module').then(m => m.LoansModule)
+      },
+      {
+        path: 'general',
+        loadChildren: () => import('./general-total/general-total.module').then(m => m.GeneralTotalModule)
+      },
+      {
+        path: 'history',
+        loadChildren: () => import('./history/history.module').then(m => m.HistoryModule)
+      }
+    ]
+  }
 ];
 
 @NgModule({

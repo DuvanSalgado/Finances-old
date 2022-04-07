@@ -20,3 +20,8 @@ export enum FormExpensesCtrl {
   status = 'status',
   description = 'description'
 }
+
+export enum FormShared {
+  month = 'month',
+  table = 'table'
+}

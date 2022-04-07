@@ -41,7 +41,7 @@ export class ComboboxComponent implements ControlValueAccessor {
     this.isDisabled = isDisabled;;
   }
 
-  setChange(event: any) {
+  setChange(event: any): void {
     this.onTouched();
     this.onChange(event.detail.value);
   }

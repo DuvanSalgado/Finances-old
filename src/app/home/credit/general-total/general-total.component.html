@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-menu-button></ion-menu-button>
+      <ion-title>Detalles generales</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-card>
+    <ion-item>
+      <ion-icon name="cash-outline" slot="start"></ion-icon>
+      <ion-label>Efectivo</ion-label>
+    </ion-item>
+    <ion-card-content>
+      <ion-item lines="none">
+        <label>
+          <h2>
+            {{ total?.cash | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h2>
+        </label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-icon name="card-outline" slot="start"></ion-icon>
+      <ion-label>Credito</ion-label>
+    </ion-item>
+    <ion-card-content>
+      <ion-item lines="none">
+        <label>
+          <h2>
+            Pendientes:
+            {{ total?.pendingCredit | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h2>
+          <h2>
+            Prestamos:
+            {{ total?.loanCredit | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h2>
+          <h2>
+            Pagados:
+            {{ total?.paidCredit | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h2>
+        </label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-icon name="reader-outline" slot="start"></ion-icon>
+      <ion-label>Debito</ion-label>
+    </ion-item>
+    <ion-card-content>
+      <ion-item lines="none">
+        <label>
+          <h2>
+            Pendientes:
+            {{ total?.pendingDebit | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h2>
+          <h2>
+            Prestamos:
+            {{ total?.loanDebit | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h2>
+          <h2>
+            Pagados:
+            {{ total?.paidDebit | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h2>
+        </label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-icon name="cart-outline" slot="start"></ion-icon>
+      <ion-label>Gastos</ion-label>
+    </ion-item>
+    <ion-card-content>
+      <ion-item lines="none">
+        <label>
+          <h2>
+            Debito:
+            {{ total?.expenseDebit | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h2>
+          <h2>
+            Credito:
+            {{ total?.expenseCredit | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h2>
+          <h2>
+            Efectivo:
+            {{ total?.expenseCash | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </h2>
+        </label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,12 +1,14 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-buttons (click)="cancel()" slot="start">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-buttons>
     <ion-title> Detalles </ion-title>
+    <ion-buttons (click)="cancel()" slot="end">
+      <ion-button>
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content fullscreen>
+<ion-content>
   <ion-card>
     <ion-card-content>
       <ion-item lines="none">
@@ -32,25 +34,22 @@
   <ion-list *ngFor="let item of data.history">
     <ion-item>
       <ion-label>
-        <h2>
+        <h3>
           Valor: {{ item?.value | currency: "COP":"symbol-narrow":"1.0-0" }}
-        </h2>
-        <h2>Fecha: {{ item?.date }}</h2>
-        <h2
-          [ngClass]="{
-            prestamo: !(item?.status.id === 2),
-            efectivo: item?.status.id === 2
-          }"
-        >
-          Fuente: {{ item?.status.name }}
-        </h2>
-        <p>Estado: {{ item?.type.name }}</p>
+        </h3>
+        <h3>Fecha: {{ item?.date }}</h3>
+        <p>{{ item?.status.name }} - {{ item?.type.name }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
-  <ion-row class="ion-text-center">
-    <ion-col>
-      <ion-button (click)="cancel()">Cerrar</ion-button>
-    </ion-col>
-  </ion-row>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <ion-button (click)="cancel()">Cerrar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
