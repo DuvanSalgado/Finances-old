@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { IExpensesModel, ITotal } from '../shared/model/credit.interface';
-import { CalculateService } from '../shared/service/calculate.service';
-import { ExpensesService } from '../shared/service/expenses.service';
+import { IExpensesModel, ITotal } from '@credit/model/credit.interface';
+import { CalculateService } from '@credit/service/calculate.service';
+import { ExpensesService } from '@credit/service/expenses.service';
 import { ModalAddExpensesComponent } from './modal-add-expenses/modal-add-expenses.component';
 
 @Component({

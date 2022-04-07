@@ -1,9 +1,11 @@
 .list {
-  width: 55%;
-}
+  width: 48%;
 
-.options {
-  width: 12%;
-  margin: 5px;
-  height: 25px;
+  &_type {
+    width: 23%;
+  }
+
+  &_value {
+    width: 25%;
+  }
 }

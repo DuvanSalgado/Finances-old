@@ -11,7 +11,6 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 @NgModule({
   declarations: [
-
     SidebarComponent,
     SearchbarComponent,
     CalendarComponent,
@@ -26,7 +25,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     FormsModule
   ],
   exports: [
-
     SidebarComponent,
     SearchbarComponent,
     CalendarComponent,

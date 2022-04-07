@@ -1,10 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SkExpensesComponent } from './sk-expenses/sk-expenses.component';
+import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { SkExpensesComponent } from './sk-expenses/sk-expenses.component';
 import { SkLoansComponent } from './sk-loans/sk-loans.component';
-
-
 
 @NgModule({
   declarations: [

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ITotal } from '../shared/model/credit.interface';
-import { CalculateService } from '../shared/service/calculate.service';
+import { CalculateService } from '@credit/service/calculate.service';
 
 @Component({
   selector: 'app-general-total',
@@ -37,8 +37,7 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
 
   getData(): void {
     this.subscription = this.calculateService.getAll()
-      .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
-      );
+      .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } });
   }
 
 }

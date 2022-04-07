@@ -3,16 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ITEMSEXPENSE } from '@app/shared/combobox/model/data.combobox';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { format } from 'date-fns';
-import { ITotal } from '../../shared/model/credit.interface';
-import { FormExpensesCtrl } from '../../shared/model/formCredit.enum';
-import { mensages } from '../../shared/model/menssage';
-import { Status } from '../../shared/model/status.enum';
-import { CalculateService } from '../../shared/service/calculate.service';
-import { ExpensesService } from '../../shared/service/expenses.service';
+import { ITotal } from '@credit/model/credit.interface';
+import { FormExpensesCtrl } from '@credit/model/formCredit.enum';
+import { mensages } from '@credit/model/menssage';
+import { Status } from '@credit/model/status.enum';
+import { CalculateService } from '@credit/service/calculate.service';
+import { ExpensesService } from '@credit/service/expenses.service';
+
 @Component({
   selector: 'app-modal-add-expenses',
   templateUrl: './modal-add-expenses.component.html',
-  styleUrls: ['./modal-add-expenses.component.scss'],
 })
 export class ModalAddExpensesComponent implements OnInit {
 
@@ -68,12 +68,12 @@ export class ModalAddExpensesComponent implements OnInit {
     const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
 
     if (this.formGroup.get(this.formCtrl.status).value.id === Status.efectivo) {
-
       this.total.cash = this.total.cash - value;
       this.total.expenseCash = this.total.expenseCash + value;
 
     } else if (this.formGroup.get(this.formCtrl.status).value.id === Status.credito) {
       this.total.expenseCredit = this.total.expenseCredit + value;
+      this.total.loanCredit = this.total.loanCredit + value;
 
     } else {
       this.total.expenseDebit = this.total.expenseDebit + value;

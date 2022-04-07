@@ -1,9 +1,9 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ITEMSEXPENSE, ITEMSMONTH, ITEMSTABLES } from '@app/shared/combobox/model/data.combobox';
+import { ITEMSMONTH, ITEMSTABLES } from '@app/shared/combobox/model/data.combobox';
 import { Subscription } from 'rxjs';
-import { FormShared } from '../shared/model/formCredit.enum';
-import { SearchService } from '../shared/service/search.service';
+import { FormShared } from '@credit/model/formCredit.enum';
+import { SearchService } from '@credit/service/search.service';
 
 @Component({
   selector: 'app-history',

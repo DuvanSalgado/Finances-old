@@ -1,9 +1,9 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { IcreditModel, ITotal } from '@credit/model/credit.interface';
+import { CalculateService } from '@credit/service/calculate.service';
+import { CreditService } from '@credit/service/credit.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { IcreditModel, ITotal } from '../shared/model/credit.interface';
-import { CalculateService } from '../shared/service/calculate.service';
-import { CreditService } from '../shared/service/credit.service';
 import { ModalDetailsLoansComponent } from './modal-details-loans/modal-details-loans.component';
 import { ModalLoansComponent } from './modal-loans/modal-loans.component';
 

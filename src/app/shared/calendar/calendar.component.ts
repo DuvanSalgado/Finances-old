@@ -4,7 +4,6 @@ import { format, parseISO } from 'date-fns';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

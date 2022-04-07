@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ITEMSLOANS, ITEMSTYPE } from '@app/shared/combobox/model/data.combobox';
+import { IcreditModel, ITotal } from '@credit/model/credit.interface';
+import { FormCreditCtrl } from '@credit/model/formCredit.enum';
+import { mensages } from '@credit/model/menssage';
+import { Status, TypeCredit } from '@credit/model/status.enum';
+import { CalculateService } from '@credit/service/calculate.service';
+import { CreditService } from '@credit/service/credit.service';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { format } from 'date-fns';
-import { IcreditModel, ITotal } from '../../shared/model/credit.interface';
-import { FormCreditCtrl } from '../../shared/model/formCredit.enum';
-import { mensages } from '../../shared/model/menssage';
-import { Status, TypeCredit } from '../../shared/model/status.enum';
-import { CalculateService } from '../../shared/service/calculate.service';
-import { CreditService } from '../../shared/service/credit.service';
 @Component({
   selector: 'app-modal-loans',
   templateUrl: './modal-loans.component.html',
@@ -100,6 +100,7 @@ export class ModalLoansComponent implements OnInit {
       if (this.formGroup.get(this.formCtrl.status).value.id === Status.credito) {
         this.total.loanCredit = this.total.loanCredit + value;
         this.total.pendingCredit = this.total.pendingCredit + value;
+
       } else {
         this.total.loanDebit = this.total.loanDebit + value;
         this.total.pendingDebit = this.total.pendingDebit + value;

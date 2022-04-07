@@ -15,16 +15,16 @@
         <label>
           <h3>Nombre: {{ data.name }}</h3>
           <p>
+            Total:
+            {{ data.fullValue | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </p>
+          <p>
             Pendiente:
             {{ data.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
           </p>
           <p>
             Pagado:
             {{ data.paidValue | currency: "COP":"symbol-narrow":"1.0-0" }}
-          </p>
-          <p>
-            Total:
-            {{ data.fullValue | currency: "COP":"symbol-narrow":"1.0-0" }}
           </p>
         </label>
       </ion-item>
