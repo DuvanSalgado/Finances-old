@@ -12,8 +12,8 @@ export class CalculateService {
 
   constructor(private fireBase: AngularFirestore) { }
 
-  public getAll(): Observable<Array<ITotal>> {
-    this.itemsCollection = this.fireBase.collection<any>('calculate', ref => ref.where('month', '>=', this.month));
+  public getAll(month: number): Observable<Array<ITotal>> {
+    this.itemsCollection = this.fireBase.collection<any>('calculate', ref => ref.where('month', '==', month));
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {

@@ -17,6 +17,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   public loans: Array<IcreditModel> = [];
   public loading = true;
   public disableButton = false;
+  public currentMonth = new Date().getMonth();
 
   private total: ITotal = {
     expenseCredit: 0,
@@ -39,7 +40,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.getdata();
+    this.getData(this.currentMonth);
   }
 
   public ngOnDestroy(): void {
@@ -66,11 +67,15 @@ export class LoansComponent implements OnInit, OnDestroy {
     this.openModal(data, 'Actualización de datos', false);
   }
 
-  private getdata(): void {
-    this.subscription = this.creditService.getAllCredit()
+  public valueChanges(month: number): void {
+    this.getData(month);
+  }
+
+  private getData(month: number): void {
+    this.subscription = this.creditService.getAllCredit(month)
       .subscribe((data) => { this.loading = false; this.loans = data; });
 
-    this.subscription.add(this.calculateService.getAll()
+    this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
       ));
   }

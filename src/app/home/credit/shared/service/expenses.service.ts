@@ -8,12 +8,11 @@ import { map } from 'rxjs/operators';
 export class ExpensesService {
 
   private itemsCollection: AngularFirestoreCollection<any>;
-  private month = new Date().getMonth();
 
   constructor(private fireBase: AngularFirestore) { }
 
-  getAll(): Observable<Array<IExpensesModel>> {
-    this.itemsCollection = this.fireBase.collection<IExpensesModel[]>('expenses', ref => ref.where('month', '>=', this.month));
+  getAll(month: number): Observable<Array<IExpensesModel>> {
+    this.itemsCollection = this.fireBase.collection<IExpensesModel[]>('expenses', ref => ref.where('month', '==', month));
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {

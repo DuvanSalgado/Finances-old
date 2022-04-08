@@ -1,5 +1,5 @@
 import { Component, forwardRef, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { format, parseISO } from 'date-fns';
 @Component({
   selector: 'app-calendar',
@@ -15,7 +15,7 @@ import { format, parseISO } from 'date-fns';
 export class CalendarComponent implements ControlValueAccessor {
 
   @Output() isDisabled = false;
-  value: string;
+  value = new FormControl();
   maxDate = format(new Date(), 'yyyy-MM-dd');
   minDate = format(new Date(), 'yyyy-MM');
 
@@ -23,7 +23,7 @@ export class CalendarComponent implements ControlValueAccessor {
   onTouched: () => void;
 
   writeValue(obj: string): void {
-    this.value = obj;
+    this.value.patchValue(obj);
   }
 
   registerOnChange(fn: any): void {
@@ -39,7 +39,7 @@ export class CalendarComponent implements ControlValueAccessor {
   }
 
   setChange(value: string): void {
-    this.value = this.formatDate(value);
+    this.value.patchValue(this.formatDate(value));
     this.onTouched();
     this.onChange(parseISO(value).getMonth());
   }

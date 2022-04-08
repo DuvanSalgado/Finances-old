@@ -1,0 +1,12 @@
+<ion-row>
+  <ion-col>
+    <ng-content></ng-content>
+  </ion-col>
+  <ion-col>
+    <app-combobox
+      [formControl]="month"
+      label="Mes"
+      [items]="itemsmonth"
+    ></app-combobox>
+  </ion-col>
+</ion-row>

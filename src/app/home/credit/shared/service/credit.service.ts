@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 export class CreditService {
 
   private itemsCollection: AngularFirestoreCollection<any>;
-  private month = new Date().getMonth();
 
   constructor(private fireBase: AngularFirestore) { }
 
@@ -16,8 +15,8 @@ export class CreditService {
     return this.itemsCollection.add(JSON.parse(JSON.stringify(data)));
   }
 
-  getAllCredit(): Observable<Array<IcreditModel>> {
-    this.itemsCollection = this.fireBase.collection<IcreditModel[]>('credit', ref => ref.where('month', '>=', this.month));
+  getAllCredit(month: number): Observable<Array<IcreditModel>> {
+    this.itemsCollection = this.fireBase.collection<IcreditModel[]>('credit', ref => ref.where('month', '==', month));
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {
