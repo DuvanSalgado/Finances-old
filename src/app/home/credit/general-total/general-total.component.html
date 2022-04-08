@@ -9,6 +9,14 @@
 
 <ion-content color="light">
   <ion-card>
+    <app-add-buttons (changeEvent)="valueChanges($event)">
+      <ion-item class="alignIcon" lines="none">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </ion-item>
+    </app-add-buttons>
+  </ion-card>
+
+  <ion-card>
     <ion-item>
       <ion-icon name="cash-outline" slot="start"></ion-icon>
       <ion-label>Efectivo</ion-label>

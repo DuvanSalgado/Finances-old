@@ -11,6 +11,7 @@ import { ITotal } from '../shared/model/credit.interface';
 })
 export class GeneralTotalComponent implements OnInit, OnDestroy {
 
+  public currentMonth = new Date().getMonth();
   public total: ITotal = {
     expenseCredit: 0,
     loanCredit: 0,
@@ -24,8 +25,6 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
     expenseCash: 0,
   };
 
-  private currentMonth = new Date().getMonth();
-
   private subscription: Subscription;
 
   constructor(private calculateService: CalculateService) { }
@@ -36,6 +35,10 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getData(this.currentMonth);
+  }
+
+  public valueChanges(month: number): void {
+    this.getData(month);
   }
 
   private getData(month: number): void {
