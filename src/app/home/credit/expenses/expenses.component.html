@@ -1,14 +1,16 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons>
-      <ion-menu-button></ion-menu-button>
-      <ion-title>Listados de gastos</ion-title>
+      <ion-menu-button color="primary"></ion-menu-button>
+      <ion-title>Gastos</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <app-add-buttons (changeEvent)="valueChanges($event)">
   <ion-button
+    fill="outline"
+    shape="round"
     [disabled]="disableButton"
     (click)="openModalCreate()"
     color="primary"
