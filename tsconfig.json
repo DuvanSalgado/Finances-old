@@ -20,6 +20,9 @@
       "@app/*": [
         "src/app/*"
       ],
+      "@credit/*":[
+        "src/app/home/credit/shared/*"
+      ],
       "@home/*": [
         "src/app/home/*"
       ],

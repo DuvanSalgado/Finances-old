@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { IExpensesModel, ITotal } from '@credit/model/credit.interface';
+import { CalculateService } from '@credit/service/calculate.service';
+import { ExpensesService } from '@credit/service/expenses.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { IExpensesModel, ITotal } from '../shared/model/credit.interface';
-import { CalculateService } from '../shared/service/calculate.service';
-import { ExpensesService } from '../shared/service/expenses.service';
 import { ModalAddExpensesComponent } from './modal-add-expenses/modal-add-expenses.component';
 
 @Component({
@@ -16,6 +16,8 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   public loading = true;
   public disableButton = false;
   public expenses: Array<IExpensesModel> = [];
+  public currentMonth = new Date().getMonth();
+
   private total: ITotal = {
     expenseCredit: 0,
     loanCredit: 0,
@@ -42,16 +44,7 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getData();
-  }
-
-  getData(): void {
-    this.subscription = this.expensesService.getAll()
-      .subscribe((data) => { this.loading = false; this.expenses = data; });
-
-    this.subscription.add(this.calculateService.getAll()
-      .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
-      ));
+    this.getData(this.currentMonth);
   }
 
   public async openModalCreate(): Promise<void> {
@@ -64,6 +57,19 @@ export class ExpensesComponent implements OnInit, OnDestroy {
     });
     await modal.present();
     this.disableButton = await (await modal.onWillDismiss()).data;
+  }
+
+  public valueChanges(month: number): void {
+    this.getData(month);
+  }
+
+  private getData(month: number): void {
+    this.subscription = this.expensesService.getAll(month)
+      .subscribe((data) => { this.loading = false; this.expenses = data; });
+
+    this.subscription.add(this.calculateService.getAll(month)
+      .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
+      ));
   }
 }
 

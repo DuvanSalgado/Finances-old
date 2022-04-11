@@ -5,7 +5,6 @@ import { ICombobox } from './model/combobox.interface';
 @Component({
   selector: 'app-combobox',
   templateUrl: './combobox.component.html',
-  styleUrls: ['./combobox.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

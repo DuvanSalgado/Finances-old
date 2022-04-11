@@ -7,14 +7,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-button
-  class="button-add"
-  [disabled]="disableButton"
-  (click)="openModalCreate()"
-  color="primary"
->
-  <ion-icon name="add-circle-outline"></ion-icon>
-</ion-button>
+<app-add-buttons (changeEvent)="valueChanges($event)">
+  <ion-button
+    class="button-add"
+    [disabled]="disableButton"
+    (click)="openModalCreate()"
+    color="primary"
+  >
+    <ion-icon name="add-circle-outline"></ion-icon>
+  </ion-button>
+</app-add-buttons>
 
 <ion-content>
   <ion-list>
@@ -29,7 +31,7 @@
       </ion-label>
       <ion-item-group>
         <ion-button [disabled]="disableButton" (click)="view(item)">
-          <ion-icon name="eye-outline"></ion-icon>
+          <ion-icon name="eye"></ion-icon>
         </ion-button>
         <ion-button [disabled]="disableButton" (click)="update(item)">
           <ion-icon name="create"></ion-icon>

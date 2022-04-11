@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
+import { IExpensesModel } from '@credit/model/credit.interface';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IExpensesModel } from '../model/credit.interface';
 
 @Injectable()
 export class ExpensesService {
 
   private itemsCollection: AngularFirestoreCollection<any>;
-  private month = new Date().getMonth();
 
   constructor(private fireBase: AngularFirestore) { }
 
-  getAll(): Observable<Array<IExpensesModel>> {
-    this.itemsCollection = this.fireBase.collection<IExpensesModel[]>('expenses', ref => ref.where('month', '>=', this.month));
+  getAll(month: number): Observable<Array<IExpensesModel>> {
+    this.itemsCollection = this.fireBase.collection<IExpensesModel[]>('expenses', ref => ref.where('month', '==', month));
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {

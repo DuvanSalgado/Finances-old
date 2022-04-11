@@ -1,9 +1,9 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { IcreditModel, ITotal } from '@credit/model/credit.interface';
+import { CalculateService } from '@credit/service/calculate.service';
+import { CreditService } from '@credit/service/credit.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { IcreditModel, ITotal } from '../shared/model/credit.interface';
-import { CalculateService } from '../shared/service/calculate.service';
-import { CreditService } from '../shared/service/credit.service';
 import { ModalDetailsLoansComponent } from './modal-details-loans/modal-details-loans.component';
 import { ModalLoansComponent } from './modal-loans/modal-loans.component';
 
@@ -17,6 +17,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   public loans: Array<IcreditModel> = [];
   public loading = true;
   public disableButton = false;
+  public currentMonth = new Date().getMonth();
 
   private total: ITotal = {
     expenseCredit: 0,
@@ -39,7 +40,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.getdata();
+    this.getData(this.currentMonth);
   }
 
   public ngOnDestroy(): void {
@@ -66,11 +67,15 @@ export class LoansComponent implements OnInit, OnDestroy {
     this.openModal(data, 'Actualización de datos', false);
   }
 
-  private getdata(): void {
-    this.subscription = this.creditService.getAllCredit()
+  public valueChanges(month: number): void {
+    this.getData(month);
+  }
+
+  private getData(month: number): void {
+    this.subscription = this.creditService.getAllCredit(month)
       .subscribe((data) => { this.loading = false; this.loans = data; });
 
-    this.subscription.add(this.calculateService.getAll()
+    this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
       ));
   }

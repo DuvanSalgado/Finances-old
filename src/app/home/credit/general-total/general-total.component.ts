@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ITEMSMONTH } from '@app/shared/combobox/model/data.combobox';
+import { CalculateService } from '@credit/service/calculate.service';
 import { Subscription } from 'rxjs';
 import { ITotal } from '../shared/model/credit.interface';
-import { CalculateService } from '../shared/service/calculate.service';
 
 @Component({
   selector: 'app-general-total',
@@ -10,6 +11,7 @@ import { CalculateService } from '../shared/service/calculate.service';
 })
 export class GeneralTotalComponent implements OnInit, OnDestroy {
 
+  public currentMonth = new Date().getMonth();
   public total: ITotal = {
     expenseCredit: 0,
     loanCredit: 0,
@@ -32,13 +34,16 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getData();
+    this.getData(this.currentMonth);
   }
 
-  getData(): void {
-    this.subscription = this.calculateService.getAll()
-      .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
-      );
+  public valueChanges(month: number): void {
+    this.getData(month);
+  }
+
+  private getData(month: number): void {
+    this.subscription = this.calculateService.getAll(month)
+      .subscribe((data) => this.total = data[0]);
   }
 
 }

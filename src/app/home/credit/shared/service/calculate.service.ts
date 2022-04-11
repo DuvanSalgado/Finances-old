@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
+import { ITotal } from '@credit/model/credit.interface';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ITotal } from '../model/credit.interface';
 
 @Injectable()
 export class CalculateService {
@@ -12,8 +12,8 @@ export class CalculateService {
 
   constructor(private fireBase: AngularFirestore) { }
 
-  public getAll(): Observable<Array<ITotal>> {
-    this.itemsCollection = this.fireBase.collection<any>('calculate', ref => ref.where('month', '>=', this.month));
+  public getAll(month: number): Observable<Array<ITotal>> {
+    this.itemsCollection = this.fireBase.collection<any>('calculate', ref => ref.where('month', '==', month));
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {

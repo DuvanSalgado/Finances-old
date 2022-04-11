@@ -19,10 +19,6 @@ const routes: Routes = [
       {
         path: 'general',
         loadChildren: () => import('./general-total/general-total.module').then(m => m.GeneralTotalModule)
-      },
-      {
-        path: 'history',
-        loadChildren: () => import('./history/history.module').then(m => m.HistoryModule)
       }
     ]
   }
