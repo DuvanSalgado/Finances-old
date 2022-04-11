@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons>
-      <ion-menu-button></ion-menu-button>
-      <ion-title>Listados de prestamos</ion-title>
+      <ion-menu-button color="primary"></ion-menu-button>
+      <ion-title>Prestamos</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -10,6 +10,8 @@
 <app-add-buttons (changeEvent)="valueChanges($event)">
   <ion-button
     class="button-add"
+    fill="outline"
+    shape="round"
     [disabled]="disableButton"
     (click)="openModalCreate()"
     color="primary"
@@ -24,17 +26,27 @@
       <ion-label>
         <h3>Nombre: {{ item.name }}</h3>
         <h3>
-          Valor:
+          Deuda:
           {{ item.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
         </h3>
         <p>{{ item?.history[0].status.name }}</p>
       </ion-label>
       <ion-item-group>
-        <ion-button [disabled]="disableButton" (click)="view(item)">
-          <ion-icon name="eye"></ion-icon>
+        <ion-button
+          fill="outline"
+          shape="round"
+          [disabled]="disableButton"
+          (click)="view(item)"
+        >
+          <ion-icon name="eye-outline"></ion-icon>
         </ion-button>
-        <ion-button [disabled]="disableButton" (click)="update(item)">
-          <ion-icon name="create"></ion-icon>
+        <ion-button
+          fill="outline"
+          shape="round"
+          [disabled]="disableButton"
+          (click)="update(item)"
+        >
+          <ion-icon name="create-outline"></ion-icon>
         </ion-button>
       </ion-item-group>
     </ion-item>

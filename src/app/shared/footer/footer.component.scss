@@ -1,0 +1,24 @@
+ion-tabs {
+  ion-tab-bar {
+    bottom: 10px;
+    position: relative;
+    border-radius: 16px;
+    width: 92%;
+    margin: 0 auto;
+
+    ion-tab-button {
+      background-color: var(--custom-background-footer);
+      &::before {
+        display: block;
+        content: "";
+        margin: 0 auto;
+        width: 25px;
+        height: 2px;
+      }
+
+      &.tab-selected::before {
+        background-color: var(--ion-color-primary);
+      }
+    }
+  }
+}
