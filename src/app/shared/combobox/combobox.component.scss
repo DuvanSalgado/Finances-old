@@ -1,0 +1,7 @@
+ion-list {
+  ion-item {
+    &::part(native) {
+      border-radius: 25px;
+    }
+  }
+}
