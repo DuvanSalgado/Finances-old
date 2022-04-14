@@ -48,7 +48,7 @@
       <ion-item lines="none">
         <ion-label>
           Pagados:
-          {{ total?.paidCredit | currency: "COP":"symbol-narrow":"1.0-0" }}
+          {{ total?.totalCredit | currency: "COP":"symbol-narrow":"1.0-0" }}
         </ion-label>
         <ion-label>
           Pendientes:
@@ -74,7 +74,7 @@
       <ion-item lines="none">
         <ion-label>
           Pagados:
-          {{ total?.paidDebit | currency: "COP":"symbol-narrow":"1.0-0" }}
+          {{ total?.totalDebit | currency: "COP":"symbol-narrow":"1.0-0" }}
         </ion-label>
         <ion-label>
           Pendientes:

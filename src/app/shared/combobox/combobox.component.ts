@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ICombobox } from './model/combobox.interface';
 
 @Component({
@@ -16,17 +16,15 @@ import { ICombobox } from './model/combobox.interface';
 
 export class ComboboxComponent implements ControlValueAccessor {
 
-  @Input() isDisabled = false;
   @Input() items: Array<ICombobox>;
   @Input() label: string;
 
-  public value: ICombobox;
-
+  value = new FormControl();
   onChange: (event) => void;
   onTouched: () => void;
 
   writeValue(item: any): void {
-    this.value = item;
+    this.value.patchValue(item);
   }
 
   registerOnChange(fn: any): void {
@@ -37,8 +35,9 @@ export class ComboboxComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;;
+  setDisabledState(isDisabled: boolean): void {
+    const state = isDisabled ? 'disable' : 'enable';
+    this.value[state]();
   }
 
   setChange(event: any): void {

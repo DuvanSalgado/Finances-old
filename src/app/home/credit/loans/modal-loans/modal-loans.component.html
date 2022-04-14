@@ -13,21 +13,29 @@
   <ion-card *ngIf="!isCreate">
     <ion-card-content>
       <ion-item lines="none">
-        <label>
+        <ion-label>
           <h3>Nombre: {{ data.name }}</h3>
-          <p>
+          <h3>
             Pendiente:
             {{ data.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
-          </p>
-          <p>
+          </h3>
+          <h3>
             Pagado:
             {{ data.paidValue | currency: "COP":"symbol-narrow":"1.0-0" }}
-          </p>
-          <p>
+          </h3>
+          <h3>
             Total:
             {{ data.fullValue | currency: "COP":"symbol-narrow":"1.0-0" }}
-          </p>
-        </label>
+          </h3>
+        </ion-label>
+        <ion-item lines="none">
+          <ion-label class="items-center-label">
+            <ion-icon slot="end" color="primary" [name]="data.icon"></ion-icon>
+            <ion-label color="primary">
+              {{ data.type.name }}
+            </ion-label>
+          </ion-label>
+        </ion-item>
       </ion-item>
     </ion-card-content>
   </ion-card>
@@ -49,12 +57,12 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col *ngIf="isCreate">
+      <ion-row *ngIf="isCreate">
+        <ion-col>
           <app-calendar [formControlName]="formCtrl.date"></app-calendar>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="isCreate">
         <ion-col>
           <app-combobox
             label="Tipo"
@@ -63,12 +71,21 @@
           ></app-combobox>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="!isCreate">
         <ion-col>
           <app-combobox
-            label="Fuente"
-            [items]="itemsLoans"
-            [formControlName]="formCtrl.status"
+            label="Operacion"
+            [items]="itemsOperation"
+            [formControlName]="formCtrl.operations"
+          ></app-combobox>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!isCreate">
+        <ion-col>
+          <app-combobox
+            label="Metodo"
+            [items]="itemsPayment"
+            [formControlName]="formCtrl.payment"
           ></app-combobox>
         </ion-col>
       </ion-row>

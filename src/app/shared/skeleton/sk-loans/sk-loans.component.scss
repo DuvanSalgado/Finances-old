@@ -1,5 +1,11 @@
 .list {
   width: 55%;
+
+  &_icon {
+    width: 9%;
+    height: 50%;
+    margin-right: 10px;
+  }
 }
 
 .options {

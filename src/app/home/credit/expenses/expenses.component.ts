@@ -4,6 +4,7 @@ import { CalculateService } from '@credit/service/calculate.service';
 import { ExpensesService } from '@credit/service/expenses.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { InicTotal } from '../shared/model/initTotal';
 import { ModalAddExpensesComponent } from './modal-add-expenses/modal-add-expenses.component';
 
 @Component({
@@ -17,19 +18,7 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   public disableButton = false;
   public expenses: Array<IExpensesModel> = [];
   public currentMonth = new Date().getMonth();
-
-  private total: ITotal = {
-    expenseCredit: 0,
-    loanCredit: 0,
-    cash: 0,
-    paidCredit: 0,
-    pendingCredit: 0,
-    expenseDebit: 0,
-    paidDebit: 0,
-    pendingDebit: 0,
-    loanDebit: 0,
-    expenseCash: 0,
-  };
+  private total: ITotal = new InicTotal().total;
 
   private subscription: Subscription;
 

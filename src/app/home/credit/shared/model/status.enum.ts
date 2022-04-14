@@ -1,10 +1,10 @@
 export enum TypeCredit {
   prestamo = 0,
-  efectivo = 1,
+  abono = 1,
 }
 
 export enum Status {
-  credito = 0,
-  debito = 1,
-  efectivo = 2
+  credito = 2,
+  debito = 3,
+  efectivo = 4
 }

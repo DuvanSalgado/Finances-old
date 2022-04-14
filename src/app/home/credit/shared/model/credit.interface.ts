@@ -7,31 +7,34 @@ export interface IcreditModel {
   month: number;
   type: ICombobox;
   status: ICombobox;
+  operation: ICombobox;
+  icon: string;
   fullValue: number;
   date: Date;
   paidValue: number;
   history: IHistory[];
 }
 
-export type IHistory = Pick<IcreditModel, 'date' | 'value' | 'status' | 'type'>;
+export type IHistory = Pick<IcreditModel, 'date' | 'value' | 'operation'>;
 
 export interface IExpensesModel {
   value: number;
   description: string;
   date: Date;
   month: number;
-  status: ICombobox;
+  operations: ICombobox;
+  icon: string;
 }
 
 export interface ITotal {
   month?: number;
   expenseCredit?: number;
   expenseCash?: number;
-  paidCredit?: number;
+  totalCredit?: number;
   pendingCredit?: number;
   loanCredit?: number;
   expenseDebit?: number;
-  paidDebit?: number;
+  totalDebit?: number;
   pendingDebit?: number;
   loanDebit?: number;
   cash?: number;
