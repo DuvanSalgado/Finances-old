@@ -29,7 +29,7 @@
         </ion-label>
         <ion-item lines="none">
           <ion-label class="items-center-label">
-            <ion-icon slot="end" color="primary" [name]="data.icon"></ion-icon>
+            <ion-icon slot="end" [color]="data.icon.labelColor" [name]="data.icon.icon"></ion-icon>
             <ion-label color="primary">
               {{ data.type.name }}
             </ion-label>
@@ -46,7 +46,9 @@
           Valor: {{ item?.value | currency: "COP":"symbol-narrow":"1.0-0" }}
         </h3>
         <h3>Fecha: {{ item?.date }}</h3>
-        <p>{{ item?.operation?.name }}</p>
+        <ion-text color="primary">
+          {{ item?.operation?.name }}
+        </ion-text>
       </ion-label>
     </ion-item>
   </ion-list>

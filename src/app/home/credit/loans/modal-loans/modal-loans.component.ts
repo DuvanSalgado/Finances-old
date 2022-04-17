@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ICombobox } from '@app/shared/combobox/model/combobox.interface';
 import { ITEMSOPERATIONS, ITEMSPAYMENT, ITEMSTYPE } from '@app/shared/combobox/model/data.combobox';
-import { IcreditModel, ITotal } from '@credit/model/credit.interface';
+import { IcreditModel, Iicons, ITotal } from '@credit/model/credit.interface';
 import { FormCreditCtrl } from '@credit/model/formCredit.enum';
 import { mensages } from '@credit/model/menssage';
 import { Status, TypeCredit } from '@credit/model/status.enum';
@@ -137,25 +137,25 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
     const paid = parseInt(this.formGroup.get(this.formCtrl.paidValue).value, 10);
     const type = this.formGroup.get(this.formCtrl.type)?.value?.id;
     const operations = this.formGroup.get(this.formCtrl.operations)?.value?.id;
-    let icon: string;
+    let icon: Iicons;
 
     if (this.isCreate || operations === TypeCredit.prestamo) {
 
       if (this.data?.type?.id === Status.credito || type === Status.credito) {
         this.total.loanCredit = this.total.loanCredit + value;
         this.total.pendingCredit = this.total.pendingCredit + value;
-        icon = 'card-outline';
+        icon = { icon: 'card-outline', labelColor: 'warning' };
       }
 
       if (this.data?.type?.id === Status.debito || type === Status.debito) {
         this.total.loanDebit = this.total.loanDebit + value;
         this.total.pendingDebit = this.total.pendingDebit + value;
-        icon = 'reader-outline';
+        icon = { icon: 'reader-outline', labelColor: 'primary' };
       }
 
       if (this.data?.type?.id === Status.efectivo || type === Status.efectivo) {
         this.total.cash = this.total.cash - value;
-        icon = 'cash-outline';
+        icon = { icon: 'cash-outline', labelColor: 'success' };
       }
 
       this.formGroup.patchValue({

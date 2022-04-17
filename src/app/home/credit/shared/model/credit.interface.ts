@@ -8,7 +8,7 @@ export interface IcreditModel {
   type: ICombobox;
   status: ICombobox;
   operation: ICombobox;
-  icon: string;
+  icon: Iicons;
   fullValue: number;
   date: Date;
   paidValue: number;
@@ -23,7 +23,7 @@ export interface IExpensesModel {
   date: Date;
   month: number;
   operations: ICombobox;
-  icon: string;
+  icon: Iicons;
 }
 
 export interface ITotal {
@@ -39,4 +39,9 @@ export interface ITotal {
   loanDebit?: number;
   cash?: number;
   id?: string;
+}
+
+export interface Iicons {
+  labelColor: string;
+  icon: string;
 }
