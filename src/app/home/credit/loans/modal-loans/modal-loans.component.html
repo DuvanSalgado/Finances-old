@@ -30,8 +30,8 @@
         </ion-label>
         <ion-item lines="none">
           <ion-label class="items-center-label">
-            <ion-icon slot="end" color="primary" [name]="data.icon"></ion-icon>
-            <ion-label color="primary">
+            <ion-icon slot="end" [color]="data.icon.labelColor" [name]="data.icon.icon"></ion-icon>
+            <ion-label [color]="data.icon.labelColor">
               {{ data.type.name }}
             </ion-label>
           </ion-label>
