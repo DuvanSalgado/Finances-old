@@ -56,7 +56,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
     this.formGroup = this.formBuild.group({
       [this.formCtrl.id]: [data?.id],
       [this.formCtrl.name]: [data?.name, Validators.required],
-      [this.formCtrl.value]: [null, Validators.required],
+      [this.formCtrl.value]: [null, [Validators.required, Validators.min(0)]],
       [this.formCtrl.type]: [data?.type, Validators.required],
       [this.formCtrl.pendingValue]: [data ? data.pendingValue : 0],
       [this.formCtrl.paidValue]: [data ? data.paidValue : 0],
@@ -131,6 +131,10 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
   }
 
   private async calculate(): Promise<void> {
+
+    this.formGroup.patchValue({
+      [this.formCtrl.value]: this.formGroup.get(this.formCtrl.value).value.replace(/[$,]/g, '')
+    });
 
     const pendingValue = parseInt(this.formGroup.get(this.formCtrl.pendingValue).value, 10);
     const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);

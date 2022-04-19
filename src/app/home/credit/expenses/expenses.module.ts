@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared/shared.module';
 import { SkeletonModule } from '@app/shared/skeleton/skeleton.module';
 import { IonicModule } from '@ionic/angular';
@@ -9,6 +9,7 @@ import { ExpensesService } from '@credit/service/expenses.service';
 import { ExpensesComponent } from './expenses.component';
 import { ExpensesRoutingModule } from './expenses.routing';
 import { ModalAddExpensesComponent } from './modal-add-expenses/modal-add-expenses.component';
+import { DirectiveModule } from '../shared/directive/directive.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ModalAddExpensesComponent } from './modal-add-expenses/modal-add-expens
     ReactiveFormsModule,
     ExpensesRoutingModule,
     SharedModule,
-    SkeletonModule
+    SkeletonModule,
+    DirectiveModule
   ],
   providers: [
     ExpensesService,

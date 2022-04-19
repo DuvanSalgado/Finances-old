@@ -6,6 +6,7 @@ import { SkeletonModule } from '@app/shared/skeleton/skeleton.module';
 import { CalculateService } from '@credit/service/calculate.service';
 import { CreditService } from '@credit/service/credit.service';
 import { IonicModule } from '@ionic/angular';
+import { DirectiveModule } from '../shared/directive/directive.module';
 import { LoansComponent } from './loans.component';
 import { LoansRoutingModule } from './loans.routing';
 import { ModalDetailsLoansComponent } from './modal-details-loans/modal-details-loans.component';
@@ -23,7 +24,8 @@ import { ModalLoansComponent } from './modal-loans/modal-loans.component';
     ReactiveFormsModule,
     IonicModule,
     SharedModule,
-    SkeletonModule
+    SkeletonModule,
+    DirectiveModule
   ],
   providers: [
     CreditService,

@@ -30,7 +30,11 @@
         </ion-label>
         <ion-item lines="none">
           <ion-label class="items-center-label">
-            <ion-icon slot="end" [color]="data.icon.labelColor" [name]="data.icon.icon"></ion-icon>
+            <ion-icon
+              slot="end"
+              [color]="data.icon.labelColor"
+              [name]="data.icon.icon"
+            ></ion-icon>
             <ion-label [color]="data.icon.labelColor">
               {{ data.type.name }}
             </ion-label>
@@ -52,7 +56,7 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Valor</ion-label>
-            <ion-input type="number" [formControlName]="formCtrl.value">
+            <ion-input appFormatCurrency [formControlName]="formCtrl.value">
             </ion-input>
           </ion-item>
         </ion-col>
