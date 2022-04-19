@@ -23,16 +23,21 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of loans">
-      <ion-icon [color]="item.icon.labelColor" slot="start" [name]="item.icon.icon"></ion-icon>
+      <ion-icon
+        [color]="item.icon.labelColor"
+        slot="start"
+        [name]="item.icon.icon"
+      ></ion-icon>
       <ion-label>
+        <ion-text [color]="item.icon.labelColor">
+          {{ item.type.name }}
+        </ion-text>
         <h3>Nombre: {{ item.name }}</h3>
         <h3>
           Deuda:
           {{ item.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
         </h3>
-        <ion-text [color]="item.icon.labelColor">
-          {{ item.type.name }}
-        </ion-text>
+        <p>Fecha: {{ item.date }}</p>
       </ion-label>
       <ion-item-group>
         <ion-button

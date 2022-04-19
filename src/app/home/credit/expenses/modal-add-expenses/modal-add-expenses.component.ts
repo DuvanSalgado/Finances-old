@@ -59,7 +59,7 @@ export class ModalAddExpensesComponent implements OnInit {
       [this.formCtrl.value]: [null, Validators.required],
       [this.formCtrl.description]: [null, Validators.required],
       [this.formCtrl.operations]: [null, Validators.required],
-      [this.formCtrl.date]: [format(this.todayDate, 'MMM dd yyyy')],
+      [this.formCtrl.date]: [format(this.todayDate, 'dd MM yyyy')],
       [this.formCtrl.month]: [this.todayDate.getMonth()],
       [this.formCtrl.icon]: [null]
     });

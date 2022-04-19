@@ -23,14 +23,20 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of expenses">
-      <ion-icon [color]="item.icon.labelColor" slot="start" [name]="item.icon.icon"></ion-icon>
+      <ion-icon
+        [color]="item.icon.labelColor"
+        slot="start"
+        [name]="item.icon.icon"
+      ></ion-icon>
       <ion-label>
+        <ion-text [color]="item.icon.labelColor">
+          {{ item.operations.name }}
+        </ion-text>
         <h3>
           Valor: {{ item.value | currency: "COP":"symbol-narrow":"1.0-0" }}
         </h3>
         <h3>Descripcion: {{ item.description }}</h3>
         <p>Fecha: {{ item.date }}</p>
-        <p>{{ item.operations.name }}</p>
       </ion-label>
     </ion-item>
   </ion-list>

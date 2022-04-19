@@ -62,7 +62,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
       [this.formCtrl.paidValue]: [data ? data.paidValue : 0],
       [this.formCtrl.fullValue]: [data ? data.fullValue : 0],
       [this.formCtrl.month]: [data ? data.month : this.todayDate.getMonth()],
-      [this.formCtrl.date]: [data ? data.date : format(this.todayDate, 'MMMM dd yyyy'), Validators.required],
+      [this.formCtrl.date]: [data ? data.date : format(this.todayDate, 'dd MM yyyy'), Validators.required],
       [this.formCtrl.operations]: [null],
       [this.formCtrl.payment]: [null],
       [this.formCtrl.icon]: [data?.icon],
