@@ -56,7 +56,7 @@ export class ModalAddExpensesComponent implements OnInit {
 
   private initializeForm(): void {
     this.formGroup = this.formbuilder.group({
-      [this.formCtrl.value]: [null, [Validators.required, Validators.min(0), Validators.pattern(/[0-9]/g)]],
+      [this.formCtrl.value]: [null, [Validators.required, Validators.min(0)]],
       [this.formCtrl.description]: [null, Validators.required],
       [this.formCtrl.operations]: [null, Validators.required],
       [this.formCtrl.date]: [format(this.todayDate, 'dd MM yyyy')],
@@ -66,11 +66,6 @@ export class ModalAddExpensesComponent implements OnInit {
   }
 
   private async calculate(): Promise<void> {
-
-    this.formGroup.patchValue({
-      [this.formCtrl.value]: this.formGroup.get(this.formCtrl.value).value.replace(/[$,]/g, '')
-    });
-
     const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
     const type = this.formGroup.get(this.formCtrl.operations).value.id;
     let icon: Iicons;

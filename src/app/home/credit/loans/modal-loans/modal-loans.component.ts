@@ -131,11 +131,6 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
   }
 
   private async calculate(): Promise<void> {
-
-    this.formGroup.patchValue({
-      [this.formCtrl.value]: this.formGroup.get(this.formCtrl.value).value.replace(/[$,]/g, '')
-    });
-
     const pendingValue = parseInt(this.formGroup.get(this.formCtrl.pendingValue).value, 10);
     const value = parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
     const paid = parseInt(this.formGroup.get(this.formCtrl.paidValue).value, 10);
