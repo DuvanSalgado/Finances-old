@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AddButtonsComponent } from './add-buttons/add-buttons.component';
 import { ButtonsActionsComponent } from './buttons-actions/buttons-actions.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ComboboxComponent } from './combobox/combobox.component';
+import { CurrencyInputComponent } from './currency-input/currency-input.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 @NgModule({
@@ -16,7 +17,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ButtonsActionsComponent,
     ComboboxComponent,
     FooterComponent,
-    AddButtonsComponent
+    AddButtonsComponent,
+    CurrencyInputComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ButtonsActionsComponent,
     ComboboxComponent,
     FooterComponent,
-    AddButtonsComponent
+    AddButtonsComponent,
+    CurrencyInputComponent
   ]
 })
 export class SharedModule { }

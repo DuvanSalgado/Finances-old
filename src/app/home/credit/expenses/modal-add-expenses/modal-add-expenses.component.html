@@ -14,13 +14,16 @@
     <ion-list>
       <ion-row>
         <ion-col>
-          <ion-item>
+<!--           <ion-item>
             <ion-label position="floating">Valor</ion-label>
             <ion-input
+              placeholder="$0,000"
               type="number"
               [formControlName]="formCtrl.value"
+            >
             ></ion-input>
-          </ion-item>
+          </ion-item> -->
+          <app-currency-input></app-currency-input>
         </ion-col>
       </ion-row>
       <ion-row>

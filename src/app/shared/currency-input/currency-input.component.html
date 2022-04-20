@@ -1,0 +1,11 @@
+<ion-item>
+  <ion-label position="floating">Descripcion</ion-label>
+  <ion-input
+    (ionInput)="changeInput($event)"
+    type="number"
+    #dummyFacade
+    (keyup)="handleKeyUp($event)"
+  >
+    {{ value | currency: "COP":"symbol-narrow":"1.0-0" }}
+  </ion-input>
+</ion-item>
