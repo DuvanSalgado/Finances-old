@@ -22,8 +22,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     CommonModule,
     IonicModule,
     RouterModule,
-    ReactiveFormsModule,
-    FormsModule
+    ReactiveFormsModule
   ],
   exports: [
     SidebarComponent,

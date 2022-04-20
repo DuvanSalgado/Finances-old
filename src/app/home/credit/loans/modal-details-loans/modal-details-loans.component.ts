@@ -4,7 +4,8 @@ import { IcreditModel } from '@credit/model/credit.interface';
 
 @Component({
   selector: 'app-modal-details-loans',
-  templateUrl: './modal-details-loans.component.html'
+  templateUrl: './modal-details-loans.component.html',
+  styleUrls: ['./modal-details-loans.component.scss']
 })
 export class ModalDetailsLoansComponent {
 
@@ -15,5 +16,4 @@ export class ModalDetailsLoansComponent {
   public cancel(): void {
     this.modalController.dismiss(false);
   }
-
 }

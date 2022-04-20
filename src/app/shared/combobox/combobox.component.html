@@ -5,10 +5,10 @@
       cancelText="Cancelar"
       okText="Aceptar"
       placeholder="Seleccione"
-      [attr.disabled]="isDisabled"
+
       [compareWith]="compareWith"
       (ionChange)="setChange($event)"
-      [(ngModel)]="value"
+      [formControl]="value"
     >
       <ion-select-option *ngFor="let item of items" [value]="item">
         {{ item.name }}

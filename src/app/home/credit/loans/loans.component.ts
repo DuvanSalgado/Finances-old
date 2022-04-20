@@ -4,6 +4,7 @@ import { CalculateService } from '@credit/service/calculate.service';
 import { CreditService } from '@credit/service/credit.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { InicTotal } from '../shared/model/initTotal';
 import { ModalDetailsLoansComponent } from './modal-details-loans/modal-details-loans.component';
 import { ModalLoansComponent } from './modal-loans/modal-loans.component';
 
@@ -19,18 +20,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   public disableButton = false;
   public currentMonth = new Date().getMonth();
 
-  private total: ITotal = {
-    expenseCredit: 0,
-    loanCredit: 0,
-    cash: 0,
-    paidCredit: 0,
-    pendingCredit: 0,
-    expenseDebit: 0,
-    paidDebit: 0,
-    pendingDebit: 0,
-    loanDebit: 0,
-    expenseCash: 0,
-  };
+  private total: ITotal =  new InicTotal().total;
   private subscription: Subscription;
 
   constructor(
@@ -60,7 +50,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   }
 
   public openModalCreate(): void {
-    this.openModal(null, 'Crear un nuevo registro', true);
+    this.openModal(null, 'Registrar un prestamo', true);
   }
 
   public update(data: IcreditModel): void {

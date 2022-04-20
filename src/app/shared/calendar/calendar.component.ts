@@ -41,10 +41,10 @@ export class CalendarComponent implements ControlValueAccessor {
   setChange(value: string): void {
     this.value.patchValue(this.formatDate(value));
     this.onTouched();
-    this.onChange(parseISO(value).getMonth());
+    this.onChange(this.formatDate(value));
   }
 
   private formatDate(value: string): string {
-    return format(new Date(value), 'MMMM dd yyyy');
+    return format(new Date(value), 'dd MM yyyy');
   }
 }

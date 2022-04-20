@@ -5,11 +5,13 @@ export enum FormCreditCtrl {
   paidValue = 'paidValue',
   pendingValue = 'pendingValue',
   month = 'month',
-  status = 'status',
+  operations = 'operations',
+  payment = 'payment',
   date = 'date',
   history = 'history',
   type = 'type',
-  id = 'id'
+  id = 'id',
+  icon = 'icon'
 }
 
 export enum FormExpensesCtrl {
@@ -17,8 +19,9 @@ export enum FormExpensesCtrl {
   value = 'value',
   month = 'month',
   date = 'date',
-  status = 'status',
-  description = 'description'
+  operations = 'operations',
+  description = 'description',
+  icon = 'icon'
 }
 
 export enum FormShared {

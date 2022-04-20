@@ -1,6 +1,7 @@
 <ng-container *ngIf="loading">
   <ion-list *ngFor="let item of items">
     <ion-item>
+      <ion-skeleton-text animated class="list_icon"></ion-skeleton-text>
       <ion-label>
         <ion-skeleton-text animated class="list"></ion-skeleton-text>
         <ion-skeleton-text animated class="list"></ion-skeleton-text>

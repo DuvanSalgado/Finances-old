@@ -1,13 +1,15 @@
 .expenses-modal {
   &::part(content) {
     height: 370px;
+    width: 98%;
     border-radius: 10px;
   }
 }
 
 .loans-modal-create {
   &::part(content) {
-    height: 410px;
+    height: 328px;
+    width: 98%;
     border-radius: 10px;
   }
 }
@@ -15,6 +17,7 @@
 .loans-modal-edit {
   &::part(content) {
     height: 485px;
+    width: 98%;
     border-radius: 10px;
   }
 }
@@ -22,6 +25,7 @@
 .view-modal {
   &::part(content) {
     height: 445px;
+    width: 98%;
     border-radius: 10px;
   }
 }
