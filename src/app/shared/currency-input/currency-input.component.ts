@@ -1,49 +1,72 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { IonInput } from '@ionic/angular';
+import { Component, forwardRef, HostListener } from '@angular/core';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-currency-input',
-  templateUrl: './currency-input.component.html'
+  templateUrl: './currency-input.component.html',
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => CurrencyInputComponent),
+    multi: true
+  }
+  ]
 })
-export class CurrencyInputComponent {
+export class CurrencyInputComponent implements ControlValueAccessor {
 
   private static backspaceKey = 'Backspace';
-  private static backspaceInputType = 'deleteContentBackward';
-  @ViewChild('dummyFacade', { static: false }) private dummyFacade: IonInput;
-  public value = '';
+  public valueForm = new FormControl();
+  public valuePipe = '';
+  onChange: (event) => void;
+  onTouched: () => void;
+
+  @HostListener('ionBlur', ['$event']) blurEvent() {
+    if (this.valuePipe !== '') {
+      this.valueForm.patchValue('.00');
+    } else {
+      this.clearInput();
+    }
+  }
+
+  @HostListener('ionFocus', ['$event']) focusEvent(event) {
+    this.clearInput();
+  }
+  writeValue(obj: any): void { }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void { }
 
   changeInput(event: any): void {
     this.clearInput();
     if (event.detail.data && !isNaN(event.detail.data)) {
       this.addDigit(event.detail.data);
-    } else if (event.detail.inputType === CurrencyInputComponent.backspaceInputType) {
-      // this handles numpad input for delete/backspace
-      this.delDigit();
     }
   }
 
   handleKeyUp(event: KeyboardEvent) {
-    // this handles keyboard input for backspace
     if (event.key === CurrencyInputComponent.backspaceKey) {
       this.delDigit();
     }
   }
 
-
   private addDigit(key: string) {
-    this.value = this.value + key;
-    // this.amountEntered.emit(+this.amount);
+    this.valuePipe = this.valuePipe + key;
+    this.onChange(this.valuePipe);
   }
 
   private delDigit() {
-    this.value = this.value.substring(0, this.value.length - 1);
-    //this.amountEntered.emit(+this.amount);
+    this.valuePipe = this.valuePipe.substring(0, this.valuePipe.length - 1);
+    this.onChange(this.valuePipe);
   }
 
   private clearInput() {
-    this.dummyFacade.value = '.0';
+    this.valueForm.patchValue(null);
   }
-
-
 
 }
