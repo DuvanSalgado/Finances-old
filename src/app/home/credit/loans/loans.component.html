@@ -57,6 +57,12 @@
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
       </ion-item-group>
+      <ion-note
+        slot="end"
+        [color]="item.pendingValue !== 0 ? 'success' : 'danger'"
+      >
+        <ion-icon name="radio-button-on"></ion-icon>
+      </ion-note>
     </ion-item>
   </ion-list>
   <app-sk-loans [loading]="loading"></app-sk-loans>
