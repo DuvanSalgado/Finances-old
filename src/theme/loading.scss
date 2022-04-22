@@ -1,0 +1,9 @@
+.loading-class {
+  background: #ffffffb0;
+
+  .loading-wrapper.sc-ion-loading-md {
+    flex-direction: column;
+    background: transparent;
+    box-shadow: none;
+  }
+}

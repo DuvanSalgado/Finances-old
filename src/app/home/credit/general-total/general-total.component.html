@@ -18,7 +18,7 @@
 
   <ion-card>
     <ion-item>
-      <ion-icon color="primary" name="cash-outline" slot="start"></ion-icon>
+      <ion-icon color="success" name="cash-outline" slot="start"></ion-icon>
       <ion-label>Efectivo</ion-label>
       <ion-note slot="end">
         {{ total?.cash | currency: "COP":"symbol-narrow":"1.0-0" }}
@@ -38,7 +38,7 @@
 
   <ion-card>
     <ion-item>
-      <ion-icon color="primary" name="card-outline" slot="start"></ion-icon>
+      <ion-icon color="warning" name="card-outline" slot="start"></ion-icon>
       <ion-label>Credito</ion-label>
       <ion-note slot="end">
         {{ total?.loanCredit | currency: "COP":"symbol-narrow":"1.0-0" }}
