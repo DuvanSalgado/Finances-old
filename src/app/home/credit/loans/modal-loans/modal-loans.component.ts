@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoadingService } from '@app/core/services/loading.service';
 import { ICombobox } from '@app/shared/combobox/model/combobox.interface';
 import { ITEMSOPERATIONS, ITEMSPAYMENT, ITEMSTYPE } from '@app/shared/combobox/model/data.combobox';
 import { IcreditModel, Iicons, ITotal } from '@credit/model/credit.interface';
@@ -8,13 +9,14 @@ import { mensages } from '@credit/model/menssage';
 import { Status, TypeCredit } from '@credit/model/status.enum';
 import { CalculateService } from '@credit/service/calculate.service';
 import { CreditService } from '@credit/service/credit.service';
-import { LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-modal-loans',
   templateUrl: './modal-loans.component.html',
   styleUrls: ['./modal-loans.component.scss'],
+  providers: [LoadingService]
 })
 export class ModalLoansComponent implements OnInit, OnDestroy {
 
@@ -25,8 +27,6 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
 
   public formGroup: FormGroup;
   public formCtrl = FormCreditCtrl;
-  public loading = false;
-  public loadingModal: any;
   public itemsType: Array<ICombobox> = ITEMSTYPE;
   public itemsOperation: Array<ICombobox> = ITEMSOPERATIONS;
   public itemsPayment: Array<ICombobox> = [];
@@ -39,8 +39,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
     private formBuild: FormBuilder,
     private calculateService: CalculateService,
     private creditService: CreditService,
-    private toastController: ToastController,
-    private loadingController: LoadingController
+    private loadingService: LoadingService
   ) { }
 
   ngOnDestroy(): void {
@@ -71,23 +70,21 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
   }
 
   public async saveChange(event: boolean): Promise<void> {
-    this.loading = true;
-    await this.presentLoading();
+
+    await this.loadingService.presentLoading();
     await this.calculate();
     this.setHistory();
 
     if (event) {
       await this.creditService.createCredit(this.formGroup.value);
-      await this.presentToast(mensages.successful);
+      await this.loadingService.presentToast(mensages.successful);
     } else {
       await this.creditService.updateCredit(this.formGroup.value);
-      await this.presentToast(mensages.update);
+      await this.loadingService.presentToast(mensages.update);
     }
 
-    this.loading = false;
-    await this.loadingModal.dismiss();
+    await this.loadingService.dismiss();
     await this.modalController.dismiss();
-
   }
 
   public cancel(): void {
@@ -122,12 +119,6 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
           this.itemsPayment = ITEMSPAYMENT;
         }
       });
-  }
-
-  private async presentToast(mensaje: string): Promise<void> {
-    const toast = await this.toastController
-      .create({ message: mensaje, duration: 1050, position: 'top' });
-    toast.present();
   }
 
   private async calculate(): Promise<void> {
@@ -196,10 +187,4 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
     });
   }
 
-  private async presentLoading(): Promise<void> {
-    this.loadingModal = await this.loadingController.create({
-      message: 'Cargando...',
-    });
-    await this.loadingModal.present(false);
-  }
 }
