@@ -1,6 +1,6 @@
-import { Component, forwardRef, Output } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { format, parseISO } from 'date-fns';
+import { Component, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { format } from 'date-fns';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -14,8 +14,7 @@ import { format, parseISO } from 'date-fns';
 })
 export class CalendarComponent implements ControlValueAccessor {
 
-  @Output() isDisabled = false;
-  value = new FormControl();
+  value = null;
   maxDate = format(new Date(), 'yyyy-MM-dd');
   minDate = format(new Date(), 'yyyy-MM');
 
@@ -23,7 +22,7 @@ export class CalendarComponent implements ControlValueAccessor {
   onTouched: () => void;
 
   writeValue(obj: string): void {
-    this.value.patchValue(obj);
+    this.value = obj;
   }
 
   registerOnChange(fn: any): void {
@@ -34,12 +33,8 @@ export class CalendarComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
-  }
-
   setChange(value: string): void {
-    this.value.patchValue(this.formatDate(value));
+    this.value = this.formatDate(value);
     this.onTouched();
     this.onChange(this.formatDate(value));
   }

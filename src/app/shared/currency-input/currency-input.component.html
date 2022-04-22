@@ -1,0 +1,11 @@
+<ion-item>
+  <ion-label position="floating">Valor</ion-label>
+  <ion-input
+    (ionInput)="changeInput($event)"
+    type="number"
+    [formControl]="valueForm"
+    (keyup)="handleKeyUp($event)"
+  >
+    {{ valuePipe | currency: "COP":"symbol-narrow":"1.0-0" }}
+  </ion-input>
+</ion-item>

@@ -14,13 +14,9 @@
     <ion-list>
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-label position="floating">Valor</ion-label>
-            <ion-input
-              type="number"
-              [formControlName]="formCtrl.value"
-            ></ion-input>
-          </ion-item>
+          <app-currency-input
+            [formControlName]="formCtrl.value"
+          ></app-currency-input>
         </ion-col>
       </ion-row>
       <ion-row>
