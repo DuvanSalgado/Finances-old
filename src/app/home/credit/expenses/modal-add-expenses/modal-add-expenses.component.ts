@@ -44,9 +44,6 @@ export class ModalAddExpensesComponent implements OnInit {
   }
 
   public async onSaveChange(evet: boolean): Promise<void> {
-    console.log(this.formGroup.value);
-
-    return
     this.loading = true;
     await this.presentLoading();
     await this.calculate();
