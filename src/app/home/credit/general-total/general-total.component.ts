@@ -39,6 +39,7 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
 
   public async openConsignmentModal(): Promise<void> {
     if (this.blockModal) {
+      this.blockModal = false;
       const modal = await this.modalController.create({
         component: ModalCashComponent,
         cssClass: 'cash-modal',
@@ -46,7 +47,6 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
         componentProps: { data: this.cashGeneral }
       });
       await modal.present();
-      this.blockModal = false;
       this.blockModal = await (await modal.onWillDismiss()).data;
     }
   }
