@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IcreditModel, ITotal } from '@credit/model/credit.interface';
+import { IcashGeneral, IcreditModel, ITotal } from '@credit/model/credit.interface';
 import { CalculateService } from '@credit/service/calculate.service';
 import { CreditService } from '@credit/service/credit.service';
 import { ModalController } from '@ionic/angular';
@@ -21,6 +21,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   public disableButtonMont = false;
   public currentMonth = new Date().getMonth();
 
+  private cashGeneral: IcashGeneral = { value: 0 };
   private month = new Date().getMonth();
   private total: ITotal = new InicTotal().total;
   private subscription: Subscription;
@@ -72,6 +73,9 @@ export class LoansComponent implements OnInit, OnDestroy {
     this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
       ));
+
+    this.subscription.add(this.calculateService.getAllCash()
+      .subscribe((data) => { if (data.length > 0) { this.cashGeneral = data[0]; } }));
   }
 
   private async openModal(data: IcreditModel, title: string, isCreate: boolean): Promise<void> {
@@ -80,7 +84,8 @@ export class LoansComponent implements OnInit, OnDestroy {
       component: ModalLoansComponent,
       cssClass: (isCreate) ? 'loans-modal-create' : 'loans-modal-edit',
       backdropDismiss: false,
-      componentProps: { data, isCreate, title, total: this.total, month: this.currentMonth }
+      componentProps:
+        { data, isCreate, title, total: this.total, month: this.currentMonth, cashGeneral: this.cashGeneral }
     });
     await modal.present();
     this.disableButton = await (await modal.onWillDismiss()).data;

@@ -49,23 +49,23 @@ export class CurrencyInputComponent implements ControlValueAccessor {
     }
   }
 
-  handleKeyUp(event: KeyboardEvent) {
+  handleKeyUp(event: KeyboardEvent): void {
     if (event.key === CurrencyInputComponent.backspaceKey) {
       this.delDigit();
     }
   }
 
-  private addDigit(key: string) {
+  private addDigit(key: string): void {
     this.valuePipe = this.valuePipe + key;
     this.onChange(this.valuePipe);
   }
 
-  private delDigit() {
+  private delDigit(): void {
     this.valuePipe = this.valuePipe.substring(0, this.valuePipe.length - 1);
     this.onChange(this.valuePipe);
   }
 
-  private clearInput() {
+  private clearInput(): void {
     this.valueForm.patchValue(null);
   }
 
