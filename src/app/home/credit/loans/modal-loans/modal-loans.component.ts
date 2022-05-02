@@ -24,6 +24,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
   @Input() total: ITotal;
   @Input() title: string;
   @Input() isCreate = true;
+  @Input() month;
 
   public formGroup: FormGroup;
   public formCtrl = FormCreditCtrl;
@@ -176,7 +177,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
         [this.formCtrl.pendingValue]: pendingValue - value
       });
     }
-    await this.calculateService.calculate(this.total);
+    await this.calculateService.calculate(this.total, this.month);
   }
 
   private setHistory(): void {

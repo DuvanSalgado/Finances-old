@@ -18,9 +18,11 @@ export class LoansComponent implements OnInit, OnDestroy {
   public loans: Array<IcreditModel> = [];
   public loading = true;
   public disableButton = false;
+  public disableButtonMont = false;
   public currentMonth = new Date().getMonth();
 
-  private total: ITotal =  new InicTotal().total;
+  private month = new Date().getMonth();
+  private total: ITotal = new InicTotal().total;
   private subscription: Subscription;
 
   constructor(
@@ -58,6 +60,8 @@ export class LoansComponent implements OnInit, OnDestroy {
   }
 
   public valueChanges(month: number): void {
+    this.currentMonth = month;
+    this.disableButtonMont = this.month !== month;
     this.getData(month);
   }
 
@@ -76,7 +80,7 @@ export class LoansComponent implements OnInit, OnDestroy {
       component: ModalLoansComponent,
       cssClass: (isCreate) ? 'loans-modal-create' : 'loans-modal-edit',
       backdropDismiss: false,
-      componentProps: { data, isCreate, title, total: this.total }
+      componentProps: { data, isCreate, title, total: this.total, month: this.currentMonth }
     });
     await modal.present();
     this.disableButton = await (await modal.onWillDismiss()).data;

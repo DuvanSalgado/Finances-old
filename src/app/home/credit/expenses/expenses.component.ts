@@ -16,10 +16,12 @@ export class ExpensesComponent implements OnInit, OnDestroy {
 
   public loading = true;
   public disableButton = false;
+  public disableButtonMont = false;
   public expenses: Array<IExpensesModel> = [];
   public currentMonth = new Date().getMonth();
-  private total: ITotal = new InicTotal().total;
 
+  private month = new Date().getMonth();
+  private total: ITotal = new InicTotal().total;
   private subscription: Subscription;
 
   constructor(
@@ -42,7 +44,7 @@ export class ExpensesComponent implements OnInit, OnDestroy {
       component: ModalAddExpensesComponent,
       cssClass: 'expenses-modal',
       backdropDismiss: false,
-      componentProps: { total: this.total }
+      componentProps: { total: this.total, month: this.currentMonth }
     });
     await modal.present();
     this.disableButton = await (await modal.onWillDismiss()).data;
@@ -50,6 +52,8 @@ export class ExpensesComponent implements OnInit, OnDestroy {
 
   public valueChanges(month: number): void {
     this.getData(month);
+    this.currentMonth = month;
+    this.disableButtonMont = this.month !== month;
   }
 
   private getData(month: number): void {

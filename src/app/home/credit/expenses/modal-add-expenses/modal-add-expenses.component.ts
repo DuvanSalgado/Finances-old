@@ -19,6 +19,7 @@ import { format } from 'date-fns';
 export class ModalAddExpensesComponent implements OnInit {
 
   @Input() total: ITotal;
+  @Input() month;
 
   public loading = false;
   public formGroup: FormGroup;
@@ -87,7 +88,7 @@ export class ModalAddExpensesComponent implements OnInit {
     }
 
     this.formGroup.patchValue({ [this.formCtrl.icon]: icon });
-    await this.calculateService.calculate(this.total);
+    await this.calculateService.calculate(this.total, this.month);
   }
 
 }
