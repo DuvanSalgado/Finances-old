@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
 export class CalculateService {
 
   private itemsCollection: AngularFirestoreCollection<any>;
-  private month = new Date().getMonth();
 
   constructor(private fireBase: AngularFirestore) { }
 
@@ -24,13 +23,12 @@ export class CalculateService {
       })));
   }
 
-  public async calculate(data: ITotal): Promise<void | DocumentReference<any>> {
+  public async calculate(data: ITotal, month: number): Promise<void | DocumentReference<any>> {
     this.itemsCollection = this.fireBase.collection<any>('calculate');
-    if (data.id && data.month === this.month) {
+    if (data.id && data.month === month) {
       return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));
     } else {
-      return await this.itemsCollection.add(JSON.parse(JSON.stringify({ ...data, month: this.month })));
+      return await this.itemsCollection.add(JSON.parse(JSON.stringify({ ...data, month })));
     }
-
   }
 }

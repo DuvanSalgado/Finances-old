@@ -12,7 +12,7 @@
     class="button-add"
     fill="outline"
     shape="round"
-    [disabled]="disableButton"
+    [disabled]="disableButton || disableButtonMont"
     (click)="openModalCreate()"
     color="primary"
   >
@@ -23,16 +23,21 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of loans">
-      <ion-icon
-        [color]="item.icon.labelColor"
-        slot="start"
-        [name]="item.icon.icon"
-      ></ion-icon>
-      <ion-label>
+      <ion-item-group class="group_icon">
+        <ion-icon
+          [color]="item.icon.labelColor"
+          slot="start"
+          [name]="item.icon.icon"
+        >
+        </ion-icon>
         <ion-text [color]="item.icon.labelColor">
           {{ item.type.name }}
         </ion-text>
-        <h3>Nombre: {{ item.name }}</h3>
+      </ion-item-group>
+      <ion-label>
+        <h3 class="ion-text-capitalize">
+          Nombre: <b> {{ item.name }}</b>
+        </h3>
         <h3>
           Deuda:
           {{ item.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
