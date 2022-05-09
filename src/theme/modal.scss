@@ -29,3 +29,11 @@
     border-radius: 10px;
   }
 }
+
+.cash-modal{
+  &::part(content) {
+    height: 180px;
+    width: 70%;
+    border-radius: 10px;
+  }
+}

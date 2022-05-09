@@ -11,7 +11,7 @@
   <ion-button
     fill="outline"
     shape="round"
-    [disabled]="disableButton"
+    [disabled]="disableButton || disableButtonMont"
     (click)="openModalCreate()"
     color="primary"
     class="button-add"
@@ -23,15 +23,17 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of expenses">
-      <ion-icon
-        [color]="item.icon.labelColor"
-        slot="start"
-        [name]="item.icon.icon"
-      ></ion-icon>
-      <ion-label>
+      <ion-item-group class="group_icon">
+        <ion-icon
+          [color]="item.icon.labelColor"
+          slot="start"
+          [name]="item.icon.icon"
+        ></ion-icon>
         <ion-text [color]="item.icon.labelColor">
           {{ item.operations.name }}
         </ion-text>
+      </ion-item-group>
+      <ion-label>
         <h3>
           Valor: {{ item.value | currency: "COP":"symbol-narrow":"1.0-0" }}
         </h3>

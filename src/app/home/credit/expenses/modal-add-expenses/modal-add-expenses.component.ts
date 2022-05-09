@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { ITEMSTYPE } from '@app/shared/combobox/model/data.combobox';
-import { Iicons, ITotal } from '@credit/model/credit.interface';
+import { IcashGeneral, Iicons, ITotal } from '@credit/model/credit.interface';
 import { FormExpensesCtrl } from '@credit/model/formCredit.enum';
 import { mensages } from '@credit/model/menssage';
 import { Status } from '@credit/model/status.enum';
@@ -19,7 +19,8 @@ import { format } from 'date-fns';
 export class ModalAddExpensesComponent implements OnInit {
 
   @Input() total: ITotal;
-  @Input() month;
+  @Input() cashGeneral: IcashGeneral;
+  @Input() month: number;
 
   public loading = false;
   public formGroup: FormGroup;
@@ -70,7 +71,7 @@ export class ModalAddExpensesComponent implements OnInit {
     let icon: Iicons;
 
     if (type === Status.efectivo) {
-      this.total.cash = this.total.cash - value;
+      this.cashGeneral.value = this.cashGeneral.value - value;
       this.total.expenseCash = this.total.expenseCash + value;
       icon = { icon: 'cash-outline', labelColor: 'success' };
     }
@@ -89,6 +90,7 @@ export class ModalAddExpensesComponent implements OnInit {
 
     this.formGroup.patchValue({ [this.formCtrl.icon]: icon });
     await this.calculateService.calculate(this.total, this.month);
+    await this.calculateService.cashGeneral(this.cashGeneral);
   }
 
 }

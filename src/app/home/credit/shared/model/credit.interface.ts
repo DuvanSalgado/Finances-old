@@ -37,11 +37,15 @@ export interface ITotal {
   totalDebit?: number;
   pendingDebit?: number;
   loanDebit?: number;
-  cash?: number;
   id?: string;
 }
 
 export interface Iicons {
   labelColor: string;
   icon: string;
+}
+
+export interface IcashGeneral {
+  id?: string;
+  value: number;
 }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IExpensesModel, ITotal } from '@credit/model/credit.interface';
+import { IcashGeneral, IExpensesModel, ITotal } from '@credit/model/credit.interface';
 import { CalculateService } from '@credit/service/calculate.service';
 import { ExpensesService } from '@credit/service/expenses.service';
 import { ModalController } from '@ionic/angular';
@@ -19,6 +19,7 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   public disableButtonMont = false;
   public expenses: Array<IExpensesModel> = [];
   public currentMonth = new Date().getMonth();
+  public cashGeneral: IcashGeneral;
 
   private month = new Date().getMonth();
   private total: ITotal = new InicTotal().total;
@@ -44,7 +45,7 @@ export class ExpensesComponent implements OnInit, OnDestroy {
       component: ModalAddExpensesComponent,
       cssClass: 'expenses-modal',
       backdropDismiss: false,
-      componentProps: { total: this.total, month: this.currentMonth }
+      componentProps: { total: this.total, month: this.currentMonth, cashGeneral: this.cashGeneral }
     });
     await modal.present();
     this.disableButton = await (await modal.onWillDismiss()).data;
@@ -63,6 +64,9 @@ export class ExpensesComponent implements OnInit, OnDestroy {
     this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
       ));
+
+    this.subscription.add(this.calculateService.getAllCash()
+      .subscribe((data) => this.cashGeneral = data[0]));
   }
 }
 

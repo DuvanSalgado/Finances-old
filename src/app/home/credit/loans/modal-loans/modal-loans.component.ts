@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { ICombobox } from '@app/shared/combobox/model/combobox.interface';
 import { ITEMSOPERATIONS, ITEMSPAYMENT, ITEMSTYPE } from '@app/shared/combobox/model/data.combobox';
-import { IcreditModel, Iicons, ITotal } from '@credit/model/credit.interface';
+import { IcashGeneral, IcreditModel, Iicons, ITotal } from '@credit/model/credit.interface';
 import { FormCreditCtrl } from '@credit/model/formCredit.enum';
 import { mensages } from '@credit/model/menssage';
 import { Status, TypeCredit } from '@credit/model/status.enum';
@@ -25,6 +25,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() isCreate = true;
   @Input() month;
+  @Input() cashGeneral: IcashGeneral;
 
   public formGroup: FormGroup;
   public formCtrl = FormCreditCtrl;
@@ -145,7 +146,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
       }
 
       if (this.data?.type?.id === Status.efectivo || type === Status.efectivo) {
-        this.total.cash = this.total.cash - value;
+        this.cashGeneral.value = this.cashGeneral.value - value;
         icon = { icon: 'cash-outline', labelColor: 'success' };
       }
 
@@ -159,7 +160,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
     if (!this.isCreate && operations === TypeCredit.abono) {
 
       if (this.formGroup.get(this.formCtrl.payment).value.id === Status.efectivo) {
-        this.total.cash = this.total.cash + value;
+        this.cashGeneral.value = this.cashGeneral.value + value;
       }
 
       if (this.data.type.id === Status.credito) {
@@ -178,6 +179,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
       });
     }
     await this.calculateService.calculate(this.total, this.month);
+    await this.calculateService.cashGeneral(this.cashGeneral);
   }
 
   private setHistory(): void {

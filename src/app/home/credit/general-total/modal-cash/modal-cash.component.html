@@ -1,0 +1,29 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title> Valor a consignar </ion-title>
+    <ion-buttons (click)="cancelModal()" slot="end">
+      <ion-button>
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <app-currency-input [formControl]="value"></app-currency-input>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <app-buttons-actions
+      [disabled]="value.invalid"
+      (createEventEmit)="onSaveChange($event)"
+      (cancelEventEmit)="cancelModal()"
+    >
+    </app-buttons-actions>
+  </ion-toolbar>
+</ion-footer>
