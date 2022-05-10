@@ -3,6 +3,7 @@
     <ion-buttons>
       <ion-menu-button color="primary"></ion-menu-button>
       <ion-title>Prestamos</ion-title>
+      <ion-toggle (ionChange)="filterActive($event)"></ion-toggle>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -20,9 +21,11 @@
   </ion-button>
 </app-add-buttons>
 
+<app-segment (segmentEventEmit)="segmentChanged($event)"></app-segment>
+
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of loans">
+    <ion-item *ngFor="let item of loansFilter">
       <ion-item-group class="group_icon">
         <ion-icon
           [color]="item.icon.labelColor"
@@ -71,7 +74,7 @@
     </ion-item>
   </ion-list>
   <app-sk-loans [loading]="loading"></app-sk-loans>
-  <ng-container *ngIf="!(loans.length > 0) && !loading">
+  <ng-container *ngIf="!(loansFilter.length > 0) && !loading">
     <ion-item lines="none">
       <ion-label>No hay datos</ion-label>
     </ion-item>

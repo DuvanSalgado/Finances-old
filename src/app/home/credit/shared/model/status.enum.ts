@@ -8,3 +8,9 @@ export enum Status {
   debito = 3,
   efectivo = 4
 }
+
+export enum StatusType {
+  credito = 'credito',
+  debito = 'debito',
+  efectivo = 'efectivo'
+}

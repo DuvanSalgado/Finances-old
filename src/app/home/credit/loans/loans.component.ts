@@ -5,6 +5,7 @@ import { CreditService } from '@credit/service/credit.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { InicTotal } from '../shared/model/initTotal';
+import { Status, StatusType } from '../shared/model/status.enum';
 import { ModalDetailsLoansComponent } from './modal-details-loans/modal-details-loans.component';
 import { ModalLoansComponent } from './modal-loans/modal-loans.component';
 
@@ -15,12 +16,15 @@ import { ModalLoansComponent } from './modal-loans/modal-loans.component';
 })
 export class LoansComponent implements OnInit, OnDestroy {
 
-  public loans: Array<IcreditModel> = [];
+  public loansFilter: Array<IcreditModel> = [];
   public loading = true;
   public disableButton = false;
   public disableButtonMont = false;
   public currentMonth = new Date().getMonth();
 
+  private loans: Array<IcreditModel> = [];
+  private status: string;
+  private check = false;
   private cashGeneral: IcashGeneral = { value: 0 };
   private month = new Date().getMonth();
   private total: ITotal = new InicTotal().total;
@@ -66,9 +70,30 @@ export class LoansComponent implements OnInit, OnDestroy {
     this.getData(month);
   }
 
+  public segmentChanged(event: string): void {
+    this.status = event;
+    if (this.check) {
+      this.loansFilter = this.loans
+        .filter((data) => data.type.id === Status[event] && data.pendingValue > 0);
+    } else {
+      this.loansFilter = this.loans
+        .filter((data) => data.type.id === Status[event]);
+    }
+
+  }
+
+  public filterActive(event: any): void {
+    this.check = event.detail.checked;
+    this.segmentChanged(this.status);
+  }
+
   private getData(month: number): void {
     this.subscription = this.creditService.getAllCredit(month)
-      .subscribe((data) => { this.loading = false; this.loans = data; });
+      .subscribe((data) => {
+        this.loading = false;
+        this.loans = data;
+        this.segmentChanged(StatusType.credito);
+      });
 
     this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
