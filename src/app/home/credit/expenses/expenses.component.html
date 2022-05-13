@@ -19,10 +19,10 @@
     <ion-icon name="add-circle-outline"></ion-icon>
   </ion-button>
 </app-add-buttons>
-
+<app-segment (segmentEventEmit)="segmentChanged($event)"></app-segment>
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of expenses">
+    <ion-item *ngFor="let item of expensesFilter">
       <ion-item-group class="group_icon">
         <ion-icon
           [color]="item.icon.labelColor"
@@ -43,7 +43,7 @@
     </ion-item>
   </ion-list>
   <app-sk-expenses [loading]="loading"></app-sk-expenses>
-  <ng-container *ngIf="!(expenses.length > 0) && !loading">
+  <ng-container *ngIf="!(expensesFilter.length > 0) && !loading">
     <ion-item lines="none">
       <ion-label>No hay datos</ion-label>
     </ion-item>

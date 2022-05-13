@@ -5,6 +5,7 @@ import { ExpensesService } from '@credit/service/expenses.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { InicTotal } from '../shared/model/initTotal';
+import { Status, StatusType } from '../shared/model/status.enum';
 import { ModalAddExpensesComponent } from './modal-add-expenses/modal-add-expenses.component';
 
 @Component({
@@ -17,10 +18,11 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   public loading = true;
   public disableButton = false;
   public disableButtonMont = false;
-  public expenses: Array<IExpensesModel> = [];
+  public expensesFilter: Array<IExpensesModel> = [];
   public currentMonth = new Date().getMonth();
   public cashGeneral: IcashGeneral;
 
+  private expenses: Array<IExpensesModel> = [];
   private month = new Date().getMonth();
   private total: ITotal = new InicTotal().total;
   private subscription: Subscription;
@@ -57,9 +59,18 @@ export class ExpensesComponent implements OnInit, OnDestroy {
     this.disableButtonMont = this.month !== month;
   }
 
+  public segmentChanged(event: string): void {
+    this.expensesFilter = this.expenses
+      .filter(data => data.operations.id === Status[event]);
+  }
+
   private getData(month: number): void {
     this.subscription = this.expensesService.getAll(month)
-      .subscribe((data) => { this.loading = false; this.expenses = data; });
+      .subscribe((data) => {
+        this.loading = false;
+        this.expenses = data;
+        this.segmentChanged(StatusType.credito);
+      });
 
     this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }

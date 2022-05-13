@@ -9,6 +9,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { ComboboxComponent } from './combobox/combobox.component';
 import { CurrencyInputComponent } from './currency-input/currency-input.component';
 import { FooterComponent } from './footer/footer.component';
+import { SegmentComponent } from './segment/segment.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ComboboxComponent,
     FooterComponent,
     AddButtonsComponent,
-    CurrencyInputComponent
+    CurrencyInputComponent,
+    SegmentComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ComboboxComponent,
     FooterComponent,
     AddButtonsComponent,
-    CurrencyInputComponent
+    CurrencyInputComponent,
+    SegmentComponent
   ]
 })
 export class SharedModule { }
