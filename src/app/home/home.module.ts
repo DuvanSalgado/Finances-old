@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home.component';
@@ -18,6 +19,7 @@ import { MotoComponent } from './moto/moto.component';
     HomeRoutingModule,
     SharedModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: []
 })
 export class HomeModule { }

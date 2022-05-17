@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthComponent } from './auth.component';
-import { AuthRoutingModule } from './auth.routing';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { AuthRoutingModule } from './auth.routing';
+import { AuthComponent } from './login/auth.component';
+import { AuthService } from './shared/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -11,7 +13,11 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    IonicModule
+    IonicModule,
+    ReactiveFormsModule
+  ],
+  providers: [
+    AuthService
   ]
 })
 export class AuthModule { }
