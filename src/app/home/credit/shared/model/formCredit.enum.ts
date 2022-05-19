@@ -19,7 +19,7 @@ export enum FormExpensesCtrl {
   value = 'value',
   month = 'month',
   date = 'date',
-  operations = 'operations',
+  type = 'type',
   description = 'description',
   icon = 'icon'
 }

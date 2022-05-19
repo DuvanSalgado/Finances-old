@@ -11,8 +11,8 @@ export class ExpensesService {
 
   constructor(private fireBase: AngularFirestore) { }
 
-  getAll(month: number): Observable<Array<IExpensesModel>> {
-    this.itemsCollection = this.fireBase.collection<IExpensesModel[]>('expenses', ref => ref.where('month', '==', month));
+  getAllForMont(month: number, table: string): Observable<Array<IExpensesModel>> {
+    this.itemsCollection = this.fireBase.collection<IExpensesModel[]>(table, ref => ref.where('month', '==', month));
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {
@@ -23,8 +23,8 @@ export class ExpensesService {
       })));
   }
 
-  create(data: IExpensesModel): Promise<DocumentReference<any>> {
-    this.itemsCollection = this.fireBase.collection<IExpensesModel>('expenses');
+  create(data: IExpensesModel, table: string): Promise<DocumentReference<any>> {
+    this.itemsCollection = this.fireBase.collection<IExpensesModel>(table);
     return this.itemsCollection.add(JSON.parse(JSON.stringify(data)));
   }
 }

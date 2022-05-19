@@ -7,21 +7,20 @@
   </ion-toolbar>
 </ion-header>
 
-<app-add-buttons (changeEvent)="valueChanges($event)">
-  <ion-button
-    fill="outline"
-    shape="round"
-    [disabled]="disableButton || disableButtonMont"
-    (click)="openModalCreate()"
-    color="primary"
-    class="button-add"
-  >
-    <ion-icon name="add-circle-outline"></ion-icon>
-  </ion-button>
-</app-add-buttons>
-<app-segment (segmentEventEmit)="segmentChanged($event)"></app-segment>
 <ion-content>
-  <ion-list>
+  <ion-segment (ionChange)="segmentChanged($event)" value="credito">
+    <ion-segment-button value="credit">
+      <ion-label>Credito</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="debit">
+      <ion-label>Debito</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="cash">
+      <ion-label>Efectivo</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <router-outlet></router-outlet>
+  <!--   <ion-list>
     <ion-item *ngFor="let item of expensesFilter">
       <ion-item-group class="group_icon">
         <ion-icon
@@ -47,5 +46,5 @@
     <ion-item lines="none">
       <ion-label>No hay datos</ion-label>
     </ion-item>
-  </ng-container>
+  </ng-container> -->
 </ion-content>

@@ -8,14 +8,14 @@ import { AuthService } from '../shared/services/auth.service';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
+  styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent extends AuthModel {
 
   formGroup: FormGroup = this.formAuth();;
 
   constructor(
-    private formbuild: FormBuilder,
+    protected formbuild: FormBuilder,
     private router: Router,
     private authService: AuthService
   ) {

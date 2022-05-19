@@ -4,7 +4,7 @@ import { FormAuthCtrl } from '../enums/form.enum';
 
 export class AuthModel {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(protected formBuilder: FormBuilder) { }
 
   public formAuth(): FormGroup {
     return this.formBuilder.group({
