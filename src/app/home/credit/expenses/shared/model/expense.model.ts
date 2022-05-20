@@ -7,6 +7,7 @@ export class ExpenseModel {
 
   protected formCtrl = FormExpensesCtrl;
   protected modal: HTMLIonModalElement;
+  protected formGroupModel: FormGroup;
   private todayDate = new Date();
 
   constructor(
@@ -24,19 +25,23 @@ export class ExpenseModel {
     });
   }
 
-  protected async openModalController(formGroup: FormGroup): Promise<void> {
+  protected async openModalController(): Promise<void> {
     this.modal = await this.modalController.create({
       component: ModalAddExpensesComponent,
       cssClass: 'expenses-modal',
       backdropDismiss: false,
-      componentProps: { formGroup }
+      componentProps: { formGroup: this.formGroupModel }
     });
     await this.modal.present();
   }
 
-  protected resetForm(formGroup: FormGroup): void {
-    formGroup.controls[this.formCtrl.value].reset();
-    formGroup.controls[this.formCtrl.description].reset();
+  protected resetForm(): void {
+    this.formGroupModel.controls[this.formCtrl.value].reset();
+    this.formGroupModel.controls[this.formCtrl.description].reset();
+  }
+
+  protected getValue(): number {
+    return parseInt(this.formGroupModel.get(this.formCtrl.value).value, 10);
   }
 
 }

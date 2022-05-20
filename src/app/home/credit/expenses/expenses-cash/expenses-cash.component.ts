@@ -39,6 +39,7 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     private calculateService: CalculateService
   ) {
     super(formBuilder, modalController);
+    this.formGroupModel = this.formGroup;
   }
 
   ngOnDestroy(): void {
@@ -57,13 +58,13 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
 
   public async openModalCreate(): Promise<void> {
     this.disableButton = true;
-    await this.openModalController(this.formGroup);
+    await this.openModalController();
     this.disableButton = await (await this.modal.onWillDismiss()).data;
 
     if (this.formGroup.valid) {
       this.saveExpensesCash();
     } else {
-      this.resetForm(this.formGroup);
+      this.resetForm();
     }
   }
 
@@ -84,6 +85,7 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
   }
 
   private async saveExpensesCash(): Promise<void> {
+    this.operations();
     await this.loadingService.presentLoading();
 
     await this.calculateService.calculate(this.total, this.month);
@@ -91,8 +93,13 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     await this.expensesService.create(this.formGroup.value, 'expensesCash');
 
     await this.loadingService.presentToast(mensages.successful);
-    this.resetForm(this.formGroup);
+    this.resetForm();
     await this.loadingService.dismiss();
+  }
+
+  private operations() {
+    this.cashGeneral.value = this.cashGeneral.value - this.getValue();
+    this.total.expenseCash = this.total.expenseCash + this.getValue();
   }
 
 }
