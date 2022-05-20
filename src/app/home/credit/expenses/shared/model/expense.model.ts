@@ -1,7 +1,6 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormExpensesCtrl } from '@app/home/credit/shared/model/formCredit.enum';
 import { ModalController } from '@ionic/angular';
-import { format } from 'date-fns';
-import { FormExpensesCtrl } from '../../shared/model/formCredit.enum';
 import { ModalAddExpensesComponent } from '../modal-add-expenses/modal-add-expenses.component';
 
 export class ExpenseModel {
@@ -19,7 +18,7 @@ export class ExpenseModel {
     return this.formBuilder.group({
       [this.formCtrl.value]: [null, [Validators.required, Validators.min(0)]],
       [this.formCtrl.description]: [null, Validators.required],
-      [this.formCtrl.date]: [format(this.todayDate, 'dd MM yyyy')],
+      [this.formCtrl.date]: [this.todayDate],
       [this.formCtrl.month]: [this.todayDate.getMonth()],
       [this.formCtrl.icon]: [null]
     });

@@ -17,14 +17,6 @@ export interface IcreditModel {
 
 export type IHistory = Pick<IcreditModel, 'date' | 'value' | 'operation'>;
 
-export interface IExpensesModel {
-  value: number;
-  description: string;
-  date: Date;
-  month: number;
-  operations: ICombobox;
-  icon: Iicons;
-}
 
 export interface ITotal {
   month?: number;

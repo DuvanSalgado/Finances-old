@@ -3,32 +3,33 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { IcashGeneral, IExpensesModel, ITotal } from '../../shared/model/credit.interface';
+import { IcashGeneral, ITotal } from '../../shared/model/credit.interface';
 import { FormExpensesCtrl } from '../../shared/model/formCredit.enum';
 import { InicTotal } from '../../shared/model/initTotal';
 import { mensages } from '../../shared/model/menssage';
 import { CalculateService } from '../../shared/service/calculate.service';
 import { ExpenseModel } from '../shared/model/expense.model';
+import { IExpensesModel } from '../shared/model/interfaces/expenses';
 import { ExpensesService } from '../shared/services/expenses.service';
 
 @Component({
-  selector: 'app-cash',
-  templateUrl: './cash.component.html'
+  selector: 'app-expenses-cash',
+  templateUrl: './expenses-cash.component.html',
+  styleUrls: ['../expenses.component.scss'],
 })
-export class CashComponent extends ExpenseModel implements OnInit, OnDestroy {
+export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDestroy {
 
   public formCtrl = FormExpensesCtrl;
   public formGroup: FormGroup = this.formExpense();
   public disableButton = false;
   public disableButtonMont = false;
   public loading = true;
-  public cashGeneral: IcashGeneral = { value: 0 };
+  public cashGeneral: IcashGeneral = { id: null, value: 0 };
   public expenses: Array<IExpensesModel> = [];
 
   private total: ITotal = new InicTotal().total;
   private subscription: Subscription;
   private month = new Date().getMonth();
-
 
   constructor(
     protected formBuilder: FormBuilder,
@@ -78,15 +79,16 @@ export class CashComponent extends ExpenseModel implements OnInit, OnDestroy {
       ));
 
     this.subscription.add(this.calculateService.getAllCash()
-      .subscribe((data) => this.cashGeneral = data[0]));
+      .subscribe((data) => { if (data.length > 0) { this.cashGeneral = data[0]; } }
+      ));
   }
 
   private async saveExpensesCash(): Promise<void> {
     await this.loadingService.presentLoading();
 
-    await this.expensesService.create(this.formGroup.value, 'expensesCash');
     await this.calculateService.calculate(this.total, this.month);
     await this.calculateService.cashGeneral(this.cashGeneral);
+    await this.expensesService.create(this.formGroup.value, 'expensesCash');
 
     await this.loadingService.presentToast(mensages.successful);
     this.resetForm(this.formGroup);

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CashComponent } from './cash/cash.component';
-import { CreditComponent } from './credit/credit.component';
-import { DebitComponent } from './debit/debit.component';
+import { ExpensesCashComponent } from './expenses-cash/expenses-cash.component';
+import { ExpensesCreditComponent } from './expenses-credit/expenses-credit.component';
+import { ExpensesDebitComponent } from './expenses-debit/expenses-debit.component';
 import { ExpensesComponent } from './expenses.component';
 
 const routes: Routes = [
@@ -10,9 +10,9 @@ const routes: Routes = [
     path: '', component: ExpensesComponent,
 
     children: [
-      { path: 'cash', component: CashComponent },
-      { path: 'debit', component: DebitComponent },
-      { path: 'credit', component: CreditComponent }
+      { path: 'cash', component: ExpensesCashComponent },
+      { path: 'debit', component: ExpensesDebitComponent },
+      { path: 'credit', component: ExpensesCreditComponent }
     ]
 
   }

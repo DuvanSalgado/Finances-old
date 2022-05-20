@@ -1,50 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons>
-      <ion-menu-button color="primary"></ion-menu-button>
-      <ion-title>Gastos</ion-title>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-segment (ionChange)="segmentChanged($event)" value="credito">
-    <ion-segment-button value="credit">
+<ion-tabs>
+  <ion-tab-bar slot="top">
+    <ion-tab-button tab="credit">
       <ion-label>Credito</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="debit">
+    </ion-tab-button>
+
+    <ion-tab-button tab="debit">
       <ion-label>Debito</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="cash">
+    </ion-tab-button>
+
+    <ion-tab-button tab="cash">
       <ion-label>Efectivo</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-  <router-outlet></router-outlet>
-  <!--   <ion-list>
-    <ion-item *ngFor="let item of expensesFilter">
-      <ion-item-group class="group_icon">
-        <ion-icon
-          [color]="item.icon.labelColor"
-          slot="start"
-          [name]="item.icon.icon"
-        ></ion-icon>
-        <ion-text [color]="item.icon.labelColor">
-          {{ item.operations.name }}
-        </ion-text>
-      </ion-item-group>
-      <ion-label>
-        <h3>
-          Valor: {{ item.value | currency: "COP":"symbol-narrow":"1.0-0" }}
-        </h3>
-        <h3>Descripcion: {{ item.description }}</h3>
-        <p>Fecha: {{ item.date }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  <app-sk-expenses [loading]="loading"></app-sk-expenses>
-  <ng-container *ngIf="!(expensesFilter.length > 0) && !loading">
-    <ion-item lines="none">
-      <ion-label>No hay datos</ion-label>
-    </ion-item>
-  </ng-container> -->
-</ion-content>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons>
+        <ion-menu-button color="primary"></ion-menu-button>
+        <ion-title>Gastos</ion-title>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+</ion-tabs>

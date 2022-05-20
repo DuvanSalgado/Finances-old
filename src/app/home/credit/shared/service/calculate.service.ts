@@ -45,6 +45,9 @@ export class CalculateService {
   }
 
   public async cashGeneral(data: IcashGeneral): Promise<void | DocumentReference<any>> {
+
+    console.log(data);
+
     this.itemsCollection = this.fireBase.collection<any>('cashGeneral');
     if (data.id) {
       return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));

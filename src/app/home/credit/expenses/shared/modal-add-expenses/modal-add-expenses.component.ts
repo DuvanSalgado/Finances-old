@@ -5,9 +5,10 @@ import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-add-expenses',
-  templateUrl: './modal-add-expenses.component.html'
+  templateUrl: './modal-add-expenses.component.html',
+  styleUrls: ['./modal-add-expenses.component.scss']
 })
-export class ModalAddExpensesComponent  {
+export class ModalAddExpensesComponent {
 
   @Input() formGroup: FormGroup;
 
@@ -16,9 +17,6 @@ export class ModalAddExpensesComponent  {
 
   constructor(
     private modalController: ModalController,
-    //  private formbuilder: FormBuilder,
-    /* private calculateService: CalculateService,
-    private expensesService: ExpensesService,  */
   ) { }
 
   public async cancelModal(): Promise<void> {
