@@ -25,16 +25,4 @@ export class ModalAddExpensesComponent {
     await this.cancelModal();
   }
 
-  /*   private async calculate(): Promise<void> {
-
-
-
-      if (type === Status.debito) {
-        this.total.expenseDebit = this.total.expenseDebit + value;
-        this.total.loanDebit = this.total.loanDebit + value;
-        icon = { icon: 'reader-outline', labelColor: 'primary' };
-      }
-
-    } */
-
 }

@@ -10,29 +10,11 @@
 </ion-button>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of expenses">
-      <ion-item-group class="group_icon">
-        <ion-icon
-          [color]="item.icon.labelColor"
-          slot="start"
-          [name]="item.icon.icon"
-        ></ion-icon>
-        <ion-text [color]="item.icon.labelColor"> Debito </ion-text>
-      </ion-item-group>
-      <ion-label>
-        <h3>
-          Valor: {{ item.value | currency: "COP":"symbol-narrow":"1.0-0" }}
-        </h3>
-        <h3>Descripcion: {{ item.description }}</h3>
-        <p>Fecha: {{ item.date | date }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  <app-sk-expenses [loading]="loading"></app-sk-expenses>
-  <ng-container *ngIf="!(expenses.length > 0) && !loading">
-    <ion-item lines="none">
-      <ion-label>No hay datos</ion-label>
-    </ion-item>
-  </ng-container>
+  <ion-content>
+    <app-expenses-list
+      [expenses]="expenses"
+      [loading]="loading"
+      [type]="'Debito'"
+    ></app-expenses-list>
+  </ion-content>
 </ion-content>

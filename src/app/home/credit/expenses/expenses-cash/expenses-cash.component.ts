@@ -1,15 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { ModalController } from '@ionic/angular';
-import { Subscription } from 'rxjs';
-import { IcashGeneral, ITotal } from '../../shared/model/credit.interface';
-import { FormExpensesCtrl } from '../../shared/model/formCredit.enum';
-import { InicTotal } from '../../shared/model/initTotal';
 import { mensages } from '../../shared/model/menssage';
 import { CalculateService } from '../../shared/service/calculate.service';
 import { ExpenseModel } from '../shared/model/expense.model';
-import { IExpensesModel } from '../shared/model/interfaces/expenses';
 import { ExpensesService } from '../shared/services/expenses.service';
 
 @Component({

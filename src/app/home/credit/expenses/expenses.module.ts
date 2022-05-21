@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { ExpensesService } from '@app/home/credit/expenses/shared/services/expenses.service';
-
 import { SharedModule } from '@app/shared/shared.module';
 import { SkeletonModule } from '@app/shared/skeleton/skeleton.module';
 import { CalculateService } from '@credit/service/calculate.service';
@@ -13,6 +12,7 @@ import { ExpensesCreditComponent } from './expenses-credit/expenses-credit.compo
 import { ExpensesDebitComponent } from './expenses-debit/expenses-debit.component';
 import { ExpensesComponent } from './expenses.component';
 import { ExpensesRoutingModule } from './expenses.routing';
+import { ExpensesListComponent } from './shared/expenses-list/expenses-list.component';
 import { ModalAddExpensesComponent } from './shared/modal-add-expenses/modal-add-expenses.component';
 
 @NgModule({
@@ -22,6 +22,7 @@ import { ModalAddExpensesComponent } from './shared/modal-add-expenses/modal-add
     ExpensesCashComponent,
     ExpensesCreditComponent,
     ExpensesDebitComponent,
+    ExpensesListComponent
   ],
   imports: [
     CommonModule,
