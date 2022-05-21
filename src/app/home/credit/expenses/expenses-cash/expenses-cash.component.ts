@@ -19,17 +19,6 @@ import { ExpensesService } from '../shared/services/expenses.service';
 })
 export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDestroy {
 
-  public formCtrl = FormExpensesCtrl;
-  public formGroup: FormGroup = this.formExpense();
-  public disableButton = false;
-  public disableButtonMont = false;
-  public loading = true;
-  public cashGeneral: IcashGeneral = { id: null, value: 0 };
-  public expenses: Array<IExpensesModel> = [];
-
-  private total: ITotal = new InicTotal().total;
-  private subscription: Subscription;
-  private month = new Date().getMonth();
 
   constructor(
     protected formBuilder: FormBuilder,
@@ -39,7 +28,6 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     private calculateService: CalculateService
   ) {
     super(formBuilder, modalController);
-    this.formGroupModel = this.formGroup;
   }
 
   ngOnDestroy(): void {
@@ -69,6 +57,7 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
   }
 
   private getData(month: number): void {
+
     this.subscription = this.expensesService.getAllForMont(month, 'expensesCash')
       .subscribe((data) => {
         this.loading = false;
@@ -97,7 +86,7 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     await this.loadingService.dismiss();
   }
 
-  private operations() {
+  private operations(): void {
     this.cashGeneral.value = this.cashGeneral.value - this.getValue();
     this.total.expenseCash = this.total.expenseCash + this.getValue();
   }

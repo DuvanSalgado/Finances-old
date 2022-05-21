@@ -1,19 +1,35 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IcashGeneral, ITotal } from '@app/home/credit/shared/model/credit.interface';
 import { FormExpensesCtrl } from '@app/home/credit/shared/model/formCredit.enum';
+import { InicTotal } from '@app/home/credit/shared/model/initTotal';
 import { ModalController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { ModalAddExpensesComponent } from '../modal-add-expenses/modal-add-expenses.component';
+import { IExpensesModel } from './interfaces/expenses';
 
 export class ExpenseModel {
 
-  protected formCtrl = FormExpensesCtrl;
+  public loading = true;
+  public disableButton = false;
+  public disableButtonMont = false;
+  public cashGeneral: IcashGeneral = { id: null, value: 0 };
+  public expenses: Array<IExpensesModel> = [];
+  public formCtrl = FormExpensesCtrl;
+  public formGroup: FormGroup;
+
   protected modal: HTMLIonModalElement;
-  protected formGroupModel: FormGroup;
+  protected month = new Date().getMonth();
+  protected total: ITotal = new InicTotal().total;
+  protected subscription: Subscription;
+
   private todayDate = new Date();
 
   constructor(
     protected formBuilder: FormBuilder,
     protected modalController: ModalController
-  ) { }
+  ) {
+    this.formGroup = this.formExpense();
+  }
 
   protected formExpense(): FormGroup {
     return this.formBuilder.group({
@@ -30,18 +46,18 @@ export class ExpenseModel {
       component: ModalAddExpensesComponent,
       cssClass: 'expenses-modal',
       backdropDismiss: false,
-      componentProps: { formGroup: this.formGroupModel }
+      componentProps: { formGroup: this.formGroup }
     });
     await this.modal.present();
   }
 
   protected resetForm(): void {
-    this.formGroupModel.controls[this.formCtrl.value].reset();
-    this.formGroupModel.controls[this.formCtrl.description].reset();
+    this.formGroup.controls[this.formCtrl.value].reset();
+    this.formGroup.controls[this.formCtrl.description].reset();
   }
 
   protected getValue(): number {
-    return parseInt(this.formGroupModel.get(this.formCtrl.value).value, 10);
+    return parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
   }
 
 }
