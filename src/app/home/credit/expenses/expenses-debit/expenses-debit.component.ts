@@ -26,25 +26,21 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit {
 
   ngOnInit(): void {
     this.getData(this.month);
-    this.formExpenseCash();
+    this.formExpenseDebit();
   }
-
-  public formExpenseCash(): void {
-    this.formGroup
-      .patchValue({ [this.formCtrl.icon]: { icon: 'reader-outline', labelColor: 'primary' } });
-  }
-
 
   public async openModalCreate(): Promise<void> {
     this.disableButton = true;
     await this.openModalController();
     this.disableButton = await (await this.modal.onWillDismiss()).data;
 
-    if (this.formGroup.valid) {
-      this.saveExpensesCash();
-    } else {
-      this.resetForm();
-    }
+    if (this.formGroup.valid) { this.saveExpensesCash(); }
+    else { this.resetForm(); }
+  }
+
+  private formExpenseDebit(): void {
+    this.formGroup
+      .patchValue({ [this.formCtrl.icon]: { icon: 'reader-outline', labelColor: 'primary' } });
   }
 
   private getData(month: number): void {
@@ -73,8 +69,8 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit {
   }
 
   private operations(): void {
-    this.total.expenseDebit = this.total.expenseDebit + this.getValue();
-    this.total.loanDebit = this.total.loanDebit + this.getValue();
+    this.total.expenseDebit = this.total.expenseDebit + this.getValue;
+    this.total.totalDebit = this.total.totalDebit + this.getValue;
   }
 
 }

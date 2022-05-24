@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+/* import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { ICombobox } from '@app/shared/combobox/model/combobox.interface';
@@ -8,10 +8,11 @@ import { FormCreditCtrl } from '@credit/model/formCredit.enum';
 import { mensages } from '@credit/model/menssage';
 import { Status, TypeCredit } from '@credit/model/status.enum';
 import { CalculateService } from '@credit/service/calculate.service';
-import { CreditService } from '@credit/service/credit.service';
+
 import { ModalController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { Subscription } from 'rxjs';
+import { LoansService } from '../services/loans.service';
 @Component({
   selector: 'app-modal-loans',
   templateUrl: './modal-loans.component.html',
@@ -40,7 +41,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
     private modalController: ModalController,
     private formBuild: FormBuilder,
     private calculateService: CalculateService,
-    private creditService: CreditService,
+    private creditService: LoansService,
     private loadingService: LoadingService
   ) { }
 
@@ -65,7 +66,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
       [this.formCtrl.month]: [data ? data.month : this.todayDate.getMonth()],
       [this.formCtrl.date]: [data ? data.date : format(this.todayDate, 'dd MM yyyy'), Validators.required],
       [this.formCtrl.operations]: [null],
-      [this.formCtrl.payment]: [null],
+      [this.formCtrl.paymentMethod]: [null],
       [this.formCtrl.icon]: [data?.icon],
       [this.formCtrl.history]: [data ? data.history : []]
     });
@@ -78,10 +79,10 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
     this.setHistory();
 
     if (event) {
-      await this.creditService.createCredit(this.formGroup.value);
+      await this.creditService.createLoans(this.formGroup.value, '');
       await this.loadingService.presentToast(mensages.successful);
     } else {
-      await this.creditService.updateCredit(this.formGroup.value);
+      await this.creditService.updateCredit(this.formGroup.value, '');
       await this.loadingService.presentToast(mensages.update);
     }
 
@@ -100,8 +101,8 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
 
       this.formGroup.controls[this.formCtrl.operations].addValidators(Validators.required);
       this.formGroup.controls[this.formCtrl.operations].updateValueAndValidity();
-      this.formGroup.controls[this.formCtrl.payment].addValidators(Validators.required);
-      this.formGroup.controls[this.formCtrl.payment].updateValueAndValidity();
+      this.formGroup.controls[this.formCtrl.paymentMethod].addValidators(Validators.required);
+      this.formGroup.controls[this.formCtrl.paymentMethod].updateValueAndValidity();
 
       this.typeCombobox();
     }
@@ -111,13 +112,13 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
     this.subscription = this.formGroup.controls[this.formCtrl.operations]
       .valueChanges.subscribe(data => {
 
-        this.formGroup.controls[this.formCtrl.payment].reset();
+        this.formGroup.controls[this.formCtrl.paymentMethod].reset();
         if (data.id === TypeCredit.prestamo) {
           this.itemsPayment = ITEMSTYPE;
-          this.formGroup.controls[this.formCtrl.payment].patchValue(this.data.type);
-          this.formGroup.controls[this.formCtrl.payment].disable();
+          this.formGroup.controls[this.formCtrl.paymentMethod].patchValue(this.data.type);
+          this.formGroup.controls[this.formCtrl.paymentMethod].disable();
         } else {
-          this.formGroup.controls[this.formCtrl.payment].enable();
+          this.formGroup.controls[this.formCtrl.paymentMethod].enable();
           this.itemsPayment = ITEMSPAYMENT;
         }
       });
@@ -159,7 +160,7 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
 
     if (!this.isCreate && operations === TypeCredit.abono) {
 
-      if (this.formGroup.get(this.formCtrl.payment).value.id === Status.efectivo) {
+      if (this.formGroup.get(this.formCtrl.paymentMethod).value.id === Status.efectivo) {
         this.cashGeneral.value = this.cashGeneral.value + value;
       }
 
@@ -185,9 +186,9 @@ export class ModalLoansComponent implements OnInit, OnDestroy {
   private setHistory(): void {
     this.formGroup.controls[this.formCtrl.history].value.push({
       date: this.formGroup.get(this.formCtrl.date).value,
-      value: this.formGroup.get(this.formCtrl.value).value,
-      operation: this.formGroup.get(this.formCtrl.operations).value,
+      value: this.formGroup.get(this.formCtrl.value).value
     });
   }
 
 }
+ */

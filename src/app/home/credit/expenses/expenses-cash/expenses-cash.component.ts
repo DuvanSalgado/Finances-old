@@ -14,7 +14,6 @@ import { ExpensesService } from '../shared/services/expenses.service';
 })
 export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDestroy {
 
-
   constructor(
     protected formBuilder: FormBuilder,
     protected modalController: ModalController,
@@ -34,25 +33,21 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     this.formExpenseCash();
   }
 
-  public formExpenseCash(): void {
-    this.formGroup
-      .patchValue({ [this.formCtrl.icon]: { icon: 'cash-outline', labelColor: 'success' } });
-  }
-
   public async openModalCreate(): Promise<void> {
     this.disableButton = true;
     await this.openModalController();
     this.disableButton = await (await this.modal.onWillDismiss()).data;
 
-    if (this.formGroup.valid) {
-      this.saveExpensesCash();
-    } else {
-      this.resetForm();
-    }
+    if (this.formGroup.valid) { this.saveExpensesCash(); }
+    else { this.resetForm(); }
+  }
+
+  private formExpenseCash(): void {
+    this.formGroup
+      .patchValue({ [this.formCtrl.icon]: { icon: 'cash-outline', labelColor: 'success' } });
   }
 
   private getData(month: number): void {
-
     this.subscription = this.expensesService.getAllForMont(month, 'expensesCash')
       .subscribe((data) => {
         this.loading = false;
@@ -82,8 +77,8 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
   }
 
   private operations(): void {
-    this.cashGeneral.value = this.cashGeneral.value - this.getValue();
-    this.total.expenseCash = this.total.expenseCash + this.getValue();
+    this.cashGeneral.value = this.cashGeneral.value - this.getValue;
+    this.total.expenseCash = this.total.expenseCash + this.getValue;
   }
 
 }

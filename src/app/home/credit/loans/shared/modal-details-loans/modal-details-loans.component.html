@@ -1,6 +1,6 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title> Detalles - {{ data.type.name }} </ion-title>
+    <ion-title>  Detalles - {{ data.type }}  </ion-title>
     <ion-buttons (click)="cancel()" slot="end">
       <ion-button>
         <ion-icon name="close"></ion-icon>
@@ -23,8 +23,8 @@
         <h3>
           Pendiente:
           <b>
-            {{ data.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}</b
-          >
+            {{ data.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
+          </b>
         </h3>
         <h3>
           Pagado:
@@ -33,13 +33,9 @@
       </ion-label>
       <ion-item lines="none">
         <ion-label class="items-center-label">
-          <ion-icon
-            slot="end"
-            [color]="data.icon.labelColor"
-            [name]="data.icon.icon"
-          ></ion-icon>
+          <ion-icon  [name]="data.icon.icon" slot="end" [color]="data.icon.labelColor"></ion-icon>
           <ion-label [color]="data.icon.labelColor">
-            {{ data.type.name }}
+            {{ data.type }}
           </ion-label>
         </ion-label>
       </ion-item>
@@ -54,11 +50,11 @@
         <h3>
           Valor: {{ item?.value | currency: "COP":"symbol-narrow":"1.0-0" }}
         </h3>
-        <h3>Fecha: {{ item?.date }}</h3>
+        <h3>Fecha: {{ item?.date | date }}</h3>
       </ion-label>
       <ion-label>
         <ion-text [color]="data.icon.labelColor">
-          {{ item?.operation?.name ? item?.operation?.name : "Prestamo" }}
+          {{ item.type }}
         </ion-text>
       </ion-label>
     </ion-item>

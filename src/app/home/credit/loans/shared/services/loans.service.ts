@@ -4,19 +4,22 @@ import { IcreditModel } from '@credit/model/credit.interface';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 @Injectable()
-export class CreditService {
+export class LoansService {
 
   private itemsCollection: AngularFirestoreCollection<any>;
 
   constructor(private fireBase: AngularFirestore) { }
 
-  createCredit(data: IcreditModel): Promise<DocumentReference<any>> {
-    this.itemsCollection = this.fireBase.collection<IcreditModel>('credit');
+  createLoans(data: IcreditModel, table: string): Promise<DocumentReference<any>> {
+    this.itemsCollection = this.fireBase.collection<IcreditModel>(table);
     return this.itemsCollection.add(JSON.parse(JSON.stringify(data)));
   }
 
-  getAllCredit(month: number): Observable<Array<IcreditModel>> {
-    this.itemsCollection = this.fireBase.collection<IcreditModel[]>('credit', ref => ref.where('month', '==', month));
+  getAllCredit(month: number, table: string): Observable<Array<IcreditModel>> {
+
+    this.itemsCollection = this.fireBase
+      .collection<IcreditModel[]>(table, (ref) => ref.where('month', '==', month));
+
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {
@@ -27,8 +30,8 @@ export class CreditService {
       })));
   }
 
-  async updateCredit(data: any): Promise<void> {
-    this.itemsCollection = this.fireBase.collection<any>('credit');
+  async updateCredit(data: any, table: string): Promise<void> {
+    this.itemsCollection = this.fireBase.collection<any>(table);
     return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));
   }
 }

@@ -6,7 +6,7 @@ export enum FormCreditCtrl {
   pendingValue = 'pendingValue',
   month = 'month',
   operations = 'operations',
-  payment = 'payment',
+  paymentMethod = 'paymentMethod',
   date = 'date',
   history = 'history',
   type = 'type',

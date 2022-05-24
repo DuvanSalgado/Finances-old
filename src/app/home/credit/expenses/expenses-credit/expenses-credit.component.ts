@@ -26,25 +26,21 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit {
 
   ngOnInit(): void {
     this.getData(this.month);
-    this.formExpenseCash();
+    this.formExpenseCredit();
   }
-
-  public formExpenseCash(): void {
-    this.formGroup
-      .patchValue({ [this.formCtrl.icon]: { icon: 'card-outline', labelColor: 'warning' } });
-  }
-
 
   public async openModalCreate(): Promise<void> {
     this.disableButton = true;
     await this.openModalController();
     this.disableButton = await (await this.modal.onWillDismiss()).data;
 
-    if (this.formGroup.valid) {
-      this.saveExpensesCash();
-    } else {
-      this.resetForm();
-    }
+    if (this.formGroup.valid) { this.saveExpensesCash(); }
+    else { this.resetForm(); }
+  }
+
+  private formExpenseCredit(): void {
+    this.formGroup
+      .patchValue({ [this.formCtrl.icon]: { icon: 'card-outline', labelColor: 'warning' } });
   }
 
   private getData(month: number): void {
@@ -73,8 +69,8 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit {
   }
 
   private operations(): void {
-    this.total.expenseCredit = this.total.expenseCredit + this.getValue();
-    this.total.loanCredit = this.total.loanCredit + this.getValue();
+    this.total.expenseCredit = this.total.expenseCredit + this.getValue;
+    this.total.totalCredit = this.total.totalCredit + this.getValue;
   }
 
 }

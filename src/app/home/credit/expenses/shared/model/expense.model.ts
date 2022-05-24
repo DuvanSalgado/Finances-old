@@ -11,7 +11,6 @@ export class ExpenseModel {
 
   public loading = true;
   public disableButton = false;
-  public disableButtonMont = false;
   public cashGeneral: IcashGeneral = { id: null, value: 0 };
   public expenses: Array<IExpensesModel> = [];
   public formCtrl = FormExpensesCtrl;
@@ -29,6 +28,10 @@ export class ExpenseModel {
     protected modalController: ModalController
   ) {
     this.formGroup = this.formExpense();
+  }
+
+  protected get getValue(): number {
+    return parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
   }
 
   protected formExpense(): FormGroup {
@@ -54,10 +57,6 @@ export class ExpenseModel {
   protected resetForm(): void {
     this.formGroup.controls[this.formCtrl.value].reset();
     this.formGroup.controls[this.formCtrl.description].reset();
-  }
-
-  protected getValue(): number {
-    return parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
   }
 
 }
