@@ -1,21 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoadingService } from '@app/core/services/loading.service';
+import { LoansService } from '@app/home/credit/loans/shared/services/loans.service';
 import { SharedModule } from '@app/shared/shared.module';
 import { SkeletonModule } from '@app/shared/skeleton/skeleton.module';
 import { CalculateService } from '@credit/service/calculate.service';
-import { CreditService } from '@credit/service/credit.service';
 import { IonicModule } from '@ionic/angular';
+import { LoansCashComponent } from './loans-cash/loans-cash.component';
 import { LoansComponent } from './loans.component';
 import { LoansRoutingModule } from './loans.routing';
-import { ModalDetailsLoansComponent } from './modal-details-loans/modal-details-loans.component';
-import { ModalLoansComponent } from './modal-loans/modal-loans.component';
+import { LoansModalCreateComponent } from './shared/loans-modal-create/loans-modal-create.component';
+import { LoansModalAddValueComponent } from './shared/loans-modal-add-value/loans-modal-add-value.component';
+import { LoansModalPaymentsComponent } from './shared/loans-modal-payments/loans-modal-payments.component';
+import { LoansModalDetailsComponent } from './shared/loans-modal-details/loans-modal-details.component';
 
 @NgModule({
   declarations: [
     LoansComponent,
-    ModalDetailsLoansComponent,
-    ModalLoansComponent
+    LoansModalDetailsComponent,
+    LoansCashComponent,
+    LoansModalCreateComponent,
+    LoansModalPaymentsComponent,
+    LoansModalAddValueComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +33,8 @@ import { ModalLoansComponent } from './modal-loans/modal-loans.component';
     SkeletonModule
   ],
   providers: [
-    CreditService,
+    LoansService,
+    LoadingService,
     CalculateService
   ]
 })

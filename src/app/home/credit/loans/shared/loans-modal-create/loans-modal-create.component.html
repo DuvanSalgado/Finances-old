@@ -1,0 +1,44 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title> Nuevo registro </ion-title>
+    <ion-buttons (click)="cancelModal()" slot="end">
+      <ion-button>
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formGroup">
+    <ion-list>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [formControlName]="formCtrl.name"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <app-currency-input
+            [formControlName]="formCtrl.value"
+          ></app-currency-input>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <app-buttons-actions
+      [disabled]="formGroup.invalid"
+      (createEventEmit)="onSaveChange($event)"
+      (cancelEventEmit)="cancelModal()"
+      [isCreate]="true"
+    >
+    </app-buttons-actions>
+  </ion-toolbar>
+</ion-footer>

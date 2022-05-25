@@ -12,7 +12,7 @@ export class CalculateService {
   constructor(private fireBase: AngularFirestore) { }
 
   public getAll(month: number): Observable<Array<ITotal>> {
-    this.itemsCollection = this.fireBase.collection<any>('calculate', ref => ref.where('month', '==', month));
+    this.itemsCollection = this.fireBase.collection<any>('total', ref => ref.where('month', '==', month));
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {
@@ -36,7 +36,7 @@ export class CalculateService {
   }
 
   public async calculate(data: ITotal, month: number): Promise<void | DocumentReference<any>> {
-    this.itemsCollection = this.fireBase.collection<any>('calculate');
+    this.itemsCollection = this.fireBase.collection<any>('total');
     if (data.id && data.month === month) {
       return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));
     } else {

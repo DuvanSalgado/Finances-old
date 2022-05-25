@@ -1,0 +1,20 @@
+<ion-button
+  fill="outline"
+  shape="round"
+  [disabled]="disableButton"
+  (click)="openModalCreate()"
+  color="primary"
+  class="button-add"
+>
+  <ion-icon name="add-circle-outline"></ion-icon>
+</ion-button>
+
+<ion-content>
+  <ion-content>
+    <app-expenses-list
+      [expenses]="expenses"
+      [loading]="loading"
+      [type]="'Debito'"
+    ></app-expenses-list>
+  </ion-content>
+</ion-content>

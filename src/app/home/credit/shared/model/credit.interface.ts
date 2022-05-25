@@ -15,29 +15,27 @@ export interface IcreditModel {
   history: IHistory[];
 }
 
-export type IHistory = Pick<IcreditModel, 'date' | 'value' | 'operation'>;
+export type IHistory = Pick<IcreditModel, 'date' | 'value' | 'type'>;
 
-export interface IExpensesModel {
-  value: number;
-  description: string;
-  date: Date;
-  month: number;
-  operations: ICombobox;
-  icon: Iicons;
-}
 
 export interface ITotal {
-  month?: number;
-  expenseCredit?: number;
-  expenseCash?: number;
-  totalCredit?: number;
-  pendingCredit?: number;
-  loanCredit?: number;
-  expenseDebit?: number;
-  totalDebit?: number;
-  pendingDebit?: number;
-  loanDebit?: number;
   id?: string;
+  month?: number;
+
+  expenseCredit?: number;
+  expenseDebit?: number;
+  expenseCash?: number;
+
+  totalCredit?: number;
+  totalDebit?: number;
+
+  pendingCredit?: number;
+  pendingDebit?: number;
+  pendingCash?: number;
+
+  paymentCredit?: number;
+  paymentDebit?: number;
+  paymentCash?: number;
 }
 
 export interface Iicons {

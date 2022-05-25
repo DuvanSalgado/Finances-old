@@ -1,0 +1,49 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title> Registrar un gasto </ion-title>
+    <ion-buttons (click)="cancelModal()" slot="end">
+      <ion-button>
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="conten">
+    <form class="conten_front" [formGroup]="formGroup">
+      <ion-list>
+        <ion-row>
+          <ion-col>
+            <app-currency-input
+              [formControlName]="formCtrl.value"
+            ></app-currency-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Descripcion</ion-label>
+              <ion-textarea
+                placeholder="Descripcion"
+                [formControlName]="formCtrl.description"
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+    </form>
+  </div>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <app-buttons-actions
+      [disabled]="formGroup.invalid"
+      (createEventEmit)="onSaveChange($event)"
+      (cancelEventEmit)="cancelModal()"
+    >
+    </app-buttons-actions>
+  </ion-toolbar>
+</ion-footer>
