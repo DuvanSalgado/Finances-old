@@ -13,12 +13,12 @@ import { ExpensesDebitComponent } from './expenses-debit/expenses-debit.componen
 import { ExpensesComponent } from './expenses.component';
 import { ExpensesRoutingModule } from './expenses.routing';
 import { ExpensesListComponent } from './shared/expenses-list/expenses-list.component';
-import { ModalAddExpensesComponent } from './shared/modal-add-expenses/modal-add-expenses.component';
+import { ExpensesModalAddComponent } from './shared/expenses-modal-add/expenses-modal-add.component';
 
 @NgModule({
   declarations: [
     ExpensesComponent,
-    ModalAddExpensesComponent,
+    ExpensesModalAddComponent,
     ExpensesCashComponent,
     ExpensesCreditComponent,
     ExpensesDebitComponent,

@@ -4,11 +4,11 @@ import { FormCreditCtrl } from '@app/home/credit/shared/model/formCredit.enum';
 import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-loand-modal-create',
-  templateUrl: './loand-modal-create.component.html',
-  styleUrls: ['./loand-modal-create.component.scss'],
+  selector: 'app-loans-modal-create',
+  templateUrl: './loans-modal-create.component.html',
+  styleUrls: ['./loans-modal-create.component.scss'],
 })
-export class LoandModalCreateComponent {
+export class LoansModalCreateComponent {
 
   @Input() formGroup: FormGroup;
   public formCtrl = FormCreditCtrl;

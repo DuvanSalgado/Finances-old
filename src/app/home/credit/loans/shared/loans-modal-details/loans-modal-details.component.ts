@@ -4,10 +4,10 @@ import { IcreditModel } from '@credit/model/credit.interface';
 
 @Component({
   selector: 'app-modal-details-loans',
-  templateUrl: './modal-details-loans.component.html',
-  styleUrls: ['./modal-details-loans.component.scss']
+  templateUrl: './loans-modal-details.component.html',
+  styleUrls: ['./loans-modal-details.component.scss']
 })
-export class ModalDetailsLoansComponent {
+export class LoansModalDetailsComponent {
 
   @Input() data: IcreditModel;
 

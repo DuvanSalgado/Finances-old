@@ -5,10 +5,10 @@ import { InicTotal } from '@app/home/credit/shared/model/initTotal';
 import { Status } from '@app/home/credit/shared/model/status.enum';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { LoandModalCreateComponent } from '../loand-modal-create/loand-modal-create.component';
+import { LoansModalCreateComponent } from '../loans-modal-create/loans-modal-create.component';
 import { LoansModalAddValueComponent } from '../loans-modal-add-value/loans-modal-add-value.component';
 import { LoansModalPaymentsComponent } from '../loans-modal-payments/loans-modal-payments.component';
-import { ModalDetailsLoansComponent } from '../modal-details-loans/modal-details-loans.component';
+import { LoansModalDetailsComponent } from '../loans-modal-details/loans-modal-details.component';
 
 export class LoansModel {
 
@@ -92,7 +92,7 @@ export class LoansModel {
 
   protected async openModalCreateController(): Promise<void> {
     this.modalCreate = await this.modalController.create({
-      component: LoandModalCreateComponent,
+      component: LoansModalCreateComponent,
       cssClass: 'loans-modal-create',
       backdropDismiss: false,
       componentProps: { formGroup: this.formGroup }
@@ -123,7 +123,7 @@ export class LoansModel {
   protected async openModalViewController(data: IcreditModel): Promise<void> {
     this.disableButton = true;
     const modalView = await this.modalController.create({
-      component: ModalDetailsLoansComponent,
+      component: LoansModalDetailsComponent,
       cssClass: 'view-modal',
       backdropDismiss: false,
       componentProps: { data }

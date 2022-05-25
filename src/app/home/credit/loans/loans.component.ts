@@ -6,7 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { InicTotal } from '../shared/model/initTotal';
 import { Status, StatusType } from '../shared/model/status.enum';
-import { ModalDetailsLoansComponent } from './shared/modal-details-loans/modal-details-loans.component';
+import { LoansModalDetailsComponent } from './shared/loans-modal-details/loans-modal-details.component';
 
 
 @Component({
@@ -47,7 +47,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   public async view(data: IcreditModel): Promise<void> {
     this.disableButton = true;
     const modal = await this.modalController.create({
-      component: ModalDetailsLoansComponent,
+      component: LoansModalDetailsComponent,
       cssClass: 'view-modal',
       backdropDismiss: false,
       componentProps: { data }

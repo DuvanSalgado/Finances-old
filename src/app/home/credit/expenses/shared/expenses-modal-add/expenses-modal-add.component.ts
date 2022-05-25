@@ -5,10 +5,10 @@ import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-add-expenses',
-  templateUrl: './modal-add-expenses.component.html',
-  styleUrls: ['./modal-add-expenses.component.scss']
+  templateUrl: './expenses-modal-add.component.html',
+  styleUrls: ['./expenses-modal-add.component.scss']
 })
-export class ModalAddExpensesComponent {
+export class ExpensesModalAddComponent {
 
   @Input() formGroup: FormGroup;
   public formCtrl = FormExpensesCtrl;

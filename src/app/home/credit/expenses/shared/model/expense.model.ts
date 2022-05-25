@@ -4,7 +4,7 @@ import { FormExpensesCtrl } from '@app/home/credit/shared/model/formCredit.enum'
 import { InicTotal } from '@app/home/credit/shared/model/initTotal';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { ModalAddExpensesComponent } from '../modal-add-expenses/modal-add-expenses.component';
+import { ExpensesModalAddComponent } from '../expenses-modal-add/expenses-modal-add.component';
 import { IExpensesModel } from './interfaces/expenses';
 
 export class ExpenseModel {
@@ -46,7 +46,7 @@ export class ExpenseModel {
 
   protected async openModalController(): Promise<void> {
     this.modal = await this.modalController.create({
-      component: ModalAddExpensesComponent,
+      component: ExpensesModalAddComponent,
       cssClass: 'expenses-modal',
       backdropDismiss: false,
       componentProps: { formGroup: this.formGroup }

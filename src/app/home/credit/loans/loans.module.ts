@@ -10,17 +10,17 @@ import { IonicModule } from '@ionic/angular';
 import { LoansCashComponent } from './loans-cash/loans-cash.component';
 import { LoansComponent } from './loans.component';
 import { LoansRoutingModule } from './loans.routing';
-import { LoandModalCreateComponent } from './shared/loand-modal-create/loand-modal-create.component';
+import { LoansModalCreateComponent } from './shared/loans-modal-create/loans-modal-create.component';
 import { LoansModalAddValueComponent } from './shared/loans-modal-add-value/loans-modal-add-value.component';
 import { LoansModalPaymentsComponent } from './shared/loans-modal-payments/loans-modal-payments.component';
-import { ModalDetailsLoansComponent } from './shared/modal-details-loans/modal-details-loans.component';
+import { LoansModalDetailsComponent } from './shared/loans-modal-details/loans-modal-details.component';
 
 @NgModule({
   declarations: [
     LoansComponent,
-    ModalDetailsLoansComponent,
+    LoansModalDetailsComponent,
     LoansCashComponent,
-    LoandModalCreateComponent,
+    LoansModalCreateComponent,
     LoansModalPaymentsComponent,
     LoansModalAddValueComponent
   ],
