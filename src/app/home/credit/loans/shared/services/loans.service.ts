@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 import { IcreditModel } from '@credit/model/credit.interface';
-import { Observable } from 'rxjs';
+import { forkJoin, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 @Injectable()
 export class LoansService {
 
@@ -15,8 +16,27 @@ export class LoansService {
     return this.itemsCollection.add(JSON.parse(JSON.stringify(data)));
   }
 
-  getAllCredit(month: number, table: string): Observable<Array<IcreditModel>> {
+  async updateCredit(data: any, table: string): Promise<void> {
+    this.itemsCollection = this.fireBase.collection<any>(table);
+    return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));
+  }
 
+
+  public getAllCreditPending(table: string): Observable<Array<IcreditModel>> {
+    this.itemsCollection = this.fireBase
+      .collection<IcreditModel[]>(table, (ref) => ref.where('pendingValue', '>', 0));
+
+    return this.itemsCollection.snapshotChanges().pipe(
+      map(data => data.map((d) => {
+        const retorno = {
+          ...d.payload.doc.data(),
+          id: d.payload.doc.id
+        };
+        return retorno;
+      })));
+  }
+
+  public getAllCreditMonth(month: number, table: string): Observable<Array<IcreditModel>> {
     this.itemsCollection = this.fireBase
       .collection<IcreditModel[]>(table, (ref) => ref.where('month', '==', month));
 
@@ -30,8 +50,4 @@ export class LoansService {
       })));
   }
 
-  async updateCredit(data: any, table: string): Promise<void> {
-    this.itemsCollection = this.fireBase.collection<any>(table);
-    return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));
-  }
 }

@@ -110,11 +110,17 @@ export class LoansCashComponent extends LoansModel implements OnInit {
   }
 
   private getData(month: number): void {
-    this.subscription = this.loansService.getAllCredit(month, 'loansCash')
+    this.subscription = this.loansService.getAllCreditPending('loansCash')
       .subscribe((data) => {
         this.loading = false;
         this.loans = data;
       });
+
+    this.subscription.add(this.loansService.getAllCreditMonth(month, 'loansCash')
+      .subscribe((data) => {
+        this.loading = false;
+        this.loans.push(...data);
+      }));
 
     this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
@@ -143,6 +149,11 @@ export class LoansCashComponent extends LoansModel implements OnInit {
       [this.formCtrl.pendingValue]: this.getPendingValue + this.getValue,
       [this.formCtrl.fullValue]: this.getFullValue + this.getValue,
     });
+  }
+
+  private operations(): void {
+    this.total.pendingCash = this.total.pendingCash + this.getValue;
+    this.cashGeneral.value = this.cashGeneral.value - this.getValue;
   }
 
   private formLoansCash(): void {

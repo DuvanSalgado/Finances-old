@@ -140,11 +140,6 @@ export class LoansModel {
     });
   }
 
-  protected operations(): void {
-    this.total.pendingCash = this.total.pendingCash + this.getValue;
-    this.cashGeneral.value = this.cashGeneral.value - this.getValue;
-  }
-
   protected resetFormCreate(): void {
     this.formGroup.controls[this.formCtrl.value].reset();
     this.formGroup.controls[this.formCtrl.name].reset();

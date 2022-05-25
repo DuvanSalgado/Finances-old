@@ -14,7 +14,7 @@ import { LoansModalDetailsComponent } from './shared/loans-modal-details/loans-m
   templateUrl: 'loans.component.html',
   styleUrls: ['loans.component.scss'],
 })
-export class LoansComponent implements OnInit, OnDestroy {
+export class LoansComponent implements OnInit {
 
   public loansFilter: Array<IcreditModel> = [];
   public loading = true;
@@ -40,7 +40,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   //  this.getData(this.currentMonth);
   }
 
-  public ngOnDestroy(): void {
+/*   public ngOnDestroy(): void {
     if (this.subscription) { this.subscription.unsubscribe(); }
   }
 
@@ -85,9 +85,9 @@ export class LoansComponent implements OnInit, OnDestroy {
   public filterActive(event: any): void {
     this.check = event.detail.checked;
     this.segmentChanged(this.status);
-  }
+  } */
 
-  private getData(month: number): void {
+/*   private getData(month: number): void {
     this.subscription = this.creditService.getAllCredit(month, '')
       .subscribe((data) => {
         this.loading = false;
@@ -101,7 +101,7 @@ export class LoansComponent implements OnInit, OnDestroy {
 
     this.subscription.add(this.calculateService.getAllCash()
       .subscribe((data) => { if (data.length > 0) { this.cashGeneral = data[0]; } }));
-  }
+  } */
 
   private async openModal(data: IcreditModel, title: string, isCreate: boolean): Promise<void> {
    /*  this.disableButton = true;
