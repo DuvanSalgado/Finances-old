@@ -51,6 +51,10 @@ export class LoansModel {
     return this.formGroup.get(this.formCtrl.paymentMethod).value.id === Status.efectivo;
   }
 
+  public async openModalViewDetails(data: IcreditModel): Promise<void> {
+    await this.openModalViewController(data);
+  }
+
   protected formLoansCreate(): void {
     this.formGroup = this.formBuilder.group({
       [this.formCtrl.name]: [null, Validators.required],
@@ -120,16 +124,18 @@ export class LoansModel {
     await this.modalPayments.present();
   }
 
-  protected async openModalViewController(data: IcreditModel): Promise<void> {
-    this.disableButton = true;
-    const modalView = await this.modalController.create({
-      component: LoansModalDetailsComponent,
-      cssClass: 'view-modal',
-      backdropDismiss: false,
-      componentProps: { data }
+  protected patchValueItem(): void {
+    this.formGroup.patchValue({
+      [this.formCtrl.pendingValue]: this.getPendingValue + this.getValue,
+      [this.formCtrl.fullValue]: this.getFullValue + this.getValue,
     });
-    await modalView.present();
-    this.disableButton = await (await modalView.onWillDismiss()).data;
+  }
+
+  protected patchValuePayments(): void {
+    this.formGroup.patchValue({
+      [this.formCtrl.pendingValue]: this.getPendingValue - this.getValue,
+      [this.formCtrl.paidValue]: this.getPaidValue + this.getValue
+    });
   }
 
   protected setHistory(type: string): void {
@@ -157,4 +163,15 @@ export class LoansModel {
     this.formGroup.controls[this.formCtrl.paymentMethod].reset();
   }
 
+  private async openModalViewController(data: IcreditModel): Promise<void> {
+    this.disableButton = true;
+    const modalView = await this.modalController.create({
+      component: LoansModalDetailsComponent,
+      cssClass: 'view-modal',
+      backdropDismiss: false,
+      componentProps: { data }
+    });
+    await modalView.present();
+    this.disableButton = await (await modalView.onWillDismiss()).data;
+  }
 }

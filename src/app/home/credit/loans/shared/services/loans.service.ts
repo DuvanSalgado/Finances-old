@@ -22,7 +22,7 @@ export class LoansService {
   }
 
 
-  public getAllCreditPending(table: string): Observable<Array<IcreditModel>> {
+  public getAllCreditPending(month: number, table: string): Observable<Array<IcreditModel>> {
     this.itemsCollection = this.fireBase
       .collection<IcreditModel[]>(table, (ref) => ref.where('pendingValue', '>', 0));
 

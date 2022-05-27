@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { ModalController } from '@ionic/angular';
@@ -13,7 +13,7 @@ import { LoansService } from '../shared/services/loans.service';
   templateUrl: './loans-cash.component.html',
   styleUrls: ['../loans.component.scss'],
 })
-export class LoansCashComponent extends LoansModel implements OnInit {
+export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy {
 
   constructor(
     private loansService: LoansService,
@@ -25,16 +25,16 @@ export class LoansCashComponent extends LoansModel implements OnInit {
     super(formBuilder, modalController);
   }
 
+  ngOnDestroy(): void {
+    if (this.subscription) { this.subscription.unsubscribe(); }
+  }
+
   ngOnInit(): void {
     this.getData(this.month);
   }
 
   valueChanges(fdsf: any) {
 
-  }
-
-  public async openModalViewDetails(data: IcreditModel): Promise<void> {
-    await this.openModalViewController(data);
   }
 
   public async openModalPaymentsCash(data: IcreditModel): Promise<void> {
@@ -68,7 +68,7 @@ export class LoansCashComponent extends LoansModel implements OnInit {
 
   private async addValueCash(): Promise<void> {
     this.setHistory('Prestamo');
-    this.patchValue();
+    this.patchValueItem();
     this.operations();
     await this.loadingService.presentLoading();
 
@@ -76,6 +76,7 @@ export class LoansCashComponent extends LoansModel implements OnInit {
     await this.calculateService.cashGeneral(this.cashGeneral);
     await this.loansService.updateCredit(this.formGroup.value, 'loansCash');
     await this.loadingService.presentToast(mensages.successful);
+
     this.resetFormAddValue();
     await this.loadingService.dismiss();
 
@@ -83,7 +84,7 @@ export class LoansCashComponent extends LoansModel implements OnInit {
 
   private async saveloansCash(): Promise<void> {
     this.setHistory('Prestamo');
-    this.patchValue();
+    this.patchValueItem();
     this.operations();
     await this.loadingService.presentLoading();
     await this.calculateService.calculate(this.total, this.month);
@@ -110,16 +111,16 @@ export class LoansCashComponent extends LoansModel implements OnInit {
   }
 
   private getData(month: number): void {
-    this.subscription = this.loansService.getAllCreditPending('loansCash')
+    this.subscription = this.loansService.getAllCreditMonth(month, 'loansCash')
       .subscribe((data) => {
-        this.loading = false;
         this.loans = data;
       });
 
-    this.subscription.add(this.loansService.getAllCreditMonth(month, 'loansCash')
+    this.subscription.add(this.loansService.getAllCreditPending(month, 'loansCash')
       .subscribe((data) => {
-        this.loading = false;
-        this.loans.push(...data);
+        data.forEach(element => {
+          if (element.month !== month) { this.loans.unshift(element); }
+        });
       }));
 
     this.subscription.add(this.calculateService.getAll(month)
@@ -127,7 +128,7 @@ export class LoansCashComponent extends LoansModel implements OnInit {
       ));
 
     this.subscription.add(this.calculateService.getAllCash()
-      .subscribe((data) => { if (data.length > 0) { this.cashGeneral = data[0]; } }
+      .subscribe((data) => { this.loading = false; if (data.length > 0) { this.cashGeneral = data[0]; } }
       ));
   }
 
@@ -135,20 +136,6 @@ export class LoansCashComponent extends LoansModel implements OnInit {
     if (this.isCash) { this.cashGeneral.value = this.cashGeneral.value + this.getValue; }
     this.total.pendingCash = this.total.pendingCash - this.getValue;
     this.total.paymentCash = this.total.paymentCash + this.getValue;
-  }
-
-  private patchValuePayments(): void {
-    this.formGroup.patchValue({
-      [this.formCtrl.pendingValue]: this.getPendingValue - this.getValue,
-      [this.formCtrl.paidValue]: this.getPaidValue + this.getValue
-    });
-  }
-
-  private patchValue(): void {
-    this.formGroup.patchValue({
-      [this.formCtrl.pendingValue]: this.getPendingValue + this.getValue,
-      [this.formCtrl.fullValue]: this.getFullValue + this.getValue,
-    });
   }
 
   private operations(): void {
