@@ -42,7 +42,7 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
     this.disableButton = true;
     await this.openModalPaymentsController();
     this.disableButton = await (await this.modalPayments.onWillDismiss()).data;
-    if (this.formGroup.valid) { this.updatePaymentsDebit(); }
+    if (this.formGroup.valid) { this.updatePaymentsCredit(); }
     else { this.resetFormPayments(); }
   }
 
@@ -65,15 +65,16 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
     else { this.resetFormAddValue(); }
   }
 
-  private async updatePaymentsDebit(): Promise<void> {
+  private async updatePaymentsCredit(): Promise<void> {
     this.setHistory('Abono');
     this.patchValuePayments();
     this.operationsPayments();
-
     await this.loadingService.presentLoading();
+
     if (this.isCash) { await this.calculateService.cashGeneral(this.cashGeneral); }
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.updateCredit(this.formGroup.value, 'loansCredit');
+
     await this.loadingService.presentToast(mensages.successful);
     this.resetFormPayments();
     await this.loadingService.dismiss();

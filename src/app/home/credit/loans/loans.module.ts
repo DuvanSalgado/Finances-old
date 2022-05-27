@@ -15,6 +15,7 @@ import { LoansModalAddValueComponent } from './shared/loans-modal-add-value/loan
 import { LoansModalPaymentsComponent } from './shared/loans-modal-payments/loans-modal-payments.component';
 import { LoansModalDetailsComponent } from './shared/loans-modal-details/loans-modal-details.component';
 import { LoansCreditComponent } from './loans-credit/loans-credit.component';
+import { LoansDebitComponent } from './loans-debit/loans-debit.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LoansCreditComponent } from './loans-credit/loans-credit.component';
     LoansModalCreateComponent,
     LoansModalPaymentsComponent,
     LoansModalAddValueComponent,
-    LoansCreditComponent
+    LoansCreditComponent,
+    LoansDebitComponent
   ],
   imports: [
     CommonModule,
