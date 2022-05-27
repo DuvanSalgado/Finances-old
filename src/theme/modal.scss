@@ -8,16 +8,16 @@
 
 .loans-modal-create {
   &::part(content) {
-    height: 280px;
-    width: 98%;
+    height: 265px;
+    width: 86%;
     border-radius: 10px;
   }
 }
 
 .loans-modal-edit {
   &::part(content) {
-    height: 485px;
-    width: 98%;
+    height: 275px;
+    width: 86%;
     border-radius: 10px;
   }
 }
@@ -26,6 +26,14 @@
   &::part(content) {
     height: 500px;
     width: 98%;
+    border-radius: 10px;
+  }
+}
+
+.add-value-modal {
+  &::part(content) {
+    height: 200px;
+    width: 70%;
     border-radius: 10px;
   }
 }

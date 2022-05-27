@@ -107,7 +107,7 @@ export class LoansModel {
   protected async openModalAddValueController(): Promise<void> {
     this.modalAddValue = await this.modalController.create({
       component: LoansModalAddValueComponent,
-      cssClass: 'loans-modal-create',
+      cssClass: 'add-value-modal',
       backdropDismiss: false,
       componentProps: { formGroup: this.formGroup }
     });
@@ -117,7 +117,7 @@ export class LoansModel {
   protected async openModalPaymentsController(): Promise<void> {
     this.modalPayments = await this.modalController.create({
       component: LoansModalPaymentsComponent,
-      cssClass: 'loans-modal-create',
+      cssClass: 'loans-modal-edit',
       backdropDismiss: false,
       componentProps: { formGroup: this.formGroup }
     });

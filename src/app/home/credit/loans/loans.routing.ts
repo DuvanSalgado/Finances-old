@@ -6,7 +6,7 @@ import { LoansDebitComponent } from './loans-debit/loans-debit.component';
 import { LoansComponent } from './loans.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'cash', pathMatch: 'full' },
+  { path: '', redirectTo: 'credit', pathMatch: 'full' },
   {
     path: '', component: LoansComponent,
     children: [

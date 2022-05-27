@@ -6,7 +6,7 @@ import { ExpensesDebitComponent } from './expenses-debit/expenses-debit.componen
 import { ExpensesComponent } from './expenses.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'cash', pathMatch: 'full' },
+  { path: '', redirectTo: 'credit', pathMatch: 'full' },
   {
     path: '', component: ExpensesComponent,
 

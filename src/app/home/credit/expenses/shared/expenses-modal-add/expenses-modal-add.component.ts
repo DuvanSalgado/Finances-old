@@ -18,11 +18,12 @@ export class ExpensesModalAddComponent {
   ) { }
 
   public async cancelModal(): Promise<void> {
+    this.formGroup.reset();
     await this.modalController.dismiss(false);
   }
 
   public async onSaveChange(evet: boolean): Promise<void> {
-    await this.cancelModal();
+    await this.modalController.dismiss(false);
   }
 
 }
