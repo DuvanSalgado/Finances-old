@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from '@app/core/guard/auth.guard';
 
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from '../shared/shared.module';
@@ -20,6 +21,6 @@ import { MotoComponent } from './moto/moto.component';
     SharedModule,
     ReactiveFormsModule
   ],
-  providers: []
+  providers: [AuthGuard]
 })
 export class HomeModule { }

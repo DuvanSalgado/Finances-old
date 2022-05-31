@@ -11,9 +11,9 @@ export class AuthGuard implements CanActivate {
   credentials = false;
 
   constructor(
-    private afAuth: AngularFireAuth,
+  /*   private afAuth: AngularFireAuth,
     private router: Router,
-    private authservice: AuthService
+    private authservice: AuthService */
   ) {
     //  this.validateCredentials();
   }
@@ -30,29 +30,11 @@ export class AuthGuard implements CanActivate {
 
     //this.validateCredentials();
     console.log('primero');
-    getAuth();
+    console.log(getAuth().currentUser);
+
     return true;
   }
 
-
-  validateCredentials(): void {
-    this.afAuth.onAuthStateChanged(user => {
-      console.log('validacion');
-
-      this.canActivate();
-
-
-
-      /* if (user) {
-        this.credentials = true;
-
-      }
-      else {
-        this.router.navigate(['/']);
-        this.credentials = false;
-      } */
-    });
-  }
 
 
 }
