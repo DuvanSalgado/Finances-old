@@ -33,8 +33,8 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
     this.getData(this.month);
   }
 
-  valueChanges(fdsf: any) {
-
+  public valueChanges(month: number) {
+    this.getData(month);
   }
 
   public async openModalPaymentsCash(data: IcreditModel): Promise<void> {
@@ -111,14 +111,14 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
 
   private getData(month: number): void {
     this.subscription = this.loansService.getAllCreditMonth(month, 'loansCash')
-      .subscribe((data) => this.loans = data);
+      .subscribe((data) => { this.loans = data; this.loading = false; });
 
     this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
       ));
 
     this.subscription.add(this.calculateService.getAllCash()
-      .subscribe((data) => { this.loading = false; if (data.length > 0) { this.cashGeneral = data[0]; } }
+      .subscribe((data) => { if (data.length > 0) { this.cashGeneral = data[0]; } }
       ));
   }
 

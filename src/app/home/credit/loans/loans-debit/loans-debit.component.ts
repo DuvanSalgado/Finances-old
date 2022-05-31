@@ -113,21 +113,15 @@ export class LoansDebitComponent extends LoansModel implements OnInit {
     this.subscription = this.loansService.getAllCreditMonth(month, 'loansDebit')
       .subscribe((data) => {
         this.loans = data;
+        this.loading = false;
       });
-
-    this.subscription.add(this.loansService.getAllCreditPending(month, 'loansDebit')
-      .subscribe((data) => {
-        data.forEach(element => {
-          if (element.month !== month) { this.loans.unshift(element); }
-        });
-      }));
 
     this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
       ));
 
     this.subscription.add(this.calculateService.getAllCash()
-      .subscribe((data) => { this.loading = false; if (data.length > 0) { this.cashGeneral = data[0]; } }
+      .subscribe((data) => { if (data.length > 0) { this.cashGeneral = data[0]; } }
       ));
   }
 

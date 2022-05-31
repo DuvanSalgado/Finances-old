@@ -22,20 +22,6 @@ export class LoansService {
   }
 
 
-  public getAllCreditPending(month: number, table: string): Observable<Array<IcreditModel>> {
-    this.itemsCollection = this.fireBase
-      .collection<IcreditModel[]>(table, (ref) => ref.where('pendingValue', '>', 0));
-
-    return this.itemsCollection.snapshotChanges().pipe(
-      map(data => data.map((d) => {
-        const retorno = {
-          ...d.payload.doc.data(),
-          id: d.payload.doc.id
-        };
-        return retorno;
-      })));
-  }
-
   public getAllCreditMonth(month: number, table: string): Observable<Array<IcreditModel>> {
     this.itemsCollection = this.fireBase
       .collection<IcreditModel[]>(table, (ref) => ref.where('month', '==', month));
