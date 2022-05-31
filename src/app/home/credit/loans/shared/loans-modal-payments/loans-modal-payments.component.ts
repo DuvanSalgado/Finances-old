@@ -20,10 +20,12 @@ export class LoansModalPaymentsComponent {
   constructor(private modalController: ModalController) { }
 
   public async cancelModal(): Promise<void> {
-    await this.modalController.dismiss();
+    this.formGroup.controls[this.formCtrl.value].reset();
+    this.formGroup.controls[this.formCtrl.paymentMethod].reset();
+    await this.modalController.dismiss(false);
   }
 
   public async onSaveChange(evet: boolean): Promise<void> {
-    await this.cancelModal();
+    await this.modalController.dismiss(false);
   }
 }

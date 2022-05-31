@@ -44,7 +44,6 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
     this.disableButton = await (await this.modalPayments.onWillDismiss()).data;
     if (this.formGroup.valid) { this.updatePaymentsCash(); }
     else { this.resetFormPayments(); }
-
   }
 
   public async openModalAddValue(data: IcreditModel): Promise<void> {
@@ -112,16 +111,7 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
 
   private getData(month: number): void {
     this.subscription = this.loansService.getAllCreditMonth(month, 'loansCash')
-      .subscribe((data) => {
-        this.loans = data;
-      });
-
-    this.subscription.add(this.loansService.getAllCreditPending(month, 'loansCash')
-      .subscribe((data) => {
-        data.forEach(element => {
-          if (element.month !== month) { this.loans.unshift(element); }
-        });
-      }));
+      .subscribe((data) => this.loans = data);
 
     this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
-import { getAuth } from 'firebase/auth';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,15 +14,11 @@ export class SidebarComponent {
   ];
 
   constructor(
-  //  private afAuth: AngularFireAuth,
-  //  private router: Router,
+    private afAuth: Auth
     ) { }
 
   public  signOut(): void {
-
-    console.log(getAuth().currentUser);
-
-     // this.afAuth.signOut();
-   // this.router.navigate(['/']);
+    this.afAuth.signOut();
+    localStorage.removeItem('userInfo');
   }
 }

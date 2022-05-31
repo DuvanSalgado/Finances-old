@@ -12,7 +12,8 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class AuthComponent extends AuthModel {
 
-  formGroup: FormGroup = this.formAuth();;
+  public formGroup: FormGroup = this.formAuth();;
+  public loading = false;
 
   constructor(
     protected formbuild: FormBuilder,
@@ -24,7 +25,14 @@ export class AuthComponent extends AuthModel {
 
   public async login(): Promise<void> {
     await this.authService.loginEmailPassword(this.formGroup.value)
-      .then(() => this.router.navigate(['/home']))
-      .catch((error: FirebaseError) => console.log(error.message));
+      .then(() => {
+        this.router.navigate(['/home']);
+        this.authService.setLocalStore();
+        this.loading = true;
+      })
+      .catch((error: FirebaseError) => {
+        this.loading = false;
+        console.log(error.message);
+      });
   }
 }

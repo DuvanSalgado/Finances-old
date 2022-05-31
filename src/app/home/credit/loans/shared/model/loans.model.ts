@@ -17,6 +17,7 @@ export class LoansModel {
   public disableButton: boolean;
   public loading = true;
   public loans: Array<IcreditModel> = [];
+  public loansPending: Array<IcreditModel> = [];
   public cashGeneral: IcashGeneral = { id: null, value: 0 };
 
   protected modalCreate: HTMLIonModalElement;

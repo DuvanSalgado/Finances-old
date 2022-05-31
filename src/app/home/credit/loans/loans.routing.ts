@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoansCashComponent } from './loans-cash/loans-cash.component';
 import { LoansCreditComponent } from './loans-credit/loans-credit.component';
 import { LoansDebitComponent } from './loans-debit/loans-debit.component';
+import { LoansPendingComponent } from './loans-pending/loans-pending.component';
 import { LoansComponent } from './loans.component';
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
     children: [
       { path: 'cash', component: LoansCashComponent },
       { path: 'credit', component: LoansCreditComponent },
-      { path: 'debit', component: LoansDebitComponent }
+      { path: 'debit', component: LoansDebitComponent },
+      { path: 'pending', component: LoansPendingComponent }
     ]
   }
 ];

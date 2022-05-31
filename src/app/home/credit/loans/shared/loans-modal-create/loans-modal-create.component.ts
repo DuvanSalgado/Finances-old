@@ -16,7 +16,8 @@ export class LoansModalCreateComponent {
   constructor(private modalController: ModalController) { }
 
   public async cancelModal(): Promise<void> {
-    this.formGroup.reset();
+    this.formGroup.controls[this.formCtrl.name].reset();
+    this.formGroup.controls[this.formCtrl.value].reset();
     await this.modalController.dismiss(false);
   }
 
