@@ -2,6 +2,7 @@ import { ITotal } from './credit.interface';
 
 export class InicTotal {
   public total: ITotal = {
+    id: null,
     expenseCredit: 0,
     expenseDebit: 0,
     expenseCash: 0,

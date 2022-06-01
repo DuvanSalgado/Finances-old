@@ -33,7 +33,7 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
     this.getData(this.month);
   }
 
-  public valueChanges(month: number) {
+  public valueChanges(month: number): void {
     this.getData(month);
   }
 
@@ -74,7 +74,7 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
     await this.calculateService.calculate(this.total, this.month);
     await this.calculateService.cashGeneral(this.cashGeneral);
     await this.loansService.updateCredit(this.formGroup.value, 'loansCash');
-    await this.loadingService.presentToast(mensages.successful);
+    await this.loadingService.presentToast(mensages.update);
 
     this.resetFormAddValue();
     await this.loadingService.dismiss();
@@ -104,7 +104,7 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
     if (this.isCash) { await this.calculateService.cashGeneral(this.cashGeneral); }
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.updateCredit(this.formGroup.value, 'loansCash');
-    await this.loadingService.presentToast(mensages.successful);
+    await this.loadingService.presentToast(mensages.update);
     this.resetFormPayments();
     await this.loadingService.dismiss();
   }

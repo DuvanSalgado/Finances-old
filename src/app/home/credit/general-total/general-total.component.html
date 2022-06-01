@@ -99,4 +99,17 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-icon color="primary" name="reader-outline" slot="start"></ion-icon>
+      <ion-label>Total de gastos:</ion-label>
+      <ion-note slot="end">
+        {{
+          total?.expenseDebit + total?.expenseCash + total?.expenseCredit
+            | currency: "COP":"symbol-narrow":"1.0-0"
+        }}
+      </ion-note>
+    </ion-item>
+  </ion-card>
 </ion-content>

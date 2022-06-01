@@ -28,8 +28,8 @@ export class LoansDebitComponent extends LoansModel implements OnInit {
     this.getData(this.month);
   }
 
-  valueChanges(aa: any) {
-
+  public valueChanges(month: number): void {
+    this.getData(month);
   }
 
   public async openModalPayments(data: IcreditModel): Promise<void> {
@@ -70,7 +70,7 @@ export class LoansDebitComponent extends LoansModel implements OnInit {
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.updateCredit(this.formGroup.value, 'loansDebit');
 
-    await this.loadingService.presentToast(mensages.successful);
+    await this.loadingService.presentToast(mensages.update);
     this.resetFormPayments();
     await this.loadingService.dismiss();
   }
@@ -90,7 +90,7 @@ export class LoansDebitComponent extends LoansModel implements OnInit {
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.updateCredit(this.formGroup.value, 'loansDebit');
 
-    await this.loadingService.presentToast(mensages.successful);
+    await this.loadingService.presentToast(mensages.update);
     this.resetFormAddValue();
     await this.loadingService.dismiss();
   }

@@ -5,27 +5,29 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-list>
-      <ion-menu-toggle
-        auto-hide="false"
-        *ngFor="let p of appPages; let i = index"
-      >
-        <ion-item
-          routerDirection="root"
-          [routerLink]="[p.url]"
-          lines="none"
-          detail="false"
-          routerLinkActive="selected"
+    <div class="menu">
+      <ion-list>
+        <ion-menu-toggle
+          auto-hide="false"
+          *ngFor="let p of appPages; let i = index"
         >
-          <ion-icon
-            slot="start"
-            [ios]="p.icon + '-outline'"
-            [md]="p.icon + '-sharp'"
-          ></ion-icon>
-          <ion-label>{{ p.title }}</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-      <ion-button (click)="signOut()">Inicial sesión</ion-button>
-    </ion-list>
+          <ion-item
+            routerDirection="root"
+            [routerLink]="[p.url]"
+            lines="none"
+            detail="false"
+            routerLinkActive="selected"
+          >
+            <ion-icon
+              slot="start"
+              [ios]="p.icon + '-outline'"
+              [md]="p.icon + '-sharp'"
+            ></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+      <ion-button (click)="signOut()">Cerrar sesión</ion-button>
+    </div>
   </ion-content>
 </ion-menu>

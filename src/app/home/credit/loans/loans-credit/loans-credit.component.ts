@@ -33,8 +33,8 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
     if (this.subscription) { this.subscription.unsubscribe(); }
   }
 
-  valueChanges(eve: any) {
-
+  public valueChanges(month: number): void {
+    this.getData(month);
   }
 
   public async openModalPayments(data: IcreditModel): Promise<void> {
@@ -75,7 +75,7 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.updateCredit(this.formGroup.value, 'loansCredit');
 
-    await this.loadingService.presentToast(mensages.successful);
+    await this.loadingService.presentToast(mensages.update);
     this.resetFormPayments();
     await this.loadingService.dismiss();
   }
@@ -94,7 +94,7 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
 
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.updateCredit(this.formGroup.value, 'loansCredit');
-    await this.loadingService.presentToast(mensages.successful);
+    await this.loadingService.presentToast(mensages.update);
 
     this.resetFormAddValue();
     await this.loadingService.dismiss();
