@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseError } from 'firebase/app';
@@ -10,7 +10,7 @@ import { AuthService } from '../shared/services/auth.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent extends AuthModel {
+export class AuthComponent extends AuthModel implements OnInit {
 
   public formGroup: FormGroup = this.formAuth();;
   public loading = false;
@@ -21,6 +21,10 @@ export class AuthComponent extends AuthModel {
     private authService: AuthService
   ) {
     super(formbuild);
+  }
+
+  ngOnInit(): void {
+    this.authService.validationUserInfo();
   }
 
   public async login(): Promise<void> {
