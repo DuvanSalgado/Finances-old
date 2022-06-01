@@ -45,7 +45,7 @@
         <ion-button
           fill="outline"
           shape="round"
-          [disabled]="disableButton"
+          [disabled]="disableButton || item.month !== month"
           (click)="openModalAddValue(item)"
         >
           <ion-icon name="add-circle-outline"></ion-icon>
@@ -53,7 +53,7 @@
         <ion-button
           fill="outline"
           shape="round"
-          [disabled]="disableButton"
+          [disabled]="disableButton || item.pendingValue === 0"
           (click)="openModalPayments(item)"
         >
           <ion-icon name="remove-circle-outline"></ion-icon>

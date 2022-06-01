@@ -18,12 +18,12 @@ export class LoansModel {
   public loading = true;
   public loans: Array<IcreditModel> = [];
   public cashGeneral: IcashGeneral = { id: null, value: 0 };
+  public month = new Date().getMonth();
 
   protected modalCreate: HTMLIonModalElement;
   protected modalAddValue: HTMLIonModalElement;
   protected modalPayments: HTMLIonModalElement;
   protected total: ITotal = new InicTotal().total;
-  protected month = new Date().getMonth();
   protected subscription: Subscription;
   protected todayDate = new Date();
 
@@ -85,7 +85,7 @@ export class LoansModel {
   protected formLoansPayments(data: IcreditModel): void {
     this.formGroup = this.formBuilder.group({
       [this.formCtrl.id]: [data.id],
-      [this.formCtrl.value]: [null, [Validators.required, Validators.min(0)]],
+      [this.formCtrl.value]: [null, [Validators.required, Validators.min(0), Validators.max(data.pendingValue)] ],
       [this.formCtrl.pendingValue]: [data.pendingValue],
       [this.formCtrl.paidValue]: [data.paidValue],
       [this.formCtrl.type]: [data.type],
