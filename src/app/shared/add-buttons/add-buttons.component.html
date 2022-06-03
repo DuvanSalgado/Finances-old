@@ -1,4 +1,4 @@
-<ion-row>
+<ion-row class="ion-align-items-center">
   <ion-col size="3">
     <ng-content></ng-content>
   </ion-col>
@@ -8,5 +8,8 @@
       label="Mes"
       [items]="itemsmonth"
     ></app-combobox>
+  </ion-col>
+  <ion-col size="1">
+    <ion-icon (click)="refresh()" name="refresh-outline"></ion-icon>
   </ion-col>
 </ion-row>

@@ -1,3 +1,67 @@
-<p>
-  loans-credit works!
-</p>
+<app-add-buttons (changeEvent)="valueChanges($event)">
+  <ion-button
+    class="button-add"
+    fill="outline"
+    shape="round"
+    [disabled]="disableButton || monthSelect"
+    (click)="openModalCreate()"
+    color="primary"
+  >
+    <ion-icon name="add-circle-outline"></ion-icon>
+  </ion-button>
+</app-add-buttons>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of loans">
+      <ion-label>
+        <h3 class="ion-text-capitalize">
+          Nombre: <b> {{ item.name }}</b>
+        </h3>
+        <h3>
+          Deuda:
+          {{ item.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
+        </h3>
+        <p>Fecha: {{ item.date | date }}</p>
+      </ion-label>
+      <ion-item-group>
+        <ion-button
+          fill="outline"
+          shape="round"
+          [disabled]="disableButton"
+          (click)="openModalViewDetails(item)"
+        >
+          <ion-icon name="eye-outline"></ion-icon>
+        </ion-button>
+        <ion-button
+          fill="outline"
+          shape="round"
+          [disabled]="disableButton || item.month !== month"
+          (click)="openModalAddValue(item)"
+        >
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button
+          fill="outline"
+          shape="round"
+          [disabled]="disableButton || item.pendingValue === 0"
+          (click)="openModalPayments(item)"
+        >
+          <ion-icon name="remove-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-note
+          slot="end"
+          [color]="item.pendingValue !== 0 ? 'success' : 'danger'"
+        >
+          <ion-icon name="radio-button-on"></ion-icon>
+        </ion-note>
+      </ion-item-group>
+    </ion-item>
+  </ion-list>
+  <app-sk-loans [loading]="loading"></app-sk-loans>
+  <ng-container *ngIf="!(loans.length > 0) && !loading">
+    <ion-item lines="none">
+      <ion-label>No hay datos</ion-label>
+    </ion-item>
+  </ng-container>
+</ion-content>

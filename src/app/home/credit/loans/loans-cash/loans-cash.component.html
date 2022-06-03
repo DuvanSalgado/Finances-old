@@ -3,7 +3,7 @@
     class="button-add"
     fill="outline"
     shape="round"
-    [disabled]="disableButton"
+    [disabled]="disableButton || monthSelect"
     (click)="openModalCreate()"
     color="primary"
   >
@@ -14,15 +14,6 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of loans">
-      <ion-item-group class="group_icon">
-        <ion-icon
-          [color]="item.icon.labelColor"
-          slot="start"
-          [name]="item.icon.icon"
-        >
-        </ion-icon>
-        <ion-text [color]="item.icon.labelColor"> Efectivo </ion-text>
-      </ion-item-group>
       <ion-label>
         <h3 class="ion-text-capitalize">
           Nombre: <b> {{ item.name }}</b>
@@ -45,7 +36,7 @@
         <ion-button
           fill="outline"
           shape="round"
-          [disabled]="disableButton"
+          [disabled]="disableButton || item.month !== month"
           (click)="openModalAddValue(item)"
         >
           <ion-icon name="add-circle-outline"></ion-icon>
@@ -53,18 +44,18 @@
         <ion-button
           fill="outline"
           shape="round"
-          [disabled]="disableButton"
+          [disabled]="disableButton || item.pendingValue === 0"
           (click)="openModalPaymentsCash(item)"
         >
-        <ion-icon name="remove-circle-outline"></ion-icon>
+          <ion-icon name="remove-circle-outline"></ion-icon>
         </ion-button>
+        <ion-note
+          slot="end"
+          [color]="item.pendingValue !== 0 ? 'success' : 'danger'"
+        >
+          <ion-icon name="radio-button-on"></ion-icon>
+        </ion-note>
       </ion-item-group>
-      <ion-note
-        slot="end"
-        [color]="item.pendingValue !== 0 ? 'success' : 'danger'"
-      >
-        <ion-icon name="radio-button-on"></ion-icon>
-      </ion-note>
     </ion-item>
   </ion-list>
   <app-sk-loans [loading]="loading"></app-sk-loans>

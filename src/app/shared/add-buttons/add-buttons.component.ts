@@ -27,6 +27,10 @@ export class AddButtonsComponent implements OnInit, OnDestroy {
     this.valueChanges();
   }
 
+  public refresh(): void {
+    this.month.patchValue({ name: '', id: this.currentMonth });
+  }
+
   private valueChanges(): void {
     this.subscription = this.month.valueChanges
       .subscribe(data => this.changeEvent.emit(data.id));

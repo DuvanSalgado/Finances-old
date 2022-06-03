@@ -34,6 +34,7 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
   }
 
   public valueChanges(month: number): void {
+    this.total = new InicTotal().total;
     this.getData(month);
   }
 
@@ -53,7 +54,7 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
 
   private getData(month: number): void {
     this.subscription = this.calculateService.getAll(month)
-      .subscribe((data) => this.total = data[0]);
+      .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } });
 
     this.subscription.add(this.calculateService.getAllCash()
       .subscribe((data) => this.cashGeneral = data[0]));

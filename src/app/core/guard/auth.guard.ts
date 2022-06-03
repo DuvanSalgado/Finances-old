@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { getAuth } from '@angular/fire/auth';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Auth } from '@angular/fire/auth';
 import { CanActivate, Router } from '@angular/router';
-import { AuthService } from '@app/auth/shared/services/auth.service';
 
 @Injectable()
 
@@ -11,48 +9,21 @@ export class AuthGuard implements CanActivate {
   credentials = false;
 
   constructor(
-    private afAuth: AngularFireAuth,
-    private router: Router,
-    private authservice: AuthService
-  ) {
-    //  this.validateCredentials();
-  }
+    private afAuth: Auth,
+    private router: Router
+  ) { }
 
+  public canActivate(): boolean {
 
-  canActivate() {
-    /*  let credentials = true;
-       if (getAuth()) {
-        credentials = true;
-      } else {
-        this.router.navigate(['/']);
-        credentials = false;
-      } */
+    const userInfo = localStorage.getItem('userInfo');
 
-    //this.validateCredentials();
-    console.log('primero');
-    getAuth();
-    return true;
-  }
-
-
-  validateCredentials(): void {
-    this.afAuth.onAuthStateChanged(user => {
-      console.log('validacion');
-
-      this.canActivate();
-
-
-
-      /* if (user) {
-        this.credentials = true;
-
-      }
-      else {
-        this.router.navigate(['/']);
-        this.credentials = false;
-      } */
+    this.afAuth.onAuthStateChanged((data) => {
+      if (!data) { this.router.navigate(['/']); }
     });
-  }
 
+    if (!userInfo) { this.router.navigate(['/']); }
+
+    return (userInfo) ? true : false;
+  }
 
 }

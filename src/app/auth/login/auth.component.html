@@ -21,7 +21,7 @@
           </ion-item>
           <ion-footer class="ion-no-border">
             <ion-toolbar>
-              <ion-button (click)="login()">Inicial sesión</ion-button>
+              <ion-button [disabled]="loading" (click)="login()">Inicial sesión</ion-button>
             </ion-toolbar>
           </ion-footer>
         </form>

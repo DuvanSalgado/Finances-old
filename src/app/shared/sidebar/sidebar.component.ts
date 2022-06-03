@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,17 +9,16 @@ import { Router } from '@angular/router';
 export class SidebarComponent {
 
   public appPages = [
-    { title: 'Credito', url: 'credit/expenses', icon: 'mail' },
+    { title: 'Credito', url: 'credit', icon: 'mail' },
     { title: 'Km/moto', url: 'moto', icon: 'paper-plane' }
   ];
 
   constructor(
-    private afAuth: AngularFireAuth,
-    private router: Router,
+    private afAuth: Auth
     ) { }
 
-  public async signOut(): Promise<void> {
-    await this.afAuth.signOut();
-    this.router.navigate(['/']);
+  public  signOut(): void {
+    this.afAuth.signOut();
+    localStorage.removeItem('userInfo');
   }
 }
