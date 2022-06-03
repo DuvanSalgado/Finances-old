@@ -34,6 +34,7 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
   }
 
   public valueChanges(month: number): void {
+    this.monthSelect = this.month !== month;
     this.getData(month);
   }
 

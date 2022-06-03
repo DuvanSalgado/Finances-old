@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { ModalController } from '@ionic/angular';
@@ -13,7 +13,7 @@ import { LoansService } from '../shared/services/loans.service';
   templateUrl: './loans-debit.component.html',
   styleUrls: ['../loans.component.scss'],
 })
-export class LoansDebitComponent extends LoansModel implements OnInit {
+export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy {
 
   constructor(
     private loansService: LoansService,
@@ -24,11 +24,17 @@ export class LoansDebitComponent extends LoansModel implements OnInit {
   ) {
     super(formBuilder, modalController);
   }
+
+  ngOnDestroy(): void {
+    if (this.subscription) { this.subscription.unsubscribe(); }
+  }
+
   ngOnInit(): void {
     this.getData(this.month);
   }
 
   public valueChanges(month: number): void {
+    this.monthSelect = this.month !== month;
     this.getData(month);
   }
 
