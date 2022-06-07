@@ -18,7 +18,8 @@ export class ExpensesModalAddComponent {
   ) { }
 
   public async cancelModal(): Promise<void> {
-    this.formGroup.reset();
+    this.formGroup.controls[this.formCtrl.value].reset();
+    this.formGroup.controls[this.formCtrl.description].reset();
     await this.modalController.dismiss(false);
   }
 
