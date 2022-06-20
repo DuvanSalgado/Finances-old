@@ -27,8 +27,8 @@ export class AuthComponent extends AuthModel implements OnInit {
     this.authService.validationUserInfo();
   }
 
-  public async login(): Promise<void> {
-    await this.authService.loginEmailPassword(this.formGroup.value)
+  public login(): void {
+    this.authService.loginEmailPassword(this.formGroup.value)
       .then(() => {
         this.router.navigate(['/home']);
         this.authService.setLocalStore();

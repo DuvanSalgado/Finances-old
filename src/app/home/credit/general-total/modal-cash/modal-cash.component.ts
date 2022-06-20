@@ -27,8 +27,17 @@ export class ModalCashComponent {
     await this.modalController.dismiss(true);
   }
 
-  public async onSaveChange(event) {
-    this.data.value = this.data.value - this.value.value;
+  public addValue(): void {
+    this.data.value = this.data.value + (+this.value.value);
+    this.onSaveChange();
+  }
+
+  public removeValue(): void {
+    this.data.value = this.data.value - (+this.value.value);
+    this.onSaveChange();
+  }
+
+  public async onSaveChange(): Promise<void> {
     await this.loadingService.presentLoading();
     await this.calculateService.cashGeneral(this.data);
     await this.loadingService.presentToast(mensages.consignar);
