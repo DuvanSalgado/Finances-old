@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { ModalController } from '@ionic/angular';
@@ -12,7 +12,7 @@ import { ExpensesService } from '../shared/services/expenses.service';
   templateUrl: './expenses-credit.component.html',
   styleUrls: ['../expenses.component.scss'],
 })
-export class ExpensesCreditComponent extends ExpenseModel implements OnInit {
+export class ExpensesCreditComponent extends ExpenseModel implements OnInit, OnDestroy {
 
   constructor(
     protected formBuilder: FormBuilder,
@@ -22,6 +22,10 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit {
     private calculateService: CalculateService
   ) {
     super(formBuilder, modalController);
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) { this.subscription.unsubscribe(); }
   }
 
   ngOnInit(): void {
@@ -53,19 +57,18 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit {
     this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
       ));
-
   }
 
-  private async saveExpensesCash() {
+  private async saveExpensesCash(): Promise<void> {
     this.operations();
-    await this.loadingService.presentLoading();
+    this.loadingService.presentLoading();
 
     await this.calculateService.calculate(this.total, this.month);
     await this.expensesService.create(this.formGroup.value, 'expensesCredit');
 
-    await this.loadingService.presentToast(mensages.successful);
+    this.loadingService.presentToast(mensages.successful);
     this.resetForm();
-    await this.loadingService.dismiss();
+    this.loadingService.dismiss();
   }
 
   private operations(): void {

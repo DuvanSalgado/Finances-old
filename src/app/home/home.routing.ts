@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@app/core/guard/auth.guard';
 import { HomeComponent } from './home.component';
-import { MotoComponent } from './moto/moto.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'credit/expenses', pathMatch: 'full' },
@@ -17,7 +16,7 @@ const routes: Routes = [
       },
       {
         path: 'moto',
-        component: MotoComponent
+        loadChildren: () => import('./moto/moto.module').then(m => m.MotoModule)
       }
     ]
   }

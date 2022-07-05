@@ -41,7 +41,7 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
   public async openModalPayments(data: IcreditModel): Promise<void> {
     this.formLoansPayments(data);
     this.disableButton = true;
-    await this.openModalPaymentsController();
+    this.openModalPaymentsController();
     this.disableButton = await (await this.modalPayments.onWillDismiss()).data;
     if (this.formGroup.valid) { this.updatePaymentsDebit(); }
     else { this.resetFormPayments(); }
@@ -50,7 +50,7 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
   public async openModalAddValue(data: IcreditModel): Promise<void> {
     this.formLoansAddValue(data);
     this.disableButton = true;
-    await this.openModalAddValueController();
+    this.openModalAddValueController();
     this.disableButton = await (await this.modalAddValue.onWillDismiss()).data;
     if (this.formGroup.valid) { this.addValueDebit(); }
     else { this.resetFormAddValue(); }
@@ -60,7 +60,7 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
     this.formLoansCreate();
     this.formLoansDebit();
     this.disableButton = true;
-    await this.openModalCreateController();
+    this.openModalCreateController();
     this.disableButton = await (await this.modalCreate.onWillDismiss()).data;
     if (this.formGroup.valid) { this.saveloansDebit(); }
     else { this.resetFormCreate(); }
@@ -70,15 +70,15 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
     this.setHistory('Abono');
     this.patchValuePayments();
     this.operationsPayments();
-    await this.loadingService.presentLoading();
+    this.loadingService.presentLoading();
 
     if (this.isCash) { await this.calculateService.cashGeneral(this.cashGeneral); }
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.updateCredit(this.formGroup.value, 'loansDebit');
 
-    await this.loadingService.presentToast(mensages.update);
+    this.loadingService.presentToast(mensages.update);
     this.resetFormPayments();
-    await this.loadingService.dismiss();
+    this.loadingService.dismiss();
   }
 
   private operationsPayments(): void {
@@ -91,28 +91,28 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
     this.setHistory('Prestamo');
     this.patchValueItem();
     this.operations();
-    await this.loadingService.presentLoading();
+    this.loadingService.presentLoading();
 
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.updateCredit(this.formGroup.value, 'loansDebit');
 
-    await this.loadingService.presentToast(mensages.update);
+    this.loadingService.presentToast(mensages.update);
     this.resetFormAddValue();
-    await this.loadingService.dismiss();
+    this.loadingService.dismiss();
   }
 
   private async saveloansDebit(): Promise<void> {
     this.setHistory('Prestamo');
     this.patchValueItem();
     this.operations();
-    await this.loadingService.presentLoading();
+    this.loadingService.presentLoading();
 
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.createLoans(this.formGroup.value, 'loansDebit');
 
-    await this.loadingService.presentToast(mensages.successful);
+    this.loadingService.presentToast(mensages.successful);
     this.resetFormCreate();
-    await this.loadingService.dismiss();
+    this.loadingService.dismiss();
   }
 
   private getData(month: number): void {

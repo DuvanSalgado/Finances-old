@@ -65,15 +65,15 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
 
   private async saveExpensesCash(): Promise<void> {
     this.operations();
-    await this.loadingService.presentLoading();
+    this.loadingService.presentLoading();
 
     await this.calculateService.calculate(this.total, this.month);
     await this.calculateService.cashGeneral(this.cashGeneral);
     await this.expensesService.create(this.formGroup.value, 'expensesCash');
 
-    await this.loadingService.presentToast(mensages.successful);
+    this.loadingService.presentToast(mensages.successful);
     this.resetForm();
-    await this.loadingService.dismiss();
+    this.loadingService.dismiss();
   }
 
   private operations(): void {

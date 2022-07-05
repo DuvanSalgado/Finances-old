@@ -27,16 +27,16 @@ export class AuthComponent extends AuthModel implements OnInit {
     this.authService.validationUserInfo();
   }
 
-  public login(): void {
-    this.authService.loginEmailPassword(this.formGroup.value)
-      .then(() => {
-        this.router.navigate(['/home']);
-        this.authService.setLocalStore();
-        this.loading = true;
-      })
-      .catch((error: FirebaseError) => {
-        this.loading = false;
-        console.log(error.message);
-      });
+  public async login(): Promise<void> {
+    try {
+      await this.authService.loginEmailPassword(this.formGroup.value);
+      this.router.navigate(['/home']);
+      this.authService.setLocalStore();
+      this.loading = true;
+    } catch (error) {
+      console.log(error);
+
+    }
+
   }
 }
