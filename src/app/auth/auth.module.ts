@@ -6,10 +6,12 @@ import { IonicModule } from '@ionic/angular';
 import { AuthRoutingModule } from './auth.routing';
 import { AuthComponent } from './login/auth.component';
 import { AuthService } from './shared/services/auth.service';
+import { ValidateSesionComponent } from './validate-sesion/validate-sesion.component';
 
 @NgModule({
   declarations: [
-    AuthComponent
+    AuthComponent,
+    ValidateSesionComponent
   ],
   imports: [
     CommonModule,

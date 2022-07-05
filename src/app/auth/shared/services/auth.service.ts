@@ -11,7 +11,6 @@ export class AuthService {
   constructor(
     private afAuth: Auth,
     private router: Router,
-    private loadingService: LoadingService
   ) { }
 
   public loginEmailPassword(user: IUser): Promise<any> {
@@ -23,10 +22,9 @@ export class AuthService {
   }
 
   public validationUserInfo(): void {
-    this.loadingService.presentLoading();
     this.afAuth.onAuthStateChanged((data) => {
       if (data) { this.router.navigate(['/home']); }
-      this.loadingService.dismiss();
+      else { this.router.navigate(['/login']); }
     });
   }
 }
