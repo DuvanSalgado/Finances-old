@@ -3,7 +3,8 @@ import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-validate-sesion',
-  templateUrl: './validate-sesion.component.html'
+  templateUrl: './validate-sesion.component.html',
+  styleUrls: ['./validate-sesion.component.scss']
 })
 export class ValidateSesionComponent implements OnInit {
 
