@@ -41,7 +41,7 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
   public async openModalPaymentsCash(data: IcreditModel): Promise<void> {
     this.formLoansPayments(data);
     this.disableButton = true;
-    this.openModalPaymentsController();
+    await this.openModalPaymentsController();
     this.disableButton = await (await this.modalPayments.onWillDismiss()).data;
     if (this.formGroup.valid) { this.updatePaymentsCash(); }
     else { this.resetFormPayments(); }
@@ -50,7 +50,7 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
   public async openModalAddValue(data: IcreditModel): Promise<void> {
     this.formLoansAddValue(data);
     this.disableButton = true;
-    this.openModalAddValueController();
+    await this.openModalAddValueController();
     this.disableButton = await (await this.modalAddValue.onWillDismiss()).data;
     if (this.formGroup.valid) { this.addValueCash(); }
     else { this.resetFormAddValue(); }
@@ -60,7 +60,7 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
     this.formLoansCreate();
     this.formLoansCash();
     this.disableButton = true;
-    this.openModalCreateController();
+    await this.openModalCreateController();
     this.disableButton = await (await this.modalCreate.onWillDismiss()).data;
     if (this.formGroup.valid) { this.saveloansCash(); }
     else { this.resetFormCreate(); }
