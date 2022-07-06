@@ -10,7 +10,7 @@ import { AuthService } from '../shared/services/auth.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent extends AuthModel implements OnInit {
+export class AuthComponent extends AuthModel {
 
   public formGroup: FormGroup = this.formAuth();;
   public loading = false;
@@ -23,20 +23,16 @@ export class AuthComponent extends AuthModel implements OnInit {
     super(formbuild);
   }
 
-  ngOnInit(): void {
-    this.authService.validationUserInfo();
-  }
+  public async login(): Promise<void> {
+    try {
+      await this.authService.loginEmailPassword(this.formGroup.value);
+      this.router.navigate(['/home']);
+      this.authService.setLocalStore();
+      this.loading = true;
+    } catch (error) {
+      console.log(error);
 
-  public login(): void {
-    this.authService.loginEmailPassword(this.formGroup.value)
-      .then(() => {
-        this.router.navigate(['/home']);
-        this.authService.setLocalStore();
-        this.loading = true;
-      })
-      .catch((error: FirebaseError) => {
-        this.loading = false;
-        console.log(error.message);
-      });
+    }
+
   }
 }

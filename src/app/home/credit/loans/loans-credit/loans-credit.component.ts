@@ -70,15 +70,15 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
     this.setHistory('Abono');
     this.patchValuePayments();
     this.operationsPayments();
-    await this.loadingService.presentLoading();
+    this.loadingService.presentLoading();
 
     if (this.isCash) { await this.calculateService.cashGeneral(this.cashGeneral); }
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.updateCredit(this.formGroup.value, 'loansCredit');
 
-    await this.loadingService.presentToast(mensages.update);
+    this.loadingService.presentToast(mensages.update);
     this.resetFormPayments();
-    await this.loadingService.dismiss();
+    this.loadingService.dismiss();
   }
 
   private operationsPayments(): void {
@@ -91,14 +91,14 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
     this.setHistory('Prestamo');
     this.patchValueItem();
     this.operations();
-    await this.loadingService.presentLoading();
+    this.loadingService.presentLoading();
 
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.updateCredit(this.formGroup.value, 'loansCredit');
     await this.loadingService.presentToast(mensages.update);
 
     this.resetFormAddValue();
-    await this.loadingService.dismiss();
+    this.loadingService.dismiss();
 
   }
 
@@ -122,15 +122,14 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
     this.setHistory('Prestamo');
     this.patchValueItem();
     this.operations();
-    await this.loadingService.presentLoading();
+    this.loadingService.presentLoading();
 
     await this.calculateService.calculate(this.total, this.month);
     await this.loansService.createLoans(this.formGroup.value, 'loansCredit');
 
-    await this.loadingService.presentToast(mensages.successful);
+    this.loadingService.presentToast(mensages.successful);
     this.resetFormCreate();
-    await this.loadingService.dismiss();
-
+    this.loadingService.dismiss();
   }
 
   private formLoansCredit(): void {

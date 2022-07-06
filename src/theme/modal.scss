@@ -45,3 +45,11 @@
     border-radius: 10px;
   }
 }
+
+.cambio-aceite-modal {
+  &::part(content) {
+    height: 200px;
+    width: 70%;
+    border-radius: 10px;
+  }
+}

@@ -9,15 +9,14 @@ import { Auth } from '@angular/fire/auth';
 export class SidebarComponent {
 
   public appPages = [
-    { title: 'Credito', url: 'credit', icon: 'mail' },
-    { title: 'Km/moto', url: 'moto', icon: 'paper-plane' }
+    { title: 'Credito', url: 'credit', icon: 'bar-chart-outline' },
+    { title: 'Km/moto', url: 'moto', icon: 'bicycle-outline' }
   ];
 
   constructor(
     private afAuth: Auth
-    ) { }
-
-  public  signOut(): void {
+  ) { }
+  public signOut(): void {
     this.afAuth.signOut();
     localStorage.removeItem('userInfo');
   }
