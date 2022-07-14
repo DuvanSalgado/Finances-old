@@ -52,7 +52,7 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit, OnDe
       .subscribe((data) => {
         this.loading = false;
         this.expenses = data;
-      });
+      }, (error) => this.loadingService.presentToast(error));
 
     this.subscription.add(this.calculateService.getAll(month)
       .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
@@ -64,10 +64,14 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit, OnDe
     this.operations();
     this.loadingService.presentLoading();
 
-    await this.calculateService.calculate(this.total, this.month);
-    await this.expensesService.create(this.formGroup.value, 'expensesDebit');
+    try {
+      await this.calculateService.calculate(this.total, this.month);
+      await this.expensesService.create(this.formGroup.value, 'expensesDebit');
+      this.loadingService.presentToast(mensages.successful);
+    } catch (error) {
+      this.loadingService.presentToast(error);
+    }
 
-    this.loadingService.presentToast(mensages.successful);
     this.resetForm();
     this.loadingService.dismiss();
   }

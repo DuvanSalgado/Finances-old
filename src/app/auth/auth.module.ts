@@ -21,7 +21,7 @@ import { ValidateSesionComponent } from './validate-sesion/validate-sesion.compo
   ],
   providers: [
     AuthService,
-    LoadingService
+    LoadingService,
   ]
 })
 export class AuthModule { }

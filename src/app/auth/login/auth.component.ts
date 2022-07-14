@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoadingService } from '@app/core/services/loading.service';
 import { FirebaseError } from 'firebase/app';
 import { AuthModel } from '../shared/model/auth.model';
 import { AuthService } from '../shared/services/auth.service';
@@ -18,7 +19,8 @@ export class AuthComponent extends AuthModel {
   constructor(
     protected formbuild: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private loadingService: LoadingService
   ) {
     super(formbuild);
   }
@@ -30,9 +32,7 @@ export class AuthComponent extends AuthModel {
       this.authService.setLocalStore();
       this.loading = true;
     } catch (error) {
-      console.log(error);
-
+      this.loadingService.presentToast(error);
     }
-
   }
 }

@@ -63,10 +63,14 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit, OnD
     this.operations();
     this.loadingService.presentLoading();
 
-    await this.calculateService.calculate(this.total, this.month);
-    await this.expensesService.create(this.formGroup.value, 'expensesCredit');
+    try {
+      await this.calculateService.calculate(this.total, this.month);
+      await this.expensesService.create(this.formGroup.value, 'expensesCredit');
+      this.loadingService.presentToast(mensages.successful);
+    } catch (error) {
+      this.loadingService.presentToast(error);
+    }
 
-    this.loadingService.presentToast(mensages.successful);
     this.resetForm();
     this.loadingService.dismiss();
   }
