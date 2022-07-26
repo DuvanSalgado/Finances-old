@@ -8,8 +8,8 @@ export class AuthModel {
 
   public formAuth(): FormGroup {
     return this.formBuilder.group({
-      [FormAuthCtrl.email]: ['dsalgado012@gmail.com', [Validators.required, Validators.pattern(patternEmail)]],
-      [FormAuthCtrl.password]: ['DuvanSalgado', [Validators.required, Validators.minLength(6)]]
+      [FormAuthCtrl.email]: ['alexa09santos@gmail.com', [Validators.required, Validators.pattern(patternEmail)]],
+      [FormAuthCtrl.password]: ['1100696361', [Validators.required, Validators.minLength(6)]]
     });
   }
 

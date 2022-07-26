@@ -3,8 +3,7 @@ import { IExpensesModel } from '../model/interfaces/expenses';
 
 @Component({
   selector: 'app-expenses-list',
-  templateUrl: './expenses-list.component.html',
-  styleUrls: ['./expenses-list.component.scss'],
+  templateUrl: './expenses-list.component.html'
 })
 export class ExpensesListComponent {
 

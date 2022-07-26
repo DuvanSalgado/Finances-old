@@ -14,10 +14,6 @@ const routes: Routes = [
         loadChildren: () => import('./credit/credit.module').then(m => m.CreditModule),
         canActivate: [AuthGuard]
       },
-      {
-        path: 'moto',
-        loadChildren: () => import('./moto/moto.module').then(m => m.MotoModule)
-      }
     ]
   }
 ];
