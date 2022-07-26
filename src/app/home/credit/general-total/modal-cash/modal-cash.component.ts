@@ -40,8 +40,8 @@ export class ModalCashComponent {
   public async onSaveChange(): Promise<void> {
     await this.loadingService.presentLoading();
     await this.calculateService.cashGeneral(this.data);
-    await this.loadingService.presentToast(mensages.consignar);
-    await this.loadingService.dismiss();
-    await this.cancelModal();
+    this.loadingService.presentToast(mensages.consignar);
+    this.loadingService.dismiss();
+    this.cancelModal();
   }
 }

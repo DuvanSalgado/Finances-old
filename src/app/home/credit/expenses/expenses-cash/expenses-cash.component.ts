@@ -67,11 +67,15 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     this.operations();
     this.loadingService.presentLoading();
 
-    await this.calculateService.calculate(this.total, this.month);
-    await this.calculateService.cashGeneral(this.cashGeneral);
-    await this.expensesService.create(this.formGroup.value, 'expensesCash');
+    try {
+      await this.calculateService.calculate(this.total, this.month);
+      await this.calculateService.cashGeneral(this.cashGeneral);
+      await this.expensesService.create(this.formGroup.value, 'expensesCash');
+      this.loadingService.presentToast(mensages.successful);
+    } catch (error) {
+      this.loadingService.presentToast(error);
+    }
 
-    this.loadingService.presentToast(mensages.successful);
     this.resetForm();
     this.loadingService.dismiss();
   }

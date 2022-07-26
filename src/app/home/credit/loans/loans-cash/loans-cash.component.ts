@@ -72,9 +72,13 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
     this.operations();
     this.loadingService.presentLoading();
 
-    await this.calculateService.calculate(this.total, this.month);
-    await this.calculateService.cashGeneral(this.cashGeneral);
-    await this.loansService.updateCredit(this.formGroup.value, 'loansCash');
+    try {
+      await this.calculateService.calculate(this.total, this.month);
+      await this.calculateService.cashGeneral(this.cashGeneral);
+      await this.loansService.updateCredit(this.formGroup.value, 'loansCash');
+    } catch (error) {
+      this.loadingService.presentToast(error);
+    }
 
     this.loadingService.presentToast(mensages.update);
     this.resetFormAddValue();
@@ -88,9 +92,13 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
     this.operations();
     this.loadingService.presentLoading();
 
-    await this.calculateService.calculate(this.total, this.month);
-    await this.calculateService.cashGeneral(this.cashGeneral);
-    await this.loansService.createLoans(this.formGroup.value, 'loansCash');
+    try {
+      await this.calculateService.calculate(this.total, this.month);
+      await this.calculateService.cashGeneral(this.cashGeneral);
+      await this.loansService.createLoans(this.formGroup.value, 'loansCash');
+    } catch (error) {
+      this.loadingService.presentToast(error);
+    }
 
     this.loadingService.presentToast(mensages.successful);
     this.resetFormCreate();
@@ -103,11 +111,15 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
     this.operationsPayments();
     this.loadingService.presentLoading();
 
-    if (this.isCash) { await this.calculateService.cashGeneral(this.cashGeneral); }
-    await this.calculateService.calculate(this.total, this.month);
-    await this.loansService.updateCredit(this.formGroup.value, 'loansCash');
+    try {
+      if (this.isCash) { await this.calculateService.cashGeneral(this.cashGeneral); }
+      await this.calculateService.calculate(this.total, this.month);
+      await this.loansService.updateCredit(this.formGroup.value, 'loansCash');
+      this.loadingService.presentToast(mensages.update);
+    } catch (error) {
+      this.loadingService.presentToast(error);
+    }
 
-    this.loadingService.presentToast(mensages.update);
     this.resetFormPayments();
     this.loadingService.dismiss();
   }

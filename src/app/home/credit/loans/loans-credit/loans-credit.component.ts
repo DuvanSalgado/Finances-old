@@ -72,11 +72,15 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
     this.operationsPayments();
     this.loadingService.presentLoading();
 
-    if (this.isCash) { await this.calculateService.cashGeneral(this.cashGeneral); }
-    await this.calculateService.calculate(this.total, this.month);
-    await this.loansService.updateCredit(this.formGroup.value, 'loansCredit');
+    try {
+      if (this.isCash) { await this.calculateService.cashGeneral(this.cashGeneral); }
+      await this.calculateService.calculate(this.total, this.month);
+      await this.loansService.updateCredit(this.formGroup.value, 'loansCredit');
+      this.loadingService.presentToast(mensages.update);
+    } catch (error) {
+      this.loadingService.presentToast(error);
+    }
 
-    this.loadingService.presentToast(mensages.update);
     this.resetFormPayments();
     this.loadingService.dismiss();
   }
@@ -93,9 +97,13 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
     this.operations();
     this.loadingService.presentLoading();
 
-    await this.calculateService.calculate(this.total, this.month);
-    await this.loansService.updateCredit(this.formGroup.value, 'loansCredit');
-    await this.loadingService.presentToast(mensages.update);
+    try {
+      await this.calculateService.calculate(this.total, this.month);
+      await this.loansService.updateCredit(this.formGroup.value, 'loansCredit');
+      this.loadingService.presentToast(mensages.update);
+    } catch (error) {
+      this.loadingService.presentToast(error);
+    }
 
     this.resetFormAddValue();
     this.loadingService.dismiss();
@@ -124,10 +132,14 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
     this.operations();
     this.loadingService.presentLoading();
 
-    await this.calculateService.calculate(this.total, this.month);
-    await this.loansService.createLoans(this.formGroup.value, 'loansCredit');
+    try {
+      await this.calculateService.calculate(this.total, this.month);
+      await this.loansService.createLoans(this.formGroup.value, 'loansCredit');
+      this.loadingService.presentToast(mensages.successful);
+    } catch (error) {
+      this.loadingService.presentToast(error);
+    }
 
-    this.loadingService.presentToast(mensages.successful);
     this.resetFormCreate();
     this.loadingService.dismiss();
   }
