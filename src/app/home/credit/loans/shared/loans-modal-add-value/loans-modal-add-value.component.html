@@ -1,7 +1,16 @@
 <ion-header translucent>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon
+          [name]="formGroup.get(formCtrl.icon).value.icon"
+          [color]="formGroup.get(formCtrl.icon).value.labelColor"
+          slot="start"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title class="ion-text-center">
-      Tipo - {{ formGroup.get(formCtrl.type).value }}
+      Prestamo - {{ formGroup.get(formCtrl.name).value }}
     </ion-title>
     <ion-buttons (click)="cancelModal()" slot="end">
       <ion-button>

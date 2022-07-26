@@ -1,13 +1,12 @@
 <ion-list *ngFor="let item of expenses">
   <ion-item>
-    <ion-item-group class="group_icon">
+    <ion-buttons slot="start">
       <ion-icon
         [color]="item.icon.labelColor"
         slot="start"
         [name]="item.icon.icon"
       ></ion-icon>
-      <ion-text [color]="item.icon.labelColor"> {{ type }} </ion-text>
-    </ion-item-group>
+    </ion-buttons>
     <ion-label>
       <h3>Valor: {{ item.value | currency: "COP":"symbol-narrow":"1.0-0" }}</h3>
       <h3>Descripcion: {{ item.description }}</h3>

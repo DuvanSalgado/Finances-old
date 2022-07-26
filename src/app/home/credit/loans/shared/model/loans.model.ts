@@ -75,6 +75,8 @@ export class LoansModel {
   protected formLoansAddValue(data: IcreditModel): void {
     this.formGroup = this.formBuilder.group({
       [this.formCtrl.id]: [data.id],
+      [this.formCtrl.name]: [data.name],
+      [this.formCtrl.icon]: [data.icon],
       [this.formCtrl.value]: [null, [Validators.required, Validators.min(0)]],
       [this.formCtrl.pendingValue]: [data.pendingValue],
       [this.formCtrl.fullValue]: [data.fullValue],
@@ -86,6 +88,8 @@ export class LoansModel {
   protected formLoansPayments(data: IcreditModel): void {
     this.formGroup = this.formBuilder.group({
       [this.formCtrl.id]: [data.id],
+      [this.formCtrl.name]: [data.name],
+      [this.formCtrl.icon]: [data.icon],
       [this.formCtrl.value]: [null, [Validators.required, Validators.min(0), Validators.max(data.pendingValue)]],
       [this.formCtrl.pendingValue]: [data.pendingValue],
       [this.formCtrl.paidValue]: [data.paidValue],
