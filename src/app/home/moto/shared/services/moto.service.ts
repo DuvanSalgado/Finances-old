@@ -12,7 +12,7 @@ export class MotoService {
   constructor(private fireBase: AngularFirestore) { }
 
   public getAll(month: number): Observable<Array<IMoto>> {
-    this.itemsCollection = this.fireBase.collection<any>('CambioAceite', ref => ref.where('month', '==', month));
+    this.itemsCollection = this.fireBase.collection<any>('CambioAceite', ref => ref.where('month', '>=', month));
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {

@@ -13,8 +13,6 @@ import { MotoService } from './shared/services/moto.service';
 })
 export class MotoComponent implements OnInit, OnDestroy {
 
-  public monthSelect = false;
-  public disableButton = true;
   public data: IMoto;
 
   private formGroup: FormGroup;
@@ -39,12 +37,10 @@ export class MotoComponent implements OnInit, OnDestroy {
   }
 
   public valueChanges(month: number): void {
-    this.monthSelect = this.date.getMonth() !== month;
     this.getData(month);
   }
 
   public async openModalCreate(): Promise<void> {
-    this.disableButton = true;
     const modal = await this.modalController.create({
       component: MotoModalAddComponent,
       cssClass: 'cambio-aceite-modal',
@@ -52,7 +48,7 @@ export class MotoComponent implements OnInit, OnDestroy {
       componentProps: { formGroup: this.formGroup }
     });
     modal.present();
-    this.disableButton = await (await modal.onWillDismiss()).data;
+    await (await modal.onWillDismiss()).data;
 
     if (this.formGroup.valid) { this.saveData(); }
     else { this.resetForm(); }
@@ -70,12 +66,11 @@ export class MotoComponent implements OnInit, OnDestroy {
 
   private getData(month: number): void {
     this.subscription = this.motoService.getAll(month).subscribe(data => {
-      this.disableButton = data.length > 0;
-      this.data = data[0];
+      this.data = data[data.length - 1];
     });
 
     this.subscription.add(this.motoService.getReferencia()
-      .subscribe(ref => this.referencia = ref[0].value));
+      .subscribe(ref => this.referencia = +ref[0].value));
   }
 
   private resetForm(): void {

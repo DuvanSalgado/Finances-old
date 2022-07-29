@@ -1,5 +1,10 @@
 <ion-header translucent>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon name="cash-outline" color="success" slot="start"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title> Gestion de afectivo </ion-title>
     <ion-buttons (click)="cancelModal()" slot="end">
       <ion-button>
@@ -19,12 +24,19 @@
 
 <ion-footer class="ion-no-border">
   <ion-toolbar class="ion-text-center">
-    <ion-button [disabled]="value.invalid" (click)="addValue()">
-      <ion-icon name="add-outline"></ion-icon>
+    <ion-button
+      class="button-action"
+      [disabled]="value.invalid"
+      (click)="addValue()"
+    >
+      depositar
     </ion-button>
-    <ion-button [disabled]="value.invalid" (click)="removeValue()">
-      <ion-icon name="remove-outline"></ion-icon>
+    <ion-button
+      class="button-action"
+      [disabled]="value.invalid"
+      (click)="removeValue()"
+    >
+      sacar
     </ion-button>
-    <ion-button (click)="cancelModal()">Cancelar</ion-button>
   </ion-toolbar>
 </ion-footer>
