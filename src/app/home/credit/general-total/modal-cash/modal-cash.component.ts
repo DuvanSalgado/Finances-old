@@ -9,6 +9,7 @@ import { CalculateService } from '../../shared/service/calculate.service';
 @Component({
   selector: 'app-modal-cash',
   templateUrl: './modal-cash.component.html',
+  styleUrls: ['./modal-cash.component.scss'],
   providers: [LoadingService]
 })
 export class ModalCashComponent {

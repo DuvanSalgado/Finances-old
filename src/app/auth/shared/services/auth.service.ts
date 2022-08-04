@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { LoadingService } from '@app/core/services/loading.service';
 import { IUser } from '../interfaces/user.interface';
 
 @Injectable()
