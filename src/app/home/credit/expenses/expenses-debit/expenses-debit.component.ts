@@ -42,6 +42,11 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit, OnDe
     else { this.resetForm(); }
   }
 
+  public valueChanges(month: number): void {
+    this.monthSelect = this.month !== month;
+    this.getData(month);
+  }
+
   private formExpenseDebit(): void {
     this.formGroup
       .patchValue({ [this.formCtrl.icon]: { icon: 'reader-outline', labelColor: 'primary' } });

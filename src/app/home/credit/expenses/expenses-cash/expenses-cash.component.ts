@@ -42,6 +42,11 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     else { this.resetForm(); }
   }
 
+  public valueChanges(month: number): void {
+    this.monthSelect = this.month !== month;
+    this.getData(month);
+  }
+
   private formExpenseCash(): void {
     this.formGroup
       .patchValue({ [this.formCtrl.icon]: { icon: 'cash-outline', labelColor: 'success' } });

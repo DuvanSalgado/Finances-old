@@ -42,6 +42,11 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit, OnD
     else { this.resetForm(); }
   }
 
+  public valueChanges(month: number): void {
+    this.monthSelect = this.month !== month;
+    this.getData(month);
+  }
+
   private formExpenseCredit(): void {
     this.formGroup
       .patchValue({ [this.formCtrl.icon]: { icon: 'card-outline', labelColor: 'warning' } });

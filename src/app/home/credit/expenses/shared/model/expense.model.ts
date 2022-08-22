@@ -15,6 +15,7 @@ export class ExpenseModel {
   public expenses: Array<IExpensesModel> = [];
   public formCtrl = FormExpensesCtrl;
   public formGroup: FormGroup;
+  public monthSelect: boolean;
 
   protected modal: HTMLIonModalElement;
   protected month = new Date().getMonth();
