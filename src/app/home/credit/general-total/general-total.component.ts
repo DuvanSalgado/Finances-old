@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { LoadingService } from '@app/core/services/loading.service';
 import { CalculateService } from '@credit/service/calculate.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -23,6 +24,7 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
   constructor(
     private calculateService: CalculateService,
     private modalController: ModalController,
+    private loadingService: LoadingService
   ) { }
 
   ngOnDestroy(): void {
@@ -31,6 +33,7 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getData(this.currentMonth);
+    this.loadingService.presentLoading();
   }
 
   public valueChanges(month: number): void {
@@ -54,7 +57,10 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
 
   private getData(month: number): void {
     this.subscription = this.calculateService.getAll(month)
-      .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } });
+      .subscribe((data) => {
+        if (data.length > 0) { this.total = data[0]; }
+        this.loadingService.dismiss();
+      });
 
     this.subscription.add(this.calculateService.getAllCash()
       .subscribe((data) => this.cashGeneral = data[0]));

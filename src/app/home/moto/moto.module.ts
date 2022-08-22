@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MotoModalAddComponent } from './moto-modal-add/moto-modal-add.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MotoService } from './shared/services/moto.service';
+import { LoadingService } from '@app/core/services/loading.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MotoService } from './shared/services/moto.service';
     IonicModule
   ],
   providers:[
-    MotoService
+    MotoService,
+    LoadingService
   ]
 })
 export class MotoModule { }

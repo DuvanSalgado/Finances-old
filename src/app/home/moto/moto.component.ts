@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoadingService } from '@app/core/services/loading.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { MotoModalAddComponent } from './moto-modal-add/moto-modal-add.component';
@@ -25,7 +26,9 @@ export class MotoComponent implements OnInit, OnDestroy {
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
-    private motoService: MotoService) { }
+    private motoService: MotoService,
+    private loadingService: LoadingService
+    ) { }
 
   ngOnDestroy(): void {
     if (this.subscription) { this.subscription.unsubscribe(); }
@@ -34,6 +37,7 @@ export class MotoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initilizeForm();
     this.getData(this.date.getMonth());
+    this.loadingService.presentLoading();
   }
 
   public valueChanges(month: number): void {
@@ -67,6 +71,7 @@ export class MotoComponent implements OnInit, OnDestroy {
   private getData(month: number): void {
     this.subscription = this.motoService.getAll(month).subscribe(data => {
       this.data = data[data.length - 1];
+      this.loadingService.dismiss();
     });
 
     this.subscription.add(this.motoService.getReferencia()
