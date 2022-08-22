@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingService } from '@app/core/services/loading.service';
-import { FirebaseError } from 'firebase/app';
 import { AuthModel } from '../shared/model/auth.model';
 import { AuthService } from '../shared/services/auth.service';
 
