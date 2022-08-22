@@ -32,8 +32,8 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getData(this.currentMonth);
     this.loadingService.presentLoading();
+    this.getData(this.currentMonth);
   }
 
   public valueChanges(month: number): void {

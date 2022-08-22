@@ -35,9 +35,9 @@ export class MotoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.loadingService.presentLoading();
     this.initilizeForm();
     this.getData(this.date.getMonth());
-    this.loadingService.presentLoading();
   }
 
   public valueChanges(month: number): void {
