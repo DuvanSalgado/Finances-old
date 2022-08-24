@@ -18,11 +18,11 @@ export class LoadingService {
       spinner: 'bubbles',
       cssClass: 'loading-class',
     });
-    return await this.loadingModal.present();
+    this.loadingModal.present();
   }
 
-  public async dismiss(): Promise<boolean> {
-    return await this.loadingModal.dismiss();
+  public dismiss(): void {
+    this.loadingModal.dismiss();
   }
 
   public async presentToast(mensaje: string): Promise<void> {
