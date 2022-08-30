@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { mensages } from '../../shared/model/menssage';
 import { CalculateService } from '../../shared/service/calculate.service';
 import { ExpenseModel } from '../shared/model/expense.model';
+import { IExpensesModel } from '../shared/model/interfaces/expenses';
 import { ExpensesService } from '../shared/services/expenses.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit, OnD
     protected modalController: ModalController,
     private expensesService: ExpensesService,
     private loadingService: LoadingService,
-    private calculateService: CalculateService
+    private calculateService: CalculateService,
+    private alertController: AlertController
   ) {
     super(formBuilder, modalController);
   }
@@ -47,6 +49,33 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit, OnD
     this.getData(month);
   }
 
+  public async deleteItem(item: IExpensesModel): Promise<void> {
+    const alert = await this.alertController.create({
+      header: '¿Esta seguro?',
+      cssClass: 'custom-alert',
+      backdropDismiss: false,
+      buttons: [{ text: 'No', role: 'cancel' },
+      {
+        text: 'Si', role: 'confirm',
+        handler: () => {
+          this.deleteItemService(item);
+        },
+      },
+      ],
+    });
+    await alert.present();
+  }
+
+  private async deleteItemService(item: IExpensesModel): Promise<void> {
+    this.operationsDelete(item.value);
+    try {
+      await this.expensesService.deleteItem(item.id, 'expensesCredit');
+      await this.calculateService.calculate(this.total);
+    } catch (error) {
+      this.loadingService.presentToast(error);
+    }
+  }
+
   private formExpenseCredit(): void {
     this.formGroup
       .patchValue({ [this.formCtrl.icon]: { icon: 'card-outline', labelColor: 'warning' } });
@@ -65,7 +94,7 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit, OnD
   }
 
   private async saveExpensesCash(): Promise<void> {
-    this.operations();
+    this.operationsCreate();
     this.loadingService.presentLoading();
 
     try {
@@ -80,9 +109,14 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit, OnD
     this.loadingService.dismiss();
   }
 
-  private operations(): void {
+  private operationsCreate(): void {
     this.total.expenseCredit = this.total.expenseCredit + this.getValue;
     this.total.totalCredit = this.total.totalCredit + this.getValue;
+  }
+
+  private operationsDelete(value: number): void {
+    this.total.expenseCredit = this.total.expenseCredit - value;
+    this.total.totalCredit = this.total.totalCredit - value;
   }
 
 }

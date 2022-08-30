@@ -16,5 +16,6 @@
     [expenses]="expenses"
     [loading]="loading"
     [type]="'Efectivo'"
+    (eventEmiterItem)="deleteItem($event)"
   ></app-expenses-list>
 </ion-content>

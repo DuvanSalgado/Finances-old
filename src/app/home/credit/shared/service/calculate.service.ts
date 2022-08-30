@@ -35,7 +35,7 @@ export class CalculateService {
       })));
   }
 
-  public async calculate(data: ITotal, month: number): Promise<void | DocumentReference<any>> {
+  public async calculate(data: ITotal, month?: number): Promise<void | DocumentReference<any>> {
     this.itemsCollection = this.fireBase.collection<any>('total');
     if (data.id) {
       return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));

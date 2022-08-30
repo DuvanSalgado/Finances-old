@@ -23,6 +23,11 @@ export class ExpensesService {
       })));
   }
 
+  deleteItem(id: string, table: string): Promise<void> {
+    this.itemsCollection = this.fireBase.collection<any>(table);
+    return this.itemsCollection.doc(id).delete();
+  }
+
   create(data: IExpensesModel, table: string): Promise<DocumentReference<any>> {
     this.itemsCollection = this.fireBase.collection<IExpensesModel>(table);
     return this.itemsCollection.add(JSON.parse(JSON.stringify(data)));

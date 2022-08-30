@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { mensages } from '../../shared/model/menssage';
 import { CalculateService } from '../../shared/service/calculate.service';
 import { ExpenseModel } from '../shared/model/expense.model';
+import { IExpensesModel } from '../shared/model/interfaces/expenses';
 import { ExpensesService } from '../shared/services/expenses.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     protected modalController: ModalController,
     private expensesService: ExpensesService,
     private loadingService: LoadingService,
-    private calculateService: CalculateService
+    private calculateService: CalculateService,
+    private alertController: AlertController
   ) {
     super(formBuilder, modalController);
   }
@@ -47,6 +49,24 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     this.getData(month);
   }
 
+  public async deleteItem(item: IExpensesModel): Promise<void> {
+    const alert = await this.alertController.create({
+      header: '¿Esta seguro?',
+      cssClass: 'custom-alert',
+      backdropDismiss: false,
+      buttons: [{ text: 'No', role: 'cancel' },
+      {
+        text: 'Si', role: 'confirm',
+        handler: () => {
+          this.deleteItemService(item);
+        },
+      },
+      ],
+    });
+
+    await alert.present();
+  }
+
   private formExpenseCash(): void {
     this.formGroup
       .patchValue({ [this.formCtrl.icon]: { icon: 'cash-outline', labelColor: 'success' } });
@@ -69,7 +89,7 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
   }
 
   private async saveExpensesCash(): Promise<void> {
-    this.operations();
+    this.operationsCreate();
     this.loadingService.presentLoading();
 
     try {
@@ -85,9 +105,26 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     this.loadingService.dismiss();
   }
 
-  private operations(): void {
+  private async deleteItemService(item: IExpensesModel): Promise<void> {
+    this.operationsDelete(item.value);
+    try {
+      await this.expensesService.deleteItem(item.id, 'expensesCash');
+      await this.calculateService.calculate(this.total);
+      await this.calculateService.cashGeneral(this.cashGeneral);
+    } catch (error) {
+      this.loadingService.presentToast(error);
+    }
+
+  }
+
+  private operationsCreate(): void {
     this.cashGeneral.value = this.cashGeneral.value - this.getValue;
     this.total.expenseCash = this.total.expenseCash + this.getValue;
+  }
+
+  private operationsDelete(value: number): void {
+    this.cashGeneral.value = this.cashGeneral.value + +value;
+    this.total.expenseCash = this.total.expenseCash - value;
   }
 
 }
