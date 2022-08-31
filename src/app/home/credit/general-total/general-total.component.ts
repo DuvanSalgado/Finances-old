@@ -32,7 +32,6 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadingService.presentLoading();
     this.getData(this.currentMonth);
   }
 
@@ -55,7 +54,8 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getData(month: number): void {
+  private async getData(month: number): Promise<void> {
+    await this.loadingService.presentLoading();
     this.subscription = this.calculateService.getAll(month)
       .subscribe((data) => {
         if (data.length > 0) { this.total = data[0]; }
