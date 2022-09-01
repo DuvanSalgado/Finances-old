@@ -28,7 +28,9 @@ export class AddButtonsComponent implements OnInit, OnDestroy {
   }
 
   public refresh(): void {
-    this.month.patchValue({ name: '', id: this.currentMonth });
+    this.month.setValue({ name: '', id: this.currentMonth }, {
+      emitEvent: false
+    });
   }
 
   private valueChanges(): void {
