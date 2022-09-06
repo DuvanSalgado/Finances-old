@@ -45,6 +45,8 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
   }
 
   public valueChanges(month: number): void {
+    this.loading = true;
+    this.expenses = [];
     this.monthSelect = this.month !== month;
     this.getData(month);
   }

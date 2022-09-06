@@ -10,7 +10,7 @@
       <h3>Descripcion: {{ item.description }}</h3>
       <p>Fecha: {{ item.date | date }}</p>
     </ion-label>
-    <ion-button (click)="deleteItem(item)" fill="clear">
+    <ion-button [disabled]="disabled" (click)="deleteItem(item)" fill="clear">
       <ion-icon color="danger" name="trash-outline"></ion-icon>
     </ion-button>
   </ion-item>

@@ -11,13 +11,11 @@ export class AddButtonsComponent implements OnInit, OnDestroy {
 
   @Output() changeEvent = new EventEmitter<number>();
 
-  public itemsmonth = ITEMSMONTH;
+  public itemsmonth = ITEMSMONTH.filter(data => data.id <= new Date().getMonth());
   public currentMonth = new Date().getMonth();
   public month = new FormControl({ name: '', id: this.currentMonth });
 
   private subscription: Subscription;
-
-  constructor() { }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

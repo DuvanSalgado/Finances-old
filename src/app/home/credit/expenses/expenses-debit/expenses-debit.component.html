@@ -17,6 +17,7 @@
       [expenses]="expenses"
       [loading]="loading"
       [type]="'Debito'"
+      [disabled]="disableButton || monthSelect"
       (eventEmiterItem)="deleteItem($event)"
     ></app-expenses-list>
   </ion-content>

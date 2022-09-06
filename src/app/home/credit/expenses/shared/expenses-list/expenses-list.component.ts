@@ -11,6 +11,7 @@ export class ExpensesListComponent {
   @Input() expenses: Array<IExpensesModel> = [];
   @Input() type: string;
   @Input() loading: boolean;
+  @Input() disabled: boolean;
   @Output() eventEmiterItem = new EventEmitter<IExpensesModel>();
 
   public deleteItem(item: IExpensesModel): void {

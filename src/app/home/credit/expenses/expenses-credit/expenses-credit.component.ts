@@ -45,6 +45,8 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit, OnD
   }
 
   public valueChanges(month: number): void {
+    this.loading = true;
+    this.expenses = [];
     this.monthSelect = this.month !== month;
     this.getData(month);
   }
