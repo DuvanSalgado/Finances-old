@@ -116,8 +116,8 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     } catch (error) {
       this.loadingService.presentToast(error);
     }
-
   }
+
 
   private operationsCreate(): void {
     this.cashGeneral.value = this.cashGeneral.value - this.getValue;
