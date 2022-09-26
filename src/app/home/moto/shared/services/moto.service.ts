@@ -35,7 +35,7 @@ export class MotoService {
       })));
   }
 
-  create(data: IMoto): Promise<DocumentReference<any>> {
+ public create(data: IMoto): Promise<DocumentReference<any>> {
     this.itemsCollection = this.fireBase.collection<IMoto>('CambioAceite');
     return this.itemsCollection.add(JSON.parse(JSON.stringify(data)));
   }

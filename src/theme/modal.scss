@@ -38,7 +38,7 @@
   }
 }
 
-.cash-modal{
+.cash-modal {
   &::part(content) {
     height: 180px;
     width: 90%;
@@ -47,6 +47,14 @@
 }
 
 .cambio-aceite-modal {
+  &::part(content) {
+    height: 200px;
+    width: 90%;
+    border-radius: 10px;
+  }
+}
+
+.investments-create {
   &::part(content) {
     height: 200px;
     width: 90%;

@@ -8,9 +8,11 @@ import { Auth } from '@angular/fire/auth';
 })
 export class SidebarComponent {
 
+  //trasladar a la base de datos.
   public appPages = [
     { title: 'Credito', url: 'credit', icon: 'bar-chart-outline' },
-    { title: 'Km/moto', url: 'moto', icon: 'bicycle-outline' }
+    { title: 'Km/moto', url: 'moto', icon: 'bicycle-outline' },
+    { title: 'Inversiones', url: 'investments', icon: 'stats-chart-outline' }
   ];
 
   constructor(
