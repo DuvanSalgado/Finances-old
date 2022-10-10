@@ -39,6 +39,7 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
   }
 
   public async openModalPayments(data: IcreditModel): Promise<void> {
+    this.getTotal(this.month);
     this.formLoansPayments(data);
     this.disableButton = true;
     await this.openModalPaymentsController();
@@ -48,6 +49,7 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
   }
 
   public async openModalAddValue(data: IcreditModel): Promise<void> {
+    this.getTotal(this.month);
     this.formLoansAddValue(data);
     this.disableButton = true;
     await this.openModalAddValueController();
@@ -57,6 +59,7 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
   }
 
   public async openModalCreate(): Promise<void> {
+    this.getTotal(this.month);
     this.formLoansCreate();
     this.formLoansDebit();
     this.disableButton = true;
@@ -134,13 +137,19 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
         this.loading = false;
       });
 
-    this.subscription.add(this.calculateService.getAll(month)
-      .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
-      ));
-
     this.subscription.add(this.calculateService.getAllCash()
       .subscribe((data) => { if (data.length > 0) { this.cashGeneral = data[0]; } }
       ));
+  }
+
+  private getTotal(month: number): void {
+    this.calculateService.getAll(month)
+      .subscribe((data) => {
+        if (data.length > 0) {
+          this.total = data[0]; console.log(data[0]);
+        }
+      }
+      );
   }
 
   private formLoansDebit(): void {
