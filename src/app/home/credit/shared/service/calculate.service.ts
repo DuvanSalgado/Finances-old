@@ -8,11 +8,15 @@ import { map } from 'rxjs/operators';
 export class CalculateService {
 
   private itemsCollection: AngularFirestoreCollection<any>;
+  private year = new Date().getFullYear();
 
   constructor(private fireBase: AngularFirestore) { }
 
   public getAll(month: number): Observable<Array<ITotal>> {
-    this.itemsCollection = this.fireBase.collection<any>('total', ref => ref.where('month', '==', month));
+    this.itemsCollection = this.fireBase
+      .collection<any>('total', ref => ref.where('month', '==', month).
+        where('year', '==', this.year));
+
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {

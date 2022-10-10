@@ -11,8 +11,10 @@ export enum FormCreditCtrl {
   history = 'history',
   type = 'type',
   id = 'id',
-  icon = 'icon'
+  icon = 'icon',
+  year = 'year'
 }
+
 
 export enum FormExpensesCtrl {
   id = 'id',
@@ -21,7 +23,8 @@ export enum FormExpensesCtrl {
   date = 'date',
   type = 'type',
   description = 'description',
-  icon = 'icon'
+  icon = 'icon',
+  year = 'year'
 }
 
 export enum FormShared {

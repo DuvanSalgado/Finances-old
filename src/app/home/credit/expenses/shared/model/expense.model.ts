@@ -19,6 +19,7 @@ export class ExpenseModel {
 
   protected modal: HTMLIonModalElement;
   protected month = new Date().getMonth();
+  protected year = new Date().getFullYear();
   protected total: ITotal = new InicTotal().total;
   protected subscription: Subscription;
 
@@ -41,6 +42,7 @@ export class ExpenseModel {
       [this.formCtrl.description]: [null, Validators.required],
       [this.formCtrl.date]: [this.todayDate],
       [this.formCtrl.month]: [this.todayDate.getMonth()],
+      [this.formCtrl.year]:[this.todayDate.getFullYear()],
       [this.formCtrl.icon]: [null]
     });
   }

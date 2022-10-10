@@ -9,6 +9,7 @@ import { LoansModalCreateComponent } from '../loans-modal-create/loans-modal-cre
 import { LoansModalAddValueComponent } from '../loans-modal-add-value/loans-modal-add-value.component';
 import { LoansModalPaymentsComponent } from '../loans-modal-payments/loans-modal-payments.component';
 import { LoansModalDetailsComponent } from '../loans-modal-details/loans-modal-details.component';
+import { ICombobox } from '@app/shared/combobox/model/combobox.interface';
 
 export class LoansModel {
 
@@ -37,6 +38,9 @@ export class LoansModel {
     return parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
   }
 
+  protected get getPaymentMethod(): ICombobox{
+    return this.formGroup.get(this.formCtrl.paymentMethod)?.value;
+  }
   protected get getPendingValue(): number {
     return parseInt(this.formGroup.get(this.formCtrl.pendingValue).value, 10);
   }
@@ -65,6 +69,7 @@ export class LoansModel {
       [this.formCtrl.fullValue]: [0],
       [this.formCtrl.type]: [null],
       [this.formCtrl.month]: [this.todayDate.getMonth()],
+      [this.formCtrl.year]:[this.todayDate.getFullYear()],
       [this.formCtrl.date]: [this.todayDate],
       [this.formCtrl.paymentMethod]: [null],
       [this.formCtrl.icon]: [null],
@@ -147,7 +152,8 @@ export class LoansModel {
     this.formGroup.controls[this.formCtrl.history].value.push({
       date: this.todayDate,
       value: this.getValue,
-      type
+      type,
+      paymentMethod: this.getPaymentMethod
     });
   }
 

@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 export class LoansService {
 
   private itemsCollection: AngularFirestoreCollection<any>;
+  private year = new Date().getFullYear();
 
   constructor(private fireBase: AngularFirestore) { }
 
@@ -21,10 +22,10 @@ export class LoansService {
     return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));
   }
 
-
   public getAllCreditMonth(month: number, table: string): Observable<Array<IcreditModel>> {
     this.itemsCollection = this.fireBase
-      .collection<IcreditModel[]>(table, (ref) => ref.where('month', '==', month));
+      .collection<IcreditModel[]>(table, (ref) => ref.where('month', '==', month)
+        .where('year', '==', this.year));
 
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {

@@ -6,6 +6,7 @@ export interface IExpensesModel {
   description: string;
   date: Date;
   month: number;
+  year: number;
   type: string;
   icon: Iicons;
 }

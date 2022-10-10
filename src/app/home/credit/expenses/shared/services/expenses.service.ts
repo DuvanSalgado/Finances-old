@@ -8,11 +8,14 @@ import { IExpensesModel } from '../model/interfaces/expenses';
 export class ExpensesService {
 
   private itemsCollection: AngularFirestoreCollection<any>;
+  private year = new Date().getFullYear();
 
   constructor(private fireBase: AngularFirestore) { }
 
   getAllForMont(month: number, table: string): Observable<Array<IExpensesModel>> {
-    this.itemsCollection = this.fireBase.collection<IExpensesModel[]>(table, ref => ref.where('month', '==', month));
+    this.itemsCollection = this.fireBase
+      .collection<IExpensesModel[]>(table, ref => ref.where('month', '==', month)
+        .where('year', '==', this.year));
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {

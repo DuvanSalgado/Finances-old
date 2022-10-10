@@ -9,18 +9,20 @@ export interface IcreditModel {
   status: ICombobox;
   operation: ICombobox;
   icon: Iicons;
+  paymentMethod: ICombobox;
   fullValue: number;
   date: Date;
   paidValue: number;
   history: IHistory[];
 }
 
-export type IHistory = Pick<IcreditModel, 'date' | 'value' | 'type'>;
+export type IHistory = Pick<IcreditModel, 'date' | 'value' | 'type' | 'paymentMethod'>;
 
 
 export interface ITotal {
   id?: string;
   month?: number;
+  year?: number;
 
   expenseCredit?: number;
   expenseDebit?: number;
