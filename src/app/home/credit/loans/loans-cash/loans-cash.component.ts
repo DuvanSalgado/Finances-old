@@ -30,12 +30,12 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
   }
 
   ngOnInit(): void {
-    this.getData(this.month);
+    this.getData();
   }
 
   public valueChanges(month: number): void {
     this.monthSelect = this.month !== month;
-    this.getData(month);
+    this.getData();
   }
 
   public async openModalPaymentsCash(data: IcreditModel): Promise<void> {
@@ -127,8 +127,8 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
     this.loadingService.dismiss();
   }
 
-  private getData(month: number): void {
-    this.subscription = this.loansService.getAllCreditMonth(month, 'loansCash')
+  private getData(): void {
+    this.subscription = this.loansService.getAllCreditMonth('loansCash')
       .subscribe((data) => {
         this.loans = data;
 

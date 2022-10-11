@@ -26,7 +26,7 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
   }
 
   ngOnInit(): void {
-    this.getData(this.month);
+    this.getData();
   }
 
   ngOnDestroy(): void {
@@ -35,7 +35,7 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
 
   public valueChanges(month: number): void {
     this.monthSelect = this.month !== month;
-    this.getData(month);
+    this.getData();
   }
 
   public async openModalPayments(data: IcreditModel): Promise<void> {
@@ -113,8 +113,8 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
 
   }
 
-  private getData(month: number): void {
-    this.subscription = this.loansService.getAllCreditMonth(month, 'loansCredit')
+  private getData(): void {
+    this.subscription = this.loansService.getAllCreditMonth('loansCredit')
       .subscribe((data) => {
         this.loans = data;
 
