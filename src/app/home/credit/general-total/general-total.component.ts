@@ -59,13 +59,13 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
     this.subscription = this.calculateService.getAll(month)
       .subscribe((data) => {
         if (data.length > 0) { this.total = data[0]; }
-      });
 
-    this.subscription.add(this.calculateService.getAllCash()
-      .subscribe((data) => {
-        this.cashGeneral = data[0];
-        this.loadingService.dismiss();
-      }));
+        this.subscription.add(this.calculateService.getAllCash()
+          .subscribe((cash) => {
+            this.cashGeneral = cash[0];
+            this.loadingService.dismiss();
+          }));
+      });
   }
 
 }

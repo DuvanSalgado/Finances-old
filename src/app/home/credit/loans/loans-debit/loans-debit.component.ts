@@ -35,7 +35,8 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
 
   public valueChanges(month: number): void {
     this.monthSelect = this.month !== month;
-    this.getData();
+    if (!this.monthSelect) { this.getData(); }
+    else { this.getDataMonth(month); }
   }
 
   public async openModalPayments(data: IcreditModel): Promise<void> {
@@ -131,7 +132,7 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
   }
 
   private getData(): void {
-    this.subscription = this.loansService.getAllCreditMonth('loansDebit')
+    this.subscription = this.loansService.getAllCredit('loansDebit')
       .subscribe((data) => {
         this.loans = data;
 
@@ -141,6 +142,11 @@ export class LoansDebitComponent extends LoansModel implements OnInit, OnDestroy
             this.loading = false;
           }));
       });
+  }
+
+  private getDataMonth(month: number): void {
+    this.subscription.add(this.loansService.getAllCreditMonth(month, 'loansDebit')
+      .subscribe(resp => this.loans = resp));
   }
 
   private getTotal(month: number): void {

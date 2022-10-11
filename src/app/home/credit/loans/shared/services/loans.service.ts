@@ -22,10 +22,25 @@ export class LoansService {
     return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));
   }
 
-  public getAllCreditMonth(table: string): Observable<Array<IcreditModel>> {
+  public getAllCredit(table: string): Observable<Array<IcreditModel>> {
     this.itemsCollection = this.fireBase
       .collection<IcreditModel[]>(table, (ref) => ref.where('year', '==', this.year)
         .where('fullValue', '>', 0));
+
+    return this.itemsCollection.snapshotChanges().pipe(
+      map(data => data.map((d) => {
+        const retorno = {
+          ...d.payload.doc.data(),
+          id: d.payload.doc.id
+        };
+        return retorno;
+      })));
+  }
+
+  public getAllCreditMonth(month: number, table: string): Observable<Array<IcreditModel>> {
+    this.itemsCollection = this.fireBase
+      .collection<IcreditModel[]>(table, (ref) => ref.where('year', '==', this.year)
+        .where('month', '==', month));
 
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
