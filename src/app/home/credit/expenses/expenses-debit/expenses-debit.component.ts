@@ -86,14 +86,12 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit, OnDe
   private getData(month: number): void {
     this.subscription = this.expensesService.getAllForMont(month, 'expensesDebit')
       .subscribe((data) => {
-        this.loading = false;
         this.expenses = data;
+
+        this.subscription.add(this.calculateService.getAll(month)
+          .subscribe((total) => { if (total.length > 0) { this.total = total[0]; } this.loading = false; }
+          ));
       }, (error) => this.loadingService.presentToast(error));
-
-    this.subscription.add(this.calculateService.getAll(month)
-      .subscribe((data) => { if (data.length > 0) { this.total = data[0]; } }
-      ));
-
   }
 
   private async saveExpensesCash(): Promise<void> {
