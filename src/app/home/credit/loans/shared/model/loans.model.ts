@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IcashGeneral, IcreditModel, ITotal } from '@app/home/credit/shared/model/credit.interface';
 import { FormCreditCtrl } from '@app/home/credit/shared/model/formCredit.enum';
 import { InicTotal } from '@app/home/credit/shared/model/initTotal';
@@ -38,7 +38,11 @@ export class LoansModel {
     return parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
   }
 
-  protected get getPaymentMethod(): ICombobox{
+  protected get getReason(): string {
+    return this.formGroup.get(this.formCtrl.reason)?.value;
+  }
+
+  protected get getPaymentMethod(): ICombobox {
     return this.formGroup.get(this.formCtrl.paymentMethod)?.value;
   }
   protected get getPendingValue(): number {
@@ -63,17 +67,19 @@ export class LoansModel {
   protected formLoansCreate(): void {
     this.formGroup = this.formBuilder.group({
       [this.formCtrl.name]: [null, Validators.required],
+      [this.formCtrl.reason]: [null, Validators.required],
       [this.formCtrl.value]: [null, [Validators.required, Validators.min(0)]],
       [this.formCtrl.pendingValue]: [0],
       [this.formCtrl.paidValue]: [0],
       [this.formCtrl.fullValue]: [0],
       [this.formCtrl.type]: [null],
       [this.formCtrl.month]: [this.todayDate.getMonth()],
-      [this.formCtrl.year]:[this.todayDate.getFullYear()],
+      [this.formCtrl.year]: [this.todayDate.getFullYear()],
       [this.formCtrl.date]: [this.todayDate],
       [this.formCtrl.paymentMethod]: [null],
       [this.formCtrl.icon]: [null],
-      [this.formCtrl.history]: [[]]
+      [this.formCtrl.historyLoan]: [[]],
+      [this.formCtrl.historyPayment]: [[]]
     });
   }
 
@@ -81,12 +87,14 @@ export class LoansModel {
     this.formGroup = this.formBuilder.group({
       [this.formCtrl.id]: [data.id],
       [this.formCtrl.name]: [data.name],
+      [this.formCtrl.reason]: [null, Validators.required],
       [this.formCtrl.icon]: [data.icon],
       [this.formCtrl.value]: [null, [Validators.required, Validators.min(0)]],
       [this.formCtrl.pendingValue]: [data.pendingValue],
       [this.formCtrl.fullValue]: [data.fullValue],
       [this.formCtrl.type]: [data.type],
-      [this.formCtrl.history]: [data.history]
+      [this.formCtrl.historyLoan]: [data.historyLoan],
+      [this.formCtrl.historyPayment]: [data.historyPayment]
     });
   }
 
@@ -100,7 +108,8 @@ export class LoansModel {
       [this.formCtrl.paidValue]: [data.paidValue],
       [this.formCtrl.type]: [data.type],
       [this.formCtrl.paymentMethod]: [null, Validators.required],
-      [this.formCtrl.history]: [data.history]
+      [this.formCtrl.historyLoan]: [data.historyLoan],
+      [this.formCtrl.historyPayment]: [data.historyPayment]
     });
   }
 
@@ -148,30 +157,40 @@ export class LoansModel {
     });
   }
 
-  protected setHistory(type: string): void {
-    this.formGroup.controls[this.formCtrl.history].value.push({
+  protected setHistoryPayment(): void {
+    this.formGroup.controls[this.formCtrl.historyPayment].value.push({
       date: this.todayDate,
       value: this.getValue,
-      type,
       paymentMethod: this.getPaymentMethod
+    });
+  }
+
+  protected setHistoryLoan(): void {
+    this.formGroup.controls[this.formCtrl.historyLoan].value.push({
+      date: this.todayDate,
+      value: this.getValue,
+      reason: this.getReason
     });
   }
 
   protected resetFormCreate(): void {
     this.formGroup.controls[this.formCtrl.value].reset();
     this.formGroup.controls[this.formCtrl.name].reset();
-    this.formGroup.controls[this.formCtrl.history].patchValue([]);
+    this.formGroup.controls[this.formCtrl.historyLoan].patchValue([]);
+    this.formGroup.controls[this.formCtrl.historyLoan].patchValue([]);
   }
 
   protected resetFormAddValue(): void {
     this.formGroup.controls[this.formCtrl.value].reset();
-    this.formGroup.controls[this.formCtrl.history].patchValue([]);
+    this.formGroup.controls[this.formCtrl.historyLoan].patchValue([]);
+    this.formGroup.controls[this.formCtrl.historyLoan].patchValue([]);
   }
 
   protected resetFormPayments(): void {
     this.formGroup.controls[this.formCtrl.value].reset();
-    this.formGroup.controls[this.formCtrl.history].patchValue([]);
     this.formGroup.controls[this.formCtrl.paymentMethod].reset();
+    this.formGroup.controls[this.formCtrl.historyLoan].patchValue([]);
+    this.formGroup.controls[this.formCtrl.historyLoan].patchValue([]);
   }
 
   private async openModalViewController(data: IcreditModel): Promise<void> {

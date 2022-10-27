@@ -31,6 +31,17 @@
             ></app-currency-input>
           </ion-col>
         </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Motivo</ion-label>
+              <ion-textarea
+                placeholder="Motivo"
+                [formControlName]="formCtrl.reason"
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
       </ion-list>
     </form>
   </div>

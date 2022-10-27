@@ -1,6 +1,7 @@
 export enum FormCreditCtrl {
   name = 'name',
   value = 'value',
+  reason = 'reason',
   fullValue = 'fullValue',
   paidValue = 'paidValue',
   pendingValue = 'pendingValue',
@@ -8,7 +9,8 @@ export enum FormCreditCtrl {
   operations = 'operations',
   paymentMethod = 'paymentMethod',
   date = 'date',
-  history = 'history',
+  historyLoan = 'historyLoan',
+  historyPayment = 'historyPayment',
   type = 'type',
   id = 'id',
   icon = 'icon',

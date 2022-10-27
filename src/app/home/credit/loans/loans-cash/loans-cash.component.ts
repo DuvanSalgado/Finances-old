@@ -71,7 +71,7 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
   }
 
   private async addValueCash(): Promise<void> {
-    this.setHistory('Prestamo');
+    this.setHistoryLoan();
     this.patchValueItem();
     this.operations();
     this.loadingService.presentLoading();
@@ -91,7 +91,7 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
   }
 
   private async saveloansCash(): Promise<void> {
-    this.setHistory('Prestamo');
+    this.setHistoryLoan();
     this.patchValueItem();
     this.operations();
     this.loadingService.presentLoading();
@@ -110,7 +110,7 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
   }
 
   private async updatePaymentsCash(): Promise<void> {
-    this.setHistory('Abono');
+    this.setHistoryPayment();
     this.patchValuePayments();
     this.operationsPayments();
     this.loadingService.presentLoading();

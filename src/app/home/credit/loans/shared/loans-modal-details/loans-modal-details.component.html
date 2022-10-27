@@ -47,23 +47,39 @@
   </ion-card-content>
 </ion-card>
 
+<div class="title">
+  <ion-title>Prestamos</ion-title>
+  <ion-title>Abonos</ion-title>
+</div>
+
 <ion-content>
-  <div class="ionic-list">
-    <ion-list *ngFor="let item of data.history">
-      <ion-item>
-        <ion-label>
-          <h3>
-            Valor: {{ item?.value | currency: "COP":"symbol-narrow":"1.0-0" }}
-          </h3>
-          <h3>Fecha: {{ item?.date | date }}</h3>
-        </ion-label>
-        <ion-label>
-          <ion-text [color]="data.icon.labelColor">
-            {{ item.type }} - {{ item?.paymentMethod?.name }}
-          </ion-text>
-        </ion-label>
-      </ion-item>
-    </ion-list>
+  <div class="list_contain">
+    <div class="list_contain_item">
+      <ion-list *ngFor="let item of data.historyLoan">
+        <ion-item>
+          <ion-label>
+            <h3>
+              Valor: {{ item?.value | currency: "COP":"symbol-narrow":"1.0-0" }}
+            </h3>
+            <h3>Motivo: {{ item?.reason }}</h3>
+            <p>Fecha: {{ item?.date | date }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="list_contain_item">
+      <ion-list *ngFor="let item of data.historyPayment">
+        <ion-item>
+          <ion-label>
+            <h3>
+              Valor: {{ item?.value | currency: "COP":"symbol-narrow":"1.0-0" }}
+            </h3>
+            <h3>Metodo: {{ item?.paymentMethod?.name }}</h3>
+            <p>Fecha: {{ item?.date | date }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
 </ion-content>
 

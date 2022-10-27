@@ -8,7 +8,7 @@
 
 .loans-modal-create {
   &::part(content) {
-    height: 265px;
+    height: 350px;
     width: 86%;
     border-radius: 10px;
   }
@@ -24,7 +24,7 @@
 
 .view-modal {
   &::part(content) {
-    height: 500px;
+    height: 96%;
     width: 98%;
     border-radius: 10px;
   }
@@ -32,7 +32,7 @@
 
 .add-value-modal {
   &::part(content) {
-    height: 200px;
+    height: 300px;
     width: 90%;
     border-radius: 10px;
   }

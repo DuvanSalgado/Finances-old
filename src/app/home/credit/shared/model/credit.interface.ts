@@ -12,12 +12,14 @@ export interface IcreditModel {
   paymentMethod: ICombobox;
   fullValue: number;
   date: Date;
+  reason: string;
   paidValue: number;
-  history: IHistory[];
+  historyLoan: IHistoryLoan[];
+  historyPayment: IhistoryPayment[];
 }
 
-export type IHistory = Pick<IcreditModel, 'date' | 'value' | 'type' | 'paymentMethod'>;
-
+export type IHistoryLoan = Pick<IcreditModel, 'date' | 'value' | 'reason'>;
+export type IhistoryPayment = Pick<IcreditModel, 'date' | 'value' |'paymentMethod'>;
 
 export interface ITotal {
   id?: string;
