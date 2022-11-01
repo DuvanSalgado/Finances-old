@@ -61,7 +61,9 @@
             <h3>
               Valor: {{ item?.value | currency: "COP":"symbol-narrow":"1.0-0" }}
             </h3>
-            <h3>Motivo: {{ item?.reason }}</h3>
+            <h3 class="reason">
+              Motivo: <samp class="reason_item"> {{ item?.reason }}</samp>
+            </h3>
             <p>Fecha: {{ item?.date | date }}</p>
           </ion-label>
         </ion-item>

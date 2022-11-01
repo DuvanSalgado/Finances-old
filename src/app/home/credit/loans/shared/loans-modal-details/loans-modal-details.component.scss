@@ -13,6 +13,20 @@
   }
 }
 
+.reason {
+  display: flex;
+  &_item {
+    display: flex;
+    overflow: scroll;
+    margin-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.reason_item::-webkit-scrollbar {
+  display: none;
+}
+
 .title {
   display: flex;
   margin-bottom: 8px;

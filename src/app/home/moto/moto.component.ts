@@ -28,7 +28,7 @@ export class MotoComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private motoService: MotoService,
     private loadingService: LoadingService
-    ) { }
+  ) { }
 
   ngOnDestroy(): void {
     if (this.subscription) { this.subscription.unsubscribe(); }
@@ -70,12 +70,14 @@ export class MotoComponent implements OnInit, OnDestroy {
 
   private getData(month: number): void {
     this.subscription = this.motoService.getAll(month).subscribe(data => {
-      this.data = data[data.length - 1];
+      if (data) { this.data = data[data.length - 1]; }
       this.loadingService.dismiss();
     });
 
     this.subscription.add(this.motoService.getReferencia()
-      .subscribe(ref => this.referencia = +ref[0].value));
+      .subscribe(ref => {
+        if (ref.length > 0) { this.referencia = +ref[0].value; }
+      }));
   }
 
   private resetForm(): void {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 import { IcashGeneral, ITotal } from '@credit/model/credit.interface';
+import { QuerySnapshot } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -8,13 +9,14 @@ import { map } from 'rxjs/operators';
 export class CalculateService {
 
   private itemsCollection: AngularFirestoreCollection<any>;
+  private angularFirestore: any;
   private year = new Date().getFullYear();
 
   constructor(private fireBase: AngularFirestore) { }
 
   public getAll(month: number): Observable<Array<ITotal>> {
     this.itemsCollection = this.fireBase
-      .collection<any>('total', ref => ref.where('month', '==', month).
+      .collection<Array<ITotal>>('total', ref => ref.where('month', '==', month).
         where('year', '==', this.year));
 
     return this.itemsCollection.snapshotChanges().pipe(
@@ -25,6 +27,19 @@ export class CalculateService {
         };
         return retorno;
       })));
+  }
+
+  public async getAllPromise(month: number): Promise<ITotal> {
+    this.angularFirestore = await this.fireBase
+      .collection<ITotal>('total', ref => ref.where('month', '==', month).
+        where('year', '==', this.year)).get().toPromise();
+
+    let data: ITotal;
+    this.angularFirestore.forEach(info => {
+      data = info.data();
+      data.id = info.id;
+    });
+    return data;
   }
 
   public getAllCash(): Observable<Array<IcashGeneral>> {
