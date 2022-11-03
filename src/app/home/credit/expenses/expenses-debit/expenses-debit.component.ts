@@ -57,13 +57,7 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit, OnDe
       cssClass: 'custom-alert',
       backdropDismiss: false,
       buttons: [{ text: 'No', role: 'cancel' },
-      {
-        text: 'Si', role: 'confirm',
-        handler: () => {
-          this.deleteItemService(item);
-        },
-      },
-      ],
+      { text: 'Si', role: 'confirm', handler: () => this.deleteItemService(item) }],
     });
     await alert.present();
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IExpensesModel } from '../model/interfaces/expenses';
+import { IExpensesModel } from '@creditExpenses/model/interfaces/expenses';
 
 @Injectable()
 export class ExpensesService {

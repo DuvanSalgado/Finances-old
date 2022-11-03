@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { FormInvestmetsCtrl } from '../model/formEnumCtrl';
+import { FormInvestmetsCtrl } from '@home/investments/model/formEnumCtrl';
 
 @Component({
   selector: 'app-create-modal',

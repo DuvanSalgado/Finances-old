@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { ModalController } from '@ionic/angular';
-import { IcreditModel } from '../../shared/model/credit.interface';
-import { mensages } from '../../shared/model/menssage';
-import { CalculateService } from '../../shared/service/calculate.service';
-import { LoansModel } from '../shared/model/loans.model';
-import { LoansService } from '../shared/services/loans.service';
+import { IcreditModel } from '@credit/model/credit.interface';
+import { mensages } from '@credit/model/menssage';
+import { CalculateService } from '@credit/service/calculate.service';
+import { LoansModel } from '@creditLoans/model/loans.model';
+import { LoansService } from '@creditLoans/services/loans.service';
 
 @Component({
   selector: 'app-loans-credit',

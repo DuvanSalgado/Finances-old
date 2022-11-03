@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { AlertController, ModalController } from '@ionic/angular';
-import { mensages } from '../../shared/model/menssage';
-import { CalculateService } from '../../shared/service/calculate.service';
-import { ExpenseModel } from '../shared/model/expense.model';
-import { IExpensesModel } from '../shared/model/interfaces/expenses';
-import { ExpensesService } from '../shared/services/expenses.service';
+import { mensages } from '@credit/model/menssage';
+import { CalculateService } from '@credit/service/calculate.service';
+import { ExpenseModel } from '@creditExpenses/model/expense.model';
+import { IExpensesModel } from '@creditExpenses/model/interfaces/expenses';
+import { ExpensesService } from '@creditExpenses/services/expenses.service';
 
 @Component({
   selector: 'app-expenses-cash',
@@ -57,13 +57,7 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
       cssClass: 'custom-alert',
       backdropDismiss: false,
       buttons: [{ text: 'No', role: 'cancel' },
-      {
-        text: 'Si', role: 'confirm',
-        handler: () => {
-          this.deleteItemService(item);
-        },
-      },
-      ],
+      { text: 'Si', role: 'confirm', handler: () => { this.deleteItemService(item); } }],
     });
 
     await alert.present();

@@ -12,27 +12,16 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "@app/*": [
-        "src/app/*"
-      ],
-      "@credit/*":[
-        "src/app/home/credit/shared/*"
-      ],
-      "@home/*": [
-        "src/app/home/*"
-      ],
-      "@shared/*": [
-        "src/app/shared/*"
-      ],
-      "@enviroment/*": [
-        "src/app/enviroments/environment*"
-      ]
-    },
+      "@app/*": ["src/app/*"],
+      "@credit/*": ["src/app/home/credit/shared/*"],
+      "@creditLoans/*": ["src/app/home/credit/loans/shared/*"],
+      "@creditExpenses/*": ["src/app/home/credit/expenses/shared/*"],
+      "@home/*": ["src/app/home/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@enviroment/*": ["src/app/enviroments/environment*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

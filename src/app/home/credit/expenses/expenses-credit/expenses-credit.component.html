@@ -2,7 +2,7 @@
   <ion-button
     fill="outline"
     shape="round"
-    [disabled]="disableButton || monthSelect"
+    [disabled]="disableButton || monthSelect || loading"
     (click)="openModalCreate()"
     color="primary"
     class="button-add"

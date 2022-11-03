@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ITEMSMONTH } from '@shared/combobox/model/data.combobox';
 import { Subscription } from 'rxjs';
-import { ITEMSMONTH } from '../combobox/model/data.combobox';
 
 @Component({
   selector: 'app-add-buttons',

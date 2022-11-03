@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IExpensesModel } from '../model/interfaces/expenses';
+import { IExpensesModel } from '@creditExpenses/model/interfaces/expenses';
 
 @Component({
   selector: 'app-expenses-list',

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormCreditCtrl } from '@app/home/credit/shared/model/formCredit.enum';
 import { ICombobox } from '@app/shared/combobox/model/combobox.interface';
@@ -15,7 +15,6 @@ export class LoansModalPaymentsComponent {
   @Input() formGroup: FormGroup;
   public itemsPayment: Array<ICombobox> = ITEMSPAYMENT;
   public formCtrl = FormCreditCtrl;
-
 
   constructor(private modalController: ModalController) { }
 
