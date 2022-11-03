@@ -130,16 +130,13 @@ export class LoansCashComponent extends LoansModel implements OnInit, OnDestroy 
 
   private getData(): void {
     this.subscription = this.loansService.getAllCredit('loansCash')
-      .subscribe((data) => {
-        this.loans = data;
+      .subscribe((data) => this.loans = data,
+        (error) => this.loadingService.presentToast(error));
 
-        this.subscription.add(this.calculateService.getAllCash()
-          .subscribe((cash) => {
-            if (cash.length > 0) { this.cashGeneral = cash[0]; }
-            this.loading = false;
-          }
-          ));
-      }, (error) => this.loadingService.presentToast(error));
+    this.subscription.add(this.calculateService.getAllCash()
+      .subscribe((cash) => {
+        if (cash.length > 0) { this.cashGeneral = cash[0]; } this.loading = false;
+      }, (error) => this.loadingService.presentToast(error)));
   }
 
   private getDataMonth(month: number): void {

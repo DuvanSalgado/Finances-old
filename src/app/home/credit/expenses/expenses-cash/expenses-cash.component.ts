@@ -57,7 +57,7 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
       cssClass: 'custom-alert',
       backdropDismiss: false,
       buttons: [{ text: 'No', role: 'cancel' },
-      { text: 'Si', role: 'confirm', handler: () => { this.deleteItemService(item); } }],
+      { text: 'Si', role: 'confirm', handler: () => this.deleteItemService(item) }],
     });
 
     await alert.present();
@@ -69,20 +69,20 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
   }
 
   private getData(month: number): void {
+
     this.subscription = this.expensesService.getAllForMont(month, 'expensesCash')
-      .subscribe((data) => {
-        this.expenses = data;
+      .subscribe((data) => this.expenses = data,
+        (error) => this.loadingService.presentToast(error));
 
-        this.subscription.add(this.calculateService.getAll(month)
-          .subscribe((total) => {
-            if (total.length > 0) { this.total = total[0]; }
+    this.subscription.add(this.calculateService.getAll(month)
+      .subscribe((total) => {
+        if (total.length > 0) { this.total = total[0]; }
+      }, (error) => this.loadingService.presentToast(error)));
 
-            this.subscription.add(this.calculateService.getAllCash()
-              .subscribe((cash) => { if (cash.length > 0) { this.cashGeneral = cash[0]; } this.loading = false; }
-              ));
-          }
-          ));
-      }, (error) => this.loadingService.presentToast(error));
+    this.subscription.add(this.calculateService.getAllCash()
+      .subscribe((cash) => {
+        if (cash.length > 0) { this.cashGeneral = cash[0]; } this.loading = false;
+      }, (error) => this.loadingService.presentToast(error)));
 
   }
 

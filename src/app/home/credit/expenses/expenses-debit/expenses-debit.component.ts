@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { AlertController, ModalController } from '@ionic/angular';
-import { mensages } from '../../shared/model/menssage';
-import { CalculateService } from '../../shared/service/calculate.service';
-import { ExpenseModel } from '../shared/model/expense.model';
-import { IExpensesModel } from '../shared/model/interfaces/expenses';
-import { ExpensesService } from '../shared/services/expenses.service';
+import { mensages } from '@credit/model/menssage';
+import { CalculateService } from '@credit/service/calculate.service';
+import { ExpenseModel } from '@creditExpenses/model/expense.model';
+import { IExpensesModel } from '@creditExpenses/model/interfaces/expenses';
+import { ExpensesService } from '@creditExpenses/services/expenses.service';
 
 @Component({
   selector: 'app-expenses-debit',
@@ -79,13 +79,13 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit, OnDe
 
   private getData(month: number): void {
     this.subscription = this.expensesService.getAllForMont(month, 'expensesDebit')
-      .subscribe((data) => {
-        this.expenses = data;
+      .subscribe((data) => this.expenses = data,
+        (error) => this.loadingService.presentToast(error));
 
-        this.subscription.add(this.calculateService.getAll(month)
-          .subscribe((total) => { if (total.length > 0) { this.total = total[0]; } this.loading = false; }
-          ));
-      }, (error) => this.loadingService.presentToast(error));
+    this.subscription.add(this.calculateService.getAll(month)
+      .subscribe((total) => {
+        if (total.length > 0) { this.total = total[0]; } this.loading = false;
+      }, (error) => this.loadingService.presentToast(error)));
   }
 
   private async saveExpensesCash(): Promise<void> {

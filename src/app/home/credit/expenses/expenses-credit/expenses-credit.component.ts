@@ -79,14 +79,14 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit, OnD
 
   private getData(month: number): void {
     this.subscription = this.expensesService.getAllForMont(month, 'expensesCredit')
-      .subscribe((data) => {
-        this.expenses = data;
+      .subscribe((data) =>
+        this.expenses = data,
+        (error) => this.loadingService.presentToast(error));
 
-        this.subscription.add(this.calculateService.getAll(month)
-          .subscribe((calculate) => {
-            if (calculate.length > 0) { this.total = calculate[0]; } this.loading = false;
-          }));
-      }, (error) => this.loadingService.presentToast(error));
+    this.subscription.add(this.calculateService.getAll(month)
+      .subscribe((calculate) => {
+        if (calculate.length > 0) { this.total = calculate[0]; } this.loading = false;
+      }, (error) => this.loadingService.presentToast(error)));
 
   }
 

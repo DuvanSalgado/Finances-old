@@ -116,14 +116,14 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
 
   private getData(): void {
     this.subscription = this.loansService.getAllCredit('loansCredit')
-      .subscribe((data) => {
-        this.loans = data;
-        this.subscription.add(this.calculateService.getAllCash()
-          .subscribe((cash) => {
-            if (cash.length > 0) { this.cashGeneral = cash[0]; }
-            this.loading = false;
-          }));
-      });
+      .subscribe((data) => this.loans = data,
+        (error) => this.loadingService.presentToast(error));
+
+    this.subscription.add(this.calculateService.getAllCash()
+      .subscribe((cash) => {
+        if (cash.length > 0) { this.cashGeneral = cash[0]; }
+        this.loading = false;
+      }, (error) => this.loadingService.presentToast(error)));
   }
 
   private getDataMonth(month: number): void {
