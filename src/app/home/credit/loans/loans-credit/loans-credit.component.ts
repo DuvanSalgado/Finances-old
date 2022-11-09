@@ -115,20 +115,19 @@ export class LoansCreditComponent extends LoansModel implements OnInit, OnDestro
   }
 
   private getData(): void {
-    this.subscription = this.loansService.getAllCredit('loansCredit')
-      .subscribe((data) => this.loans = data,
-        (error) => this.loadingService.presentToast(error));
 
-    this.subscription.add(this.calculateService.getAllCash()
+    this.subscription = this.calculateService.getAllCash()
       .subscribe((cash) => {
         if (cash.length > 0) { this.cashGeneral = cash[0]; }
+      }, (error) => this.loadingService.presentToast(error));
+
+    this.subscription.add(this.loansService.getAllCredit('loansCredit')
+      .subscribe((loanCredit: IcreditModel[]) => {
+        this.loans = loanCredit.filter(item =>
+          (item.month == this.month) || (item.month != this.month && item.pendingValue > 0));
+        this.loansAll = loanCredit;
         this.loading = false;
       }, (error) => this.loadingService.presentToast(error)));
-  }
-
-  private getDataMonth(month: number): void {
-    this.subscription.add(this.loansService.getAllCreditMonth(month, 'loansCredit')
-      .subscribe(resp => this.loans = resp));
   }
 
   private async getTotal(month: number) {

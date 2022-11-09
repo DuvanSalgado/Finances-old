@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 import { IcreditModel } from '@credit/model/credit.interface';
-import { forkJoin, merge, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -24,31 +24,14 @@ export class LoansService {
 
   public getAllCredit(table: string): Observable<Array<IcreditModel>> {
     this.itemsCollection = this.fireBase
-      .collection<IcreditModel[]>(table, (ref) => ref.where('year', '==', this.year)
-        .where('pendingValue', '>', 0));
+      .collection<IcreditModel[]>(table, (ref) => ref.where('year', '==', this.year));
 
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
-        const retorno = {
+        return {
           ...d.payload.doc.data(),
           id: d.payload.doc.id
-        };
-        return retorno;
-      })));
-  }
-
-  public getAllCreditMonth(month: number, table: string): Observable<Array<IcreditModel>> {
-    this.itemsCollection = this.fireBase
-      .collection<IcreditModel[]>(table, (ref) => ref.where('year', '==', this.year)
-        .where('month', '==', month));
-
-    return this.itemsCollection.snapshotChanges().pipe(
-      map(data => data.map((d) => {
-        const retorno = {
-          ...d.payload.doc.data(),
-          id: d.payload.doc.id
-        };
-        return retorno;
+        }
       })));
   }
 

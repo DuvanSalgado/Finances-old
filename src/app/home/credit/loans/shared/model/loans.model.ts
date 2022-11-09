@@ -26,6 +26,7 @@ export class LoansModel {
   protected modalAddValue: HTMLIonModalElement;
   protected modalPayments: HTMLIonModalElement;
   protected total: ITotal = new InicTotal().total;
+  protected loansAll: Array<IcreditModel> = [];
   protected subscription: Subscription;
   protected todayDate = new Date();
 
@@ -113,6 +114,9 @@ export class LoansModel {
     });
   }
 
+  protected getDataMonth(month: number): void {
+    this.loans = this.loansAll.filter(item => item.month == month);
+  }
   protected async openModalCreateController(): Promise<void> {
     this.modalCreate = await this.modalController.create({
       component: LoansModalCreateComponent,
