@@ -16,7 +16,7 @@ export class ButtonsActionsComponent {
   }
 
   create(): void {
-    this.createEventEmit.emit(true);
+    this.createEventEmit.emit();
   }
 
   cancel(): void {

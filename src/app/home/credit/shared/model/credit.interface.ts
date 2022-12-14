@@ -18,8 +18,13 @@ export interface IcreditModel {
   historyPayment: IhistoryPayment[];
 }
 
-export type IHistoryLoan = Pick<IcreditModel, 'date' | 'value' | 'reason'>;
-export type IhistoryPayment = Pick<IcreditModel, 'date' | 'value' |'paymentMethod'>;
+export interface IHistoryLoan {
+  date: Date;
+  value: number;
+  reason: string;
+  icon: Iicons;
+}
+export type IhistoryPayment = Pick<IcreditModel, 'date' | 'value' | 'paymentMethod'>;
 
 export interface ITotal {
   id?: string;
@@ -33,13 +38,9 @@ export interface ITotal {
   totalCredit?: number;
   totalDebit?: number;
 
-  pendingCredit?: number;
-  pendingDebit?: number;
-  pendingCash?: number;
-
-  paymentCredit?: number;
-  paymentDebit?: number;
-  paymentCash?: number;
+  loansCredit?: number;
+  loansDebit?: number;
+  loansCash?: number;
 }
 
 export interface Iicons {

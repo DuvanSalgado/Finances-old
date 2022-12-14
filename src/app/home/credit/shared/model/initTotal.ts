@@ -11,12 +11,8 @@ export class InicTotal {
     totalCredit: 0,
     totalDebit: 0,
 
-    pendingCredit: 0,
-    pendingDebit: 0,
-    pendingCash: 0,
-
-    paymentCredit: 0,
-    paymentDebit: 0,
-    paymentCash: 0,
+    loansCash: 0,
+    loansDebit: 0,
+    loansCredit: 0
   };
 }

@@ -10,8 +10,13 @@ import { IcreditModel } from '@credit/model/credit.interface';
 export class LoansModalDetailsComponent {
 
   @Input() data: IcreditModel;
+  public segment: string = 'prestamos'
 
   constructor(private modalController: ModalController) { }
+
+  public segmentChanged({ detail }: any): void {
+    this.segment = detail.value;
+  }
 
   public cancel(): void {
     this.modalController.dismiss(false);

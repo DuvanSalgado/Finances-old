@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormCreditCtrl } from '@app/home/credit/shared/model/formCredit.enum';
+import { ICombobox } from '@app/shared/combobox/model/combobox.interface';
+import { ITEMSTYPE } from '@app/shared/combobox/model/data.combobox';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -12,16 +14,15 @@ export class LoansModalCreateComponent {
 
   @Input() formGroup: FormGroup;
   public formCtrl = FormCreditCtrl;
+  public itemsType: Array<ICombobox> = ITEMSTYPE;
 
   constructor(private modalController: ModalController) { }
 
   public async cancelModal(): Promise<void> {
-    this.formGroup.controls[this.formCtrl.name].reset();
-    this.formGroup.controls[this.formCtrl.value].reset();
-    await this.modalController.dismiss(false);
+    await this.modalController.dismiss();
   }
 
-  public async onSaveChange(evet: boolean): Promise<void> {
-    await this.modalController.dismiss(false);
+  public async onSaveChange(): Promise<void> {
+    await this.modalController.dismiss(true);
   }
 }

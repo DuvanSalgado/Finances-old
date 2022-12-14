@@ -32,14 +32,22 @@
               ></ion-input>
             </ion-item>
           </ion-col>
-        </ion-row>
-        <ion-row>
           <ion-col>
             <app-currency-input
               [formControlName]="formCtrl.value"
             ></app-currency-input>
           </ion-col>
         </ion-row>
+        <!--         <ion-row>
+          <ion-col>
+            <app-combobox
+              label="Fuente"
+              [items]="itemsType"
+              [formControlName]="formCtrl.type"
+            >
+            </app-combobox>
+          </ion-col>
+        </ion-row> -->
         <ion-row>
           <ion-col>
             <ion-item>
@@ -60,7 +68,7 @@
   <ion-toolbar>
     <app-buttons-actions
       [disabled]="formGroup.invalid"
-      (createEventEmit)="onSaveChange($event)"
+      (createEventEmit)="onSaveChange()"
       (cancelEventEmit)="cancelModal()"
       [isCreate]="true"
     >

@@ -7,11 +7,11 @@ import { SharedModule } from '@app/shared/shared.module';
 import { SkeletonModule } from '@app/shared/skeleton/skeleton.module';
 import { CalculateService } from '@credit/service/calculate.service';
 import { IonicModule } from '@ionic/angular';
-import { LoansCashComponent } from './loans-cash/loans-cash.component';
-import { LoansCreditComponent } from './loans-credit/loans-credit.component';
-import { LoansDebitComponent } from './loans-debit/loans-debit.component';
 import { LoansComponent } from './loans.component';
 import { LoansRoutingModule } from './loans.routing';
+import { OperationCash } from './operation/operation-cash';
+import { OperationCredit } from './operation/operation-credit';
+import { OperationDebit } from './operation/operation-debit';
 import { LoansModalAddValueComponent } from './shared/loans-modal-add-value/loans-modal-add-value.component';
 import { LoansModalCreateComponent } from './shared/loans-modal-create/loans-modal-create.component';
 import { LoansModalDetailsComponent } from './shared/loans-modal-details/loans-modal-details.component';
@@ -21,12 +21,9 @@ import { LoansModalPaymentsComponent } from './shared/loans-modal-payments/loans
   declarations: [
     LoansComponent,
     LoansModalDetailsComponent,
-    LoansCashComponent,
     LoansModalCreateComponent,
     LoansModalPaymentsComponent,
-    LoansModalAddValueComponent,
-    LoansCreditComponent,
-    LoansDebitComponent
+    LoansModalAddValueComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +36,10 @@ import { LoansModalPaymentsComponent } from './shared/loans-modal-payments/loans
   providers: [
     LoansService,
     LoadingService,
-    CalculateService
+    CalculateService,
+    OperationCredit,
+    OperationCash,
+    OperationDebit
   ]
 })
 export class LoansModule { }

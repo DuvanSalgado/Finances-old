@@ -1,6 +1,8 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title class="ion-text-center"> Detalles - {{ data.type }} </ion-title>
+    <ion-title class="ion-text-center ion-text-capitalize">
+      Prestamo - {{ data.name }}
+    </ion-title>
     <ion-buttons (click)="cancel()" slot="end">
       <ion-button>
         <ion-icon name="close"></ion-icon>
@@ -14,74 +16,69 @@
     <ion-item lines="none">
       <ion-label>
         <h3>
-          Nombre: <b>{{ data.name }} </b>
-        </h3>
-        <h3>
           Total:
-          {{ data.fullValue | currency: "COP":"symbol-narrow":"1.0-0" }}
+          {{ data.fullValue | currency : "COP" : "symbol-narrow" : "1.0-0" }}
         </h3>
         <h3>
           Pendiente:
           <b>
-            {{ data.pendingValue | currency: "COP":"symbol-narrow":"1.0-0" }}
+            {{
+              data.pendingValue | currency : "COP" : "symbol-narrow" : "1.0-0"
+            }}
           </b>
         </h3>
         <h3>
           Pagado:
-          {{ data.paidValue | currency: "COP":"symbol-narrow":"1.0-0" }}
+          {{ data.paidValue | currency : "COP" : "symbol-narrow" : "1.0-0" }}
         </h3>
       </ion-label>
-      <ion-item lines="none">
-        <ion-label class="items-center-label">
-          <ion-icon
-            [name]="data.icon.icon"
-            slot="end"
-            [color]="data.icon.labelColor"
-          ></ion-icon>
-          <ion-label [color]="data.icon.labelColor">
-            {{ data.type }}
-          </ion-label>
-        </ion-label>
-      </ion-item>
     </ion-item>
   </ion-card-content>
 </ion-card>
 
-<div class="title">
-  <ion-title>Prestamos</ion-title>
-  <ion-title>Abonos</ion-title>
-</div>
+<ion-toolbar>
+  <ion-segment (ionChange)="segmentChanged($event)" value="prestamos">
+    <ion-segment-button value="prestamos"> Prestamos </ion-segment-button>
+    <ion-segment-button value="abonos"> Abonos </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
 
 <ion-content>
-  <div class="list_contain">
-    <div class="list_contain_item">
-      <ion-list *ngFor="let item of data.historyLoan">
-        <ion-item>
-          <ion-label>
-            <h3>
-              Valor: {{ item?.value | currency: "COP":"symbol-narrow":"1.0-0" }}
-            </h3>
-            <h3 class="reason">
-              Motivo: <samp class="reason_item"> {{ item?.reason }}</samp>
-            </h3>
-            <p>Fecha: {{ item?.date | date }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
-    <div class="list_contain_item">
-      <ion-list *ngFor="let item of data.historyPayment">
-        <ion-item>
-          <ion-label>
-            <h3>
-              Valor: {{ item?.value | currency: "COP":"symbol-narrow":"1.0-0" }}
-            </h3>
-            <h3>Metodo: {{ item?.paymentMethod?.name }}</h3>
-            <p>Fecha: {{ item?.date | date }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
+  <div *ngIf="'prestamos' == segment">
+    <ion-list *ngFor="let item of data.historyLoan">
+      <ion-item>
+        <ion-icon
+          [name]="item.icon.icon"
+          slot="start"
+          [color]="item.icon.labelColor"
+        ></ion-icon>
+        <ion-label>
+          <h3>
+            Valor:
+            {{ item?.value | currency : "COP" : "symbol-narrow" : "1.0-0" }}
+          </h3>
+          <h3 class="reason">
+            Motivo: <samp class="reason_item"> {{ item?.reason }}</samp>
+          </h3>
+          <p>{{ item?.date | date }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="'abonos' == segment">
+    <ion-list *ngFor="let item of data.historyPayment">
+      <ion-item class="ion-padding-start">
+        <ion-label>
+          <h3>
+            Valor:
+            {{ item?.value | currency : "COP" : "symbol-narrow" : "1.0-0" }}
+          </h3>
+          <h3>Metodo: {{ item?.paymentMethod?.name }}</h3>
+          <p>Fecha: {{ item?.date | date }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>
 

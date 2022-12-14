@@ -16,12 +16,11 @@ export class LoansModalAddValueComponent {
   constructor(private modalController: ModalController) { }
 
   public async cancelModal(): Promise<void> {
-    this.formGroup.controls[this.formCtrl.value].reset();
-    await this.modalController.dismiss(false);
+    await this.modalController.dismiss();
   }
 
   public async onSaveChange(evet: boolean): Promise<void> {
-    await this.modalController.dismiss(false);
+    await this.modalController.dismiss(true);
   }
 
 }
