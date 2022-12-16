@@ -65,7 +65,7 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit, OnDe
   private async deleteItemService(item: IExpensesModel): Promise<void> {
     this.operationsDelete(item.value);
     try {
-      await this.expensesService.deleteItem(item.id, 'expensesDebit');
+      await this.expensesService.deleteItem(item.id, 'ExpensesDebit');
       await this.calculateService.calculate(this.total);
     } catch (error) {
       this.loadingService.presentToast(error);
@@ -78,7 +78,7 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit, OnDe
   }
 
   private getData(month: number): void {
-    this.subscription = this.expensesService.getAllForMont(month, 'expensesDebit')
+    this.subscription = this.expensesService.getAllForMont(month, 'ExpensesDebit')
       .subscribe((data) => this.expenses = data,
         (error) => this.loadingService.presentToast(error));
 
@@ -94,7 +94,7 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit, OnDe
 
     try {
       await this.calculateService.calculate(this.total, this.month);
-      await this.expensesService.create(this.formGroup.value, 'expensesDebit');
+      await this.expensesService.create(this.formGroup.value, 'ExpensesDebit');
       this.loadingService.presentToast(mensages.successful);
     } catch (error) {
       this.loadingService.presentToast(error);

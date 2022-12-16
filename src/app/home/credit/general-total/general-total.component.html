@@ -27,14 +27,29 @@
     <ion-card-content>
       <ion-item lines="none">
         <ion-label>
-          Gastos:
-          {{
-            total?.expenseCash | currency : "COP" : "symbol-narrow" : "1.0-0"
-          }}
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img alt="Gastos" src="../../../../assets/icon/gasto.png" />
+            </ion-avatar>
+            <ion-label>
+              {{
+                total?.expenseCash
+                  | currency : "COP" : "symbol-narrow" : "1.0-0"
+              }}
+            </ion-label>
+          </ion-item>
         </ion-label>
         <ion-label>
-          Prestamos:
-          {{ total?.loansCash | currency : "COP" : "symbol-narrow" : "1.0-0" }}
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img alt="Prestamos" src="../../../../assets/icon/prestamo.png" />
+            </ion-avatar>
+            <ion-label>
+              {{
+                total?.loansCash | currency : "COP" : "symbol-narrow" : "1.0-0"
+              }}
+            </ion-label>
+          </ion-item>
         </ion-label>
       </ion-item>
     </ion-card-content>
@@ -51,17 +66,30 @@
     <ion-card-content>
       <ion-item lines="none">
         <ion-label>
-          Gastos:
-          {{
-            total?.expenseCredit | currency : "COP" : "symbol-narrow" : "1.0-0"
-          }}
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img alt="Gastos" src="../../../../assets/icon/gasto.png" />
+            </ion-avatar>
+            <ion-label>
+              {{
+                total?.expenseCredit
+                  | currency : "COP" : "symbol-narrow" : "1.0-0"
+              }}
+            </ion-label>
+          </ion-item>
         </ion-label>
-
         <ion-label>
-          Prestamos:
-          {{
-            total?.loansCredit | currency : "COP" : "symbol-narrow" : "1.0-0"
-          }}
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img alt="Prestamos" src="../../../../assets/icon/prestamo.png" />
+            </ion-avatar>
+            <ion-label>
+              {{
+                total?.loansCredit
+                  | currency : "COP" : "symbol-narrow" : "1.0-0"
+              }}
+            </ion-label>
+          </ion-item>
         </ion-label>
       </ion-item>
     </ion-card-content>
@@ -78,14 +106,29 @@
     <ion-card-content>
       <ion-item lines="none">
         <ion-label>
-          Gastos:
-          {{
-            total?.expenseDebit | currency : "COP" : "symbol-narrow" : "1.0-0"
-          }}
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img alt="Gastos" src="../../../../assets/icon/gasto.png" />
+            </ion-avatar>
+            <ion-label>
+              {{
+                total?.expenseDebit
+                  | currency : "COP" : "symbol-narrow" : "1.0-0"
+              }}
+            </ion-label>
+          </ion-item>
         </ion-label>
         <ion-label>
-          Prestamos
-          {{ total?.loansDebit | currency : "COP" : "symbol-narrow" : "1.0-0" }}
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img alt="Prestamos" src="../../../../assets/icon/prestamo.png" />
+            </ion-avatar>
+            <ion-label>
+              {{
+                total?.loansDebit | currency : "COP" : "symbol-narrow" : "1.0-0"
+              }}
+            </ion-label>
+          </ion-item>
         </ion-label>
       </ion-item>
     </ion-card-content>

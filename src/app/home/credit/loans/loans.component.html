@@ -68,13 +68,19 @@
                   <ion-icon name="add"></ion-icon>
                 </ion-fab-button>
                 <ion-fab-list side="start">
-                  <ion-fab-button (click)="openModalAddValue(item, operationCredit)">
+                  <ion-fab-button
+                    (click)="openModalAddValue(item, operationCredit)"
+                  >
                     <ion-icon color="warning" name="card-outline"></ion-icon>
                   </ion-fab-button>
-                  <ion-fab-button (click)="openModalAddValue(item, operationDebit)">
+                  <ion-fab-button
+                    (click)="openModalAddValue(item, operationDebit)"
+                  >
                     <ion-icon color="primary" name="reader-outline"></ion-icon>
                   </ion-fab-button>
-                  <ion-fab-button (click)="openModalAddValue(item,operationCash)">
+                  <ion-fab-button
+                    (click)="openModalAddValue(item, operationCash)"
+                  >
                     <ion-icon color="success" name="cash-outline"></ion-icon>
                   </ion-fab-button>
                 </ion-fab-list>
@@ -96,6 +102,14 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
+
+  <ion-item *ngIf="loans.length > 0 && !query">
+    <h5 class="ion-padding-end">Total:</h5>
+    <h5>
+      {{ totalloans | currency : "COP" : "symbol-narrow" : "1.0-0" }}
+    </h5>
+  </ion-item>
+
   <app-sk-loans [loading]="loading"></app-sk-loans>
   <ng-container *ngIf="!(loans.length > 0) && !loading">
     <ion-item lines="none">

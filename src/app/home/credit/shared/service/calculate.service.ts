@@ -15,7 +15,7 @@ export class CalculateService {
 
   public getAll(month: number): Observable<Array<ITotal>> {
     this.itemsCollection = this.fireBase
-      .collection<Array<ITotal>>('total', ref => ref.where('month', '==', month).
+      .collection<Array<ITotal>>('Total', ref => ref.where('month', '==', month).
         where('year', '==', this.year));
 
     return this.itemsCollection.snapshotChanges().pipe(
@@ -30,7 +30,7 @@ export class CalculateService {
 
   public async getAllPromise(month: number): Promise<ITotal> {
     this.angularFirestore = await this.fireBase
-      .collection<ITotal>('total', ref => ref.where('month', '==', month).
+      .collection<ITotal>('Total', ref => ref.where('month', '==', month).
         where('year', '==', this.year)).get().toPromise();
 
     let data: ITotal;
@@ -42,7 +42,7 @@ export class CalculateService {
   }
 
   public getAllCash(): Observable<Array<IcashGeneral>> {
-    this.itemsCollection = this.fireBase.collection<any>('cashGeneral');
+    this.itemsCollection = this.fireBase.collection<any>('CashGeneral');
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
         const retorno = {
@@ -54,7 +54,7 @@ export class CalculateService {
   }
 
   public async calculate(data: ITotal, month?: number): Promise<void | DocumentReference<any>> {
-    this.itemsCollection = this.fireBase.collection<any>('total');
+    this.itemsCollection = this.fireBase.collection<any>('Total');
     if (data.id) {
       return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));
     } else {
@@ -63,7 +63,7 @@ export class CalculateService {
   }
 
   public async cashGeneral(data: IcashGeneral): Promise<void | DocumentReference<any>> {
-    this.itemsCollection = this.fireBase.collection<any>('cashGeneral');
+    this.itemsCollection = this.fireBase.collection<any>('CashGeneral');
     if (data.id) {
       return await this.itemsCollection.doc(data.id).update(JSON.parse(JSON.stringify(data)));
     } else {

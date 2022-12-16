@@ -16,7 +16,7 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
 
   public currentMonth = new Date().getMonth();
   public total: ITotal = new InicTotal().total;
-  public cashGeneral: IcashGeneral;
+  public cashGeneral: IcashGeneral = { value: 0, id: null };
 
   private subscription: Subscription;
   private blockModal = true;
@@ -47,7 +47,7 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
         component: ModalCashComponent,
         cssClass: 'cash-modal',
         backdropDismiss: false,
-        componentProps: { data: this.cashGeneral }
+        componentProps: { cashGeneral: this.cashGeneral }
       });
       await modal.present();
       this.blockModal = await (await modal.onWillDismiss()).data;
@@ -58,14 +58,14 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
     await this.loadingService.presentLoading();
     this.subscription = this.calculateService.getAll(month)
       .subscribe((data) => {
-        if (data.length > 0) { this.total = data[0]; }
-
-        this.subscription.add(this.calculateService.getAllCash()
-          .subscribe((cash) => {
-            this.cashGeneral = cash[0];
-            this.loadingService.dismiss();
-          }));
+        if (data.length > 0) this.total = data[0];
       });
+
+    this.subscription.add(this.calculateService.getAllCash()
+      .subscribe((cash) => {
+        if (cash.length > 0) this.cashGeneral = cash[0];
+        this.loadingService.dismiss();
+      }));
   }
 
 }

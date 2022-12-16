@@ -14,7 +14,7 @@ import { CalculateService } from '../../shared/service/calculate.service';
 })
 export class ModalCashComponent {
 
-  @Input() data: IcashGeneral;
+  @Input() cashGeneral: IcashGeneral;
 
   public value = new FormControl(null, Validators.required);
 
@@ -24,23 +24,23 @@ export class ModalCashComponent {
     private loadingService: LoadingService
   ) { }
 
-  public async cancelModal(): Promise<void> {
-    await this.modalController.dismiss(true);
+  public cancelModal(): void {
+    this.modalController.dismiss(true);
   }
 
   public addValue(): void {
-    this.data.value = this.data.value + (+this.value.value);
+    if (this.cashGeneral) this.cashGeneral.value += (+this.value.value);
     this.onSaveChange();
   }
 
   public removeValue(): void {
-    this.data.value = this.data.value - (+this.value.value);
+    if (this.cashGeneral) this.cashGeneral.value -= (+this.value.value);
     this.onSaveChange();
   }
 
   public async onSaveChange(): Promise<void> {
     await this.loadingService.presentLoading();
-    await this.calculateService.cashGeneral(this.data);
+    await this.calculateService.cashGeneral(this.cashGeneral);
     this.loadingService.presentToast(mensages.consignar);
     this.loadingService.dismiss();
     this.cancelModal();

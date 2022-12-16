@@ -30,6 +30,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   public loans: Array<IcreditModel> = [];
   public query: string = null;
   public cashGeneral: IcashGeneral = { id: null, value: 0 };
+  public totalloans: number = 0;
   private loansAll: Array<IcreditModel> = [];
   private total: ITotal = new InicTotal().total;
 
@@ -154,6 +155,7 @@ export class LoansComponent implements OnInit, OnDestroy {
     this.subscription.add(this.loansService.getAllCredit()
       .subscribe((loanCash: IcreditModel[]) => {
         this.loans = this.filterMont(loanCash);
+        this.totalloans = this.calculateTotal(loanCash);
         this.loansAll = loanCash;
         this.loading = false;
       }, (error) => this.loadingService.presentToast(error)));
@@ -212,8 +214,12 @@ export class LoansComponent implements OnInit, OnDestroy {
     this.loadingService.dismiss();
   }
 
-  private filterMont = (loanCash: Array<IcreditModel>) =>
-    loanCash.filter(item =>
-      (item.month === this.month) || (item.month !== this.month && item.pendingValue > 0));
+  private calculateTotal(loan: Array<IcreditModel>): number {
+    return loan.reduce((acc, { pendingValue }) => pendingValue + acc, 0)
+  }
 
+  private filterMont(loanCash: Array<IcreditModel>): IcreditModel[] {
+    return loanCash.filter(item =>
+      (item.month === this.month) || (item.month !== this.month && item.pendingValue > 0));
+  }
 }
