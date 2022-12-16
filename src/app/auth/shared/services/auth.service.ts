@@ -16,14 +16,12 @@ export class AuthService {
     return signInWithEmailAndPassword(this.afAuth, user.email, user.password);
   }
 
-  public setLocalStore(): void {
-    localStorage.setItem('userInfo', JSON.stringify(this.afAuth.currentUser));
-  }
-
   public validationUserInfo(): void {
     this.afAuth.onAuthStateChanged((data) => {
       if (data) { this.router.navigate(['/home']); }
       else { this.router.navigate(['/login']); }
+    }, () => {
+      this.router.navigate(['/login'])
     });
   }
 }

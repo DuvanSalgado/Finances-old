@@ -28,7 +28,6 @@ export class AuthComponent extends AuthModel {
     try {
       await this.authService.loginEmailPassword(this.formGroup.value);
       this.router.navigate(['/home']);
-      this.authService.setLocalStore();
       this.loading = true;
     } catch (error) {
       this.loadingService.presentToast(error);
