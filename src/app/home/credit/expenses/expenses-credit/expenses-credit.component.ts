@@ -107,13 +107,13 @@ export class ExpensesCreditComponent extends ExpenseModel implements OnInit, OnD
   }
 
   private operationsCreate(): void {
-    this.total.expenseCredit = this.total.expenseCredit + this.getValue;
-    this.total.totalCredit = this.total.totalCredit + this.getValue;
+    this.total.expenseCredit += this.getValue;
+    this.total.totalCredit += this.getValue;
   }
 
   private operationsDelete(value: number): void {
-    this.total.expenseCredit = this.total.expenseCredit - value;
-    this.total.totalCredit = this.total.totalCredit - value;
+    this.total.expenseCredit -= value;
+    this.total.totalCredit -= value;
   }
 
 }

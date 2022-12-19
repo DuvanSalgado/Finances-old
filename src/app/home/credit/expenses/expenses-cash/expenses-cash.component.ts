@@ -114,15 +114,14 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
     }
   }
 
-
   private operationsCreate(): void {
-    this.cashGeneral.value = this.cashGeneral.value - this.getValue;
-    this.total.expenseCash = this.total.expenseCash + this.getValue;
+    this.cashGeneral.value -= this.getValue;
+    this.total.expenseCash += this.getValue;
   }
 
   private operationsDelete(value: number): void {
-    this.cashGeneral.value = this.cashGeneral.value + +value;
-    this.total.expenseCash = this.total.expenseCash - value;
+    this.cashGeneral.value += (+value);
+    this.total.expenseCash -= - value;
   }
 
 }

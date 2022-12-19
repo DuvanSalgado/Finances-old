@@ -105,13 +105,13 @@ export class ExpensesDebitComponent extends ExpenseModel implements OnInit, OnDe
   }
 
   private operationsCreate(): void {
-    this.total.expenseDebit = this.total.expenseDebit + this.getValue;
-    this.total.totalDebit = this.total.totalDebit + this.getValue;
+    this.total.expenseDebit += this.getValue;
+    this.total.totalDebit += this.getValue;
   }
 
   private operationsDelete(value: number): void {
-    this.total.expenseDebit = this.total.expenseDebit - value;
-    this.total.totalDebit = this.total.totalDebit - value;
+    this.total.expenseDebit -= (+value);
+    this.total.totalDebit -= (+value);
   }
 
 }
