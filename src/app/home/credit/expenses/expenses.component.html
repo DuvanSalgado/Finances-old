@@ -20,7 +20,11 @@
     <ion-toolbar>
       <ion-buttons>
         <ion-menu-button color="primary"></ion-menu-button>
-        <ion-title>Gastos</ion-title>
+        <ion-title> Gastos </ion-title>
+        <p class="ion-padding-end">
+          efectivo:
+          {{ cashGeneral.value | currency : "COP" : "symbol-narrow" : "1.0-0" }}
+        </p>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>

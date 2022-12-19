@@ -5,13 +5,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'AIzaSyDtXvVForJrQz5Y_Nek-aVNDqgZeDw7iGw',
-    authDomain: 'finance-9917e.firebaseapp.com',
-    projectId: 'finance-9917e',
-    storageBucket: 'finance-9917e.appspot.com',
-    messagingSenderId: '171624055655',
-    appId: '1:171624055655:web:03d22f9aea12edb613a5c2',
-    measurementId: 'G-RX3KNQBS98'
+    apiKey: "AIzaSyBYHt4Vrx2sQK3CBDA3qcaPAoyu-N8IDD0",
+    authDomain: "financeqa-b7450.firebaseapp.com",
+    projectId: "financeqa-b7450",
+    storageBucket: "financeqa-b7450.appspot.com",
+    messagingSenderId: "243086759335",
+    appId: "1:243086759335:web:9732a5251276bbd2fa1282"
   }
 };
 

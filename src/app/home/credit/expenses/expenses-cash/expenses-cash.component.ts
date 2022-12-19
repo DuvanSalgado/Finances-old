@@ -121,7 +121,7 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
 
   private operationsDelete(value: number): void {
     this.cashGeneral.value += (+value);
-    this.total.expenseCash -= - value;
+    this.total.expenseCash -= (+value);
   }
 
 }
