@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { IcashGeneral } from '../shared/model/credit.interface';
 import { CalculateService } from '../shared/service/calculate.service';
 
@@ -7,11 +8,16 @@ import { CalculateService } from '../shared/service/calculate.service';
   templateUrl: './expenses.component.html',
   styleUrls: ['./expenses.component.scss'],
 })
-export class ExpensesComponent implements OnInit {
+export class ExpensesComponent implements OnInit, OnDestroy {
 
   public cashGeneral: IcashGeneral = { id: null, value: 0 };
-  private subscription
+  private subscription: Subscription;
+
   constructor(private calculateService: CalculateService) { }
+
+  ngOnDestroy(): void {
+    if (this.subscription) { this.subscription.unsubscribe(); }
+  }
 
   ngOnInit(): void {
     this.subscription = (this.calculateService.getAllCash()
