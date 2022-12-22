@@ -1,11 +1,16 @@
-.button-add {
-  margin-left: 11px;
+.ion-fab-button-add::part(native) {
+  box-shadow: none;
+  color: var(--ion-color-primary);
+  background: #ffffff;
+  border: 2px solid var(--ion-color-primary);
+  border-radius: 50px;
+  padding-top: 0;
+  padding-left: 26px;
+  padding-right: 26px;
+  padding-bottom: 0;
+  height: 34px;
 }
 
-ion-list {
-  padding: 0;
-}
-
-.item-group {
-  display: flex;
+.ion-searchbar {
+  --border-radius: 14px;
 }

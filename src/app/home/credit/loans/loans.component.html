@@ -11,11 +11,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-row>
+<ion-row class="ion-justify-content-center">
   <ion-col size="2">
     <ion-fab>
-      <ion-fab-button [disabled]="loading" size="small">
-        <ion-icon name="add"></ion-icon>
+      <ion-fab-button
+        class="ion-fab-button-add"
+        [disabled]="loading"
+        size="small"
+      >
+        <ion-icon name="add-circle-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-list side="end">
         <ion-fab-button (click)="openModalCreate(operationCredit)">
@@ -32,6 +36,7 @@
   </ion-col>
   <ion-col>
     <ion-searchbar
+      class="ion-searchbar"
       [debounce]="1000"
       (ionChange)="onSearchLoan($event)"
       animated="true"
@@ -63,7 +68,7 @@
             </ion-col>
             <ion-col *ngIf="!query" size="2">
               <ion-fab [edge]="true" vertical="center" horizontal="end">
-                <ion-fab-button size="small">
+                <ion-fab-button class="ion-fab-button-add" size="small">
                   <ion-icon name="add"></ion-icon>
                 </ion-fab-button>
                 <ion-fab-list side="start">
@@ -88,6 +93,7 @@
             <ion-col *ngIf="!query" size="2">
               <ion-fab [edge]="true" vertical="center" horizontal="end">
                 <ion-fab-button
+                  class="ion-fab-button-add"
                   [disabled]="disableButton || item.pendingValue == 0"
                   (click)="openModalPayments(item)"
                   size="small"
