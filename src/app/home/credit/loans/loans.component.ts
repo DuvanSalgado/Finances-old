@@ -31,7 +31,6 @@ export class LoansComponent implements OnInit, OnDestroy {
   public query: string = null;
   public cashGeneral: IcashGeneral = { id: null, value: 0 };
   public totalloans: number = 0;
-  private loansAll: Array<IcreditModel> = [];
   private total: ITotal = new InicTotal().total;
 
   constructor(
@@ -44,7 +43,6 @@ export class LoansComponent implements OnInit, OnDestroy {
     private modalController: ModalController
   ) { }
 
-
   ngOnDestroy(): void {
     if (this.subscription) { this.subscription.unsubscribe(); }
   }
@@ -55,8 +53,8 @@ export class LoansComponent implements OnInit, OnDestroy {
 
   public onSearchLoan(event): void {
     this.query = event.target.value.toLowerCase();
-    if (this.query) this.loans = this.loansAll.filter((loan) => loan.name.toLowerCase().indexOf(this.query) > -1);
-    else this.loans = this.filterMont(this.loansAll);
+    if (this.query) this.loans = this.loans.filter((loan) => loan.name.toLowerCase().indexOf(this.query) > -1);
+    else this.getData();
   }
 
   public async openModalCreate(operation: LoansFormModel): Promise<void> {
@@ -154,9 +152,8 @@ export class LoansComponent implements OnInit, OnDestroy {
 
     this.subscription.add(this.loansService.getAllCredit()
       .subscribe((loanCash: IcreditModel[]) => {
-        this.loans = this.filterMont(loanCash);
+        this.loans = loanCash;
         this.totalloans = this.calculateTotal(loanCash);
-        this.loansAll = loanCash;
         this.loading = false;
       }, (error) => this.loadingService.presentToast(error)));
   }
@@ -218,8 +215,4 @@ export class LoansComponent implements OnInit, OnDestroy {
     return loan.reduce((acc, { pendingValue }) => pendingValue + acc, 0)
   }
 
-  private filterMont(loanCash: Array<IcreditModel>): IcreditModel[] {
-    return loanCash.filter(item =>
-      (item.month === this.month) || (item.month !== this.month && item.pendingValue > 0));
-  }
 }
