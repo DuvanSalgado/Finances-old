@@ -30,8 +30,9 @@ export class LoansComponent implements OnInit, OnDestroy {
   public loans: Array<IcreditModel> = [];
   public query: string = null;
   public cashGeneral: IcashGeneral = { id: null, value: 0 };
-  public totalloans: number = 0;
+  public totalLoans: number = 0;
   private total: ITotal = new InicTotal().total;
+  private loansAll: Array<IcreditModel> = [];
 
   constructor(
     private loansService: LoansService,
@@ -53,8 +54,8 @@ export class LoansComponent implements OnInit, OnDestroy {
 
   public onSearchLoan(event): void {
     this.query = event.target.value.toLowerCase();
-    if (this.query) this.loans = this.loans.filter((loan) => loan.name.toLowerCase().indexOf(this.query) > -1);
-    else this.getData();
+    if (this.query) this.loans = this.loansAll.filter((loan) => loan.name.toLowerCase().indexOf(this.query) > -1);
+    else this.loans = this.filterMont(this.loansAll);
   }
 
   public async openModalCreate(operation: LoansFormModel): Promise<void> {
@@ -151,9 +152,10 @@ export class LoansComponent implements OnInit, OnDestroy {
       }, (error) => this.loadingService.presentToast(error));
 
     this.subscription.add(this.loansService.getAllCredit()
-      .subscribe((loanCash: IcreditModel[]) => {
-        this.loans = loanCash;
-        this.totalloans = this.calculateTotal(loanCash);
+      .subscribe((loans: IcreditModel[]) => {
+        this.loans = this.filterMont(loans);
+        this.loansAll = loans;
+        this.totalLoans = this.calculateTotal(loans);
         this.loading = false;
       }, (error) => this.loadingService.presentToast(error)));
   }
@@ -213,6 +215,11 @@ export class LoansComponent implements OnInit, OnDestroy {
 
   private calculateTotal(loan: Array<IcreditModel>): number {
     return loan.reduce((acc, { pendingValue }) => pendingValue + acc, 0)
+  }
+
+  private filterMont(loans: Array<IcreditModel>): IcreditModel[] {
+    return loans.filter(item =>
+      (item.month === this.month) || (item.month !== this.month && item.pendingValue > 0));
   }
 
 }

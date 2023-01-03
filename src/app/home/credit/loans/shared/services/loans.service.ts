@@ -23,7 +23,7 @@ export class LoansService {
 
   public getAllCredit(): Observable<Array<IcreditModel>> {
     this.itemsCollection = this.fireBase
-      .collection<IcreditModel[]>('Loans', (ref) => ref.where('pendingValue', '>', 0));
+      .collection<IcreditModel[]>('Loans');
 
     return this.itemsCollection.snapshotChanges().pipe(
       map(data => data.map((d) => {
