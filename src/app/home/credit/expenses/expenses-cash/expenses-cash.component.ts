@@ -71,17 +71,17 @@ export class ExpensesCashComponent extends ExpenseModel implements OnInit, OnDes
   private getData(month: number): void {
 
     this.subscription = this.expensesService.getAllForMont(month, 'ExpensesCash')
-      .subscribe((data) => this.expenses = data,
+      .subscribe((data) => { this.expenses = data; this.loading = false; },
         (error) => this.loadingService.presentToast(error));
 
-    this.subscription.add(this.calculateService.getAll(month)
+    this.subscription.add(this.calculateService.getAllTotal(month)
       .subscribe((total) => {
         if (total.length > 0) { this.total = total[0]; }
       }, (error) => this.loadingService.presentToast(error)));
 
     this.subscription.add(this.calculateService.getAllCash()
       .subscribe((cash) => {
-        if (cash.length > 0) { this.cashGeneral = cash[0]; } this.loading = false;
+        if (cash.length > 0) this.cashGeneral = cash[0];
       }, (error) => this.loadingService.presentToast(error)));
 
   }

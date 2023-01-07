@@ -56,7 +56,7 @@ export class GeneralTotalComponent implements OnInit, OnDestroy {
 
   private async getData(month: number): Promise<void> {
     await this.loadingService.presentLoading();
-    this.subscription = this.calculateService.getAll(month)
+    this.subscription = this.calculateService.getAllTotal(month)
       .subscribe((data) => {
         if (data.length > 0) this.total = data[0];
       });

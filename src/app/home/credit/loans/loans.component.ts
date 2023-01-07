@@ -58,25 +58,22 @@ export class LoansComponent implements OnInit, OnDestroy {
     else this.loans = this.filterMont(this.loansAll);
   }
 
-  public async openModalCreate(operation: LoansFormModel): Promise<void> {
-    await this.getTotal(this.month);
+  public openModalCreate(operation: LoansFormModel): void {
     operation.initializeFormLoansCreate();
     operation.patchFormLoans();
     this.openModalCreateController(operation);
   }
 
-  public async openModalPayments(data: IcreditModel): Promise<void> {
+  public openModalPayments(data: IcreditModel): void {
     this.disableButton = true;
-    await this.getTotal(data.month);
     this.operationCash.formLoansPayments(data);
-    await this.openModalPaymentsController();
+    this.openModalPaymentsController();
   }
 
-  public async openModalAddValue(data: IcreditModel, operation: LoansFormModel): Promise<void> {
-    await this.getTotal(data.month);
+  public openModalAddValue(data: IcreditModel, operation: LoansFormModel): void {
     operation.formLoansAddValue(data);
     operation.patchFormLoans();
-    await this.openModalAddValueController(operation);
+    this.openModalAddValueController(operation);
   }
 
   public async openModalViewDetails(data: IcreditModel): Promise<void> {
@@ -151,6 +148,11 @@ export class LoansComponent implements OnInit, OnDestroy {
         if (cash.length > 0) { this.cashGeneral = cash[0]; }
       }, (error) => this.loadingService.presentToast(error));
 
+    this.subscription.add(this.calculateService.getAllTotal(this.month)
+      .subscribe((total: ITotal[]) => {
+        if (total.length > 0) this.total = total[0];
+      }, (error) => this.loadingService.presentToast(error)));
+
     this.subscription.add(this.loansService.getAllCredit()
       .subscribe((loans: IcreditModel[]) => {
         this.loans = this.filterMont(loans);
@@ -186,16 +188,6 @@ export class LoansComponent implements OnInit, OnDestroy {
     }
     this.loadingService.presentToast(mensages.update);
     this.loadingService.dismiss();
-  }
-
-  private async getTotal(month: number): Promise<void> {
-    try {
-      const dataPromise = await this.calculateService.getAllPromise(month);
-      if (dataPromise) { this.total = dataPromise; }
-    } catch (error) {
-      this.loadingService.presentToast(error);
-      throw new Error(error);
-    }
   }
 
   private async saveloan(operation: LoansFormModel): Promise<void> {

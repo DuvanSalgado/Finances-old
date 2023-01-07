@@ -8,12 +8,11 @@ import { map } from 'rxjs/operators';
 export class CalculateService {
 
   private itemsCollection: AngularFirestoreCollection<any>;
-  private angularFirestore: any;
   private year = new Date().getFullYear();
 
   constructor(private fireBase: AngularFirestore) { }
 
-  public getAll(month: number): Observable<Array<ITotal>> {
+  public getAllTotal(month: number): Observable<Array<ITotal>> {
     this.itemsCollection = this.fireBase
       .collection<Array<ITotal>>('Total', ref => ref.where('month', '==', month).
         where('year', '==', this.year));
@@ -26,19 +25,6 @@ export class CalculateService {
         };
         return retorno;
       })));
-  }
-
-  public async getAllPromise(month: number): Promise<ITotal> {
-    this.angularFirestore = await this.fireBase
-      .collection<ITotal>('Total', ref => ref.where('month', '==', month).
-        where('year', '==', this.year)).get().toPromise();
-
-    let data: ITotal;
-    this.angularFirestore.forEach(info => {
-      data = info.data();
-      data.id = info.id;
-    });
-    return data;
   }
 
   public getAllCash(): Observable<Array<IcashGeneral>> {
