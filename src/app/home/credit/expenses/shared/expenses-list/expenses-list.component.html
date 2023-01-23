@@ -5,9 +5,9 @@
       slot="start"
       [name]="item.icon.icon"
     ></ion-icon>
-    <ion-label>
+    <ion-label >
       <h3>Valor: {{ item.value | currency: "COP":"symbol-narrow":"1.0-0" }}</h3>
-      <h3>Descripcion: {{ item.description }}</h3>
+      <h3 class="ion-text-wrap" >Descripcion: {{ item.description }}</h3>
       <p>Fecha: {{ item.date | date }}</p>
     </ion-label>
     <ion-button [disabled]="disabled" (click)="deleteItem(item)" fill="clear">
