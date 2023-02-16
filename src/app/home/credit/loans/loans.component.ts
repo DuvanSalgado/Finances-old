@@ -211,7 +211,8 @@ export class LoansComponent implements OnInit, OnDestroy {
 
   private filterMont(loans: Array<IcreditModel>): IcreditModel[] {
     return loans.filter(item =>
-      (item.month === this.month) || (item.month !== this.month && item.pendingValue > 0));
+      (item.month === this.month) || (item.month !== this.month && item.pendingValue > 0))
+      .sort((a, b) => b.pendingValue - a.pendingValue);
   }
 
 }
