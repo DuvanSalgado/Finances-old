@@ -94,7 +94,7 @@
               <ion-fab [edge]="true" vertical="center" horizontal="end">
                 <ion-fab-button
                   class="ion-fab-button-add"
-                  [disabled]="disableButton || item.pendingValue == 0"
+                  [disabled]="disableButton || item.pendingValue === 0"
                   (click)="openModalPayments(item)"
                   size="small"
                 >

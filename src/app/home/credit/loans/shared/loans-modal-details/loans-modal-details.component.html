@@ -44,7 +44,7 @@
 </ion-toolbar>
 
 <ion-content>
-  <div *ngIf="'prestamos' == segment">
+  <div *ngIf="'prestamos' === segment">
     <ion-list *ngFor="let item of data.historyLoan">
       <ion-item>
         <ion-icon
@@ -66,7 +66,7 @@
     </ion-list>
   </div>
 
-  <div *ngIf="'abonos' == segment">
+  <div *ngIf="'abonos' === segment">
     <ion-list *ngFor="let item of data.historyPayment">
       <ion-item class="ion-padding-start">
         <ion-label>
@@ -81,13 +81,3 @@
     </ion-list>
   </div>
 </ion-content>
-
-<ion-footer class="ion-no-border">
-  <ion-toolbar>
-    <ion-row class="ion-text-center">
-      <ion-col>
-        <ion-button (click)="cancel()">Cerrar</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
-</ion-footer>

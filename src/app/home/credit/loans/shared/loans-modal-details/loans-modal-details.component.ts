@@ -10,7 +10,7 @@ import { IcreditModel } from '@credit/model/credit.interface';
 export class LoansModalDetailsComponent {
 
   @Input() data: IcreditModel;
-  public segment: string = 'prestamos'
+  public segment = 'prestamos';
 
   constructor(private modalController: ModalController) { }
 

@@ -42,7 +42,7 @@ export class ExpenseModel {
       [this.formCtrl.description]: [null, Validators.required],
       [this.formCtrl.date]: [this.todayDate],
       [this.formCtrl.month]: [this.todayDate.getMonth()],
-      [this.formCtrl.year]:[this.todayDate.getFullYear()],
+      [this.formCtrl.year]: [this.todayDate.getFullYear()],
       [this.formCtrl.icon]: [null]
     });
   }
@@ -52,6 +52,8 @@ export class ExpenseModel {
       component: ExpensesModalAddComponent,
       cssClass: 'expenses-modal',
       backdropDismiss: false,
+      initialBreakpoint: 1,
+      breakpoints: [1],
       componentProps: { formGroup: this.formGroup }
     });
     await this.modal.present();

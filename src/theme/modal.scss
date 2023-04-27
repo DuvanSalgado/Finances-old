@@ -1,40 +1,34 @@
 .expenses-modal {
   &::part(content) {
     height: 300px;
-    width: 86%;
-    border-radius: 10px;
+    border-radius: 20px 20px 0px 0px
   }
 }
 
 .loans-modal-create {
   &::part(content) {
     height: 350px;
-    width: 86%;
-    border-radius: 10px;
+    border-radius: 20px 20px 0px 0px
   }
 }
 
 .loans-modal-edit {
   &::part(content) {
     height: 275px;
-    width: 86%;
-    border-radius: 10px;
+    border-radius: 20px 20px 0px 0px
   }
 }
 
 .view-modal {
   &::part(content) {
-    height: 96%;
-    width: 98%;
-    border-radius: 10px;
+    border-radius: 20px 20px 0px 0px
   }
 }
 
 .add-value-modal {
   &::part(content) {
     height: 300px;
-    width: 90%;
-    border-radius: 10px;
+    border-radius: 20px 20px 0px 0px
   }
 }
 

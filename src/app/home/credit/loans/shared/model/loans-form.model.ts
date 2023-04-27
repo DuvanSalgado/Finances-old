@@ -7,12 +7,20 @@ import { ICombobox } from '@app/shared/combobox/model/combobox.interface';
 export abstract class LoansFormModel {
 
   public formCtrl = FormCreditCtrl;
-  private formGroup: FormGroup;
   protected todayDate = new Date();
+  private formGroup: FormGroup;
 
   constructor(
     protected formBuilder: FormBuilder,
   ) { }
+
+  public get getValueIcon(): any {
+    return this.getFormGroup.get(this.formCtrl.icon).value;
+  }
+
+  public get getFormGroup(): FormGroup {
+    return this.formGroup;
+  }
 
   protected get getValue(): number {
     return parseInt(this.formGroup.get(this.formCtrl.value).value, 10);
@@ -40,19 +48,12 @@ export abstract class LoansFormModel {
     return this.formGroup.get(this.formCtrl.paymentMethod).value.id === Status.efectivo;
   }
 
-  public get getValueIcon(): any {
-    return this.getFormGroup.get(this.formCtrl.icon).value;
-  }
-
-  public get getFormGroup(): FormGroup {
-    return this.formGroup;
-  }
-
   public abstract patchFormLoans(): void;
 
   public abstract operations(total: ITotal, cashGeneral?: IcashGeneral): void;
 
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   public initializeFormLoansCreate(): void {
     this.formGroup = this.formBuilder.group({
       [this.formCtrl.name]: [null, Validators.required],
@@ -72,6 +73,7 @@ export abstract class LoansFormModel {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   public formLoansAddValue(data: IcreditModel): void {
     this.formGroup = this.formBuilder.group({
       [this.formCtrl.id]: [data.id],
@@ -86,6 +88,7 @@ export abstract class LoansFormModel {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   public formLoansPayments(data: IcreditModel): void {
     this.formGroup = this.formBuilder.group({
       [this.formCtrl.id]: [data.id],
@@ -99,6 +102,7 @@ export abstract class LoansFormModel {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   public patchValueItem(): void {
     this.formGroup.patchValue({
       [this.formCtrl.pendingValue]: this.getPendingValue + this.getValue,
@@ -106,6 +110,7 @@ export abstract class LoansFormModel {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   public patchValuePayments(): void {
     this.formGroup.patchValue({
       [this.formCtrl.pendingValue]: this.getPendingValue - this.getValue,
@@ -113,6 +118,7 @@ export abstract class LoansFormModel {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   public setHistoryPayment(): void {
     this.formGroup.controls[this.formCtrl.historyPayment].value.push({
       date: this.todayDate,
@@ -121,6 +127,7 @@ export abstract class LoansFormModel {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   public setHistoryLoan(icon): void {
     this.formGroup.controls[this.formCtrl.historyLoan].value.push({
       date: this.todayDate,

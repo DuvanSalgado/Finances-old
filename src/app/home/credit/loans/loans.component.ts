@@ -23,15 +23,16 @@ import { LoansService } from './shared/services/loans.service';
 })
 export class LoansComponent implements OnInit, OnDestroy {
 
-  private subscription: Subscription;
+
   public month = new Date().getMonth();
   public loading = false;
   public disableButton = false;
   public loans: Array<IcreditModel> = [];
   public query: string = null;
   public cashGeneral: IcashGeneral = { id: null, value: 0 };
-  public totalLoans: number = 0;
+  public totalLoans = 0;
   private total: ITotal = new InicTotal().total;
+  private subscription: Subscription;
   private loansAll: Array<IcreditModel> = [];
 
   constructor(
@@ -81,6 +82,8 @@ export class LoansComponent implements OnInit, OnDestroy {
       component: LoansModalDetailsComponent,
       cssClass: 'view-modal',
       backdropDismiss: false,
+      initialBreakpoint: 0.5,
+      breakpoints: [0.5, 1],
       componentProps: { data }
     });
     await modalView.present();
@@ -92,6 +95,8 @@ export class LoansComponent implements OnInit, OnDestroy {
       component: LoansModalCreateComponent,
       cssClass: 'add-value-modal',
       backdropDismiss: false,
+      initialBreakpoint: 1,
+      breakpoints: [1],
       componentProps: { formGroup: operarion.getFormGroup }
     });
     await modalCreate.present();
@@ -101,7 +106,7 @@ export class LoansComponent implements OnInit, OnDestroy {
       operarion.setHistoryLoan(operarion.getValueIcon);
       operarion.patchValueItem();
       operarion.operations(this.total, this.cashGeneral);
-      this.saveloan(operarion)
+      this.saveloan(operarion);
     }
   }
 
@@ -110,6 +115,8 @@ export class LoansComponent implements OnInit, OnDestroy {
       component: LoansModalPaymentsComponent,
       cssClass: 'loans-modal-edit',
       backdropDismiss: false,
+      initialBreakpoint: 1,
+      breakpoints: [1],
       componentProps: { formGroup: this.operationCash.getFormGroup }
     });
     await modalPayments.present();
@@ -128,6 +135,8 @@ export class LoansComponent implements OnInit, OnDestroy {
       component: LoansModalAddValueComponent,
       cssClass: 'add-value-modal',
       backdropDismiss: false,
+      initialBreakpoint: 1,
+      breakpoints: [1],
       componentProps: { formGroup: operation.getFormGroup }
     });
     await modalAddValue.present();
