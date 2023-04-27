@@ -93,7 +93,7 @@ export class LoansComponent implements OnInit, OnDestroy {
   private async openModalCreateController(operarion: LoansFormModel): Promise<void> {
     const modalCreate = await this.modalController.create({
       component: LoansModalCreateComponent,
-      cssClass: 'add-value-modal',
+      cssClass: 'loans-modal-create',
       backdropDismiss: false,
       initialBreakpoint: 1,
       breakpoints: [1],

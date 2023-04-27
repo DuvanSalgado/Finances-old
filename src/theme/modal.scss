@@ -1,20 +1,20 @@
 .expenses-modal {
   &::part(content) {
-    height: 315px;
+    height: 317px;
     border-radius: 20px 20px 0px 0px
   }
 }
 
 .loans-modal-create {
   &::part(content) {
-    height: 350px;
+    height: 318px;
     border-radius: 20px 20px 0px 0px
   }
 }
 
 .loans-modal-edit {
   &::part(content) {
-    height: 301px;
+    height: 302px;
     border-radius: 20px 20px 0px 0px
   }
 }
@@ -27,7 +27,7 @@
 
 .add-value-modal {
   &::part(content) {
-    height: 315px;
+    height: 317px;
     border-radius: 20px 20px 0px 0px
   }
 }
