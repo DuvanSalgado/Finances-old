@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { IUser } from '../interfaces/user.interface';
+import { AuthRepository } from '@app/auth/shared/constants/repository/auth.repository';
 
 @Injectable()
 
-export class AuthService {
+export class AuthService implements AuthRepository {
 
   constructor(
     private afAuth: Auth,
@@ -21,7 +22,7 @@ export class AuthService {
       if (data) { this.router.navigate(['/home']); }
       else { this.router.navigate(['/login']); }
     }, () => {
-      this.router.navigate(['/login'])
+      this.router.navigate(['/login']);
     });
   }
 }

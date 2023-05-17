@@ -20,6 +20,5 @@ export class SidebarComponent {
   ) { }
   public signOut(): void {
     this.afAuth.signOut();
-    localStorage.removeItem('userInfo');
   }
 }

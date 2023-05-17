@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './login/auth.component';
-import { ValidateSesionComponent } from './validate-sesion/validate-sesion.component';
+import { ValidateSesionComponent } from './view/validate-sesion/validate-sesion.component';
+import { LoginComponent } from './view/login/login.component';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: AuthComponent,
+    component: LoginComponent,
   }
 ];
 

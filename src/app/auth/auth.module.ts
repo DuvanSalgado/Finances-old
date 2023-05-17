@@ -4,13 +4,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingService } from '@app/core/services/loading.service';
 import { IonicModule } from '@ionic/angular';
 import { AuthRoutingModule } from './auth.routing';
-import { AuthComponent } from './login/auth.component';
+import { LoginInteractor } from './interactor/login-interactor';
+import { LoginPresenter } from './presenter/login.presenter';
 import { AuthService } from './shared/services/auth.service';
-import { ValidateSesionComponent } from './validate-sesion/validate-sesion.component';
+import { LoginComponent } from './view/login/login.component';
+import { ValidateSesionComponent } from './view/validate-sesion/validate-sesion.component';
 
 @NgModule({
   declarations: [
-    AuthComponent,
+    LoginComponent,
     ValidateSesionComponent
   ],
   imports: [
@@ -20,8 +22,19 @@ import { ValidateSesionComponent } from './validate-sesion/validate-sesion.compo
     ReactiveFormsModule
   ],
   providers: [
-    AuthService,
     LoadingService,
+    {
+      provide: 'loginPresenterProvider',
+      useClass: LoginPresenter
+    },
+    {
+      provide: 'loginInteractorProvider',
+      useClass: LoginInteractor
+    },
+    {
+      provide: 'AuthRepository',
+      useClass: AuthService
+    },
   ]
 })
 export class AuthModule { }
